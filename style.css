@@ -3,3 +3,37 @@
     padding: 0;
     box-sizing: border-box;
 }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.tabs {
+    display: flex;
+    background-color: #333;
+}
+
+.tab {
+    flex: 1;
+    padding: 14px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    border: 1px solid #333;
+}
+
+.tab:hover {
+    background-color: #575757;
+}
+
+.tab-content {
+    text-wrap-mode: auto;
+    display: none;
+    padding: 20px;
+    border-top: 1px solid #333;
+}
+
+.active {
+    display: block;
+}

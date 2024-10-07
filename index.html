@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projectr Masjid</title>
+    <link rel = "stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
@@ -14,6 +16,34 @@
             <p>First Part, making the website</p>
         </div>
     </header>
+
+    <div class="tabs">
+        <div class = "tab" onclick="showTab('home')">Home</div>
+        <div class = "tab" onclick="showTab('about')">About</div>
+        <div class = "tab" onclick="showTab('events')">Events</div>
+        <div class = "tab" onclick="showTab('donate')">Donate</div>
+
+    </div>
+
+    <div id = "home" class = "tab-content active">
+        <h2> Home Tab</h2>
+        
+    </div>
+
+
+    <div id = "about" class = "tab-content">
+        <h2>About</h2>
+    </div>
+
+
+    <div id = "events" class="tab-content">
+        <h2>events</h2>
+    </div>
+
+
+    <div id="donate" class="tab-content">
+        <h2>Donate</h2>
+    </div>
     
     
 </body>
