@@ -37,3 +37,59 @@ body {
 .active {
     display: block;
 }
+
+.information{
+    width: auto;
+    padding: 10px;
+    min-height: 200px;
+    border: 1px solid #ece5e5;
+}
+.information h2 {
+    text-align: center;
+}
+.SocialMedia{
+    border: 1px solid #f8eeee;
+    margin: auto;
+    margin-top: 20px;
+    width: fit-content;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.SocialMedia a {
+    text-decoration: none; /* Removes the underline */
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    max-width: 300px;
+    color: #303030;
+    transition: color 0.5s ease; 
+}
+.SocialMedia a:hover {
+    color: #000;
+}
+.SocialMedia div {
+    display: flex;
+    align-items: center;
+    max-height: fit-content;
+    white-space: normal;
+    flex-grow: 1;
+}
+.SocialMedia img {
+    align-content: center;
+    margin-right: 12px;
+    width: 100px;
+}
+.SocialMedia a:hover img {
+    transform: scale(1.1); /* Slightly enlarge the icon on hover */
+    transition: transform 0.5s ease;
+}
+.SocialMedia .facebook{
+    border-radius: 50px;
+    background: linear-gradient(to right, #3b83e7, #ece5e5);
+}
+.SocialMedia .instagram{
+    border-radius: 25px;
+    background: linear-gradient(to right, #5560c4,#be469e,#f5b861);
+}
