@@ -42,13 +42,23 @@ body {
     width: auto;
     padding: 10px;
     min-height: 200px;
+    min-width: 50%;
+    max-height: 500px;
     border: 1px solid #ece5e5;
+    overflow:auto;
 }
-.information h2 {
+.TitleInfo {
     text-align: center;
 }
+.information h2 {
+    top: 0;
+    display: inline-block;
+    padding: 10px;
+    margin: 0;
+    position: sticky;
+    z-index: 1;
+}
 .SocialMedia{
-    border: 1px solid #f8eeee;
     margin: auto;
     margin-top: 20px;
     width: fit-content;
@@ -77,6 +87,7 @@ body {
     flex-grow: 1;
 }
 .SocialMedia img {
+    padding-top: 5px;
     align-content: center;
     margin-right: 12px;
     width: 100px;
@@ -86,10 +97,10 @@ body {
     transition: transform 0.5s ease;
 }
 .SocialMedia .facebook{
-    border-radius: 50px;
+    border-radius: 60px;
     background: linear-gradient(to right, #3b83e7, #ece5e5);
 }
 .SocialMedia .instagram{
-    border-radius: 25px;
+    border-radius: 30px;
     background: linear-gradient(to right, #5560c4,#be469e,#f5b861);
 }
