@@ -14,9 +14,10 @@ function showTab(tabName) {
 function getDate(){
     var date = new Date();
     var day = date.getDate();
-    var dayOfWeek = date.getDate() % 7; // 0 - 23
+    var dayOfWeek = date.getDate() % 7;
     var month = date.getMonth() % 12;
     var year = date.getFullYear();
+    
     const dayNames = ["Monday", "Tuesday", "Wednesday", 
         "Thursday", "Friday", "Saturday", "Sunday"];
     const monthNames = ["January", "February", "March", 
