@@ -24,13 +24,14 @@
     </div>
 
     <div id = "home" class = "tab-content active">
-        <h2> Home Tab</h2>
+        <h2 class="Webpage-Tab-Title"> Home</h2>
         
     </div>
 
 
     <div id = "about" class = "tab-content">
         <div class="information">
+            <h2 class="Webpage-Tab-Title"> About</h2>
             <h2>*Title of the information here*</h2>
             <p>The full text goes here.</p>
         </div>
@@ -56,14 +57,70 @@
         
     </div>
 
-
     <div id = "events" class="tab-content">
-        <h2>events</h2>
+        <h2 class="Webpage-Tab-Title">Events</h2>
+        <div class="calendar-container">
+            <div id="calendar">
+                <h3>Calendar</h3> 
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Dynamic Calendar</title>
+                  </head>
+                  <body>
+                    <div class="container">
+                      <div class="calendar">
+                        <div class="calendar-header">
+                          <button id="prev-month">Previous</button>
+                          <h2 id="month-year"></h2>
+                          <button id="next-month">Next</button>
+                        </div>
+                        <div class="calendar-grid" id="calendar-grid">
+                          <!-- Calendar days will be dynamically generated here -->
+                        </div>
+                      </div>
+                    </div>
+                  </body>
+            </div>
+
+            <div id="event-box">
+                <h3>Event List</h3>
+                <ul id="event-list"></ul>
+            </div>
+        </div>
     </div>
 
-
     <div id="donate" class="tab-content">
-        <h2>Donate</h2>
+        <h2 class="Webpage-Tab-Title"> Donate</h2>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Donate Page</title>
+        </head>
+        <body>
+            <div class="container">
+                <!-- Left section for information -->
+                <div class="info-section">
+                    <p>An information section, why people may want to donate, and how to donate.</p>
+                </div>
+        
+                <!-- Right section for donations -->
+                <div class="donation-section">
+                    <div class="donation-method">
+                        <a href="https://paypal.com" class="donation-link" target="_blank">
+                            <img src="paypal-logo.png" alt="Paypal Logo" class="logo">
+                            <p>Donate through PayPal</p>
+                        </a>
+                    </div>
+                    <div class="donation-method">
+                        <a href="https://zelle.com" class="donation-link" target="_blank">
+                            <img src="zelle-logo.png" alt="Zelle Logo" class="logo">
+                            <p>Donate through Zelle</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </body>
     </div>
     
     
