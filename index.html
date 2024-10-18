@@ -1,6 +1,6 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Project Masjid</title>
@@ -8,12 +8,12 @@
         <script src="script.js" defer></script>
         <link rel="icon"href="https://scontent.fsac1-2.fna.fbcdn.net/v/t39.30808-1/246006879_1906401049561389_4115199036393652330_n.png?stp=dst-png_s200x200&_nc_cat=102&ccb=1-7&_nc_sid=f4b9fd&_nc_ohc=oae7fXJ8LoYQ7kNvgFEX77H&_nc_zt=24&_nc_ht=scontent.fsac1-2.fna&_nc_gid=AaG93WLkedh81YLGAXhmFm-&oh=00_AYC6a2PjDBNCq7YN15cBZahvWZiXzq_PUFvNBixzJfrYTw&oe=670FE852">
     </head>
-    <body>
-        <header>
-            <div class="container">
+<body>
+<header>
+  <div class="container">
                 
-                <div>
-                    <a href ="index.html">
+  <div>
+      <a href ="index.html">
                     <img src="https://scontent.fsac1-2.fna.fbcdn.net/v/t39.30808-1/246006879_1906401049561389_4115199036393652330_n.png?stp=dst-png_s200x200&_nc_cat=102&ccb=1-7&_nc_sid=f4b9fd&_nc_ohc=wycPrfg4BMMQ7kNvgE0_W2j&_nc_zt=24&_nc_ht=scontent.fsac1-2.fna&_nc_gid=ABM6O-9z73qnHkHRe_e21GN&oh=00_AYDbGQ-22y0NiCr60Q9JcHEK8ge6c3oBOIOk3utWrY0OVA&oe=67164792" 
                     alt="logo of MMSC" width="150" height="150">
                 </div>
@@ -21,35 +21,204 @@
             </div>
         </header>
 
-        <div class="tabs">
+    <div class="tabs">
+        <div class = "tab" onclick="showTab('home')">Home</div>
+        <div class = "tab" onclick="showTab('about')">About</div>
+        <div class = "tab" onclick="showTab('events')">Events</div>
+        <div class = "tab" onclick="showTab('donate')">Donate</div>
+        </div>
+
+    <div id = "home" class = "tab-content active">
+
+        <div class="box" id="prayers_times"> 
             
-            <div class = "tab" onclick="showTab('home')">Home</div>
-            <div class = "tab" onclick="showTab('about')">About</div>
-            <div class = "tab" onclick="showTab('events')">Events</div>
-            <div class = "tab" onclick="showTab('donate')">Donate</div>
+            <div id="date" class="clock" onload="getDate()"></div>
+            <br>
+            <p> <u>Daily Prayer Times:</u> </p>
+
+            <p style="text-align:left;">
+                Fajr 
+                <span style="float:right;">
+                    11:00 
+                </span>
+            </p>
+
+            <p style="text-align:left;">
+                Dhuhr 
+                <span style="float:right;">
+                    13:00 
+                </span>
+            </p>
+
+            <p style="text-align:left;">
+                Asr 
+                <span style="float:right;">
+                    15:00 
+                </span>
+            </p>
+
+            <p style="text-align:left;">
+                Maghrib 
+                <span style="float:right;">
+                    17:00 
+                </span>
+            </p>
+
+            <p style="text-align:left;">
+                Isha 
+                <span style="float:right;">
+                    19:00 
+                </span>
+            </p>
+            <p> <u>Special Prayer Dates & Times:</u> </p>
+
+            <p style="text-align:left;">
+                Jumu'ah (Speech) 
+                <span style="float:right;">
+                    Friday 18th, 13:00 
+                </span>
+            </p>
+
+            <p style="text-align:left;">
+                Jumu'ah (Prayer) 
+                <span style="float:right;">
+                    Friday 18th, 13:30 
+                </span>
+            </p>
+
+
 
         </div>
 
-        <div id = "home" class = "tab-content active">
-            <h2> Home Tab</h2>
-            
-        </div>
+        
+
+        
+    </div>
 
 
-        <div id = "about" class = "tab-content">
-            <h2>About</h2>
-        </div>
-
-
-        <div id = "events" class="tab-content">
-            <h2>events</h2>
-        </div>
-
-
-        <div id="donate" class="tab-content">
-            <h2>Donate</h2>
+    <div id = "about" class = "tab-content">
+        <div class="information">
+            <h2 class="Webpage-Tab-Title"> About</h2>
+            <h2>*Title of the information here*</h2>
+            <p>The full text goes here.</p>
         </div>
         
+        <div class = "Team">
+            <h1> Meet the team!</h1>
+            <div class = "membersBox">
+                <div class = "member">
+                    <img src = "https://tinyurl.com/2s3cwmnp" alt = "placeholder">
+                    <p>*Membername*</p>
+                </div>
+                <div class = "member">
+                    <img src = "https://tinyurl.com/2s3cwmnp" alt = "placeholder">
+                    <p>*Membername*</p>
+                </div>
+                <div class = "member">
+                    <img src = "https://tinyurl.com/2s3cwmnp" alt = "placeholder">
+                    <p>*Membername*</p>
+                </div>
+                <div class = "member">
+                    <img src = "https://tinyurl.com/2s3cwmnp" alt = "placeholder">
+                    <p>*Membername*</p>
+                </div>
+                <div class = "member">
+                    <img src = "https://tinyurl.com/2s3cwmnp" alt = "placeholder">
+                    <p>*Membername*</p>
+                </div>
+                <div class = "member">
+                    <img src = "https://tinyurl.com/2s3cwmnp" alt = "placeholder">
+                    <p>*Membername*</p>
+                </div>
+            </div>
+        </div>
+
+        <div class = "SocialMedia">
+            <div class = "facebook">
+                <a href="https://www.facebook.com/mmsc99" title = "Facebook" target="_blank">
+                    <img  src="https://tinyurl.com/yv3ex2be" class = "fbimage">
+                </a>
+                <a href="https://www.facebook.com/mmsc99" title = "Facebook" target="_blank">
+                    Click here for our Facebook Get updated with the latest of what is happening.
+                </a>
+            </div>
+            <div class = "instagram">
+                <a href="https://www.instagram.com/___mmsc___/" title = "Instagram" target="_blank">
+                    <img  src="https://tinyurl.com/hrtz28z8" class = "Iimage">
+                </a>
+                <a href="https://www.instagram.com/___mmsc___/" title = "Instagram" target="_blank">
+                    Click here for our Instagram Get updated with the latest of what is happening.
+                </a>
+            </div>
+        </div>
         
-    </body>
-    </html>
+    </div>
+
+    <div id = "events" class="tab-content">
+        <h2 class="Webpage-Tab-Title">Events</h2>
+        <div class="calendar-container">
+            <div id="calendar">
+                <h3>Calendar</h3> 
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Dynamic Calendar</title>
+                  </head>
+                  <body>
+                    <div class="container">
+                      <div class="calendar">
+                        <div class="calendar-header">
+                          <button id="prev-month">Previous</button>
+                          <h2 id="month-year"></h2>
+                          <button id="next-month">Next</button>
+                        </div>
+                        <div class="calendar-grid" id="calendar-grid">
+                          <!-- Calendar days will be dynamically generated here -->
+                        </div>
+                      </div>
+                    </div>
+                  </body>
+            </div>
+
+            <div id="event-box">
+                <h3>Event List</h3>
+                <ul id="event-list"></ul>
+            </div>
+        </div>
+    </div>
+    <div id="donate" class="tab-content">
+        <h2 class="Webpage-Tab-Title"> Donate</h2>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Donate Page</title>
+        </head>
+        <body>
+            <div class="container">
+                <!-- Left section for information -->
+                <div class="info-section">
+                    <p>An information section, why people may want to donate, and how to donate.</p>
+                </div>
+        
+                <!-- Right section for donations -->
+                <div class="donation-section">
+                    <div class="donation-method">
+                        <a href="https://paypal.com" class="donation-link" target="_blank">
+                            <img src="paypal-logo.png" alt="Paypal Logo" class="logo">
+                            <p>Donate through PayPal</p>
+                        </a>
+                    </div>
+                    <div class="donation-method">
+                        <a href="https://zelle.com" class="donation-link" target="_blank">
+                            <img src="zelle-logo.png" alt="Zelle Logo" class="logo">
+                            <p>Donate through Zelle</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </div>
+    
+    
+</body>
+</html>
