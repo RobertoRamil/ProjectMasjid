@@ -76,6 +76,7 @@ body {
     text-decoration: none; /* Removes the underline */
     font-family: 'Arial', sans-serif;
     font-size: 18px;
+    padding-top: 5px;
     font-weight: bold;
     max-width: 300px;
     color: #303030;
