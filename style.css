@@ -11,7 +11,7 @@ body {
 
 .tabs {
     display: flex;
-    background-color: #333;
+    background-color: #0f5952;
 }
 
 .tab {
@@ -20,18 +20,32 @@ body {
     text-align: center;
     color: white;
     cursor: pointer;
-    border: 1px solid #333;
+    border: 1px solid #0f5952;
 }
 
+a img {
+    transition: transform 0.3s ease; 
+}
+
+a img:hover {
+    transform: scale(1.1); /* Scale up the logo on hover */
+}
+.header {
+    display: block;
+    padding: 6px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
 .tab:hover {
-    background-color: #575757;
+    background-color: #157269;
 }
 
 .tab-content {
     text-wrap-mode: auto;
     display: none;
     padding: 20px;
-    border-top: 1px solid #333;
+    border-top: 1px solid #0f5952;
 }
 
 .active {
@@ -76,6 +90,7 @@ body {
     text-decoration: none; /* Removes the underline */
     font-family: 'Arial', sans-serif;
     font-size: 18px;
+    padding-top: 5px;
     font-weight: bold;
     max-width: 300px;
     color: #303030;
@@ -297,4 +312,3 @@ body {
     max-height: 100px;
     height: auto;
 }
-
