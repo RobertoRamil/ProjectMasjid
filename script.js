@@ -129,6 +129,23 @@ function teamMems(num_mems){
   }
   
 }
-
 //initialize the member list
 teamMems(12);
+
+function announcementPanes(announcement_panes){
+  const announcementGrid = document.getElementById("announcementBox");
+  for(let j = 0; j < announcement_panes; j++){
+    
+    const announcement = document.createElement("div");
+    announcement.classList.add("announcement");
+    
+    var boxinbox = document.createElement("announBox");
+    boxinbox.textContent= "*Announcement details go here*"; 
+    announcement.appendChild(boxinbox);
+
+    announcementGrid.appendChild(announcement);
+
+  }
+  
+}
+announcementPanes(5);
