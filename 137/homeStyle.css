@@ -1,0 +1,103 @@
+/*This holds the prayer times, carasol, and announcement box*/
+.first-row{
+    align-items: flex-start;
+
+     display: flex; 
+     justify-content: center;
+    padding: 15px;
+}
+
+.first-row div{
+    padding: 5px;
+    padding-top: 0px;
+}
+
+/*---------------Prayer time box specifically---------------*/
+
+.box{
+    background-color: whitesmoke;
+    width: 300px;
+}
+
+.box p{
+    text-align: left;
+}
+.box span{
+    float: right;
+}
+
+.box u{
+    text-align: center;
+}
+
+#prayerTitle{
+    padding-bottom: 20px;
+}
+
+#prayers_times{
+    background-color: lightgray;
+    text-align: center;
+    font-size: small;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+/*---------------Middle of page picture carousel---------------*/
+
+.carouselExampleIndicators{
+    display: flex; 
+    justify-content: center;
+}
+.carousel-inner>.item {
+    width: 100%;
+
+}
+
+#img{
+    height: 500px;
+    width: 700px !important;
+}
+/*---------------Announcement box---------------*/
+
+.Announce{
+    background-color: rgb(175, 170, 170);
+    float: right;
+    width: 25%;
+    padding: 10px;
+    height: fit-content;
+    min-height: 200px;
+    border: 1px solid #ece5e5;
+}
+.Announce .announcementBox{
+    display: flex;
+    flex-flow: column wrap;
+}
+.Announce .announcementBox .announcement{
+    padding-right: 30px;
+    padding-bottom: 120px;
+    display: grid;
+    min-width: 100px;
+    width: fit-content;
+    max-height: 100px;
+    height: fit-content;
+
+}
+.Announce h2{
+    text-align: center;
+}
+.Announce announBox{
+    background-color: lightgray;
+    max-width: 375px;
+    width: 375px;
+    max-height: 100px;
+    height: 100px;
+    border: 1px solid #ece5e5;
+}
+/*---------------Map---------------*/
+#map{
+    height: 500px;
+    width: 500px;
+}
+.mapChange b{
+    font-size:2vw;
+}

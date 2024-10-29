@@ -1,0 +1,57 @@
+/* --------------------General HTML------------------ */
+
+h3 {
+    text-align: center;
+}
+
+.header {
+    display: block;
+    padding: 6px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-bottom: 1px solid #0f5952;
+}
+
+.header a img {
+    transition: transform 0.3s ease; 
+}
+
+.header a img:hover {
+    transform: scale(1.1); /* Scale up the logo on hover */
+}
+
+.Webpage-Tab-Title {
+    padding-top:20px;
+    text-align: center;
+}
+
+/*-------------------Header------------------------ */
+.tabs {
+    display: flex;
+    background-color: #0f5952;
+}
+
+/*home, about, event, donate tabs */
+
+.tab {
+    flex: 1;
+    padding: 14px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    border: 1px solid #0f5952;
+}
+
+.tab:hover {
+    background-color: #157269;
+    color: white;
+    text-decoration: none
+}
+
+.tab-content {
+    text-wrap-mode: auto;
+    display: none;
+    padding: 20px;
+    border-top: 1px solid #0f5952;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>About Page</title>
+        <link rel="stylesheet" href="aboutStyle.css">
+
+        <!--This is the script used to automake the team members-->
+        <script src="aboutScript.js" defer></script>
+
+        <!--Importing jquery to get the function that makes the header-->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
+        crossorigin="anonymous">
+        </script>
+
+        <script>
+            $(function(){
+                $('#header').load('header.html');
+            })
+        </script>
+    </head>
+    
+    <body>
+    <!--The header is inputted here-->
+        <div id="header"></div>
+    <!--the title of the page-->
+        <h2 class="Webpage-Tab-Title"> About</h2>
+
+    <!--Left box-->
+        <div class="information">
+            <h2>*Title of the information here*</h2>
+            <p>The full text goes here.</p>
+        </div>
+    <!--Right box-->
+        <div class = "Team">
+            <h1> Meet the team!</h1>
+            <div class = "membersBox" id = "membersBox">
+                <!-- Auto fill members -->
+            </div>
+        </div>
+    <!--Social Media-->
+        <div class = "SocialMedia">
+            <div class = "facebook">
+                <a href="https://www.facebook.com/mmsc99" title = "Facebook" target="_blank">
+                    <img  src="https://tinyurl.com/yv3ex2be" class = "fbimage">
+                </a>
+                <a href="https://www.facebook.com/mmsc99" title = "Facebook" target="_blank">
+                    Click here for our Facebook Get updated with the latest of what is happening.
+                </a>
+            </div>
+            
+            <div class = "instagram">
+                <a href="https://www.instagram.com/___mmsc___/" title = "Instagram" target="_blank">
+                    <img  src="https://tinyurl.com/hrtz28z8" class = "Iimage">
+                </a>
+                <a href="https://www.instagram.com/___mmsc___/" title = "Instagram" target="_blank">
+                    Click here for our Instagram Get updated with the latest of what is happening.
+                </a>
+            </div>
+        </div>
+
+    </body>
+</html>
