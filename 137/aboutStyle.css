@@ -1,0 +1,100 @@
+/*---------------information box (left)------------ */
+.information{
+    float: left;
+    width: 50%;
+    padding: 10px;
+    min-height: 200px;
+    border: 1px solid #ece5e5;
+}
+.information h2 {
+    text-align: center;
+}
+/*---------------social medias box (bottom boxes)------------ */
+.SocialMedia{
+    border: 1px solid #f8eeee;
+    margin: auto;
+    margin-top: 20px;
+    width: fit-content;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.SocialMedia div {
+    display: flex;
+    align-items: center;
+    max-height: fit-content;
+    white-space: normal;
+    flex-grow: 1;
+}
+
+.SocialMedia img {
+    align-content: center;
+    margin-right: 12px;
+    width: 100px;
+}
+.SocialMedia a:hover img {
+    transform: scale(1.1); /* Slightly enlarge the icon on hover */
+    transition: transform 0.5s ease;
+}
+
+/*The text we see in the social media boxes */
+.SocialMedia a {
+    text-decoration: none; /* Removes the underline */
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    padding-top: 5px;
+    font-weight: bold;
+    max-width: 300px;
+    color: #303030;
+    transition: color 0.5s ease; 
+}
+.SocialMedia a:hover {
+    color: #000;
+}
+
+/*The gradients we see in the social media boxes */
+.SocialMedia .facebook{
+    border-radius: 50px;
+    background: linear-gradient(to right, #3b83e7, #ece5e5);
+}
+.SocialMedia .instagram{
+    border-radius: 25px;
+    background: linear-gradient(to right, #5560c4,#be469e,#f5b861);
+}
+
+
+/*---------------team member box (right box)------------ */
+
+.Team{
+    float: right;
+    width: 50%;
+    padding: 10px;
+    height: fit-content;
+    min-height: 200px;
+    border: 1px solid #ece5e5;
+}
+
+.Team .membersBox{
+    display: flex;
+    flex-flow: row wrap;
+}
+.Team .membersBox .member{
+    padding-right: 30px;
+    padding-bottom: 120px;
+    display: grid;
+    min-width: 100px;
+    width: fit-content;
+    max-height: 100px;
+    height: fit-content;
+}
+.Team p{
+    align-content: center;
+}
+.Team img{
+    max-width: 100px;
+    width: auto;
+    max-height: 100px;
+    height: auto;
+}
