@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="adminstyle.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <header>
+        <div id="backButton">
+            <a href="index.html">
+            <button type="button" class="back_button">< Back</button>
+            </a>
+        </div>
+        <div class="header">
+                                 
+            <div>
+                <a href ="index.html">
+                    <img src="https://github.com/RobertoRamil/ProjectMasjid/blob/main/logo2.png?raw=true" alt="logo of MMSC" width="150" height="150">
+                </a>
+            </div>
+                  
+        </div>
+    </header>
+
+
+    <div class="login-container">
+        <h2>Admin Login</h2>
+        <form id = "loginForm">
+            <p id="errorMessage"></p>
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" required>
+
+            <button type="submit" id="submit">Login</button>
+            <button type="button" id="forgot_password">Forgot Password</button>
+            
+        </form>
+    </div>
+</body>
+</html>
