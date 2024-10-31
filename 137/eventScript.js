@@ -64,3 +64,16 @@ document.getElementById("next-month").addEventListener("click", () => {
 // Initialize the calendar on page load
 renderCalendar(currentDate);
 /*--------------------------- */
+
+/*----Everything here is used for email and phone signup----*/
+//IMPORTANT note, we need to make a function to connect to the database first (This should be done anyway to support calendar events)
+function signUpEmail(){
+  //This function needs to grab the input data from the textbox(the ID is email)
+  //This function is triggered by an in site button press
+}
+
+function signUpPhone(){
+  //This function needs to grab the input data from the textbox(the ID is phone)
+  //This function is triggered by an in site button press
+}
+/*----------------------------------------------------------*/
