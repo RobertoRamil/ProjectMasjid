@@ -1,0 +1,63 @@
+
+/* -------Container: holds boxes (left:info)(right:donate)--------------- */
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 a
+}
+
+/* --------------------Left box:info------------------------ */
+.info-section, .donation-section {
+    width: 45%;
+    text-align: center;
+    font-size: 1.2em;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* -------Donate section: holds donation methods------------ */
+
+.donation-section {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* -------Donate method: Logos------ */
+.donation-method {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+.donation-method .logo {
+    width: 50px;
+    height: auto;
+    margin-right: 15px;
+}
+.donation-method p {
+    font-size: 1.2em;
+}
+
+/* --------------------Donate Link------------------------ */
+.donation-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none; /* Remove underline */
+    color: black; /* Set the text color to black */
+}
+.donation-link p {
+    margin-left: 15px;
+    font-size: 1.2em;
+}
+.donation-link:hover p {
+    text-decoration: underline; /* Add underline on hover if needed */
+}
+

@@ -1,8 +1,4 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* --------------------General------------------------ */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -11,7 +7,7 @@ body {
 
 .tabs {
     display: flex;
-    background-color: #333;
+    background-color: #0f5952;
 }
 
 .tab {
@@ -20,25 +16,40 @@ body {
     text-align: center;
     color: white;
     cursor: pointer;
-    border: 1px solid #333;
+    border: 1px solid #0f5952;
 }
-
 .tab:hover {
-    background-color: #575757;
+    background-color: #157269;
 }
 
 .tab-content {
     text-wrap-mode: auto;
     display: none;
     padding: 20px;
-    border-top: 1px solid #333;
+    border-top: 1px solid #0f5952;
 }
 
 .active {
     display: block;
 }
 
+/* --------------------Header------------------------ */
+.header a img {
+    transition: transform 0.3s ease; 
+}
 
+.header a img:hover {
+    transform: scale(1.1); /* Scale up the logo on hover */
+}
+.header {
+    display: block;
+    padding: 6px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* --------------------Home Page ------------------------ */
 .box{
     background-color: whitesmoke;
     width: 300px;
@@ -51,7 +62,42 @@ body {
     border: 1px solid black;
     padding: 10px;
 }
+.Announce{
+    background-color: rgb(175, 170, 170);
+    float: right;
+    width: 25%;
+    padding: 10px;
+    height: fit-content;
+    min-height: 200px;
+    border: 1px solid #ece5e5;
+}
+.Announce .announcementBox{
+    display: flex;
+    flex-flow: column wrap;
+}
+.Announce .announcementBox .announcement{
+    padding-right: 30px;
+    padding-bottom: 120px;
+    display: grid;
+    min-width: 100px;
+    width: fit-content;
+    max-height: 100px;
+    height: fit-content;
 
+}
+.Announce h2{
+    text-align: center;
+}
+.Announce announBox{
+    background-color: lightgray;
+    max-width: 375px;
+    width: 375px;
+    max-height: 100px;
+    height: 100px;
+    border: 1px solid #ece5e5;
+}
+
+/* --------------------About------------------------ */
 .information{
     float: left;
     width: 50%;
@@ -76,6 +122,7 @@ body {
     text-decoration: none; /* Removes the underline */
     font-family: 'Arial', sans-serif;
     font-size: 18px;
+    padding-top: 5px;
     font-weight: bold;
     max-width: 300px;
     color: #303030;
@@ -109,7 +156,41 @@ body {
     background: linear-gradient(to right, #5560c4,#be469e,#f5b861);
 }
 
+.Team{
+    float: right;
+    width: 50%;
+    padding: 10px;
+    height: fit-content;
+    min-height: 200px;
+    border: 1px solid #ece5e5;
+}
+.Team .membersBox{
+    display: flex;
+    flex-flow: row wrap;
+}
+.Team h2{
+    text-align: center;
+}
+.Team .membersBox .member{
+    padding-right: 30px;
+    padding-bottom: 120px;
+    display: grid;
+    min-width: 100px;
+    width: fit-content;
+    max-height: 100px;
+    height: fit-content;
+}
+.Team p{
+    align-content: center;
+}
+.Team img{
+    max-width: 100px;
+    width: auto;
+    max-height: 100px;
+    height: auto;
+}
 
+/* --------------------Events------------------------ */
 .Webpage-Tab-Title {
     text-align: center;
 }
@@ -151,53 +232,41 @@ body {
     margin-bottom: 10px;
     border-radius: 5px;
 }
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-  }
-
-  
-  .calendar {
+.calendar {
     width: 100%;
     border: 1px solid #ddd;
     border-radius: 10px;
     margin-top: 10px;
     padding: 20px;
     background-color: #fff;
-  }
-  
-  .calendar-header {
+}
+
+.calendar-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-  }
-  
-  .calendar-grid {
+}
+
+.calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 5px;
-  }
-  
-  .calendar-day {
+}
+
+.calendar-day {
     border: 1px solid #ccc;
     border-radius: 5%;
     padding: 10px;
     text-align: center;
-  }
-  
-  .calendar-day.other-month {
+}
+
+.calendar-day.other-month {
     color: #aaa;
     background-color: #f4f4f4;
-  }
-  
-  .container {
+}
+
+.container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -206,19 +275,19 @@ body {
     margin: 0 auto;
 }
 
+/* --------------------Donate------------------------ */
+
 .info-section, .donation-section {
     background-color: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 .info-section {
     width: 45%;
     text-align: center;
     font-size: 1.2em;
 }
-
 .donation-section {
     width: 45%;
     display: flex;
@@ -226,75 +295,38 @@ body {
     justify-content: center;
     align-items: center;
 }
-
 .donation-method {
     display: flex;
     align-items: center;
     margin: 20px 0;
 }
-
 .donation-method .logo {
     width: 50px;
     height: auto;
     margin-right: 15px;
 }
-
 .donation-method p {
     font-size: 1.2em;
 }
-
 .donation-link {
     display: flex;
     align-items: center;
     text-decoration: none; /* Remove underline */
     color: black; /* Set the text color to black */
 }
-
 .donation-link p {
     margin-left: 15px;
     font-size: 1.2em;
 }
-
 .donation-link:hover p {
     text-decoration: underline; /* Add underline on hover if needed */
 }
-
 .donation-method .logo {
     width: 50px;
     height: auto;
     margin-right: 15px;
 }
-.Team{
-    float: right;
-    width: 50%;
-    padding: 10px;
-    height: fit-content;
-    min-height: 200px;
-    border: 1px solid #ece5e5;
-}
-.Team .membersBox{
-    display: flex;
-    flex-flow: row wrap;
-}
-.Team h2{
-    text-align: center;
-}
-.Team .membersBox .member{
-    padding-right: 30px;
-    padding-bottom: 120px;
-    display: grid;
-    min-width: 100px;
-    width: fit-content;
-    max-height: 100px;
-    height: fit-content;
-}
-.Team p{
-    align-content: center;
-}
-.Team img{
-    max-width: 100px;
-    width: auto;
-    max-height: 100px;
-    height: auto;
-}
+/* --------------------Footer------------------------ */
+
+
 
