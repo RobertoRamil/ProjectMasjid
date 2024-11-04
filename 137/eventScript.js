@@ -101,9 +101,10 @@ document.getElementById("next-month").addEventListener("click", () => {
 // Initialize the calendar on page load
 renderCalendar(currentDate);
 
-function eventList(event_panes){
+function eventList(events){
+  numEvents = events.length
   const eventGrid = document.getElementById("eventBox");
-  for(let i = 0; i < event_panes; i++){
+  for(let i = 0; i < numEvents; i++){
     const eventObj = document.createElement("div");
     eventObj.classList.add("eventItem");
     var eventcontent = document.createElement("eventItemBox");
@@ -112,5 +113,4 @@ function eventList(event_panes){
     eventGrid.appendChild(eventItem);
   }
 }
-
-eventList(2);
+eventList(events);
