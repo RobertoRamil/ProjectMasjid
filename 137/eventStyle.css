@@ -92,6 +92,28 @@
     border-radius: 5px;
 }
 
+
+#event-box .eventBox{
+    display: flex;
+    flex-flow: column wrap;
+}
+#event-box .eventBox .eventItem{
+    padding-right: 30px;
+    padding-bottom: 120px;
+    display: grid;
+    min-width: 100px;
+    width: fit-content;
+    max-height: 100px;
+    height: fit-content;
+}
+#event-box .eventItemBox{
+    background-color: lightgray;
+    max-width: 375px;
+    width: 375px;
+    max-height: 100px;
+    height: 100px;
+    border: 1px solid #ece5e5;
+}
 /* Responsive styling */
 @media (max-width: 768px) {
     .calendar-container {

@@ -100,3 +100,17 @@ document.getElementById("next-month").addEventListener("click", () => {
 
 // Initialize the calendar on page load
 renderCalendar(currentDate);
+
+function eventList(event_panes){
+  const eventGrid = document.getElementById("eventBox");
+  for(let i = 0; i < event_panes; i++){
+    const eventObj = document.createElement("div");
+    eventObj.classList.add("eventItem");
+    var eventcontent = document.createElement("eventItemBox");
+    eventcontent.textContent= "item"; 
+    eventObj.appendChild(eventcontent);
+    eventGrid.appendChild(eventItem);
+  }
+}
+
+eventList(2);
