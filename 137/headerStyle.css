@@ -55,3 +55,15 @@ h3 {
     padding: 20px;
     border-top: 1px solid #0f5952;
 }
+
+header{
+    background-color: white !important;
+}
+
+/*---------------Background---------------*/
+body { 
+    background-image: url("https://www.cair.com/wp-content/uploads/2024/05/SACRAMENTOSTATE.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
