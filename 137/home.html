@@ -42,7 +42,9 @@
                 $('#header').load('header.html');
             })
         </script>
-    </head>
+
+<script type='module' src="firebase.js"defer></script>
+
     
 <body>
     <!--The header is inputted here-->
@@ -50,6 +52,8 @@
     <!--This is the prayer box, every paragraph and span is one row-->
     <div class="first-row">
         <div class="box" id="prayers_times"> 
+            
+
             <div id="date" class="clock" onload="getDate()"></div>
             <br>
 
