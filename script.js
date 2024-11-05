@@ -149,3 +149,20 @@ function announcementPanes(announcement_panes){
   
 }
 announcementPanes(5);
+
+/* -----------------------Admin Page Functions--------------------------*/
+const adminUsername = "admin";
+const adminPassword = "password";
+document.getElementById("loginForm").addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const enteredUsername = document.getElementById("username").value;
+  const enteredPassword = document.getElementById("password").value;
+  const errorMessage = document.getElementById("errorMessage");
+
+  if(enteredUsername == adminUsername && enteredPassword == adminPassword) {
+    window.location.assign("index.html");
+  } else {
+    errorMessage.textContent = "Invalid Username or Password";
+  }
+});
