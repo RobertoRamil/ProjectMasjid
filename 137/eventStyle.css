@@ -92,7 +92,6 @@
     border-radius: 5px;
 }
 
-
 #event-box .eventBox{
     display: flex;
     flex-flow: column wrap;
