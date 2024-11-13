@@ -5,15 +5,34 @@ h3 {
 }
 
 .header {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 6px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
     border-bottom: 1px solid #0f5952;
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/project-musjid.firebasestorage.app/o/FrontImage.png?alt=media&token=30e372c1-b736-4544-afb9-481dd73e5063'); /* Use your backdrop image URL */
+    background-size: cover;
+    background-position: center;
+    height: 160px; /* header space */
+    position: relative;
 }
-
+/*transparent backdrop*/
+.header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(128, 128, 128, 0.5); /* Grey with 50% opacity */
+    z-index: 0; 
+}
 .header a img {
+    position: relative;
+    z-index: 1; /* Ensures the logo appears on top */
     transition: transform 0.3s ease; 
 }
 
@@ -22,17 +41,17 @@ h3 {
 }
 
 .Webpage-Tab-Title {
-    padding-top:20px;
+    padding-top: 20px;
     text-align: center;
 }
 
-/*-------------------Header------------------------ */
+/*-------------------Header Tabs------------------------ */
 .tabs {
     display: flex;
     background-color: #0f5952;
 }
 
-/*home, about, event, donate tabs */
+/* Home, About, Event, Donate Tabs */
 
 .tab {
     flex: 1;
@@ -46,7 +65,7 @@ h3 {
 .tab:hover {
     background-color: #157269;
     color: white;
-    text-decoration: none
+    text-decoration: none;
 }
 
 .tab-content {
@@ -56,13 +75,9 @@ h3 {
     border-top: 1px solid #0f5952;
 }
 
-header{
-    background-color: white !important;
-}
-
 /*---------------Background---------------*/
 body { 
-    background-image: url("https://www.cair.com/wp-content/uploads/2024/05/SACRAMENTOSTATE.jpg");
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/project-musjid.firebasestorage.app/o/Back.jpg?alt=media&token=3557bb0e-c2b9-46a6-8765-632e8492a7de");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
