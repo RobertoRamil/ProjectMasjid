@@ -4,14 +4,16 @@
     width: 50%;
     padding: 10px;
     min-height: 200px;
-    border: 1px solid #ece5e5;
+    box-shadow: 3px 3px 20px gray;
+    background-color: #40404093;
+    color: #ffffff;
 }
 .information h2 {
     text-align: center;
+    text-shadow: 1px 1px 1px #000;
 }
 /*---------------social medias box (bottom boxes)------------ */
 .SocialMedia{
-    border: 1px solid #f8eeee;
     margin: auto;
     margin-top: 20px;
     width: fit-content;
@@ -47,20 +49,21 @@
     padding-top: 5px;
     font-weight: bold;
     max-width: 300px;
-    color: #303030;
+    color: #1b1b1b;
     transition: color 0.5s ease; 
 }
 .SocialMedia a:hover {
     color: #000;
+    text-decoration: none;
 }
 
 /*The gradients we see in the social media boxes */
 .SocialMedia .facebook{
-    border-radius: 50px;
+    border-radius: 20px;
     background: linear-gradient(to right, #3b83e7, #ece5e5);
 }
 .SocialMedia .instagram{
-    border-radius: 25px;
+    border-radius: 20px;
     background: linear-gradient(to right, #5560c4,#be469e,#f5b861);
 }
 
