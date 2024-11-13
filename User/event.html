@@ -7,6 +7,8 @@
         <title>Events Page</title>
 
     <link rel="stylesheet" href="eventStyle.css">
+    
+    <script src="firebase.js" defer></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" 
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
@@ -63,13 +65,13 @@
         <h4>Sign up for newsletter</h4>
         <div class="emailSignup">
             <p>Sign up with email</p>
-            <input type="text" class="Ebox" name="email" id="email" value="">
+            <input type="text" class="Ebox" name="email" id="emailField" placeholder="Email Address" required>
             <button onclick="signUpEmail()" class="Esign">Sign up with email</button>
 
         </div>
         <div class="phoneSignup">
             <p>Sign up with phone number</p>
-            <input type="text" class="Pbox" name="phone" id="phone" value="">
+            <input type="text" class="Pbox" name="phone" id="phoneField" placeholder="Phone Number" required>
             <button onclick="signUpPhone()" class="Psign">Sign up with phone</button>
         </div>
         
