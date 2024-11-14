@@ -45,14 +45,13 @@
         </script>
 
 <script type='module' src="firebase.js"defer></script>
-
     
 <body>
     <!--The header is inputted here-->
     <div id="header"></div>
     <!--This is the prayer box, every paragraph and span is one row-->
-    <div class="first-row">
-        <div class="box" id="prayers_times"> 
+    <div class="row">
+        <div class="box col-3" id="prayers_times"> 
             
 
             <div id="date" class="clock" onload="getDate()"></div>
@@ -116,9 +115,19 @@
     
     
         </div>
+	<div class = "Announce col-6">
+            <h1> Announcements:</h1>
+            <div class = "announcementBox" id = "announcementBox">
+            </div>
+        </div>
+</div>
+<div class="row">
+ <!--Initial Iframe example, this can be put into the home HTML once set up-->
+    <iframe class="col-3" src="https://www.google.com/maps?q=Maunatul+Muslimeen+Society+of+CA+(Islamic+Center)+-+MMSC+-+Sacramento&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed" 
+    allowfullscreen id="map"></iframe>
 
         <!--This is the rotating images in the middle of the page-->
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div id="carouselExampleIndicators" class="carousel slide col-6" data-ride="carousel">
             <ol class="carousel-indicators">
               <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
               <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -146,19 +155,13 @@
             </a>
           </div>
 
-        <div class = "Announce">
-            <h1> Annoucements:</h1>
-            <div class = "announcementBox" id = "announcementBox">
-            </div>
-        </div>
+ 
     </div> 
 
-    <!--Initial Iframe example, this can be put into the home HTML once set up-->
-    <iframe src="https://www.google.com/maps?q=Maunatul+Muslimeen+Society+of+CA+(Islamic+Center)+-+MMSC+-+Sacramento&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed" 
-    allowfullscreen id="map"></iframe>
+</div>
                  
     <!--This would be on the admin side, it would ask for the user input with an example of what to input
-    Once they submit their input, embed will change the URL to the location if found-->
+    Once they submit their input, embed will change the URL to the location if found
     <form class="mapChange">
         <b>
             Location Name on Google Maps:
@@ -169,11 +172,14 @@
         <input type="text" id="Location"><br>
         <button type="submit" onclick="convertSpace(event)">Submit</button>
         <br>
-    </form>
+    </form> -->
             
         
                 
 </body>
 
 <!-- footer added here -->
-<div id="footer"></div> 
+<div id="footer"></div>
+
+
+
