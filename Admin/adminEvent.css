@@ -56,3 +56,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     color: white;
 }
+.newsUp_button:hover, .newsSend_button:hover, .infoUp_button:hover{
+    transform: scale(1.1);
+    background-color: #157269;
+}
