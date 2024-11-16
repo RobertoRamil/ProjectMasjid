@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js'
+import { getFirestore, collection, getDocs, arrayUnion } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js'
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -21,9 +21,12 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 
-const db = getFirestore()
+const db = getFirestore();
 
-const colRef = collection(db, "users")
+const contactsRef = doc(db, "users", "userContacts");
+const contactsSnap = getDoc(contactsRef);
+
+const colRef = collection(db, "users");
 
 getDocs(colRef)
     .then((snapshot) => {
@@ -36,3 +39,5 @@ getDocs(colRef)
     .catch(err => {
         console.log(err.message)
     })
+
+
