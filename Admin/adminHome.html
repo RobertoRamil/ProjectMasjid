@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Home</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="adminHome.css">
+    <link rel="stylesheet" href="adminHome.js">
+</head>
+<!-- Loading header here-->
+    <div id="header"></div>
+<body id ="links">
+    <script>
+        $(function(){
+            $('#header').load('adminHeader.html');
+        })
+    </script>
+    <!-- Social Media Links Update Section -->
+    <div id="socialMediaSection">
+        <h3>Update Social Media Links</h3>
+        <form id="socialLinksForm">
+            <label for="facebookLink">Facebook URL:</label>
+            <input type="url" id="facebookLink" name="facebookLink" placeholder="Enter Facebook URL">
+
+            <label for="instagramLink">Instagram URL:</label>
+            <input type="url" id="instagramLink" name="instagramLink" placeholder="Enter Instagram URL">
+
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+</body>
+</html>

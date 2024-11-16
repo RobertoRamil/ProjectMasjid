@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Logo and Backdrop Upload</title>
+    <link rel="stylesheet" href="adminHeader.css">
+</head>
+<body>
+    <div class="upload-container">
+        <h2>Update Image</h2>
+
+        <!-- Dropdown for selecting Logo or Backdrop -->
+        <label for="imageType">Select Image Type:</label>
+        <select id="imageType" name="imageType">
+            <option value="logo" selected>Logo</option>
+            <option value="backdrop">Backdrop</option>
+        </select>
+
+        <!-- File input for image upload -->
+        <input type="file" id="imageUpload" accept="image/*">
+        <div class="preview-container">
+            <img id="imagePreview" src="#" alt="Image Preview" style="display:none;">
+        </div>
+
+        <button id="uploadButton" onclick="uploadImage()">Upload Image</button>
+        <p id="uploadStatus"></p>
+    </div>
+    
+    <div class="tabs">
+        <a href="adminHome.html" class="tab">Home</a>
+        <a href="adminAbout.html" class="tab">About</a>
+        <a href="adminEvent.html" class="tab">Events</a>
+        <a href="adminDonate.html" class="tab">Donate</a>
+    </div>
+
+    <script src="adminHeader.js"></script>
+</body>
+</html>
