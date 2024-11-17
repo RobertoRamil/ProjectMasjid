@@ -1,5 +1,4 @@
 /*This holds the prayer times, carasol, and announcement box*/
-
 .first-row{
     align-items: flex-start;
 
@@ -56,7 +55,7 @@
 
 #img{
     height: 500px;
-    width: 100% !important;
+    width: 700px !important;
 }
 /*---------------Announcement box---------------*/
 
@@ -102,4 +101,3 @@
 .mapChange b{
     font-size:2vw;
 }
-

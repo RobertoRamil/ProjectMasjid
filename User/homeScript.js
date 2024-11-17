@@ -30,7 +30,7 @@ function announcementPanes(announcement_panes){
     }
     
   }
-  announcementPanes(2);
+  announcementPanes(5);
 
   //prayer time to auto get the current date on the system
 function getDate(){
