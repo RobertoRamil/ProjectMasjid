@@ -40,3 +40,9 @@ body{
 .mapChange input{
     padding-left: 100px;
 }
+
+/*dark mode stuff*/
+.dark-mode {
+    background-color: black;
+    color: white;
+  }
