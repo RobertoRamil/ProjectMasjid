@@ -1,1 +1,44 @@
 <!--hello--> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin Home</title>
+        <link rel="stylesheet" href="adminHome.css">
+        <script src="adminHome.js"></script>
+    </head>
+    <body>
+        <header>
+            <div id="backButton">
+                <a href="index.html">
+                <button type="button" class="back_button">< Back</button>
+                </a>
+            </div>
+            <div class="header">
+                <h2>Homepage Edit</h2>                  
+                <div>
+                    <a href ="index.html">
+                        <img src="https://github.com/RobertoRamil/ProjectMasjid/blob/main/logo2.png?raw=true" alt="logo of MMSC" width="150" height="150">
+                    </a>
+                </div>
+                      
+            </div>
+        </header>
+
+
+    <div class="post-container">
+        
+        <h2>Add Announcement</h2>
+        <form id = "announcementForm">
+            <p id="errorMessage"></p>
+            <label for="announcementText">Type announcement information here:</label>
+            <input type="text" name="announcementText" id="announcementText" required>
+            <button type="submit" id="submit">Post Announcement</button>
+            <button type="button" id="remove_mode">Remove an announcement</button>
+            
+        </form>
+    </div>
+</body>
+</html>
