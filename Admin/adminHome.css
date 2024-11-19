@@ -1,3 +1,52 @@
+body{
+    margin: 0px;
+}
+
+#map_change{
+    border: 5px rgba(210, 212, 214, 0.897) groove;
+    border-radius: 10px;
+
+    width: 30%;
+    height: 20%;
+    padding: 1%;
+    margin: 1%;
+
+    font-size: 120%;
+    text-align: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(210, 212, 214, 0.52);
+    overflow: auto;
+}
+
+#example{
+    padding-top: 3%;
+}
+
+.mapChange b{
+    margin:auto;
+    font-size: 25px;
+}
+
+.mapChange button, input{
+    padding: 10px;
+    cursor: pointer;
+
+}
+
+.mapChange input{
+    padding-left: 100px;
+}
+
+/*dark mode stuff*/
+.dark-mode {
+    background-color: black;
+    color: white;
+  }
+
 /*-------------------Update Social Media Links------------------------ */
 #links {
     font-family: Arial, sans-serif;

@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="adminHome.css">
     <script src="adminHome.js"defer></script> 
     <link rel="stylesheet" href="adminHome.js">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
+    crossorigin="anonymous">
+    </script>
 </head>
 <!-- Loading header here-->
     <div id="header"></div>
@@ -86,6 +90,23 @@
             
         </div>
     </div>
+    <div id="map_change">
+            <form class="mapChange">
+                <b>
+                    Location Name on Google Maps: <br>
+                </b>
+                
+                <div id="example">
+                    Example: Maunatul Muslimeen Society of CA (Islamic Center) - MMSC - Sacramento
+                    <br><br>
+                </div>
+
+                <input type="text" id="Location">
+                <button type="submit">Submit</button>
+               <!-- <button type="submit" onclick="convertSpace(event)">Submit</button>-->
+            </form>
+        </div>
+        <button onclick="darkSwitch()">DarkMode</button>
 </body>
 </html>
 
