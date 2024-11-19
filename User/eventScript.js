@@ -121,6 +121,7 @@ eventList(events);
 function signUpEmail(){
   const userEmail = document.getElementById("emailField").value;
   var emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    //IMPORTANT NOTE FOR LATER: Add functionality to ensure that the email is not a duplicate
   if(emailRegex.test(userEmail)){
     alert("You have joined the newsletter!");
     updateDoc(contactsRef, {emails: arrayUnion(userEmail)})
@@ -135,6 +136,7 @@ function signUpEmail(){
 function signUpPhone(){
   const userPhone = document.getElementById("phoneField").value;
   var phoneRegex = /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+  //IMPORTANT NOTE FOR LATER: Add functionality to ensure that the phonenumber is not a duplicate
   if(phoneRegex.test(userPhone)){
     alert("You have joined the newsletter!");
     updateDoc(contactsRef, {phoneNums: arrayUnion(userPhone)})

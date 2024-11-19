@@ -1,0 +1,92 @@
+/*-------------------Update Image------------------------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    height: 100%; 
+    background-color: #f7f7f7;
+}
+.upload-container {
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+    width: 300px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+.preview-container {
+    margin-top: 15px;
+}
+
+#imagePreview {
+    max-width: 100%;
+    max-height: 150px;
+    border-radius: 8px;
+    padding-left: 60px;
+}
+
+/* Upload Button Styling */
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #0f5952;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #157269;
+}
+
+/* Upload Status Styling */
+#uploadStatus {
+    margin-top: 10px;
+    font-size: 14px;
+    color: green;
+}
+
+/*-------------------Header Tabs------------------------ */
+.tabs {
+    display: flex;
+    background-color: #0f5952;
+    margin-top: 200px;
+    width: 100%; 
+    justify-content: center; 
+}
+
+.tab {
+    flex: 1;
+    padding: 14px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    border: 1px solid #0f5952;
+    transition: background-color 0.3s ease;
+}
+
+.tab:hover {
+    background-color: #157269;
+    color: white;
+    text-decoration: none;
+}
+
+.tab-content {
+    display: none; 
+    padding: 20px;
+    border-top: 1px solid #0f5952;
+}

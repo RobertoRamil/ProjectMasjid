@@ -1,0 +1,55 @@
+              
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin Home Page</title>
+
+        <link rel="stylesheet" href="adminDonate.css">
+       
+        <script src="adminDonate.js" defer></script>
+        
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
+        crossorigin="anonymous">
+        </script>
+
+    </head> 
+    <body>
+        <div class="content">
+            <div id="donate_text">
+                <!--Later replace the placeholder text to take from the database of the current about-->
+                <textarea placeholder="Edit Donation's about section"></textarea>
+                <br>
+                <button type="submit">Convert Changes</button>
+            </div>
+            
+            <div  id="donate_buttons">       
+                <div id="paypal">
+                    <b>Turn off Paypal </b>      
+                    <!--Add thing that actually removes the image-->
+                    <input type="checkbox" id="toggle"/>
+                    <br>
+                <!--Later replace the placeholder text-->
+                    <input type="text" placeholder="current URL" class="donateURL">
+                    <br>
+                    <button type="submit" >Update Paypal Link</button>
+                </div>
+                
+                <div id="zelle">
+                    <b>Turn off Zelle </b>      
+                    <!--Add thing that actually removes the image-->
+                    <input type="checkbox" id="toggle"/>
+                    <br>
+                <!--Later replace the placeholder text-->
+                    <div class="donateSubmit">
+                        <input type="file" placeholder="current URL" id="submitImg"/>
+                        <br>
+                        <img id="preview" src="#"/>
+                    </div>
+                    <button type="submit">Update Zelle Link</button>
+                </div>
+            </div>
+        </div>
+    </body>  
+</html>  

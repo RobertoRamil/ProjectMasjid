@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin About</title>
+    <link rel="stylesheet" href="adminAbout.css">
+    <script src="adminAbout.js" defer></script>
+</head>
+<body>
+    <h2 class="Webpage-Tab-Title">Admin About</h2>
+
+    <!-- Left Box -->
+    <div class="information">
+        <h2 contenteditable="true" id="adminLeftTitle">*Title of the information here*</h2>
+        <p contenteditable="true" id="adminLeftText">The full text goes here.</p>
+    </div>
+
+    <!-- Right Box -->
+    <div class="Team">
+        <h1>Manage the Team!</h1>
+        <div class="membersBox" id="adminMembersBox">
+            <!-- Editable team members will populate here -->
+        </div>
+        <button id="addNewMember">+ Add New Member</button>
+    </div>
+
+    <!-- Save Changes Button -->
+    <button id="saveChanges" class="save-btn">Save Changes</button>
+</body>
+</html>
