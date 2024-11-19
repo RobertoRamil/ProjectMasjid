@@ -1,4 +1,3 @@
-
 (function(){
     var darkOn=localStorage.getItem("darkCookie");
     var element=document.body;

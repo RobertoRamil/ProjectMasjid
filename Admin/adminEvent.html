@@ -8,6 +8,27 @@
     <script src="adminEvent.js"></script>
 </head>
 <body>
+    <div class="calendar-box">
+        <div class="header">
+            <button onclick="prevMonth()">Previous</button>
+            <h2 id="monthYear"></h2>
+            <button onclick="nextMonth()">Next</button>
+        </div>
+
+        <div class="calendar" id="calendar"></div>
+
+        <button id="saveButton">Save</button>
+    </div>
+
+    <!-- Event Popup -->
+    <div id="eventPopup" class="event-popup" style="display: none;">
+      <h3 id="selectedDate"></h3>
+      <input type="text" id="eventInput" placeholder="Add or edit an event" />
+      <button onclick="addEvent()">Add Event</button>
+      <div class="event-list" id="eventList"></div>
+      <button onclick="closePopup()">Close</button>
+    </div>
+    <div id="overlay" class="overlay" style="display: none;" onclick="closePopup()"></div>
     <div class = "newsletter_info">
          <p>Edit the newsletter info section here</p>
          <textarea class = "info_box" name="ibox" id = "info_field" style="overflow: auto; resize: none;"></textarea>
