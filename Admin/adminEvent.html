@@ -1,13 +1,47 @@
-<!DOCTYPE HTML>
-<html lang = "en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin event page editor</title>
+    <title>Admin Event</title>
+
     <link rel="stylesheet" href="adminEvent.css">
     <script src="adminEvent.js"></script>
 </head>
 <body>
+
+    <header>
+        <div id="backButton">
+            <a href="index.html">
+            <button type="button" class="back_button">< Back</button>
+            </a>
+        </div>
+        <div class="header">
+            <h2>Eventpage Edit</h2>                     
+            <div>
+                <a href ="index.html">
+                    <img src="https://github.com/RobertoRamil/ProjectMasjid/blob/main/logo2.png?raw=true" alt="logo of MMSC" width="150" height="150">
+                </a>
+            </div>
+                  
+        </div>
+    </header>
+
+
+    <div class="eventedit-container">
+        <h2>Toggle features</h2>
+        <form id = "Form">
+            <p id="errorMessage"></p>
+            
+              <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+                <p>Newsletter Signup</p>
+              </label>
+
+            <button type="submit" id="submit">Save</button>
+        </form>
+
     <div class="calendar-box">
         <div class="header">
             <button onclick="prevMonth()">Previous</button>
@@ -41,6 +75,7 @@
             <button onclick = "saveNewsLetter()" class = "newsUp_button">Save newsletter</button>
             <button onclick = "sendNewsLetter()" class = "newsSend_button">Send newsletter</button>
         </div>
+
     </div>
 </body>
 </html>
