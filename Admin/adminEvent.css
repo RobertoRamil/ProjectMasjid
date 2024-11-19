@@ -159,3 +159,66 @@ body {
     text-decoration: underline;
   }
   
+.newsletter_info{
+    float: left;
+    text-align: center;
+    font-size: 1em;
+    background-color: white;
+    padding: 20px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    margin-left: 5%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+}
+.info_box{
+    width: 90%;
+    height: 200px;
+    margin-bottom: 20px;
+}
+.infoUp_button{
+    background-color: #0f5952;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: white;
+}
+
+.newsletter_center{
+    float: right;
+    text-align: center;
+    height: 300px;
+    font-size: 1.0em;
+    background-color: white;
+    padding: 20px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    margin-right: 5%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.news_upload{
+    margin-top: 150px;
+    margin-bottom: 50px;
+}
+.newsUp_button, .newsSend_button{
+    background-color: #0f5952;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: white;
+}
+.newsUp_button:hover, .newsSend_button:hover, .infoUp_button:hover{
+    transform: scale(1.1);
+    background-color: #157269;
+}
+
