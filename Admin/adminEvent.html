@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin event page editor</title>
+    <link rel="stylesheet" href="adminEvent.css">
+    <script src="adminEvent.js"></script>
+</head>
+<body>
+    <div class = "newsletter_info">
+         <p>Edit the newsletter info section here</p>
+         <textarea class = "info_box" name="ibox" id = "info_field" style="overflow: auto; resize: none;"></textarea>
+         <button onclick = "uploadInfoBox()" class = "infoUp_button">Save text</button>
+    </div>
+    <div class = "newsletter_center">
+        <p>Upload and send newsletters here this only accepts ".pdf" files</p>
+        <input type="file" class ="news_upload" id = "newsUp_field" accept = ".pdf">
+        <div class = "button_holder">
+            <button onclick = "saveNewsLetter()" class = "newsUp_button">Save newsletter</button>
+            <button onclick = "sendNewsLetter()" class = "newsSend_button">Send newsletter</button>
+        </div>
+    </div>
+</body>
+</html>

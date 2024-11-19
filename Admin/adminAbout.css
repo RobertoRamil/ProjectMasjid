@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    color: #ffffff;
+    background-color: #40404093;
+}
+
+.Webpage-Tab-Title {
+    text-align: center;
+    font-size: 24px;
+}
+
+.information, .Team {
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 3px 3px 10px gray;
+    background-color: #333;
+}
+
+.information h2, .information p {
+    margin: 10px 0;
+}
+
+.Team .membersBox {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.Team .member {
+    border: 1px solid #555;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+    background-color: #444;
+}
+
+.Team .member img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.Team .member p {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.save-btn {
+    margin: 20px auto;
+    display: block;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #28a745;
+}
+
+.save-btn:hover {
+    background-color: #218838;
+}

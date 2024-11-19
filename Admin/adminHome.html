@@ -1,23 +1,96 @@
-              
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Admin Home Page</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Home</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="adminHome.css">
+    <script src="adminHome.js"defer></script> 
+    <link rel="stylesheet" href="adminHome.js">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
+    crossorigin="anonymous">
+    </script>
+</head>
+<!-- Loading header here-->
+    <div id="header"></div>
+<body id ="links">
+    <script>
+        $(function(){
+            $('#header').load('adminHeader.html');
+        })
+    </script>
+    <!-- Social Media Links Update Section -->
+    <div id="socialMediaSection">
+        <h3>Update Social Media Links</h3>
+        <form id="socialLinksForm">
+            <label for="facebookLink">Facebook URL:</label>
+            <input type="url" id="facebookLink" name="facebookLink" placeholder="Enter Facebook URL">
 
-        <link rel="stylesheet" href="adminHome.css">
-        <script src="adminHome.js"defer></script>
+            <label for="instagramLink">Instagram URL:</label>
+            <input type="url" id="instagramLink" name="instagramLink" placeholder="Enter Instagram URL">
 
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
-        crossorigin="anonymous">
-        </script>
-    </head>
-    <body>
-        <!--MAKE THIS ACTUALLY WORK-->
-        <!--This would be on the admin side, it would ask for the user input with an example of what to input
-        Once they submit their input, embed will change the URL to the location if found-->
-        <div id="map_change">
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+  <!-- The header is inputted here -->
+    <div id="header"></div>
+    <!-- This is the prayer box, every paragraph and span is one row -->
+    <div class="first-row">
+        <div class="box" id="prayers_times">
+
+            <div id="date" class="clock" onload="getDate()"> test</div>
+            <br>
+            <div id="prayerTitle">
+                <u>Daily Prayer Times:</u>
+            </div>
+            <div id="rows-container">
+                <p>
+                    <input type="text" class = "prayer" placeholder="Prayer Name" id="prayerName1" maxlength="5"/>
+                    <span>
+                        <input type="text" class = "time" placeholder="Prayer Time" id="prayerTime1" maxlength="5"/>
+                    </span>
+                </p>
+
+                <p>
+                    <input type="text" class = "prayer" placeholder="Prayer Name" id="prayerName2" maxlength="5"/>
+                    <span>
+                        <input type="text" class = "time" placeholder="Prayer Time" id="prayerTime2" maxlength="5"/>
+                    </span>
+                </p>
+
+                <p>
+                    <input type="text" class = "prayer" placeholder="Prayer Name" id="prayerName3" maxlength="5"/>
+                    <span>
+                        <input type="text" class = "time" placeholder="Prayer Time" id="prayerTime3" maxlength="5"/>
+                    </span>
+                </p>
+                <p>
+                    <input type="text" class = "prayer" placeholder="Prayer Name" id="prayerName4" maxlength="5"/>
+                    <span>
+                        <input type="text" class = "time" placeholder="Prayer Time" id="prayerTime4" maxlength="5"/>
+                    </span>
+                </p>
+                <p>
+                    <input type="text" class = "prayer" placeholder="Prayer Name" id="prayerName5" maxlength="5"/>
+                    <span>
+                        <input type="text" class = "time" placeholder="Prayer Time" id="prayerTime5" maxlength="5"/>
+                    </span>
+                </p>
+            <div id="prayerTitle">
+                <u>Special Prayer Dates & Times:</u>
+            </div>    
+            </div>
+
+            <div> 
+                <button id="addSPrayerRow">Add Prayer</button>
+                <button id="saveButton"> Save </button> 
+            </div>
+            
+        </div>
+    </div>
+    <div id="map_change">
             <form class="mapChange">
                 <b>
                     Location Name on Google Maps: <br>
@@ -34,6 +107,9 @@
             </form>
         </div>
         <button onclick="darkSwitch()">DarkMode</button>
+</body>
+</html>
 
-    </body>  
-</html>  
+<body>
+    
+</body>
