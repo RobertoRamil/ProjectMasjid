@@ -23,7 +23,34 @@
             })
         </script>
     </head>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Update Left Box
+            const leftBoxTitle = localStorage.getItem("leftBoxTitle");
+            const leftBoxText = localStorage.getItem("leftBoxText");
+            if (leftBoxTitle) document.querySelector(".information h2").textContent = leftBoxTitle;
+            if (leftBoxText) document.querySelector(".information p").textContent = leftBoxText;
     
+            // Update Team Members
+            const teamMembers = JSON.parse(localStorage.getItem("teamMembers") || "[]");
+            const memberGrid = document.getElementById("membersBox");
+            //memberGrid.innerHTML = ""; // Clear existing members
+            teamMembers.forEach(member => {
+                const memberDiv = document.createElement("div");
+                memberDiv.classList.add("member");
+    
+                const portrait = document.createElement("img");
+                portrait.setAttribute("src", member.photo);
+    
+                const name = document.createElement("p");
+                name.textContent = member.name;
+    
+                memberDiv.appendChild(portrait);
+                memberDiv.appendChild(name);
+                memberGrid.appendChild(memberDiv);
+            });
+        });
+    </script>
     <body>
     <!--The header is inputted here-->
         <div id="header"></div>

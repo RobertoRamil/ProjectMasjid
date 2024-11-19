@@ -6,6 +6,7 @@
     <title>Admin Home</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="adminHome.css">
+    <script src="adminHome.js"defer></script> 
     <link rel="stylesheet" href="adminHome.js">
 </head>
 <!-- Loading header here-->
@@ -29,5 +30,65 @@
             <button type="submit">Save Changes</button>
         </form>
     </div>
+  <!-- The header is inputted here -->
+    <div id="header"></div>
+    <!-- This is the prayer box, every paragraph and span is one row -->
+    <div class="first-row">
+        <div class="box" id="prayers_times">
+
+            <div id="date" class="clock" onload="getDate()"> test</div>
+            <br>
+            <div id="prayerTitle">
+                <u>Daily Prayer Times:</u>
+            </div>
+            <div id="rows-container">
+                <p>
+                    <input type="text" class = "prayer" placeholder="Prayer Name" id="prayerName1" maxlength="5"/>
+                    <span>
+                        <input type="text" class = "time" placeholder="Prayer Time" id="prayerTime1" maxlength="5"/>
+                    </span>
+                </p>
+
+                <p>
+                    <input type="text" class = "prayer" placeholder="Prayer Name" id="prayerName2" maxlength="5"/>
+                    <span>
+                        <input type="text" class = "time" placeholder="Prayer Time" id="prayerTime2" maxlength="5"/>
+                    </span>
+                </p>
+
+                <p>
+                    <input type="text" class = "prayer" placeholder="Prayer Name" id="prayerName3" maxlength="5"/>
+                    <span>
+                        <input type="text" class = "time" placeholder="Prayer Time" id="prayerTime3" maxlength="5"/>
+                    </span>
+                </p>
+                <p>
+                    <input type="text" class = "prayer" placeholder="Prayer Name" id="prayerName4" maxlength="5"/>
+                    <span>
+                        <input type="text" class = "time" placeholder="Prayer Time" id="prayerTime4" maxlength="5"/>
+                    </span>
+                </p>
+                <p>
+                    <input type="text" class = "prayer" placeholder="Prayer Name" id="prayerName5" maxlength="5"/>
+                    <span>
+                        <input type="text" class = "time" placeholder="Prayer Time" id="prayerTime5" maxlength="5"/>
+                    </span>
+                </p>
+            <div id="prayerTitle">
+                <u>Special Prayer Dates & Times:</u>
+            </div>    
+            </div>
+
+            <div> 
+                <button id="addSPrayerRow">Add Prayer</button>
+                <button id="saveButton"> Save </button> 
+            </div>
+            
+        </div>
+    </div>
 </body>
 </html>
+
+<body>
+    
+</body>

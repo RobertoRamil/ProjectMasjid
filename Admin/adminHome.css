@@ -71,4 +71,62 @@
 
 #socialLinksForm button:hover {
     background-color: #157269;
+
+/* Prayer time box specifically */
+.box {
+    background-color: whitesmoke;
+    width: 300px;
+    overflow: visible; /* Ensure it grows dynamically */
+    display: flex;
+    flex-direction: column; /* Arrange rows and button vertically */
+    justify-content: space-between; /* Ensure button stays at the bottom */
+    padding: 10px;
+    border: 1px solid black;
+    height: auto;
+    min-height: 200px; /* Optional: Set a minimum height */
+}
+
+#prayers_times {
+    background-color: lightgray;
+    text-align: center;
+    font-size: small;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+#rows-container {
+    flex-grow: 1; /* Rows grow dynamically */
+}
+
+.box p {
+    text-align: left;
+}
+
+.box span {
+    float: right;
+}
+
+.box u {
+    text-align: center;
+}
+
+#prayerTitle {
+    padding-bottom: 20px;
+}
+
+#addPrayerRow {
+    align-self: center; /* Center button horizontally */
+    margin-top: 10px;
+}
+
+.prayer {
+    width: 12ch;
+}
+
+.time {
+    width: 11ch;
+}
+
+#addSPrayerRow {
+    margin-top: 10px;
 }
