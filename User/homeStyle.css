@@ -35,10 +35,11 @@
 }
 
 #prayers_times{
-    background-color: lightgray;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     font-size: small;
-    border: 1px solid black;
     padding: 10px;
 }
 
@@ -60,24 +61,24 @@
 /*---------------Announcement box---------------*/
 
 .Announce{
-    background-color: rgb(175, 170, 170);
     float: right;
     width: 25%;
-    padding: 10px;
+    padding: 20px;
     height: fit-content;
     min-height: 200px;
-    border: 1px solid #ece5e5;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .Announce .announcementBox{
     display: flex;
     flex-flow: column wrap;
 }
 .Announce .announcementBox .announcement{
-    padding-right: 30px;
     padding-bottom: 120px;
     display: grid;
     min-width: 100px;
-    width: fit-content;
+    width: 100%;
     max-height: 100px;
     height: fit-content;
 
@@ -86,12 +87,11 @@
     text-align: center;
 }
 .Announce announBox{
-    background-color: lightgray;
-    max-width: 375px;
-    width: 375px;
-    max-height: 100px;
+    width: 90%;
     height: 100px;
-    border: 1px solid #ece5e5;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 /*---------------Map---------------*/
 #map{
