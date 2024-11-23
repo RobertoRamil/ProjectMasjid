@@ -13,9 +13,15 @@
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
         crossorigin="anonymous">
         </script>
+        <script defer>
+            $(function(){
+                $('#header').load('adminHeader.html');
+            })
+        </script>
 
     </head> 
     <body>
+        <div id = "header"></div>
         <div class="content">
             <div id="donate_text">
                 <!--Later replace the placeholder text to take from the database of the current about-->

@@ -4,36 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Event</title>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="adminEvent.css">
-    <script src="adminEvent.js"></script>
+    <script src="adminEvent.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous">
+    </script>
+    <script>
+        $(function(){
+            $('#header').load('adminHeader.html');
+        })
+    </script>
 </head>
+<header>
+    <div id="backButton">
+        <a href="adminHome.html">
+        <button type="button" class="back_button">< Back</button>
+        </a>
+    </div>
+    
+</header>
+
 <body>
-
-    <header>
-        <div id="backButton">
-            <a href="index.html">
-            <button type="button" class="back_button">< Back</button>
-            </a>
-        </div>
-        <div class="header">
-            <h2>Eventpage Edit</h2>                     
-            <div>
-                <a href ="index.html">
-                    <img src="https://github.com/RobertoRamil/ProjectMasjid/blob/main/logo2.png?raw=true" alt="logo of MMSC" width="150" height="150">
-                </a>
-            </div>
-                  
-        </div>
-    </header>
-
-
+    <div id="header"></div>
+    
+    <h2>Eventpage Edit</h2>
     <div class="eventedit-container">
         <h2>Toggle features</h2>
         <form id = "Form">
             <p id="errorMessage"></p>
             
-              <label class="switch">
+              <label class="switch">    
                 <input type="checkbox">
                 <span class="slider round"></span>
                 <p>Newsletter Signup</p>
@@ -43,7 +43,7 @@
         </form>
 
     <div class="calendar-box">
-        <div class="header">
+        <div class="cal_header">
             <button onclick="prevMonth()">Previous</button>
             <h2 id="monthYear"></h2>
             <button onclick="nextMonth()">Next</button>
