@@ -1,6 +1,6 @@
 /* --------------------Event Page------------------------ */
 .eventedit-container {
-  width: 40%;
+  width: 80%;
   background-color: #f4f4f4;
   margin: auto;
   margin-top: 50px;
@@ -43,27 +43,7 @@ button:hover {
   text-align: center;
 }
 /* --------------------Header------------------------ */
-.header a img {
-  transition: transform 0.3s ease; 
-}
 
-.header a img:hover {
-  transform: scale(1.1); /* Scale up the logo on hover */
-}
-.header {
-  display: block;
-  padding: 6px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-.back_button {
-  /* override align */
-  width: 60px;
-}
-.backButton {
-  text-align: left;
-}
 /* --------------------Slider------------------------ */
 .switch {
   position: relative;
@@ -151,7 +131,6 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f8f9fa;
-  display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
