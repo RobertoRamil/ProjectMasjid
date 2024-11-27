@@ -1,5 +1,5 @@
 # ProjectMasjid
-![alt text] (https://github.com/RobertoRamil/ProjectMasjid/blob/main/logo2.png)
+![Alt text](https://github.com/RobertoRamil/ProjectMasjid/blob/main/logo2.png)
 
 #Mark Ures
 #Roberto Ramil
