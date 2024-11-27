@@ -2,7 +2,7 @@
 > Project Masjid is a website project for the Maunatul Muslimeen Society of California
 ![banner](https://github.com/RobertoRamil/ProjectMasjid/blob/main/Banner.png?raw=true)
 
-By the Basiq Coders: Mark Ures, Roberto Ramil, Corliss Yang, Shahroz Hamid, Mansoor Ali, Giovany Nunez, Iman Abboud, Simon Vu Truong
+By the BasiqCoders: Mark Ures, Roberto Ramil, Corliss Yang, Shahroz Hamid, Mansoor Ali, Giovany Nunez, Iman Abboud, Simon Vu Truong
 
 ## Table of Contents
  - [What Project Masjid Is](#what-project-masjid-is)
@@ -23,9 +23,10 @@ Project Masjid is led and implemented by the development team of BasiqCoders whi
 Project Masjid utilizes the following technologies
 
 Frontend:
- - HTML - Website Design
- - CSS - Website syle/formatting
- - JavaScript - Handling of data 
+ - <img src="https://insideout.com/wp-content/uploads/2012/09/HTML5_Logo_256.png" alt="HTMLICON" width = "20"/> HTML - Website Design
+ - <img src = "https://sonysimon.com/wp-content/uploads/2016/07/css.png" alt="CSSICON" width = "20"/> CSS - Website syle/formatting
+ - <img src = "https://www.globalcloudteam.com/wp-content/uploads/2023/08/javascript.webp" alt="JSICON" width = "20"/> JavaScript - Handling of data 
+
 
 Backend:
  - Firebase - Database
@@ -35,7 +36,7 @@ Backend:
 
 IDE: Visual Studio
 ### Entity Relationship Diagram
-
+![ERD](https://github.com/RobertoRamil/ProjectMasjid/blob/main/Blank_diagram.png?raw=true)
 ## Testing
  > Currently a placeholder
 ## Deployment
