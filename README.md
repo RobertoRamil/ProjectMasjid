@@ -45,7 +45,7 @@ IDE: Visual Studio
  > Currently a placeholder
 ## Prototype Showcase
 Want to view our original prototype?
-[Click here to download it and explore it yourself!](https://github.com/RobertoRamil/ProjectMasjid/blob/main/readme/Prototype.zip)
+[Click here to download it and explore it yourself!](https://github.com/RobertoRamil/ProjectMasjid/raw/refs/heads/main/readme/Prototype.zip)
 
 ## Current Project Showcase
 The website is located [Here at mmscenter.org](mmscenter.org)
