@@ -1,9 +1,10 @@
+
+
 /*This holds the prayer times, carasol, and announcement box*/
 .first-row{
     align-items: flex-start;
 
-     display: flex; 
-     justify-content: center;
+    display: flex; 
     padding: 15px;
 }
 
@@ -12,6 +13,19 @@
     padding-top: 0px;
 }
 
+/*Quote*/
+#quote{
+    position:relative;
+    align-items: flex-start;
+    left:25%;
+    max-width: 50%;
+    padding: 15px;
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+}
 /*---------------Prayer time box specifically---------------*/
 
 .box{
@@ -40,7 +54,11 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     font-size: small;
-    padding: 10px;
+    margin: 3%;
+    padding:3%;
+    position: relative;
+    /*left: 20%;*/
+    height: auto;
 }
 
 /*---------------Middle of page picture carousel---------------*/
@@ -61,19 +79,27 @@
 /*---------------Announcement box---------------*/
 
 .Announce{
-    float: right;
     width: 25%;
-    padding: 20px;
+    margin-left:3%;
+    margin-right: 20px;
     height: fit-content;
     min-height: 200px;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
 }
+
 .Announce .announcementBox{
     display: flex;
     flex-flow: column wrap;
 }
+
+.announcementBox{
+    margin-left: auto;
+    order: 2;
+}
+
 .Announce .announcementBox .announcement{
     padding-bottom: 120px;
     display: grid;
@@ -83,9 +109,17 @@
     height: fit-content;
 
 }
+
+.Announce h1{
+    padding: 3%;
+    text-decoration: underline;
+}
+
 .Announce h2{
     text-align: center;
 }
+
+
 .Announce announBox{
     width: 90%;
     height: 100px;

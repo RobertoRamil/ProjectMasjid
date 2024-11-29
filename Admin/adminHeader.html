@@ -11,11 +11,13 @@
         <h2>Update Image</h2>
 
         <!-- Dropdown for selecting Logo or Backdrop -->
-        <label for="imageType">Select Image Type:</label>
-        <select id="imageType" name="imageType">
-            <option value="logo" selected>Logo</option>
-            <option value="backdrop">Backdrop</option>
-        </select>
+        <div class="logoChange">
+            <label for="imageType">Select Image Type:</label>
+            <select id="imageType" name="imageType">
+                <option value="logo" selected>Logo</option>
+                <option value="backdrop">Backdrop</option>
+            </select>
+        </div>
 
         <!-- File input for image upload -->
         <input type="file" id="imageUpload" accept="image/*">

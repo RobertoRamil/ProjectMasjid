@@ -99,10 +99,8 @@ input[type=button], input[type=submit]{
     margin-right: auto;
     text-align: center;
 }
-.back_button {
-    /* override align */
-    width: 60px;
-}
+
+
 .backButton {
     text-align: center;
 }
@@ -261,10 +259,6 @@ body{
 
 .box p {
     text-align: left;
-}
-
-.box span {
-    float: right;
 }
 
 .box u {

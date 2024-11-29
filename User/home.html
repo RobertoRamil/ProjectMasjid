@@ -44,78 +44,92 @@
             })
         </script>
 
-<script type='module' src="firebase.js"defer></script>
+        <script type='module' src="firebase.js"defer></script>
+    </head>
 
 <body>
     <!--The header is inputted here-->
     <div id="header"></div>
+
+    <div id="quote">
+        <h1> Quotes:</h1>
+        <div class="announcement">Quote of the day</div>
+    </div>
+
+
     <!--This is the prayer box, every paragraph and span is one row-->
     <div class="first-row">
-        <div class="box" id="prayers_times"> 
-            
-
-            <div id="date" class="clock" onload="getDate()"></div>
-            <br>
-
-            <div id="prayerTitle">
-            <u>Daily Prayer Times:</u> 
+        <aside>
+            <div class="box" id="prayers_times"> 
+                
+    
+                <div id="date" class="clock" onload="getDate()"></div>
+                <br>
+    
+                <div id="prayerTitle">
+                <u>Daily Prayer Times:</u> 
+                </div>
+    
+                <p >
+                    Fajr 
+                    <span>
+                        11:00 
+                    </span>
+                </p>
+        
+                <p>
+                    Dhuhr 
+                    <span>
+                        13:00 
+                    </span>
+                </p>
+        
+                <p >
+                    Asr 
+                    <span>
+                        15:00 
+                    </span>
+                </p>
+        
+                <p>
+                    Maghrib 
+                    <span>
+                        17:00 
+                    </span>
+                </p>
+        
+                <p>
+                    Isha 
+                    <span>
+                        19:00 
+                    </span>
+                </p>
+                <div id="prayerTitle">
+                    <u>Special Prayer Dates & Times:</u>
+                </div>
+                <p>
+                    Jumu'ah (Speech) 
+                    <span>
+                        Friday 18th, 13:00 
+                    </span>
+                </p>
+        
+                <p>
+                    Jumu'ah (Prayer) 
+                    <span>
+                        Friday 18th, 13:30 
+                    </span>
+                </p>
+        
+        
+        
             </div>
-
-            <p >
-                Fajr 
-                <span>
-                    11:00 
-                </span>
-            </p>
-    
-            <p>
-                Dhuhr 
-                <span>
-                    13:00 
-                </span>
-            </p>
-    
-            <p >
-                Asr 
-                <span>
-                    15:00 
-                </span>
-            </p>
-    
-            <p>
-                Maghrib 
-                <span>
-                    17:00 
-                </span>
-            </p>
-    
-            <p>
-                Isha 
-                <span>
-                    19:00 
-                </span>
-            </p>
-            <div id="prayerTitle">
-                <u>Special Prayer Dates & Times:</u>
-            </div>
-            <p>
-                Jumu'ah (Speech) 
-                <span>
-                    Friday 18th, 13:00 
-                </span>
-            </p>
-    
-            <p>
-                Jumu'ah (Prayer) 
-                <span>
-                    Friday 18th, 13:30 
-                </span>
-            </p>
     
     
-    
-        </div>
-
+            <!--Initial Iframe example, this can be put into the home HTML once set up-->
+            <iframe src="https://www.google.com/maps?q=Maunatul+Muslimeen+Society+of+CA+(Islamic+Center)+-+MMSC+-+Sacramento&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed" 
+            allowfullscreen id="map"></iframe>
+        </aside>
         <!--This is the rotating images in the middle of the page-->
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -145,41 +159,17 @@
             </a>
           </div>
 
-        <div class="row">
-<div class = "Announce col-12">
-            <h1> Annoucements:</h1>
-            <div class = "announcementBox" id = "announcementBox">
+        <div class="announcementBox">
+            <div class = "Announce col-12">
+                <h1> Annoucements</h1>
+                <div class = "announcementBox" id = "announcementBox"> </div>
             </div>
-        </div>
-<div class = "Announce col-12">
-            <h1> Quotes:</h1>
-            <div class = "announcementBox" id = "announcementBox">
-		<div class="announcement">Quote of the day</div>
-            </div>
-        </div>
-        </div>
+        </div>                                 
     </div> 
 
-    <!--Initial Iframe example, this can be put into the home HTML once set up-->
-    <iframe src="https://www.google.com/maps?q=Maunatul+Muslimeen+Society+of+CA+(Islamic+Center)+-+MMSC+-+Sacramento&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed" 
-    allowfullscreen id="map"></iframe>
-                 
-    <!--This would be on the admin side, it would ask for the user input with an example of what to input
-    Once they submit their input, embed will change the URL to the location if found-->
-    <form class="mapChange">
-        <b>
-            Location Name on Google Maps:
-        </b>
-        <div>
-            &emsp; Example: Maunatul Muslimeen Society of CA (Islamic Center) - MMSC - Sacramento
-        </div>
-        <input type="text" id="Location"><br>
-        <button type="submit" onclick="convertSpace(event)">Submit</button>
-        <br>
-    </form>
-            
-        
-                
+
+
+
 </body>
 
 <!-- footer added here -->

@@ -1,25 +1,12 @@
-/*-------------------Update Image------------------------ */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     font-family: Arial, sans-serif;
-    height: 100%; 
     background-color: #f7f7f7;
-}
-.upload-container {
-    background-color: #fff;
-    padding: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    text-align: center;
-    width: 300px;
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 h2 {
@@ -27,15 +14,10 @@ h2 {
     margin-bottom: 15px;
 }
 
-.preview-container {
-    margin-top: 15px;
-}
-
-#imagePreview {
-    max-width: 100%;
-    max-height: 150px;
-    border-radius: 8px;
-    padding-left: 60px;
+.logoChange{
+    align-items: flex-start;
+    display: flex; 
+    padding-bottom: 10px;
 }
 
 /* Upload Button Styling */
@@ -54,6 +36,39 @@ button:hover {
     background-color: #157269;
 }
 
+
+
+
+
+/*-------------------Update Image------------------------ */
+#imageUpload{
+    border:none;
+}
+.upload-container {
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+    width: 300px;
+    position:relative;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.preview-container {
+    margin-top: 15px;
+}
+
+#imagePreview {
+    max-width: 100%;
+    max-height: 150px;
+    border-radius: 8px;
+    padding-left: 60px;
+}
+
 /* Upload Status Styling */
 #uploadStatus {
     margin-top: 10px;
@@ -65,7 +80,7 @@ button:hover {
 .tabs {
     display: flex;
     background-color: #0f5952;
-    margin-top: 200px;
+    margin-top: 1%;
     width: 100%; 
     justify-content: center; 
 }
@@ -78,6 +93,7 @@ button:hover {
     cursor: pointer;
     border: 1px solid #0f5952;
     transition: background-color 0.3s ease;
+    text-decoration:none;
 }
 
 .tab:hover {
