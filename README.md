@@ -45,7 +45,22 @@ IDE: Visual Studio
  > Currently a placeholder
 ## Prototype Showcase
 Want to view our original prototype?
-[Click here to download it and explore it yourself!](https://github.com/RobertoRamil/ProjectMasjid/raw/refs/heads/main/readme/Prototype.zip)
+[Click here to download and explore it yourself!](https://github.com/RobertoRamil/ProjectMasjid/raw/refs/heads/main/readme/Prototype.zip)
 
 ## Current Project Showcase
-The website is located [Here at mmscenter.org](mmscenter.org)
+The website is located [Here at mmscenter.org](https://mmscenter.org)
+
+Below is an image showcase showwing off the various portions of the website, if you'd like to see everything the user side has to offer simply use the above link!
+
+User Home page
+![Home](https://github.com/RobertoRamil/ProjectMasjid/blob/main/readme/Home.png)
+
+User Events page
+![Events](https://github.com/RobertoRamil/ProjectMasjid/blob/main/readme/Events.PNG)
+
+Admin Home page
+![aHome](https://github.com/RobertoRamil/ProjectMasjid/blob/main/readme/adminhome.PNG)
+
+Admin adding calendar event
+![aCalendar1](https://github.com/RobertoRamil/ProjectMasjid/blob/main/readme/adminevents1.PNG)
+![aCalendar2](https://github.com/RobertoRamil/ProjectMasjid/blob/main/readme/adminevents2.PNG)
