@@ -64,3 +64,7 @@ Admin Home page
 Admin adding calendar event
 ![aCalendar1](https://github.com/RobertoRamil/ProjectMasjid/blob/main/readme/adminevents1.PNG)
 ![aCalendar2](https://github.com/RobertoRamil/ProjectMasjid/blob/main/readme/adminevents2.PNG)
+
+## Timeline
+Here is a timeline of the exprected future of the project
+![Timeline](https://github.com/RobertoRamil/ProjectMasjid/blob/main/readme/Timeline.drawio.png)
