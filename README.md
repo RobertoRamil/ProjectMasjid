@@ -13,6 +13,7 @@ By the BasiqCoders: Mark Ures, Roberto Ramil, Corliss Yang, Shahroz Hamid, Manso
  - [Developer Instructions](#developer-instructions)
  - [Prototype](#prototype-showcase)
  - [Current Project Showcase](#current-project-showcase)
+ - [Timeline](#timeline)
 
 ## What Project Masjid Is
 Maunatul Muslimeen Society of CA (MMSC) is a non-profit organization that provides prayer services to the local community. Per the client's request, BasiqCoders built a unique solution for their community by building a robust website for a way of fostering community among the attendees, providing important announcements, prayer times, and an admin portal for the leaders to add/update changes without requiring any coding by the user.
