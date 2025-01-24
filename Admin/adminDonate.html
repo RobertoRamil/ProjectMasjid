@@ -1,9 +1,9 @@
-              
+<!DOCTYPE html>        
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Admin Home Page</title>
+        <title>Admin Donate</title>
 
         <link rel="stylesheet" href="adminDonate.css">
        
@@ -19,42 +19,45 @@
             })
         </script>
 
-    </head> 
+    </head>         
+    <header>
+            <div id = "header"></div>
+    </header>
     <body>
-        <div id = "header"></div>
-        <div class="content">
-            <div id="donate_text">
+        <div id="page_content">
+            <form id="donate_about">
                 <!--Later replace the placeholder text to take from the database of the current about-->
                 <textarea placeholder="Edit Donation's about section"></textarea>
                 <br>
                 <button type="submit">Convert Changes</button>
-            </div>
+            </form>
             
-            <div  id="donate_buttons">       
-                <div id="paypal">
+            <div id="donate_buttons">       
+                <form id="paypal">
                     <b>Turn off Paypal </b>      
                     <!--Add thing that actually removes the image-->
-                    <input type="checkbox" id="toggle"/>
+                    <input type="checkbox" class="toggle"/>
                     <br>
-                <!--Later replace the placeholder text-->
-                    <input type="text" placeholder="current URL" class="donateURL">
+                    <!--Later replace the placeholder text with the current donation link-->
+                    <input type="url" placeholder="current URL" id="paypalURL">
                     <br>
                     <button type="submit" >Update Paypal Link</button>
-                </div>
-                
-                <div id="zelle">
+                </form>
+
+                <br>
+
+                <form id="zelle">
                     <b>Turn off Zelle </b>      
                     <!--Add thing that actually removes the image-->
-                    <input type="checkbox" id="toggle"/>
+                    <input type="checkbox" class="toggle"/>
                     <br>
-                <!--Later replace the placeholder text-->
-                    <div class="donateSubmit">
-                        <input type="file" placeholder="current URL" id="submitImg"/>
+                    <form id="zelleSubmit">
+                        <input type="file" placeholder="current URL" id="zelleSubmitImg" accept="image/*"/>
                         <br>
-                        <img id="preview" src="#"/>
-                    </div>
+                        <img id="zelle_preview" src=""/>
+                    </form>
                     <button type="submit">Update Zelle Link</button>
-                </div>
+                </form>
             </div>
         </div>
     </body>  

@@ -1,26 +1,15 @@
+/*These will affect every page that it's imported to.*/
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    background-color: white;
+    margin:0;
+    padding: 0;
 }
 
-h2 {
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-.logoChange{
-    align-items: flex-start;
-    display: flex; 
-    padding-bottom: 10px;
-}
-
-/* Upload Button Styling */
 button {
     margin-top: 15px;
     padding: 10px 20px;
@@ -36,37 +25,63 @@ button:hover {
     background-color: #157269;
 }
 
+label{
+    display: block;
+    margin-bottom: 5px;
+}
 
+h2{
+    text-align: center;
+}
 
+/*-------------------Dark Mode------------------------ */
+.dark-mode {
+    background-color: black;
+    color: white;
+  }
 
 
 /*-------------------Update Image------------------------ */
-#imageUpload{
-    border:none;
+/*This changes the size of the upload container to be smaller 
+when screen size is larger then 1100px (like laptops)*/
+@media screen and (min-width:1100px){
+    #upload-container{
+        width: 30%;
+    }
 }
-.upload-container {
+
+#background_and_title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+#update_image_visual_text{
+    margin:0.5%;
+    padding-top: 0.9%;
+}
+
+#background-upload-container {    
+    position:relative;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: #fff;
     padding: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     text-align: center;
-    width: 300px;
-    position:relative;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
 }
 
-
-.preview-container {
-    margin-top: 15px;
+#logoChange{
+    padding: 10px 0px;
 }
 
 #imagePreview {
     max-width: 100%;
     max-height: 150px;
     border-radius: 8px;
-    padding-left: 60px;
 }
 
 /* Upload Status Styling */
@@ -77,10 +92,9 @@ button:hover {
 }
 
 /*-------------------Header Tabs------------------------ */
-.tabs {
+#tabs_container{
     display: flex;
     background-color: #0f5952;
-    margin-top: 1%;
     width: 100%; 
     justify-content: center; 
 }
@@ -102,8 +116,34 @@ button:hover {
     text-decoration: none;
 }
 
-.tab-content {
-    display: none; 
-    padding: 20px;
-    border-top: 1px solid #0f5952;
+/*-------------------The Toggle switches------------------------ */
+.toggle{
+    -webkit-appearance: none;
+    position: relative;
+    width: 60px;
+    height: 30px;
+    border-radius: 25px;
+    background-color:red;
+    cursor: pointer;
+}
+
+.toggle:checked{
+    background-color:green;
+}
+
+.toggle::after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    height: 1.25rem;
+    width: 1.25rem;
+    background-color: white;
+    transition: left .3s;
+}
+
+.toggle:checked::after {
+    left: 70%;
 }

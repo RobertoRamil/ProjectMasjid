@@ -1,66 +1,197 @@
+@media screen and (min-width:1100px){
+    #Announcement_Quote_Prayer{
+        display: flex;
+        justify-content: space-between;
+    }
 
-/* --------------------Homepage------------------------ */
-.post-container {
-    width: 40%;
-    background-color: #f4f4f4;
-    margin: auto;
-    margin-top: 50px;
-    padding: 20px;
+    #Announcements-container {
+        width: 30%; 
+    }
+
+    #map_container{
+        width:40%;
+    }
+
+    #quoteChange{
+        width: fit-content;
+    }
+
+    #submit_announcement {
+        width: 45%;
+    }
+
+}
+
+@media screen and (max-width:1099px){
+    #map_container{
+        max-width:95%;
+    }
+}
+
+.Announce_Background{
+    background-color: lightgray;
+
+    border: 1px solid black;
+    box-shadow: 0 0 10px rgb(0, 0, 0, 0.1);    
     border-radius: 5px;
-    box-shadow: 0 0 10px rgb(0, 0, 0, .1);
-}
-h2{
-    text-align: center;
-}
-label{
-    display: block;
-    margin-bottom: 5px;
-}
-input{
-    width: 95%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-button {
-    max-width: 50%;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #0f5952;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-#submit {
-    float: inline-start;
-    width: 45%;
-    margin-right: 2%;
-}
-#remove_mode {
-    float: inline-start;
-    width: 45%;
-
-}
-#announcementForm button{
-    display: grid;
 }
 
-button:hover {
-    background-color: #157269;
-}
+/*Announcement & Quote*/
+    #Announcements-container, #quoteChange{
+        height:fit-content;
 
-#errorMessage {
-    color: red;
-    text-align: center;
-}
-input[type=text] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-}
+        margin: 10px;
+        padding: 20px;
+
+        display:flow-root;
+    }
+
+    #Announcements-container h2{
+        text-align: center;
+
+        margin-bottom:20px;
+        margin-top:0px;
+        
+    }
+
+    #announcementText{
+        position:relative;
+
+        font-size: large;
+
+        width: 100%;
+
+        padding: 8px;
+        margin:20px 0px 10px 0px;
+
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        overflow: visible;
+    }
+
+    #submit_announcement {
+        float: inline-start;
+        margin-right: 2%;
+    }
+
+/*Quote*/
+    #quoteChange{
+        min-width: 30%;
+    }
+
+    #quoteForm{
+        display:flex;
+        flex-direction: column;
+    }
+
+    #announcementForm textarea, #quoteForm input{
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+    }
+
+/* Prayer time box specifically */
+    #prayers_times {
+
+        text-align: center;
+        font-size: 20px;
+        font-weight:bold;
+
+        padding: 10px;
+        margin:10px;
+
+        width: fit-content;
+        height: auto;
+        min-height: 200px; /* Optional: Set a minimum height */
+
+        overflow: visible; /* Ensure it grows dynamically */
+
+        display: flex;
+        flex-direction: column; /* Arrange rows and button vertically */
+        justify-content: space-between; /* Ensure button stays at the bottom */
+    }
+
+/*This is the time inputs for the prayer times*/
+    .time{
+        font-size: 18px;
+    }
+
+    .prayerTitle {
+        margin-top:8%;
+        padding-bottom: 20px;
+
+        text-align: center;
+    }
+
+    .prayer_time_and_label{
+        display:flex;
+        flex-direction:column;
+
+        text-align: left;
+    }
+
+    #addPrayerRow {
+        align-self: center; /* Center button horizontally */
+
+        margin-top: 10px;
+    }
+
+/*This the dropdown box for the special prayer names*/
+    .specialPrayerTime{
+        width: fit-content;
+
+        font-size: 20px;
+
+        margin:10px;
+    }
+
+/*Map section*/
+    #map_container{
+        border: 5px rgba(210, 212, 214, 0.897) groove;
+        border-radius: 10px;
+
+        height: 20%;
+
+        padding: 1%;
+        margin: 1%;
+
+        font-size: larger;
+        text-align: center;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background-color: rgba(210, 212, 214, 0.52);
+    }
+
+    #mapChange b{
+        margin:auto;
+
+        font-size: 25px;
+    }
+
+    #mapChange button, #mapChange input{
+        padding: 10px;
+
+        cursor: pointer;
+    }
+
+    #mapChange input{
+        width: 100%;
+    }
+
+    #mapChange button{
+        display: flex;
+
+        justify-self:center;
+    }
+
+
+
+/*Commenting out until used
+
 Announcement {
   width: 100%;
   height: 150px;
@@ -71,6 +202,12 @@ Announcement {
   background-color: #f8f8f8;
   resize: none;
 }
+
+#errorMessage {
+    color: red;
+    text-align: center;
+}
+
 input[type=button], input[type=submit]{
     background-color: #04AA6D;
     border: none;
@@ -80,209 +217,12 @@ input[type=button], input[type=submit]{
     margin: 4px 2px;
     cursor: pointer;
   }
-#errorMessage {
-    color: red;
-    text-align: center;
-}
-/* --------------------Header------------------------ */
-.header a img {
-    transition: transform 0.3s ease; 
-}
 
-.header a img:hover {
-    transform: scale(1.1); /* Scale up the logo on hover */
-}
-.header {
-    display: block;
-    padding: 6px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
-
-.backButton {
-    text-align: center;
-}
-body{
-    margin: 0px;
-}
-
-#map_change{
-    border: 5px rgba(210, 212, 214, 0.897) groove;
-    border-radius: 10px;
-
-    width: 30%;
-    height: 20%;
-    padding: 1%;
-    margin: 1%;
-
-    font-size: 120%;
-    text-align: center;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background-color: rgba(210, 212, 214, 0.52);
-    overflow: auto;
-}
-
-#example{
-    padding-top: 3%;
-}
-
-.mapChange b{
-    margin:auto;
-    font-size: 25px;
-}
-
-.mapChange button, input{
-    padding: 10px;
-    cursor: pointer;
-
-}
-
-.mapChange input{
-    padding-left: 100px;
-}
-
-/*dark mode stuff*/
-.dark-mode {
-    background-color: black;
-    color: white;
-  }
-
-/*-------------------Update Social Media Links------------------------ */
-#links {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding-left: 0;
-    background-color: #f9f9f9;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; 
-}
-
-/* Social Media Section */
-#socialMediaSection {
-    margin: 40px auto;
-    padding: 20px;
-    max-width: 500px;
-    background-color: #fff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    text-align: center;
-    float:inline-end; 
-    bottom: 0; 
-    width: 100%; 
-    max-width: 500px; 
-}
-
-#socialMediaSection h3 {
-    margin-bottom: 20px;
-    font-size: 1.5em;
-    color: #555;
-}
-
-
-#socialLinksForm {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-#socialLinksForm label {
-    text-align: left;
-    font-size: 0.9em;
-    color: #666;
-}
-
-#socialLinksForm input {
-    padding: 10px;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-#socialLinksForm input:focus {
-    border-color: #0f5952;
-    outline: none;
-}
-
-#socialLinksForm button {
-    padding: 10px;
-    font-size: 1em;
-    color: #fff;
-    background-color: #0f5952;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#socialLinksForm button:hover {
-    background-color: #157269;
-}
-/* Prayer time box specifically */
-.first-row{
+  #remove_mode {
     float: inline-start;
-    margin: 2%;
-}
-.box {
-    background-color: whitesmoke;
-    width: 300px;
-    overflow: visible; /* Ensure it grows dynamically */
-    display: flex;
-    flex-direction: column; /* Arrange rows and button vertically */
-    justify-content: space-between; /* Ensure button stays at the bottom */
-    padding: 10px;
-    border: 1px solid black;
-    height: auto;
-    min-height: 200px; /* Optional: Set a minimum height */
-}
-
-#prayers_times {
-    background-color: lightgray;
-    text-align: center;
-    font-size: small;
-    border: 1px solid black;
-    padding: 10px;
-}
-
-#rows-container {
-    flex-grow: 1; /* Rows grow dynamically */
-}
-
-.box p {
-    text-align: left;
-}
-
-.box u {
-    text-align: center;
-}
-
-#prayerTitle {
-    padding-bottom: 20px;
-}
-
-#addPrayerRow {
-    align-self: center; /* Center button horizontally */
-    margin-top: 10px;
-}
-
-.prayer {
-    width: 12ch;
-}
-
-.time {
-    width: 11ch;
-}
-
-#addSPrayerRow {
-    margin-top: 10px;
+    width: 45%;
 
 }
+
+*/
+

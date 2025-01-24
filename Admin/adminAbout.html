@@ -13,37 +13,46 @@
         })
     </script>
 </head>
+
 <header>
-    <div id="backButton">
-        <a href="adminHome.html">
-        <button type="button" class="back_button">< Back</button>
-        </a>
-    </div>
     <div id = "header"></div>       
 </header>
 
 <body>
-    <h2 class="Webpage-Tab-Title">Admin About</h2>
+    <div id="about_content">
+        <h2 id="Webpage-Tab-Title">Admin About</h2>
+        
+        <div id="information_and_team">
+            <!-- Left Box -->
+            <div id="information">
+                <h2 contenteditable="true" id="adminLeftTitle">*Title of the information here*</h2>
+                <p contenteditable="true" id="adminLeftText">The full text goes here.</p>
+            </div>
 
-    <div class="about_content">
-
-        <!-- Left Box -->
-        <div class="information">
-            <h2 contenteditable="true" id="adminLeftTitle">*Title of the information here*</h2>
-            <p contenteditable="true" id="adminLeftText">The full text goes here.</p>
+            <!-- Right Box -->
+            <div id="Team">
+                <h1>Manage the Team!</h1>
+                <div class="membersBox" id="adminMembersBox">
+                    <!-- Editable team members will populate here -->
+                </div>
+                <button id="addNewMember">+ Add New Member</button>
+            </div>
         </div>
 
-        <!-- Right Box -->
-        <div class="Team">
-            <h1>Manage the Team!</h1>
-            <div class="membersBox" id="adminMembersBox">
-                <!-- Editable team members will populate here -->
-            </div>
-            <button id="addNewMember">+ Add New Member</button>
+        <!-- Social Media Links Update Section -->
+        <div id="socialMediaSection">
+            <h3>Update Social Media Links</h3>
+            <form id="socialLinksForm">
+                <label for="facebookLink">Facebook URL:</label>
+                <input type="url" id="facebookLink" name="facebookLink" placeholder="Enter Facebook URL">
+
+                <label for="instagramLink">Instagram URL:</label>
+                <input  type="url" id="instagramLink" name="instagramLink" placeholder="Enter Instagram URL">
+            </form>
         </div>
 
         <!-- Save Changes Button -->
-        <button id="saveChanges" class="save-btn">Save Changes</button>
+        <button id="saveChanges">Save Changes</button>
     </div>
 </body>
 </html>

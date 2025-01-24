@@ -7,27 +7,18 @@
     <link rel="stylesheet" href="adminLogin.css">
     <script src="adminLogin.js"></script>
 </head>
+
+<header>
+    <div id="header">           
+        <a href ="index.html">
+            <img src="https://github.com/RobertoRamil/ProjectMasjid/blob/main/logo2.png?raw=true" alt="logo of MMSC" width="150" height="150">
+        </a>                  
+    </div>
+</header>
+
 <body>
-    <header>
-        <div id="backButton">
-            <a href="index.html">
-            <button type="button" class="back_button">Back</button>
-            </a>
-        </div>
-        <div class="header">
-                                 
-            <div>
-                <a href ="index.html">
-                    <img src="https://github.com/RobertoRamil/ProjectMasjid/blob/main/logo2.png?raw=true" alt="logo of MMSC" width="150" height="150">
-                </a>
-            </div>
-                  
-        </div>
-    </header>
-
-
-    <div class="login-container">
-        <h2>Admin Login</h2>
+    <div id="login-container">
+        <h2 id="loginTitle">Admin Login</h2>
         <form id = "loginForm">
             <p id="errorMessage"></p>
             <label for="username">Username:</label>
@@ -35,7 +26,7 @@
 
             <label for="password">Password:</label>
             <input type="password" name="password" id="password" required>
-
+            
             <button type="submit" id="submit">Login</button>
             <button type="button" id="forgot_password">Forgot Password</button>
             

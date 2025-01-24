@@ -1,66 +1,27 @@
-(function(){
-    var darkOn=localStorage.getItem("darkCookie");
-    var element=document.body;
 
-    if(darkOn==="true"){
-        element.classList.toggle("dark-mode");
-    }
-
-  })();
-
-function darkSwitch() {
-    var element = document.body;
-    var switchDark=element.classList.toggle("dark-mode");
-    document.cookie="darkCookie="+switchDark;
-    localStorage.setItem("darkCookie", switchDark);
-  }
-
-$(document).ready(function() {
-
-    // Handle form submission for social media links
-    $('#socialLinksForm').on('submit', function(event) {
-        event.preventDefault();  
-
-        // Get values from input fields
-        const facebookLink = $('#facebookLink').val().trim();
-        const instagramLink = $('#instagramLink').val().trim();
-
-        // Check if at least one link is provided
-        if (!facebookLink && !instagramLink) {
-            alert('Please enter at least one social media link.');
-            return; 
-        }
-
-        // Placeholder for Firebase 
-        const updates = {};
-        if (facebookLink) updates.facebook = facebookLink;
-        if (instagramLink) updates.instagram = instagramLink;
-
-        // Temporary alert as a placeholder
-        alert(`Updates:\n${facebookLink ? "Facebook: " + facebookLink : ""}\n${instagramLink ? "Instagram: " + instagramLink : ""}`);
-    });
-});
-let sPrayerCounter = 1; 
-
+  //Prayer List
+  let sPrayerCounter = 1; 
+  //This is for generating the special prayer times and name
 document.getElementById("addSPrayerRow").addEventListener("click", function () {
     const rowsContainer = document.getElementById("rows-container");
 
-
-
     // Create a new row
-    const newRow = document.createElement("p");
+    const newRow = document.createElement("form");
     newRow.id = `sPrayerRow${sPrayerCounter}`; // Assign a unique ID to the row
 
     // Create input for prayer name
-    const sPrayerNameInput = document.createElement("input");
-    sPrayerNameInput.type = "text";
-    sPrayerNameInput.placeholder = "Prayer Name";
-    sPrayerNameInput.className = "prayer";
+    var prayerTypes=["Jumu'ah (Speech)","Jumu'ah (Prayer)"];
+    const sPrayerNameInput = document.createElement("select");
+    for(let i=0; i<prayerTypes.length; i++){
+        sPrayerNameInput.appendChild(new Option(prayerTypes[i]));
+    }
+    sPrayerNameInput.className = "specialPrayerTime";
     sPrayerNameInput.id = `sPrayerName${sPrayerCounter}`; 
+    
 
     // Create input for prayer time
     const sPrayerTimeInput = document.createElement("input");
-    sPrayerTimeInput.type = "text";
+    sPrayerTimeInput.type = "time";
     sPrayerTimeInput.placeholder = "Prayer Time";
     sPrayerTimeInput.className = "time";
     sPrayerNameInput.id = `sPrayerName${sPrayerCounter}`; // Unique ID for the prayer name input

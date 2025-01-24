@@ -1,80 +1,168 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #40404093;
-}
 
-
-.about_content{
+#about_content{
     color:white;
-}
-
-.Webpage-Tab-Title {
-    text-align: center;
-    font-size: 24px;
-}
-
-.information, .Team {
-    margin: 20px;
     padding: 20px;
-    box-shadow: 3px 3px 10px gray;
-    background-color: #333;
+    background-color: rgb(102, 102, 104); /*This is just to make it easier to see what is the body section*/
 }
 
-.information h2, .information p {
-    margin: 10px 0;
-}
+/*This is the title of the page "Admin About*/
+    #Webpage-Tab-Title {
+        font-size: 24px;
+        margin-top:0px;
+    }
 
-.Team .membersBox {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
 
-.Team .member {
-    border: 1px solid #555;
-    padding: 10px;
+/*The background of the two boxes*/
+    @media screen and (min-width:1100px){
+        #information_and_team {
+            display:flex;
+            justify-content: space-between;
+        }
+    }
+
+    #information, #Team {
+        margin: 20px 10px;
+        padding: 20px;
+        box-shadow: 3px 3px 10px gray;
+        background-color: #333;
+        border-radius: 8px;
+        min-width: 48%;
+    }
+
+/*This the information section before editing the team management*/
+    #information h2, #information p {
+        margin: 10px 0px;
+        padding:5px;
+    }
+    #information p{
+        background-color: rgb(68, 67, 67);
+    }
+
+/*These are the team member that are generated when pressing "+add new member"*/
+    #Team .membersBox {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    #Team .member {
+        border: 1px solid #555;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 150px;
+        background-color: #444;
+    }
+
+    #Team .member img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+    }
+
+    #Team .member textarea{
+        width:99%;
+    }
+
+    #Team .member p {
+        text-align: center;
+        margin: 10px 0;
+        font-size: 16px;
+    }
+
+
+/*This is the social media changing section*/
+    #socialMediaSection {
+        margin: 0px auto;
+        padding: 20px;
+        max-width: 500px;
+        background-color: #333;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        text-align: center;
+        bottom: 0; 
+        width: 100%; 
+        max-width: 500px; 
+    }
+
+    #socialMediaSection h3 {
+        margin-bottom: 20px;
+        margin-top: 10px;    
+        font-size: 1.5em;
+        color: rgb(230, 217, 217);
+    }
+
+    #socialLinksForm {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    #socialLinksForm label {
+        text-align: left;
+        font-size: 0.9em;
+        color: white;
+    }
+
+    #socialLinksForm input {
+        padding: 10px;
+        font-size: 1em;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #socialLinksForm input:focus {
+        border-color: #0f5952;
+        outline: none;
+    }
+
+    #socialLinksForm button {
+        padding: 10px;
+        font-size: 1em;
+        color: #fff;
+        background-color: #0f5952;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    #socialLinksForm button:hover {
+        background-color: #157269;
+    }
+
+/*The bottom save button*/
+    #saveChanges {
+        margin: 20px auto;
+        display: block;
+        padding: 15px 30px;
+        font-size: 18px;
+        font-weight: bold;
+        background-color: #28a745;
+    }
+
+    #saveChanges:hover {
+        background-color: #218838;
+    }
+
+
+    /*This isn't used so I comment out
+
+
+
+/*-------------------Update Social Media Links------------------------ * /
+#links {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding-left: 0;
+    background-color: #f9f9f9;
+    color: #333;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 150px;
-    background-color: #444;
+    min-height: 100vh; 
 }
 
-.Team .member img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-}
-
-.Team .member p {
-    text-align: center;
-    margin: 10px 0;
-    font-size: 16px;
-}
-
-button {
-    margin-top: 10px;
-    padding: 8px 12px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-.save-btn {
-    margin: 20px auto;
-    display: block;
-    padding: 15px 30px;
-    font-size: 18px;
-    font-weight: bold;
-    background-color: #28a745;
-}
-
-.save-btn:hover {
-    background-color: #218838;
-}
+*/

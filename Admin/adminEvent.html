@@ -1,83 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Event</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="adminEvent.css">
-    <script src="adminEvent.js" defer></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous">
-    </script>
-    <script defer>
-        $(function(){
-            $('#header').load('adminHeader.html');
-        })
-    </script>
-</head>
-<header>
-    <div id="backButton">
-        <a href="adminHome.html">
-        <button type="button" class="back_button">< Back</button>
-        </a>
-    </div>
-    
-</header>
+    <head>    
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--Title is what chrome shows on top-->
+        <title>Admin Event</title>
+        <!--CSS & Javascript-->
+        <link rel="stylesheet" href="adminEvent.css">
 
-<body>
-    <div id="header"></div>
-    
-    <h2>Eventpage Edit</h2>
-    <div class="eventedit-container">
-        <h2>Toggle features</h2>
-        <form id = "Form">
-            <p id="errorMessage"></p>
+        <script src="adminEvent.js" defer></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"> </script>
+        <!--This imports the codes of the adminHeader (including whatever is imported in the header HTML file)-->
+        <script defer>
+            $(function(){
+                $('#header').load('adminHeader.html');
+            })
+        </script>
+    </head>
+
+    <header>
+        <div id="header"></div>
+    </header>
+
+    <body>   
+        <div id = "toggle_news_signup">
+            <strong>Newsletter Signup </strong>
+            <input type="checkbox" class="toggle" id="newspaper_toggle"/>
+        </div>           
+        <div id="Edit_newsLetter">
+            <!-- commenting out cuz its not used rn
             
-              <label class="switch">    
-                <input type="checkbox">
-                <span class="slider round"></span>
-              </label>
+            <p id="errorMessage"></p>
+                        
 
-            <button type="submit" id="submit">Save</button>
-            <p>Newsletter Signup</p>
+            #errorMessage {
+                color: red;
+                text-align: center;
+            }
+            -->        
+            <!--Information section-->
+            <div id = "newsletter_info">
+                <p>Edit the newsletter info section here</p>
+                <textarea id = "info_box" name="ibox" ></textarea>
+                <button onclick = "uploadInfoBox()" id= "infoUp_button">Save text</button>
+            </div>
 
-        </form>
-    </div>
-
-    <div class="calendar-box">
-        <div class="cal_header">
-            <button onclick="prevMonth()">Previous</button>
-            <h2 id="monthYear"></h2>
-            <button onclick="nextMonth()">Next</button>
+            <!--Upload File-->
+            <div id = "newsletter_center">
+                <p>Upload and send newsletters <strong><br/>(only ".pdf" files)</strong></p>
+                <input type="file" class ="news_upload" id = "newsUp_field" accept = ".pdf">
+                <div id = "button_holder">
+                    <!-- What is the point of the save news letter
+                    <button onclick = "saveNewsLetter()" id = "newsUp_button">Save newsletter</button>
+                    -->
+                    <button onclick = "sendNewsLetter()" id = "newsSend_button">Send newsletter</button>
+                </div>
+            </div> 
         </div>
 
-        <div class="calendar" id="calendar"></div>
-
-        <button id="saveButton">Save</button>
-    </div>
-
-    <!-- Event Popup -->
-    <div id="eventPopup" class="event-popup" style="display: none;">
-      <h3 id="selectedDate"></h3>
-      <input type="text" id="eventInput" placeholder="Add or edit an event" />
-      <button onclick="addEvent()">Add Event</button>
-      <div class="event-list" id="eventList"></div>
-      <button onclick="closePopup()">Close</button>
-    </div>
-    <div id="overlay" class="overlay" style="display: none;" onclick="closePopup()"></div>
-    <div class = "newsletter_info">
-         <p>Edit the newsletter info section here</p>
-         <textarea class = "info_box" name="ibox" id = "info_field" style="overflow: auto; resize: none;"></textarea>
-         <button onclick = "uploadInfoBox()" class = "infoUp_button">Save text</button>
-    </div>
-    <div class = "newsletter_center">
-        <p>Upload and send newsletters here this only accepts ".pdf" files</p>
-        <input type="file" class ="news_upload" id = "newsUp_field" accept = ".pdf">
-        <div class = "button_holder">
-            <button onclick = "saveNewsLetter()" class = "newsUp_button">Save newsletter</button>
-            <button onclick = "sendNewsLetter()" class = "newsSend_button">Send newsletter</button>
+        <div id="calendar-box">
+            <div class="cal_header">
+                <button onclick="prevMonth()">Previous</button>
+                <h2 id="monthYear"></h2>
+                <button onclick="nextMonth()">Next</button>
+            </div>
+    
+            <div class="calendar" id="calendar"></div>
+    
+            <button id="saveButton">Save</button>
+        </div>
+    
+        <!-- Event Popup -->
+        <div id="eventPopup" class="event-popup" style="display: none;">
+          <h3 id="selectedDate"></h3>
+          <input type="text" id="eventInput" placeholder="Add or edit an event" />
+           <br>
+          <button onclick="addEvent()" class="eventPopup_button">Add Event</button>
+          <div class="event-list" id="eventList"></div>
+          <button onclick="closePopup()" class="eventPopup_button">Close</button>
         </div>
 
-    </div>
+        <div id="overlay" class="overlay" style="display: none;" onclick="closePopup()">
+        </div>        
 </body>
 </html>

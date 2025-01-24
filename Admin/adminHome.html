@@ -1,127 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Home</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="adminHome.css">
-    <script src="adminHome.js"defer></script> 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous">
-    </script>
-    <script>
-        $(function(){
-            $('#header').load('adminHeader.html');
-        })
-    </script>
-</head>
-<header>
-    <div id="backButton">
-        <a href="adminHome.html">
-            <button type="button" class="back_button">< Back</button>
-        </a>
-    </div>
-</header>
-<!-- Loading header here-->
-<body>
-    <div id="header"></div>
-    <!-- Social Media Links Update Section -->
-    <div id="socialMediaSection">
-        <h3>Update Social Media Links</h3>
-        <form id="socialLinksForm">
-            <label for="facebookLink">Facebook URL:</label>
-            <input type="url" id="facebookLink" name="facebookLink" placeholder="Enter Facebook URL">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin Home</title>
 
-            <label for="instagramLink">Instagram URL:</label>
-            <input type="url" id="instagramLink" name="instagramLink" placeholder="Enter Instagram URL">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"> </script>
 
-            <button type="submit">Save Changes</button>
-        </form>
-    </div>
-  <!-- The header is inputted here -->
-  <div class="post-container">
-    <h2>Add Announcement</h2>
-    <form id = "announcementForm">
-        <p id="errorMessage"></p>
-        <label for="announcementText">Type announcement information here:</label>
-        <input type="text" name="announcementText" id="announcementText" required>
-        <button type="submit" id="submit">Post Announcement</button>
-        <button type="button" id="remove_mode">Remove an announcement</button>
-        
-        <button type="submit">Save Changes</button>
-    </form>
-</div>
-    
-    <!-- This is the prayer box, every paragraph and span is one row -->
-    <div class="first-row">
-        <div class="box" id="prayers_times">
+        <link rel="stylesheet" href="adminHome.css">
+        <script src="adminHome.js"defer></script> 
 
-            <div id="date" class="clock" onload="getDate()"> test</div>
-            <br>
-            <div id="prayerTitle">
-                <u>Daily Prayer Times:</u>
-            </div>
-            <div id="rows-container">
-                <p>
-                    <input type="text" class = "prayer" placeholder="Prayer Name" id="prayerName1" maxlength="5"/>
-                    <span>
-                        <input type="text" class = "time" placeholder="Prayer Time" id="prayerTime1" maxlength="5"/>
-                    </span>
-                </p>
+        <script>
+            $(function(){
+                $('#header').load('adminHeader.html');
+            })
+        </script>
 
-                <p>
-                    <input type="text" class = "prayer" placeholder="Prayer Name" id="prayerName2" maxlength="5"/>
-                    <span>
-                        <input type="text" class = "time" placeholder="Prayer Time" id="prayerTime2" maxlength="5"/>
-                    </span>
-                </p>
+    </head>
 
-                <p>
-                    <input type="text" class = "prayer" placeholder="Prayer Name" id="prayerName3" maxlength="5"/>
-                    <span>
-                        <input type="text" class = "time" placeholder="Prayer Time" id="prayerTime3" maxlength="5"/>
-                    </span>
-                </p>
-                <p>
-                    <input type="text" class = "prayer" placeholder="Prayer Name" id="prayerName4" maxlength="5"/>
-                    <span>
-                        <input type="text" class = "time" placeholder="Prayer Time" id="prayerTime4" maxlength="5"/>
-                    </span>
-                </p>
-                <p>
-                    <input type="text" class = "prayer" placeholder="Prayer Name" id="prayerName5" maxlength="5"/>
-                    <span>
-                        <input type="text" class = "time" placeholder="Prayer Time" id="prayerTime5" maxlength="5"/>
-                    </span>
-                </p>
-            <div id="prayerTitle">
-                <u>Special Prayer Dates & Times:</u>
-            </div>    
+    <header>
+        <div id="header"></div>
+    </header>
+
+    <body>
+        <div id="Announcement_Quote_Prayer">
+            <!-- This is the prayer box, every paragraph and span is one row -->
+            <div id="prayers_times" class="Announce_Background">
+                <div id="date" class="clock" onload="getDate()"></div>
+
+                <div class="prayerTitle">
+                    <u>Daily Prayer Times:</u>
+                </div>
+                <div id="rows-container">
+                    <form class="prayer_time_and_label">
+                        <label for="prayerTime1">Fajr</label>      
+                        <input type="time" class = "time" placeholder="Prayer Time" id="prayerTime1" maxlength="5"/>
+                    </form>
+
+                    <form class="prayer_time_and_label">
+                        <label for="prayerTime2">Dhuhr</label> 
+                        <input type="time" class = "time" placeholder="Prayer Time" id="prayerTime2" maxlength="5"/>
+                    </form>
+
+                    <form class="prayer_time_and_label">
+                        <label for="prayerTime3">Asr</label> 
+                        <input type="time" class = "time" placeholder="Prayer Time" id="prayerTime3" maxlength="5"/>
+                    </form>
+
+                    <form class="prayer_time_and_label">
+                        <label for="prayerTime4">Maghrib</label> 
+                        <input type="time" class = "time" placeholder="Prayer Time" id="prayerTime4" maxlength="5"/>
+                    </form>
+
+                    <form class="prayer_time_and_label">
+                        <label for="prayerTime4">Isha</label> 
+                        <input type="time" class = "time" placeholder="Prayer Time" id="prayerTime5" maxlength="5"/>
+                    </form>
+                    <div class="prayerTitle">
+                        <u>Special Prayer Dates & Times:</u>
+                    </div>    
+                </div>
+                <div>                 
+                    <button id="addSPrayerRow">Add Prayer</button>
+                    <button id="prayerSaveButton"> Save </button> 
+                </div>
             </div>
 
-            <div> 
-                <button id="addSPrayerRow">Add Prayer</button>
-                <button id="saveButton"> Save </button> 
+            <div id="quoteChange" class="Announce_Background">
+                <h2>Change Quote</h2>
+                <form id = "quoteForm">
+                    <label for="quoteInput">Type quote here:</label>
+                    <input type="text" id="quoteInput">
+                    <button type="submit" id="submit_announcement">Post Quote</button>
+                </form>
+            </div>
+
+            <div id="Announcements-container" class="Announce_Background">
+                <h2>Add Announcement</h2>
+                <form id = "announcementForm">
+                    <!-- Commenting this out until used
+                        <p id="errorMessage"></form>
+                    -->
+                    <label for="announcementText">Type announcement information here:</label>
+                    <textarea id="announcementText" required></textarea>
+                    <button type="submit" id="submit_announcement">Post Announcement</button>
+                    <!--
+                    This I feel needs more working on. 
+                    A remove announcement doesn't do anything with the current thing being
+                    only a input box. I think this should be a seperate section that has all the 
+                    current announcements that can be edited. Something like the calender does, but for the announcements.
+
+                    
+                        <button type="button" id="remove_mode">Remove an announcement</button>
+            
+                    
+                    also whats the point of the save when you have a post
+
+                        <button type="submit">Save Changes</button>       
+                    
+                    -->
+                </form>
             </div>
             
         </div>
-    </div>
-    <div id="map_change">
-            <form class="mapChange">
+
+
+        SLIDE SHOW CHANGES PUT WHERE QUOTES ARE THEN QUOTE DOWN WITH MAP OR SOMETHING
+
+
+        <div id="map_container">
+            <form id="mapChange">
                 <b>
                     Location Name on Google Maps: <br>
                 </b>
                 
-                <div id="example">
+                <div id="example_map_input">
                     Example: Maunatul Muslimeen Society of CA (Islamic Center) - MMSC - Sacramento
                     <br><br>
                 </div>
 
                 <input type="text" id="Location">
                 <button type="submit">Submit</button>
-               <!-- <button type="submit" onclick="convertSpace(event)">Submit</button>-->
+               <!-- Commenting out because not working.
+                
+                <button type="submit" onclick="convertSpace(event)">Submit</button> 
+                -->
             </form>
         </div>
-        <button onclick="darkSwitch()">DarkMode</button>
-</body>
+    </body>
+
 </html>

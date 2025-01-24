@@ -1,22 +1,31 @@
 /* --------------------General------------------------ */
-.login-container {
+#login-container {
+    display: grid;
+
     width: 40%;
-    background-color: #f4f4f4;
+    max-height: fit-content;
+
+    background-color: rgb(230, 225, 225);
+
     margin: auto;
     margin-top: 50px;
+
     padding: 20px;
+    
     border-radius: 5px;
     box-shadow: 0 0 10px rgb(0, 0, 0, .1);
 }
-h2{
+
+#loginTitle{
     text-align: center;
+    margin:0px;
 }
 label{
     display: block;
     margin-bottom: 5px;
 }
 input{
-    width: 95%;
+    width: 90%;
     padding: 8px;
     margin-bottom: 10px;
     border-radius: 4px;
@@ -55,14 +64,14 @@ button:hover {
     text-align: center;
 }
 /* --------------------Header------------------------ */
-.header a img {
+#header a img {
     transition: transform 0.3s ease; 
 }
 
-.header a img:hover {
+#header a img:hover {
     transform: scale(1.1); /* Scale up the logo on hover */
 }
-.header {
+#header {
     display: block;
     padding: 6px;
     margin-left: auto;
