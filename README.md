@@ -1,6 +1,6 @@
 # Project Masjid
 > Project Masjid is a website project for the Maunatul Muslimeen Society of California
-![banner](https://github.com/RobertoRamil/ProjectMasjid/blob/main/Banner.png?raw=true)
+![banner](https://github.com/RobertoRamil/ProjectMasjid/blob/main/readme/Banner.png?raw=true)
 
 By the BasiqCoders: Mark Ures, Roberto Ramil, Corliss Yang, Shahroz Hamid, Mansoor Ali, Giovany Nunez, Iman Abboud, Simon Vu Truong
 
@@ -13,6 +13,7 @@ By the BasiqCoders: Mark Ures, Roberto Ramil, Corliss Yang, Shahroz Hamid, Manso
  - [Developer Instructions](#developer-instructions)
  - [Prototype](#prototype-showcase)
  - [Current Project Showcase](#current-project-showcase)
+ - [Timeline](#timeline)
 
 ## What Project Masjid Is
 Maunatul Muslimeen Society of CA (MMSC) is a non-profit organization that provides prayer services to the local community. Per the client's request, BasiqCoders built a unique solution for their community by building a robust website for a way of fostering community among the attendees, providing important announcements, prayer times, and an admin portal for the leaders to add/update changes without requiring any coding by the user.
@@ -29,14 +30,14 @@ Frontend:
 
 
 Backend:
- - Firebase - Database
- - Node.js - Database and data handling
- - Vercel - Webhosting
- - AWS (SNS) - SMS/Email Service
+ - <img src="https://firebaseopensource.com/logo-small.png" alt="FIREBASEICON" width="20"/> Firebase - Database
+ - <img src="https://cdn.iconscout.com/icon/free/png-256/free-node-js-logo-icon-download-in-svg-png-gif-file-formats--technology-social-media-vol-5-pack-logos-icons-3030179.png?f=webp" alt="NJSICON" width="20"/> Node.js - Database and data handling
+ - <img src="https://icons.iconarchive.com/icons/ionic/ionicons/256/logo-vercel-icon.png" alt="VERCELICON" width="20"/> Vercel - Webhosting
+ - <img src="https://cdn.iconscout.com/icon/free/png-256/free-aws-logo-icon-download-in-svg-png-gif-file-formats--cloud-computing-network-server-database-brand-pack-logos-icons-1583149.png?f=webp&w=256" alt="AWSICON" width="20"/> AWS (SNS) - SMS/Email Service
 
 IDE: Visual Studio
 ### Entity Relationship Diagram
-![ERD](https://github.com/RobertoRamil/ProjectMasjid/blob/main/Blank_diagram.png?raw=true)
+![ERD](https://github.com/RobertoRamil/ProjectMasjid/blob/main/readme/Blank_diagram.png?raw=true)
 ## Testing
  > Currently a placeholder
 ## Deployment
@@ -44,5 +45,27 @@ IDE: Visual Studio
 ## Developer Instructions
  > Currently a placeholder
 ## Prototype Showcase
+Want to view our original prototype?
+[Click here to download and explore it yourself!](https://github.com/RobertoRamil/ProjectMasjid/raw/refs/heads/main/readme/Prototype.zip)
 
 ## Current Project Showcase
+The website is located [Here at mmscenter.org](https://mmscenter.org)
+
+Below is an image showcase showwing off the various portions of the website, if you'd like to see everything the user side has to offer simply use the above link!
+
+User Home page
+![Home](https://github.com/RobertoRamil/ProjectMasjid/blob/main/readme/Home.png)
+
+User Events page
+![Events](https://github.com/RobertoRamil/ProjectMasjid/blob/main/readme/Events.PNG)
+
+Admin Home page
+![aHome](https://github.com/RobertoRamil/ProjectMasjid/blob/main/readme/adminhome.PNG)
+
+Admin adding calendar event
+![aCalendar1](https://github.com/RobertoRamil/ProjectMasjid/blob/main/readme/adminevents1.PNG)
+![aCalendar2](https://github.com/RobertoRamil/ProjectMasjid/blob/main/readme/adminevents2.PNG)
+
+## Timeline
+Here is a timeline of the exprected future of the project
+![Timeline](https://github.com/RobertoRamil/ProjectMasjid/blob/main/readme/Timeline.drawio.png)

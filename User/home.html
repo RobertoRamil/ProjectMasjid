@@ -50,15 +50,15 @@
 <body>
     <!--The header is inputted here-->
     <div id="header"></div>
-
+<div class="centeredRow">
     <div id="quote">
         <h1> Quotes:</h1>
         <div class="announcement">Quote of the day</div>
     </div>
-
+</div>
 
     <!--This is the prayer box, every paragraph and span is one row-->
-    <div class="first-row">
+    <div class="centeredRow">
         <aside>
             <div class="box" id="prayers_times"> 
                 
@@ -123,13 +123,17 @@
         
         
         
-            </div>
+            </div>                                 
+    </div> 
+
+
+
+
+</body>
+
     
     
-            <!--Initial Iframe example, this can be put into the home HTML once set up-->
-            <iframe src="https://www.google.com/maps?q=Maunatul+Muslimeen+Society+of+CA+(Islamic+Center)+-+MMSC+-+Sacramento&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed" 
-            allowfullscreen id="map"></iframe>
-        </aside>
+
         <!--This is the rotating images in the middle of the page-->
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -159,18 +163,10 @@
             </a>
           </div>
 
-        <div class="announcementBox">
-            <div class = "Announce col-12">
-                <h1> Annoucements</h1>
-                <div class = "announcementBox" id = "announcementBox"> </div>
-            </div>
-        </div>                                 
-    </div> 
-
-
-
-
-</body>
+          <div class="announcements">
+            <h1>Announcements</h1>
+            <div class="announcement-row" id="announcementRow"></div>
+        </div>
 
 <!-- footer added here -->
 <div id="footer"></div>
