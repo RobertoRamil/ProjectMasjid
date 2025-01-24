@@ -1,10 +1,10 @@
 
 
 /*This holds the prayer times, carasol, and announcement box*/
-.first-row{
-    align-items: flex-start;
-
-    display: flex; 
+.centeredRow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 15px;
 }
 
@@ -15,10 +15,8 @@
 
 /*Quote*/
 #quote{
-    position:relative;
-    align-items: flex-start;
-    left:25%;
-    max-width: 50%;
+    align-items: center; 
+    width: 50%;
     padding: 15px;
     margin-top: 10px;
     background-color: white;
@@ -27,7 +25,12 @@
 
 }
 /*---------------Prayer time box specifically---------------*/
-
+.prayerContainer {
+    width: 25;
+    height: 25%;
+    border-radius: 8%;
+    background-color: white;
+}
 .box{
     background-color: whitesmoke;
     width: 300px;
@@ -66,71 +69,63 @@
 .carouselExampleIndicators{
     display: flex; 
     justify-content: center;
+    margin: 0 auto; /* Ensures horizontal centering of the container */
+    width: fit-content; /* Adjusts the width to fit the content */
 }
-.carousel-inner>.item {
-    width: 100%;
-
+.carousel-inner .carousel-item img {
+    display: block;
+    margin: auto;
+    max-width: 100%; /* Prevents the images from overflowing */
+    height: auto; /* Maintains the aspect ratio */
 }
 
 #img{
+    border-radius: 8px;
     height: 500px;
-    width: 700px !important;
+    width: 50% !important;
+    object-fit: cover; /* Ensures the image scales properly without distortion */
 }
 /*---------------Announcement box---------------*/
-
-.Announce{
-    width: 25%;
-    margin-left:3%;
-    margin-right: 20px;
-    height: fit-content;
-    min-height: 200px;
+/* Announcements container */
+.announcements {
+    width: 50%; /* Match width with the carousel */
+    margin: 20px auto; /* Center horizontally and add spacing */
+    padding: 20px;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-}
-
-.Announce .announcementBox{
-    display: flex;
-    flex-flow: column wrap;
-}
-
-.announcementBox{
-    margin-left: auto;
-    order: 2;
-}
-
-.Announce .announcementBox .announcement{
-    padding-bottom: 120px;
-    display: grid;
-    min-width: 100px;
-    width: 100%;
-    max-height: 100px;
-    height: fit-content;
-
-}
-
-.Announce h1{
-    padding: 3%;
-    text-decoration: underline;
-}
-
-.Announce h2{
     text-align: center;
 }
 
-
-.Announce announBox{
-    width: 90%;
-    height: 100px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* Header inside announcements */
+.announcements h1 {
+    margin-bottom: 20px;
+    text-decoration: underline;
 }
+
+/* Announcement grid container */
+.announcement-row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Add spacing between rows */
+    align-items: center; /* Center content horizontally */
+}
+
+/* Individual announcement box */
+.announcement {
+    width: 90%; /* Slight padding from edges */
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    font-size: 1rem;
+    text-align: center;
+}
+
 /*---------------Map---------------*/
 #map{
-    height: 500px;
-    width: 500px;
+    height: 100%;
+    width: 100%;
 }
 .mapChange b{
     font-size:2vw;

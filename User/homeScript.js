@@ -13,23 +13,23 @@ function convertSpace(event){
 }    
 
 //announcment box auto makes the boxes
-function announcementPanes(announcement_panes){
-    const announcementGrid = document.getElementById("announcementBox");
-    for(let j = 0; j < announcement_panes; j++){
-      
-      const announcement = document.createElement("div");
-      announcement.classList.add("announcement");
-      
-      var boxinbox = document.createElement("announBox");
-      boxinbox.textContent= "*Announcement details go here*"; 
-      announcement.appendChild(boxinbox);
+function announcementPanes(announcement_panes) {
+    const announcementGrid = document.getElementById("announcementRow");
+    for (let j = 0; j < announcement_panes; j++) {
+        // Create announcement box
+        const announcement = document.createElement("div");
+        announcement.classList.add("announcement");
 
-      if(announcement){
-      announcementGrid.appendChild(announcement);
-      }
+        // Create inner box for content
+        const boxInBox = document.createElement("div");
+        boxInBox.classList.add("inner-box");
+        boxInBox.textContent = "*Announcement details go here*"; 
+        announcement.appendChild(boxInBox);
+
+        // Append announcement to grid
+        announcementGrid.appendChild(announcement);
     }
-    
-  }
+}
   announcementPanes(5);
 
   //prayer time to auto get the current date on the system
@@ -61,6 +61,50 @@ function getDate(){
     
 }
 getDate();
+
+
+
+
+// Alternative function for generating prayer boxes using prayerAmount
+function prayerBoxGeneration(prayerAmount) {
+    const container = document.createElement('div');
+    container.classList.add('prayerContainer');
+
+    // Create first row for daily prayers
+    const row1 = document.createElement('div');
+    row1.classList.add('prayerRow');
+    for (let i = 0; i <= 4; i++) {
+        const box = document.createElement('div');
+        box.classList.add('prayerBox');
+        box.textContent = `Daily Prayer ${i + 1}`;
+        row1.appendChild(box);
+    }
+
+    // Create second row for event prayers
+    const row2 = document.createElement('div');
+    row2.classList.add('prayerRow');
+    for (let i = 0; i < prayerAmount; i++) {
+        const box = document.createElement('div');
+        box.classList.add('prayerBox');
+        box.textContent = `Event Prayer ${i + 1}`;
+        row2.appendChild(box);
+    }
+
+    // Append rows to the container
+    container.appendChild(row1);
+    container.appendChild(row2);
+
+    // Append the container to the body
+    document.body.appendChild(container);
+}
+
+// Example usage
+const prayerTimes = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha', 'Jumuah'];
+createPrayerTimeBoxes(prayerTimes);
+
+// Example usage for prayerBoxGeneration
+prayerBoxGeneration(3);
+
 
 
 

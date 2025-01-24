@@ -13,6 +13,7 @@ h3 {
     margin-right: auto;
     text-align: center;
     border-bottom: 1px solid #0f5952;
+    
     background-image: url('https://firebasestorage.googleapis.com/v0/b/project-musjid.firebasestorage.app/o/FrontImage.png?alt=media&token=30e372c1-b736-4544-afb9-481dd73e5063'); /* Use your backdrop image URL */
     background-size: cover;
     background-position: center;
@@ -77,8 +78,8 @@ h3 {
 
 /*---------------Background---------------*/
 body { 
-    background-image: url("https://firebasestorage.googleapis.com/v0/b/project-musjid.firebasestorage.app/o/Back.jpg?alt=media&token=3557bb0e-c2b9-46a6-8765-632e8492a7de");
+    background-image: url('../mosque-6231915.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: cover;
+    background-size:cover ;
 }
