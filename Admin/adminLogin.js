@@ -26,7 +26,7 @@ const provider = new GoogleAuthProvider();
 
 
 const submit = document.getElementById("submit");
-const reset = document.getElementById("forgot_password");
+const resetSend = document.getElementById("resetSend");
 
 submit.addEventListener("click", (event) => {
   event.preventDefault();
@@ -51,26 +51,25 @@ submit.addEventListener("click", (event) => {
 
     });
 })
-/*
-reset.addEventListener("click", (event) => {
+
+resetSend.addEventListener("click", (event) => {
   event.preventDefault();
-  const email = document.getElementById("username").value;
+  const email = document.getElementById("email").value;
 
   sendPasswordResetEmail(auth, email)
     .then((userCredential) => {
       // Signed in 
-      alert("pass");
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      alert("fail");
+      alert("Error: Unable to send password reset email");
     });
 })
-*/
+
 
 /*Reset password modal*/
-/*
+
 function openModal() {
   document.getElementById("modalOverlay").style.display = "flex";
 }
@@ -78,7 +77,7 @@ function openModal() {
 function closeModal() {
   document.getElementById("modalOverlay").style.display = "none";
 }
-*/
+
 /*
 const googleLogin = document.getElementById("googleLogin");
 googleLogin.addEventListener("click", (event) => {
