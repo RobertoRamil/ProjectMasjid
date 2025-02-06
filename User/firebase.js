@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import { getFirestore, collection, getDocs, arrayUnion } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js'
+import { getFirestore, collection, doc, getDoc, updateDoc, getDocs, arrayUnion } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js'
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -18,15 +18,52 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 
-const db = getFirestore();
+const db = getFirestore(app);
+//const storage = getStorage(app);
 
 const contactsRef = doc(db, "users", "userContacts");
 const contactsSnap = getDoc(contactsRef);
 
 const colRef = collection(db, "users");
+
+function signUpEmail(){
+    const userEmail = document.getElementById("emailField").value;
+    var emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      //IMPORTANT NOTE FOR LATER: Add functionality to ensure that the email is not a duplicate
+      //IMPORTANT NOTE FOR LATER: When email sending is function we need to make an authentification method to avoid botting
+    if(emailRegex.test(userEmail)){
+        //This alert can be polished later into something prettier
+      alert("You have joined the newsletter!");
+      updateDoc(contactsRef, {emails: arrayUnion(userEmail)})
+    }
+    else{
+      alert("Invalid Email");
+  
+    }
+    
+  }
+  
+function signUpPhone(){
+    const userPhone = document.getElementById("phoneField").value;
+    var phoneRegex = /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+    //IMPORTANT NOTE FOR LATER: Add functionality to ensure that the phonenumber is not a duplicate
+    //IMPORTANT NOTE FOR LATER: When sms is function we need to make an authentification method to avoid botting
+    if(phoneRegex.test(userPhone)){
+        //This alert can be polished later into something prettier
+        var phoneNum = userPhone.replace(/[^A-Z0-9]/ig, "");
+        alert("You have joined the newsletter!");
+        updateDoc(contactsRef, {phoneNums: arrayUnion(phoneNum)})
+    }
+    else{
+      alert("Invalid Phone number");
+    }
+    
+}
+window.signUpEmail = signUpEmail;
+window.signUpPhone = signUpPhone;
 
 getDocs(colRef)
     .then((snapshot) => {
