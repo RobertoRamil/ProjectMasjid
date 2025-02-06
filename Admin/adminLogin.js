@@ -69,12 +69,11 @@ resetSend.addEventListener("click", (event) => {
 
 
 /*Reset password modal*/
-
-function openModal() {
+export function openModal() {
   document.getElementById("modalOverlay").style.display = "flex";
 }
 
-function closeModal() {
+export function closeModal() {
   document.getElementById("modalOverlay").style.display = "none";
 }
 
