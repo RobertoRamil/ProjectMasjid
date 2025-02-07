@@ -14,7 +14,6 @@ h3 {
     text-align: center;
     border-bottom: 1px solid #0f5952;
     
-    background-image: url('https://firebasestorage.googleapis.com/v0/b/project-musjid.firebasestorage.app/o/FrontImage.png?alt=media&token=30e372c1-b736-4544-afb9-481dd73e5063'); /* Use your backdrop image URL */
     background-size: cover;
     background-position: center;
     height: 160px; /* header space */
