@@ -118,33 +118,3 @@ eventList(events);
 
 /*----Everything here is used for email and phone signup----*/
 //IMPORTANT note, we need to make a function to connect to the database first (This should be done anyway to support calendar events)
-function signUpEmail(){
-  const userEmail = document.getElementById("emailField").value;
-  var emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    //IMPORTANT NOTE FOR LATER: Add functionality to ensure that the email is not a duplicate
-  if(emailRegex.test(userEmail)){
-    alert("You have joined the newsletter!");
-    updateDoc(contactsRef, {emails: arrayUnion(userEmail)})
-  }
-  else{
-    alert("Invalid Email");
-
-  }
-  
-}
-
-function signUpPhone(){
-  const userPhone = document.getElementById("phoneField").value;
-  var phoneRegex = /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
-  //IMPORTANT NOTE FOR LATER: Add functionality to ensure that the phonenumber is not a duplicate
-  if(phoneRegex.test(userPhone)){
-    alert("You have joined the newsletter!");
-    updateDoc(contactsRef, {phoneNums: arrayUnion(userPhone)})
-  }
-  else{
-    alert("Invalid Phone number");
-  }
-  
-  //This function needs to grab the input data from the textbox(the ID is phone)
-  //This function is triggered by an in site button press
-}
