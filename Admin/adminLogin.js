@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, GoogleAuthProvider, signInWithPopup } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, browserSessionPersistence, setPersistence }
+  from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -22,38 +23,49 @@ initializeApp(firebaseConfig);
 
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth();
-const provider = new GoogleAuthProvider();
 
-
+// Elements
 const submit = document.getElementById("submit");
 const resetSend = document.getElementById("resetSend");
+const forgotPassword = document.getElementById("forgotPassword");
+const modalOverlay = document.getElementById("modalOverlay")
+const signOutButton = document.getElementById("signOutButton")
 
+// Submit button
 submit.addEventListener("click", (event) => {
   event.preventDefault();
+
   const email = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
-
-
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in 
-      const user = userCredential.user;
-      window.location.href = "adminHome.html"
+  // Sets session to persistent while tab is open. Logs out when tab is closed
+  setPersistence(auth, browserSessionPersistence)
+    .then(() => {
+      return signInWithEmailAndPassword(auth, email, password);
+    })
+    .then((user) => {
+      console.log("Successful Login!");
+      window.location.href = "adminHome.html";
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
+
       if (email != "" && password != "") {
+        document.getElementById("password").value = "";
         alert("Error: Username or password incorrect");
+
       }
-
-
+      else if (email == "" || password == "") {
+        alert("Error: Both fields must be filled out");
+      }
     });
-})
+});
 
+// Reset Password button (In modal)
 resetSend.addEventListener("click", (event) => {
   event.preventDefault();
+
   const email = document.getElementById("email").value;
 
   sendPasswordResetEmail(auth, email)
@@ -67,15 +79,21 @@ resetSend.addEventListener("click", (event) => {
     });
 })
 
+//Forgot password button
+forgotPassword.addEventListener("click", (event) => {
+  event.preventDefault();
 
-/*Reset password modal*/
-export function openModal() {
   document.getElementById("modalOverlay").style.display = "flex";
-}
+})
 
-export function closeModal() {
-  document.getElementById("modalOverlay").style.display = "none";
-}
+//Close modal if admin clicks off it
+modalOverlay.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (event.target === document.getElementById('modalOverlay')) {
+    document.getElementById("modalOverlay").style.display = "none";
+  }
+})
+
 
 /*
 const googleLogin = document.getElementById("googleLogin");

@@ -7,10 +7,6 @@
     <title>Admin Login</title>
     <link rel="stylesheet" href="adminLogin.css">
     <script type= "module" src="adminLogin.js" defer></script>
-    
-    <script type="module">
-        import { openModal, closeModal } from './adminLogin.js';
-    </script>
 
 </head>
 
@@ -35,23 +31,14 @@
             <input type="password" name="password" id="password" required>
 
             <button type="submit" id="submit">Login</button>
-            <script>
-                function openModal() {
-                    document.getElementById("modalOverlay").style.display = "flex";
-                }
-
-                function closeModal() {
-                    document.getElementById("modalOverlay").style.display = "none";
-                }
-            </script>
-            <button type="button" id="forgotPassword" onclick="openModal()">Forgot Password</button>
+            <button type="button" id="forgotPassword">Forgot Password</button>
         </form>
 
-        <div id="modalOverlay" class="modal-overlay" onclick="closeModal()">
+        <div id="modalOverlay" class="modal-overlay">
             <div class="modal" onclick="event.stopPropagation()">
                 <p>Enter your email to receive email to reset password.</p>
                 <input type="email" id="email" class="email-input" placeholder="Enter your email">
-                <button type="button" id="resetSend" onclick="closeModal()">Send Email</button>
+                <button type="button" id="resetSend">Send Email</button>
 
             </div>
         </div>
