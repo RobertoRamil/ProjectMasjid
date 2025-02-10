@@ -6,26 +6,33 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Donate Page</title>
-        <link id="pageCSS" rel="stylesheet" href="donateStyle.css">
+        <link rel="stylesheet" href="donateStyle.css">
 
         <!--Importing jquery to get the function that makes the header-->
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
         crossorigin="anonymous">
         </script>
-
-        <script>
-            $(function(){
-                $('#header').load('header.html');
-                $('#footer').load('footer.html');
-            })
-        </script>
     
     </head>
     
 <body>
     <!--The header is inputted here-->
-    <div id="header"></div>
+    <header>
+        <div class="header">        
+            <a href="home.html">
+                <img src="https://firebasestorage.googleapis.com/v0/b/project-musjid.firebasestorage.app/o/logo2.png?alt=media&token=ebdbe434-bd84-4ce4-80f2-9cc956353035" 
+                     alt="logo of MMSC" 
+                     width="150" height="150">
+            </a>
+        </div>
+    </header>
+    <div class="tabs">
+        <a href="home.html" class="tab">Home</a>
+        <a href="about.html" class="tab">About</a>
+        <a href="event.html" class="tab">Events</a>
+        <a href="donate.html" class="tab">Donate</a>
+    </div>
     <!--Where the page officially starts, Holds the title of the page-->
     <h2 class="Webpage-Tab-Title"> Donate</h2>
 

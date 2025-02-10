@@ -9,7 +9,6 @@
     max-width: 1200px;
     margin: 0 a
 }
-
 /* --------------------Left box:info------------------------ */
 .info-section, .donation-section {
     width: 45%;
@@ -20,9 +19,7 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 /* -------Donate section: holds donation methods------------ */
-
 .donation-section {
     width: 45%;
     display: flex;
