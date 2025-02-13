@@ -118,7 +118,7 @@ function announcementPanes(announcement_panes) {
 }
   announcementPanes(5);
 
-  //prayer time to auto get the current date on the system
+//prayer time to auto get the current date on the system
 function getDate(){
     var date = new Date();
     var day = date.getDate();
@@ -152,44 +152,32 @@ getDate();
 
 
 // Alternative function for generating prayer boxes using prayerAmount
-function prayerBoxGeneration(prayerAmount) {
-    const container = document.createElement('div');
-    container.classList.add('prayerContainer');
+let congregationAmount = 5;
+let congregationNames = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+let congregationTimes = ["05:30", "12:45", "16:15", "18:30", "20:00"];
 
-    // Create first row for daily prayers
-    const row1 = document.createElement('div');
-    row1.classList.add('prayerRow');
-    for (let i = 0; i <= 4; i++) {
-        const box = document.createElement('div');
-        box.classList.add('prayerBox');
-        box.textContent = `Daily Prayer ${i + 1}`;
-        row1.appendChild(box);
-    }
+let container = document.querySelector(".container"); // Selects the container div
 
-    // Create second row for event prayers
-    const row2 = document.createElement('div');
-    row2.classList.add('prayerRow');
-    for (let i = 0; i < prayerAmount; i++) {
-        const box = document.createElement('div');
-        box.classList.add('prayerBox');
-        box.textContent = `Event Prayer ${i + 1}`;
-        row2.appendChild(box);
-    }
+for (let i = 0; i < congregationAmount; i++) {
+    let box = document.createElement("div"); // Create the outer box
+    box.classList.add("prayerBox");
 
-    // Append rows to the container
-    container.appendChild(row1);
-    container.appendChild(row2);
+    let prayerName = document.createElement("div"); // Prayer name div
+    prayerName.classList.add("prayer-name");
+    prayerName.textContent = congregationNames[i];
 
-    // Append the container to the body
-    document.body.appendChild(container);
+    let prayerTime = document.createElement("div"); // Prayer time div
+    prayerTime.classList.add("prayer-time");
+    prayerTime.textContent = congregationTimes[i];
+
+    // Append name and time inside the box
+    box.appendChild(prayerName);
+    box.appendChild(prayerTime);
+
+    // Append box to the container
+    container.appendChild(box);
 }
 
-// Example usage
-const prayerTimes = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha', 'Jumuah'];
-createPrayerTimeBoxes(prayerTimes);
-
-// Example usage for prayerBoxGeneration
-prayerBoxGeneration(3);
 
 
 
