@@ -1,107 +1,127 @@
+/*
+Fonts:
+font-family: 'Old Standard TT', serif;
+font-family: 'Abril Fatface', serif;
 
+To create content separation, use the class "centeredRow".
+*/
 
-/*This holds the prayer times, carasol, and announcement box*/
+/*Content Separation*/
 .centeredRow{
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
-.first-row div{
-    padding: 5px;
-    padding-top: 0px;
+.container {
+    display: flex;
+    justify-content: center; /* Centers the row */
+    align-items: center;
+    flex-wrap: wrap; /* Allows wrapping if screen is small */
+}
+
+.box {
+    align-items: flex; 
+    flex-direction:column;  
+    width: 80vw;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    justify-content: center;
+}
+/*Content Separation*/
+
+#heading{
+    font-family: 'Abril Fatface', serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#headingDate{
+    font-family: 'Abril Fatface', serif;
+    font-size: clamp(1rem, 5vw, 4rem);
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 /*Quote*/
 #quote{
-    align-items: center; 
-    width: 50%;
-    padding: 15px;
-    margin-top: 10px;
+    width: 80%;
+    padding: 15px; 
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+/*Quote*/
 
-}
-/*---------------Prayer time box specifically---------------*/
-.prayerContainer {
-    width: 25;
-    height: 25%;
-    border-radius: 8%;
-    background-color: white;
-}
-.box{
-    background-color: whitesmoke;
-    width: 300px;
+
+
+/*Prayer Time*/
+.prayer-name {
+    font-size: clamp(0rem, 6vw, 1.5rem);
+    margin-bottom: 10px; /* Space between name and time */
 }
 
-.box p{
-    text-align: left;
-}
-.box span{
-    float: right;
+.prayer-time {
+    font-family: 'Old Standard TT', serif;
+    font-size: 14px;
 }
 
-.box u{
-    text-align: center;
-}
 
-#prayerTitle{
-    padding-bottom: 20px;
-}
-
-#prayers_times{
+.prayerBox{
+    font-family: 'Old Standard TT', serif;
+    align-items: flex; 
+    flex-direction:column;  
+    width: clamp(150px, 16%, 300px); /* Responsive width */
+    padding: 2vw;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    font-size: small;
-    margin: 3%;
-    padding:3%;
-    position: relative;
-    /*left: 20%;*/
-    height: auto;
+    justify-content: center;  
+    margin: .5vw;
 }
 
-/*---------------Middle of page picture carousel---------------*/
+/*Prayer Time*/
 
+
+
+/*Image Carousel*/
 .carouselExampleIndicators{
     display: flex; 
     justify-content: center;
     margin: 0 auto; /* Ensures horizontal centering of the container */
     width: fit-content; /* Adjusts the width to fit the content */
+    max-width: 80%;
+}
+.carousel-inner {
+    width: 100%;
+    max-height: 80vh; /* Keeps it responsive on large screens */
+    border-radius: 8px;
 }
 .carousel-inner .carousel-item img {
     display: block;
     margin: auto;
-    max-width: 100%; /* Prevents the images from overflowing */
-    height: auto; /* Maintains the aspect ratio */
+    max-width: 60%; /* Prevents the images from overflowing */
+    height: 61.9vw; /* Maintains the aspect ratio */
+    border-radius: 8px;
 }
 
 #img{
     border-radius: 8px;
-    height: 500px;
-    width: 50% !important;
+    width: 85w !important;
     object-fit: cover; /* Ensures the image scales properly without distortion */
 }
-/*---------------Announcement box---------------*/
-/* Announcements container */
-.announcements {
-    width: 50%; /* Match width with the carousel */
-    margin: 20px auto; /* Center horizontally and add spacing */
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
+/*Image Carousel*/
 
-/* Header inside announcements */
-.announcements h1 {
-    margin-bottom: 20px;
-    text-decoration: underline;
-}
+
+
+/*Announcements*/
 
 /* Announcement grid container */
 .announcement-row {
@@ -113,6 +133,8 @@
 
 /* Individual announcement box */
 .announcement {
+    font-family: 'Old Standard TT', serif;
+    font-size: 14px;
     width: 90%; /* Slight padding from edges */
     background-color: #f9f9f9;
     border-radius: 8px;
@@ -121,6 +143,9 @@
     font-size: 1rem;
     text-align: center;
 }
+/*Announcements*/
+
+
 
 /*---------------Map---------------*/
 #map{

@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="headerStyle.css">
+    <link rel="stylesheet" href="User/headerStyle.css">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
         crossorigin="anonymous">
+
+        <script src="headerScript.js"defer></script>
+
 </head>
 
 <body>
@@ -19,11 +22,12 @@
     </header>
 
     <div class="tabs">
-        <a href="home.html" class="tab">Home</a>
-        <a href="about.html" class="tab">About</a>
-        <a href="event.html" class="tab">Events</a>
-        <a href="donate.html" class="tab">Donate</a>
+        <a href="javascript:void(0);" class="tab" onclick="loadContent('home.html')">Home</a>
+        <a href="javascript:void(0);" class="tab" onclick="loadContent('about.html')">About</a>
+        <a href="javascript:void(0);" class="tab" onclick="loadContent('event.html')">Events</a>
+        <a href="javascript:void(0);" class="tab" onclick="loadContent('donate.html')">Donate</a>
     </div>
+    <div id="filter"></div>
 </body>
     <script src="header.js" defer></script>
     <script src="firebase.js" type="module" defer></script>

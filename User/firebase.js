@@ -31,6 +31,7 @@ async function fetchLogo() {
   }
 } 
 
+
 async function setHeaderBackground() {
   const storageRef = ref(storage, 'HeaderPhotos/FrontImage.png');
   try {
@@ -96,4 +97,3 @@ getDocs(colRef)
     .catch(err => {
         console.log(err.message)
     })
-

@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>About Page</title>
-        <link rel="stylesheet" href="aboutStyle.css">
+        <link id="pageCSS" rel="stylesheet" href="User/aboutStyle.css">
 
         <!--This is the script used to automake the team members-->
         <script src="aboutScript.js" defer></script>
@@ -18,8 +18,8 @@
 
         <script>
             $(function(){
-                $('#header').load('header.html');
-                $('#footer').load('footer.html');
+                $('#header').load('User/header.html');
+                $('#footer').load('User/footer.html');
             })
         </script>
     </head>
@@ -53,7 +53,7 @@
     </script>
     <body>
     <!--The header is inputted here-->
-        <div id="header"></div>
+
     <!--the title of the page-->
         <h2 class="Webpage-Tab-Title"> About</h2>
 <div class="centeredRow">
@@ -73,27 +73,36 @@
         </div>
 </div>
     <!--Social Media-->
-        <div class = "SocialMedia">
-            <div class = "facebook">
-                <a href="https://www.facebook.com/mmsc99" title = "Facebook" target="_blank">
-                    <img  src="https://tinyurl.com/yv3ex2be" class = "fbimage">
-                </a>
-                <a href="https://www.facebook.com/mmsc99" title = "Facebook" target="_blank">
-                    Click here for our Facebook Get updated with the latest of what is happening.
-                </a>
-            </div>
-            
-            <div class = "instagram">
-                <a href="https://www.instagram.com/___mmsc___/" title = "Instagram" target="_blank">
-                    <img  src="https://tinyurl.com/hrtz28z8" class = "Iimage">
-                </a>
-                <a href="https://www.instagram.com/___mmsc___/" title = "Instagram" target="_blank">
-                    Click here for our Instagram Get updated with the latest of what is happening.
-                </a>
+        <div>
+            <div class="row">
+                <div class = "SocialMedia row offset-md-2 col-md-8 offset-1 col-10" style="justify-content: center">
+                    <div class="col-12 col-md-6">
+                        <div class = "facebook">
+                            <a href="https://www.facebook.com/mmsc99" title = "Facebook" target="_blank">
+                                <img  src="https://tinyurl.com/yv3ex2be" class = "fbimage">
+                            </a>
+                            <a href="https://www.facebook.com/mmsc99" title = "Facebook" target="_blank">
+                                Click here for our Facebook Get updated with the latest of what is happening.
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class = "instagram">
+                            <a href="https://www.instagram.com/___mmsc___/" title = "Instagram" target="_blank">
+                                <img  src="https://tinyurl.com/hrtz28z8" class = "Iimage">
+                            </a>
+                            <a href="https://www.instagram.com/___mmsc___/" title = "Instagram" target="_blank">
+                                Click here for our Instagram Get updated with the latest of what is happening.
+                            </a>
+                        </div>
+                    </div>
+                    
+                </div>
             </div>
         </div>
+        
         <!-- footer added here -->
-        <div id="footer"></div> 
+
         
     </body>
 </html>
