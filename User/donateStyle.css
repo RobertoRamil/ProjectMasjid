@@ -1,4 +1,3 @@
-
 /* -------Container: holds boxes (left:info)(right:donate)--------------- */
 
 .container {
@@ -11,7 +10,6 @@
 }
 /* --------------------Left box:info------------------------ */
 .info-section, .donation-section {
-    width: 45%;
     text-align: center;
     font-size: 1.2em;
     background-color: white;
@@ -21,7 +19,6 @@
 }
 /* -------Donate section: holds donation methods------------ */
 .donation-section {
-    width: 45%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -57,4 +54,3 @@
 .donation-link:hover p {
     text-decoration: underline; /* Add underline on hover if needed */
 }
-
