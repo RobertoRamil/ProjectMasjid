@@ -1,36 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
     <link rel="stylesheet" href="adminLogin.css">
-    <script src="adminLogin.js"></script>
+    <script type= "module" src="adminLogin.js" defer></script>
+
 </head>
 
 <header>
-    <div id="header">           
-        <a href ="index.html">
-            <img src="https://github.com/RobertoRamil/ProjectMasjid/blob/main/logo2.png?raw=true" alt="logo of MMSC" width="150" height="150">
-        </a>                  
+    <div id="header">
+        <a href="index.html">
+            <img src="https://github.com/RobertoRamil/ProjectMasjid/blob/main/logo2.png?raw=true" alt="logo of MMSC"
+                width="150" height="150">
+        </a>
     </div>
 </header>
 
 <body>
     <div id="login-container">
         <h2 id="loginTitle">Admin Login</h2>
-        <form id = "loginForm">
+        <form>
             <p id="errorMessage"></p>
             <label for="username">Username:</label>
             <input type="text" name="username" id="username" required>
 
             <label for="password">Password:</label>
             <input type="password" name="password" id="password" required>
-            
+
             <button type="submit" id="submit">Login</button>
-            <button type="button" id="forgot_password">Forgot Password</button>
-            
+            <button type="button" id="forgotPassword">Forgot Password</button>
         </form>
+
+        <div id="modalOverlay" class="modal-overlay">
+            <div class="modal" onclick="event.stopPropagation()">
+                <p>Enter your email to receive email to reset password.</p>
+                <input type="email" id="email" class="email-input" placeholder="Enter your email">
+                <button type="button" id="resetSend">Send Email</button>
+
+            </div>
+        </div>
+
+
+
+
+
     </div>
+
 </body>
+
 </html>

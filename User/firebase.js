@@ -18,8 +18,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
-
+const app = initializeApp(firebaseConfig);
 
 const db = getFirestore();
 
@@ -40,4 +39,4 @@ getDocs(colRef)
         console.log(err.message)
     })
 
-
+    
