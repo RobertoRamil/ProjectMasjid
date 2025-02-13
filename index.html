@@ -1,23 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta http-equiv="refresh" content="0; URL='User/home.html'">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Masjid</title>
-    <link rel = "stylesheet" href="style.css">
-    <script src="script.js" defer></script>
-</head>
-<body>
-<header>
-  <div class="header">
-    <div>
-        <a href ="index.html">
-            <img src="https://github.com/RobertoRamil/ProjectMasjid/blob/main/logo2.png?raw=true" alt="logo of MMSC">
-        </a>
-    </div>
-  </div>
-</header>
+    <title>Home Page</title>
+    <link id="pageCSS" rel="stylesheet" href="User/homeStyle.css">
 
+    <!-- Import Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap and jQuery -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+
+    <!-- Import Template System -->
+    <script src="template.js" defer></script>
+
+    <script type='module' src="firebase.js" defer></script>
+</head>
+
+<body>
+    <!-- Load header -->
+    <div id="header"></div>
+
+    <!-- Main Content -->
+    <div class="centeredRow">
+      <div id="quote">
+          <h1>Quotes:</h1>
+          <div class="announcement">Quote of the day</div>
+      </div>
+  </div>
+
+    <!-- Load footer -->
+    <div id="footer"></div>
+<script>
+  fetch('User/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+
+        // Fetch the footer content from the User folder
+        fetch('User/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    // Function to load content dynamically based on the tab clicked
+    function loadContent(page) {
+      fetch('User/' + page)
+        .then(response => response.text())
+        .then(data => {
+            // Insert the fetched content into the #quote div
+            document.querySelector('#quote').innerHTML = data;
+
+            // Determine the CSS file based on the page name (e.g., about.html -> aboutStyle.css)
+            const cssFile = 'User/' + page.replace('.html', 'Style.css');
+            
+            // Determine the JS file based on the page name (e.g., about.html -> aboutScript.js)
+            const jsFile = 'User/' + page.replace('.html', 'Script.js');
+            // Remove the old CSS link (if any)
+            const oldCSS = document.getElementById('pageCSS');
+            if (oldCSS) {
+                oldCSS.remove();  // Remove the previous CSS file
+            }
+
+            // Remove the old JS script (if any)
+            const oldJS = document.getElementById('pageJS');
+            if (oldJS) {
+                oldJS.remove();  // Remove the previous JS file
+            }
+
+
+            // Load the new CSS
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = cssFile;  // Path to the new CSS file (e.g., aboutStyle.css)
+            link.id = 'pageCSS';  // Give it a unique ID to replace it later
+            document.head.appendChild(link);  // Append the new CSS to the <head>
+
+            // Load the new JS
+            const script = document.createElement('script');
+            script.src = jsFile;  // Path to the new JS file (e.g., aboutScript.js)
+            script.id = 'pageJS';  // Give it a unique ID to replace it later
+            script.defer = true;   // Defer execution until the document is fully parsed
+            document.body.appendChild(script);  // Append the script to the <body>
+        })
+        .catch(error => {
+            console.error('Error loading content:', error);
+        });
+            
+    }
+
+</script>
 </body>
+
 </html>

@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
+  
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Home Page</title>
-        <link rel="stylesheet" href="homeStyle.css">
 
+        <link id="pageCSS" rel="stylesheet" href="homeStyle.css">
+        
+        <!-- Import Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+        
         <!--This is for the prayer and announcements-->        
         <script src="homeScript.js"defer></script>
 
@@ -47,94 +52,42 @@
         <script type='module' src="firebase.js"defer></script>
     </head>
 
+
+
 <body>
-    <!--The header is inputted here-->
-    <div id="header"></div>
-<div class="centeredRow">
-    <div id="quote">
-        <h1> Quotes:</h1>
-        <div class="announcement">Quote of the day</div>
-    </div>
-</div>
 
-    <!--This is the prayer box, every paragraph and span is one row-->
+<!--Header-->
+<div id="header"></div>
+<!--Header-->
+
+
+
+<!-- Quote of the Day-->
+  <div class="centeredRow">
+      <div class="box">
+        <h1 id="heading">Quote of the Day</h1>
+        <div class="announcement">The Most Compassionate, Most Merciful.</div>
+      </div>
+  </div>
+<!-- Quote of the Day-->
+
+
+
+
+<!--Prayer Container-->    
     <div class="centeredRow">
-        <aside>
-            <div class="box" id="prayers_times"> 
-                
-    
-                <div id="date" class="clock" onload="getDate()"></div>
-                <br>
-    
-                <div id="prayerTitle">
-                <u>Daily Prayer Times:</u> 
-                </div>
-    
-                <p >
-                    Fajr 
-                    <span>
-                        11:00 
-                    </span>
-                </p>
-        
-                <p>
-                    Dhuhr 
-                    <span>
-                        13:00 
-                    </span>
-                </p>
-        
-                <p >
-                    Asr 
-                    <span>
-                        15:00 
-                    </span>
-                </p>
-        
-                <p>
-                    Maghrib 
-                    <span>
-                        17:00 
-                    </span>
-                </p>
-        
-                <p>
-                    Isha 
-                    <span>
-                        19:00 
-                    </span>
-                </p>
-                <div id="prayerTitle">
-                    <u>Special Prayer Dates & Times:</u>
-                </div>
-                <p>
-                    Jumu'ah (Speech) 
-                    <span>
-                        Friday 18th, 13:00 
-                    </span>
-                </p>
-        
-                <p>
-                    Jumu'ah (Prayer) 
-                    <span>
-                        Friday 18th, 13:30 
-                    </span>
-                </p>
-        
-        
-        
-            </div>                                 
-    </div> 
-
-
-
-
-</body>
+            <div class="box">
+                <h1 id="headingDate"><div id="date" class="clock" onload="getDate()"></div> </h1>
+                <div class="container"></div> <!-- Container to hold prayer boxes -->
+                <script src="script.js"></script>                               
+            </div> 
+    </div>
+<!--Prayer Container-->
 
     
-    
-
-        <!--This is the rotating images in the middle of the page-->
+        
+<!--Image Carousel-->   
+<div class="centeredRow">     
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
               <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -161,12 +114,25 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
-          </div>
+        </div>
+</div>
+<!--Image Carousel--->
 
-          <div class="announcements">
-            <h1>Announcements</h1>
+
+
+<!--Announcements-->
+<div class="centeredRow"> 
+          <div class="box">
+            <h1 id="heading">Announcements</h1>
             <div class="announcement-row" id="announcementRow"></div>
         </div>
+</div>
+<!--Announcements-->
+
+
 
 <!-- footer added here -->
+
 <div id="footer"></div>
+</body>
+
