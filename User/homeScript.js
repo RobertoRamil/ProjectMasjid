@@ -148,7 +148,9 @@ function getDate(){
 }
 getDate();
 
-
+/*
+firestore database->/prayertimes/prayers. find document's fields size. 
+*/
 
 
 // Alternative function for generating prayer boxes using prayerAmount
