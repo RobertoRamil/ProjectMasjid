@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 
 import { getStorage, ref, getDownloadURL } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js';
-import { getFirestore, collection, doc, getDoc, updateDoc, getDocs, arrayUnion } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js'
+import { getFirestore, collection, doc, getDoc, updateDoc, getDocs, arrayUnion  } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js'
 
 
 export const firebaseConfig = {
@@ -43,6 +43,54 @@ async function setHeaderBackground() {
   }
 }
 
+//--------------------------------------------Setup for team members---------------------------------------------------
+async function getTeamNames(){
+  const teamRef = doc(db, "team", "team_members");
+  const teamSnap = await getDoc(teamRef); // Await the getDoc call
+  const teamNames = [];
+  //get all the team names from the database
+  if (teamSnap.exists()) {
+    const teamData = teamSnap.data();
+    if (teamData.teamNames) { 
+      teamData.teamNames.forEach((name) => {
+        teamNames.push(name);
+      });
+    }
+  }
+  //console.log(teamNames);
+  return teamNames;
+}
+
+async function getTeamPortraits(num_mems, memberNames){
+  //create array to store portraitURLs
+  const portraitURLs = [];
+  for(let i = 0; i < num_mems; i++){
+    console.log("Getting portrait for", memberNames[i]); // Debugging line
+    const portraitRef = ref(storage, `team_portraits/${memberNames[i]}.PNG`);
+    const portraitURL = await getDownloadURL(portraitRef); // Await the getDownloadURL call
+    //add portraitURL to an array
+    portraitURLs.push(portraitURL);
+  }
+  //console.log(portraitURLs);
+  return portraitURLs;
+}
+//--------------------------------------------End of setup for team members--------------------------------------------
+
+//--------------------------------------------Setup for about section--------------------------------------------------
+async function getAboutHeader(){
+  const aboutRef = doc(db, "about", "about_header");
+  const aboutSnap = await getDoc(aboutRef); // Await the getDoc call
+  const aboutHeader = aboutSnap.data().header;
+  return aboutHeader;
+}
+
+async function getAboutBody(){
+  const aboutRef = doc(db, "about", "about_body");
+  const aboutSnap = await getDoc(aboutRef); // Await the getDoc call
+  const aboutBody = aboutSnap.data().body;
+  return aboutBody;
+}
+//--------------------------------------------End of setup for about section-------------------------------------------
 const contactsRef = doc(db, "users", "userContacts");
 const contactsSnap = getDoc(contactsRef);
 
@@ -81,6 +129,10 @@ function signUpPhone(){
     }
     
 }
+window.getAboutHeader = getAboutHeader;
+window.getAboutBody = getAboutBody;
+window.getTeamNames = getTeamNames;
+window.getTeamPortraits = getTeamPortraits;
 window.signUpEmail = signUpEmail;
 window.signUpPhone = signUpPhone;
 window.setHeaderBackground = setHeaderBackground;
