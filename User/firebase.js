@@ -31,7 +31,6 @@ async function fetchLogo() {
   }
 } 
 
-
 async function setHeaderBackground() {
   const storageRef = ref(storage, 'HeaderPhotos/FrontImage.png');
   try {
@@ -43,6 +42,35 @@ async function setHeaderBackground() {
   }
 }
 
+//--------------------------------------------Setup for donate section--------------------------------------------------//
+async function fetchZelleLogo() {
+  console.log("fetchZelleLogo function called"); 
+  const storageRef = ref(storage, 'Donation_Photos/zelle.png');
+  try {
+    const url = await getDownloadURL(storageRef);
+    console.log("Zelle Logo URL:", url);
+    document.getElementById('zellelogo').src = url;
+    console.log("Zelle logo fetched and set successfully"); 
+  } catch (error) {
+    console.error("Error fetching Zelle logo:", error);
+  }
+}
+
+async function getDonateBody(){
+  const aboutRef = doc(db, "donate", "donate_body");
+  const aboutSnap = await getDoc(aboutRef); 
+  const aboutBody = aboutSnap.data().body;
+  return aboutBody;
+}
+
+async function getPaypalBody(){
+  const aboutRef = doc(db, "donate", "donate_paypal");
+  const aboutSnap = await getDoc(aboutRef); 
+  const aboutBody = aboutSnap.data().body;
+  return aboutBody;
+}
+
+//--------------------------------------------Setup for donate section--------------------------------------------------//
 const contactsRef = doc(db, "users", "userContacts");
 const contactsSnap = getDoc(contactsRef);
 
@@ -85,6 +113,9 @@ window.signUpEmail = signUpEmail;
 window.signUpPhone = signUpPhone;
 window.setHeaderBackground = setHeaderBackground;
 window.fetchLogo = fetchLogo;
+window.fetchZelleLogo = fetchZelleLogo;
+window.getDonateBody = getDonateBody;
+window.getPaypalBody = getPaypalBody;
 
 getDocs(colRef)
     .then((snapshot) => {
