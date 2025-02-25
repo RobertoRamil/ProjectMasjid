@@ -1,8 +1,10 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, browserSessionPersistence, setPersistence }
-  from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
 
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, browserSessionPersistence, setPersistence, 
+  signInWithPopup, GoogleAuthProvider} from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
+
+import { getFirestore, collection, doc, getDoc, updateDoc, getDocs, arrayUnion } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -23,13 +25,14 @@ initializeApp(firebaseConfig);
 
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth();
+const provider = new GoogleAuthProvider();
+const db = getFirestore();
 
 // Elements
 const submit = document.getElementById("submit");
 const resetSend = document.getElementById("resetSend");
 const forgotPassword = document.getElementById("forgotPassword");
 const modalOverlay = document.getElementById("modalOverlay")
-const signOutButton = document.getElementById("signOutButton")
 
 // Submit button
 submit.addEventListener("click", (event) => {
@@ -94,8 +97,8 @@ modalOverlay.addEventListener("click", (event) => {
   }
 })
 
+const whitelistedAdmins = await getDocs(collection(db, "whitelistedAdmins"));
 
-/*
 const googleLogin = document.getElementById("googleLogin");
 googleLogin.addEventListener("click", (event) => {
   event.preventDefault();
@@ -109,7 +112,13 @@ googleLogin.addEventListener("click", (event) => {
       const user = result.user;
       // IdP data available using getAdditionalUserInfo(result)
       // ...
-      alert("success")
+      const isAdmin = whitelistedAdmins.docs.some(doc => doc.data().email === user.email);
+      if (isAdmin) {
+        window.location.href = "adminHome.html";
+      } else {
+        alert("You are not authorized to access this page.");
+      }
+      //window.location.href = "adminHome.html";
     }).catch((error) => {
       // Handle Errors here.
       const errorCode = error.code;
@@ -122,4 +131,5 @@ googleLogin.addEventListener("click", (event) => {
       // ...
     });
 })
-*/
+
+
