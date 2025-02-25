@@ -113,7 +113,9 @@ googleLogin.addEventListener("click", (event) => {
       // IdP data available using getAdditionalUserInfo(result)
       // ...
       const isAdmin = whitelistedAdmins.docs.some(doc => doc.data().email === user.email);
-      if (isAdmin) {
+      if (user.email == isAdmin) 
+      {
+
         window.location.href = "adminHome.html";
       } else {
         alert("You are not authorized to access this page.");
