@@ -98,30 +98,29 @@ getDocs(colRef)
 
 
 
-
 //This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.
 const prayerRef = doc(db, "prayerTimes", "Prayers");
+const prayerSnap = await getDoc(prayerRef);
+const prayerHourData = prayerSnap.data(); //Gets the data from the prayer database
+
 
 //This pulls the prayer times from the prayerTimes collection in firebase
-async function pullPrayerTime(){
-const prayerSnap = await getDoc(prayerRef);
-
+export async function pullPrayerTime(prayerName){
   try{
-    const data = prayerSnap.data();
-    const fieldCount = Object.keys(data).length;
-    /*
-    forloop (using fieldCount), 
-    grab prayer name->congregationNames[i] in homeScript.js
-    grab prayer time-> congregationTimes[i]
-    
-    */
-    console.log("Document data:", `${fieldCount}`);
+    const fieldCount = Object.keys(prayerHourData).length;//Gets the count of prayers in the database
+    let keys=Object.keys(prayerHourData); //Isolates data to prayer names
+    let info=Object.values(prayerHourData); //Isolates the data to the values
 
+    for(let i=0;i<fieldCount; i++){
+      if(keys[i]==prayerName){
+        let fullDate=info[i].toDate();
+        return(fullDate);
+      }
+    }
   }catch (e) {
     console.log("error getting prayer Times"+e);
   }  
 }
-window.onload=pullPrayerTime;
 
 
 function createPrayerTime(prayerName, prayerNumber, prayerTimes){
@@ -129,10 +128,6 @@ function createPrayerTime(prayerName, prayerNumber, prayerTimes){
   let firebaseTimeStamp;
   let currentDate=new Date();
 
-  //If it's a Jumu'ah prayer/speech it will translate the date value to timestamp to be stored.
-  //Else, it will grab the system's current day, month, and year at the time of pressing save to fill in those data points for the timestamp.
-
-  //CURRENTLY ONLY ALLOWS ONLY ONE JUMU'AH PRAYER AND SPEECH. CURRENTLY DOES NOT WORK IF MULTIPLE JUMU'AH ARE ADDED THEN REMOVED!!!! 
   if(prayerName.includes("Jumu'ah")){
     prayerTime=document.getElementById(`sPrayerTime${prayerNumber}`).value;
     let tempDate=new Date(prayerTime);
@@ -145,10 +140,14 @@ function createPrayerTime(prayerName, prayerNumber, prayerTimes){
 
   prayerTimes[prayerName] = firebaseTimeStamp;
 }
-
-//ERROR IN THE CONSOLE WHEN NOT IN THE ADMIN SIDE 
+/*
+//ERROR IN THE CONSOLE WHEN NOT IN THE ADMIN SIDE THAT STOPS USAGE OF OTHER FUNCTIONS
 //Translating the prayer times to timestamps to put into database and then testing to push to the database.
 //If there are time slots present but not filled, it will not push all of the data and alert the user.
+//If it's a Jumu'ah prayer/speech it will translate the date value to timestamp to be stored.
+  //Else, it will grab the system's current day, month, and year at the time of pressing save to fill in those data points for the timestamp.
+
+  //CURRENTLY ONLY ALLOWS ONLY ONE JUMU'AH PRAYER AND SPEECH. CURRENTLY DOES NOT WORK IF MULTIPLE JUMU'AH ARE ADDED THEN REMOVED!!!! 
 document.getElementById("prayerSaveButton").addEventListener("click",function(){
   let timeAmount=document.getElementsByClassName("time").length;
   let prayerTimes={};
@@ -187,3 +186,4 @@ document.getElementById("prayerSaveButton").addEventListener("click",function(){
   }
 });
 
+*/
