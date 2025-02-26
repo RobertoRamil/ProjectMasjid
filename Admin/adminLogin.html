@@ -28,12 +28,12 @@
             <input type="text" name="username" id="username" required>
 
             <label for="password">Password:</label>
-            <input type="button" name="password" id="password" required>
+            <input type="password" name="password" id="password" required>
         </form>
             <button type="button" id="googleLogin">Login with Google</button>
             <button type="button" id="submit">Login</button>
             <button type="button" id="forgotPassword">Forgot Password</button>
-        
+            <div id="recaptcha-container"></div>
 
         <div id="modalOverlay" class="modal-overlay">
             <div class="modal" onclick="event.stopPropagation()">
@@ -43,13 +43,13 @@
 
             </div>
         </div>
-
+        
 
 
 
 
     </div>
-
+    
 </body>
 
 </html>

@@ -1,8 +1,11 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 
-import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, browserSessionPersistence, setPersistence, 
-  signInWithPopup, GoogleAuthProvider} from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
+import {
+  getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, browserSessionPersistence, setPersistence,
+  signInWithPopup, GoogleAuthProvider, RecaptchaVerifier, multiFactor, PhoneAuthProvider, PhoneMultiFactorGenerator,
+  signInWithPhoneNumber
+} from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
 
 import { getFirestore, collection, doc, getDoc, updateDoc, getDocs, arrayUnion } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js'
 // TODO: Add SDKs for Firebase products that you want to use
@@ -34,7 +37,8 @@ const resetSend = document.getElementById("resetSend");
 const forgotPassword = document.getElementById("forgotPassword");
 const modalOverlay = document.getElementById("modalOverlay")
 
-// Submit button
+
+// Manual Sign-In
 submit.addEventListener("click", (event) => {
   event.preventDefault();
 
@@ -47,8 +51,9 @@ submit.addEventListener("click", (event) => {
       return signInWithEmailAndPassword(auth, email, password);
     })
     .then((user) => {
-      console.log("Successful Login!");
-      window.location.href = "adminHome.html";
+      verifyAdminAndSignIn(user.user);
+      
+      //window.location.href = "adminHome.html";
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -97,39 +102,51 @@ modalOverlay.addEventListener("click", (event) => {
   }
 })
 
-const whitelistedAdmins = await getDocs(collection(db, "whitelistedAdmins"));
 
+const whitelistedAdmins = await getDocs(collection(db, "whitelistedAdmins"));
+window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+  'size': 'invisible',
+  'callback': (response) => {
+    // reCAPTCHA solved, allow signInWithPhoneNumber.
+    onSignInSubmit();
+  }
+});
+window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {});
+
+// Google Sign-In
 const googleLogin = document.getElementById("googleLogin");
 googleLogin.addEventListener("click", (event) => {
   event.preventDefault();
-
   signInWithPopup(auth, provider)
     .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      // The signed-in user info.
       const user = result.user;
-      // IdP data available using getAdditionalUserInfo(result)
-      // ...
-      const isAdmin = whitelistedAdmins.docs.some(doc => doc.data().email === user.email);
-      if (isAdmin) {
-        window.location.href = "adminHome.html";
-      } else {
-        alert("You are not authorized to access this page.");
-      }
-      //window.location.href = "adminHome.html";
+      verifyAdminAndSignIn(user);
     }).catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
-      alert("fail")
-      // ...
+      console.log(error);
     });
-})
+});
 
+// Phone Sign-In (After Google Sign-In & Manual Sign-In)
+async function verifyAdminAndSignIn(user) {
+  const isAdmin = whitelistedAdmins.docs.some(doc => doc.id === user.email);
+  if (isAdmin) {
+    const phoneNumber = whitelistedAdmins.docs.find(doc => doc.id === user.email).data().phoneNumber;
+    const appVerifier = window.recaptchaVerifier;
+    //const adminDocId = whitelistedAdmins.docs.find(doc => doc.id === user.email).id;
 
+    try {
+      const confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
+      const verificationCode = prompt("Please enter the verification code sent to your phone:");
+      const result = await confirmationResult.confirm(verificationCode);
+      const user = result.user;
+      //console.log("Phone number verified and user signed in:");
+      window.location.href = "adminHome.html";
+    } catch (error) {
+      grecaptcha.reset(window.recaptchaVerifier);
+      console.error("Error during phone number sign-in:", error);
+      alert("Error: Unable to sign in with phone number.");
+    }
+  } else {
+    alert("You are not authorized to access this page.");
+  }
+}
