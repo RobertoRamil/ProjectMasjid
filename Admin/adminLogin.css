@@ -52,8 +52,9 @@ button {
 }
 
 #forgot_password {
-    float: inline-start;
+    float: inline-end;
     width: 45%;
+    margin-left: 2%;
 
 }
 
