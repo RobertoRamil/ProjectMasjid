@@ -115,11 +115,11 @@
 /*This is the time inputs for the prayer times*/
     .time{
         font-size: 18px;
-        width: 100%;
     }
 
     .prayerTitle {
         margin-top:8%;
+        padding-bottom: 20px;
 
         text-align: center;
     }
@@ -188,22 +188,7 @@
         justify-self:center;
     }
 
-/*Close Button seen in special prayers*/
-.close_button{
-    margin-top: 0px;
-    background:none;
-    color:black;
 
-    cursor: pointer;
-
-    position: relative;
-    transform: translate(250%, 90%);
-
-}
-
-.close_button:hover{
-    background: #bbb;
-}
 
 /*Commenting out until used
 
