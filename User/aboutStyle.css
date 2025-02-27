@@ -7,12 +7,13 @@
 /*---------------information box (left)------------ */
 .information{
     float: left;
-    width: 50%;
+    width: 80%;
     padding: 10px;
     min-height: 200px;
-    box-shadow: 3px 3px 20px gray;
-    background-color: #40404093;
-    color: #ffffff;
+    background-color: white; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    
 }
 .information h2 {
     text-align: center;
@@ -70,16 +71,20 @@
 
 .Team{
     float: right;
-    width: 50%;
+    width: 80%;
+    min-width: 90%;
     padding: 10px;
     height: fit-content;
     min-height: 200px;
-    border: 1px solid #ece5e5;
+    background-color: white; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .Team .membersBox{
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
 }
 .Team .membersBox .member{
     padding-right: 30px;
