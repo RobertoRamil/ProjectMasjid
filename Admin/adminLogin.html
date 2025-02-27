@@ -12,8 +12,8 @@
 
 <header>
     <div id="header">
-        <a href="index.html">
-            <img src="https://github.com/RobertoRamil/ProjectMasjid/blob/main/logo2.png?raw=true" alt="logo of MMSC"
+        <a href="../index.html">
+            <img src="https://github.com/RobertoRamil/ProjectMasjid/blob/main/logo2.png?raw=true" id= "logo of MMSC"alt="logo of MMSC"
                 width="150" height="150">
         </a>
     </div>
@@ -29,10 +29,11 @@
 
             <label for="password">Password:</label>
             <input type="password" name="password" id="password" required>
-
-            <button type="submit" id="submit">Login</button>
-            <button type="button" id="forgotPassword">Forgot Password</button>
         </form>
+            <button type="button" id="googleLogin">Login with Google</button>
+            <button type="button" id="submit">Login</button>
+            <button type="button" id="forgotPassword">Forgot Password</button>
+            <div id="recaptcha-container"></div>
 
         <div id="modalOverlay" class="modal-overlay">
             <div class="modal" onclick="event.stopPropagation()">
@@ -42,13 +43,13 @@
 
             </div>
         </div>
-
+        
 
 
 
 
     </div>
-
+    
 </body>
 
 </html>
