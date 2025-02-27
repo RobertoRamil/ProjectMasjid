@@ -19,7 +19,9 @@
     <!-- Import Template System -->
     <script src="template.js" defer></script>
     <script src="User/header.js" defer></script>
+    <script type='module' src="User/headerScript.js"></script>
     <script src="User/footerScript.js" defer></script>
+
     <script type='module' src="User/firebase.js" defer></script>
 </head>
 
@@ -87,6 +89,7 @@
 
             // Load the new JS
             const script = document.createElement('script');
+            script.type="module";
             script.src = jsFile;  // Path to the new JS file (e.g., aboutScript.js)
             script.id = 'pageJS';  // Give it a unique ID to replace it later
             script.defer = true;   // Defer execution until the document is fully parsed
