@@ -7,8 +7,11 @@
         <title>About Page</title>
         <link id="pageCSS" rel="stylesheet" href="User/aboutStyle.css">
 
-        <!--This is the script used to automake the team members-->
+        <script src="firebase.js" type = "module" defer></script>
         <script src="aboutScript.js" defer></script>
+
+        <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js" type = "module" defer></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js" type = "module" defer></script>
 
         <!--Importing jquery to get the function that makes the header-->
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
@@ -59,8 +62,8 @@
 <div class="centeredRow">
     <!--Left box-->
         <div class="information">
-            <h2>*Title of the information here*</h2>
-            <p>The full text goes here.</p>
+            <h2 id = "abtHead"></h2>
+            <p id = abtBody></p>
         </div>
 </div>
 <div class="centeredRow">

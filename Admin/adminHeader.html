@@ -7,7 +7,8 @@
         <title>Admin Logo and Backdrop Upload</title>
         <!--CSS & Javscript-->
         <link rel="stylesheet" href="adminHeader.css">
-        <script src="adminHeader.js"></script>
+        <script src="adminHeader.js" defer ></script>
+        <script src="../User/firebase.js" type="module" defer></script>
 
     </head>
 
@@ -39,7 +40,7 @@
                 <img id="imagePreview" src="#" alt="Image Preview" style="display:none;">
             </div>
 
-            <button onclick="uploadImage()">Upload Image</button>
+            <button id="uploadButton">Upload Image</button>
             <p id="uploadStatus"></p>
 
         </div>

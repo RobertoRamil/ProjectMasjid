@@ -27,7 +27,6 @@ onAuthStateChanged(auth, (user) => {
     console.log("Page restricted until signed in");
   } else {
     // User is signed in, you can get the user ID if needed
-    console.log("Signed in as account Name:", user.displayName);
   }
 });
 // End: Redirect to login page if the user is not authenticated

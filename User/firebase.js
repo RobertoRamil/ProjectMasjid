@@ -1,7 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 
-import { getStorage, ref, getDownloadURL } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js';
+import { getStorage, ref, getDownloadURL, uploadBytes } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js';
 import { getFirestore, collection, doc, getDoc, updateDoc, getDocs, arrayUnion } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js'
+
 
 
 export const firebaseConfig = {
@@ -70,7 +71,54 @@ async function getPaypalBody(){
   return aboutBody;
 }
 
-//--------------------------------------------Setup for donate section--------------------------------------------------//
+//--------------------------------------------Setup for team members---------------------------------------------------
+async function getTeamNames(){
+  const teamRef = doc(db, "team", "team_members");
+  const teamSnap = await getDoc(teamRef); // Await the getDoc call
+  const teamNames = [];
+  //get all the team names from the database
+  if (teamSnap.exists()) {
+    const teamData = teamSnap.data();
+    if (teamData.teamNames) { 
+      teamData.teamNames.forEach((name) => {
+        teamNames.push(name);
+      });
+    }
+  }
+  //console.log(teamNames);
+  return teamNames;
+}
+
+async function getTeamPortraits(num_mems, memberNames){
+  //create array to store portraitURLs
+  const portraitURLs = [];
+  for(let i = 0; i < num_mems; i++){
+    console.log("Getting portrait for", memberNames[i]); // Debugging line
+    const portraitRef = ref(storage, `team_portraits/${memberNames[i]}.PNG`);
+    const portraitURL = await getDownloadURL(portraitRef); // Await the getDownloadURL call
+    //add portraitURL to an array
+    portraitURLs.push(portraitURL);
+  }
+  //console.log(portraitURLs);
+  return portraitURLs;
+}
+//--------------------------------------------End of setup for team members--------------------------------------------
+
+//--------------------------------------------Setup for about section--------------------------------------------------
+async function getAboutHeader(){
+  const aboutRef = doc(db, "about", "about_header");
+  const aboutSnap = await getDoc(aboutRef); // Await the getDoc call
+  const aboutHeader = aboutSnap.data().header;
+  return aboutHeader;
+}
+
+async function getAboutBody(){
+  const aboutRef = doc(db, "about", "about_body");
+  const aboutSnap = await getDoc(aboutRef); // Await the getDoc call
+  const aboutBody = aboutSnap.data().body;
+  return aboutBody;
+}
+//--------------------------------------------End of setup for about section-------------------------------------------
 const contactsRef = doc(db, "users", "userContacts");
 const contactsSnap = getDoc(contactsRef);
 
@@ -109,6 +157,74 @@ function signUpPhone(){
     }
     
 }
+
+async function getlinks() {
+  const linksColRef = collection(db, "Links");
+  try {
+    const snapshot = await getDocs(linksColRef);
+    let links = {};
+    snapshot.docs.forEach((doc) => {
+      links[doc.id] = doc.data().link;
+    });
+
+    if (links.facebook) {
+      document.getElementById('facebook_footer_link').href = links.facebook;
+      console.log("Facebook link set to:", links.facebook);
+    }
+    if (links.instagram) {
+      document.getElementById('instagram_footer_link').href = links.instagram;
+      console.log("Instagram link set to:", links.instagram);
+    }
+    if (links.youtube) {
+      document.getElementById('youtube_footer_link').href = links.youtube;
+      console.log("YouTube link set to:", links.youtube); 
+    }
+    console.log(links);
+  } catch (error) {
+    console.error("Error fetching links:", error);
+  }
+}
+
+async function uploadImage() {
+    const file = document.getElementById("imageUpload").files[0];
+    const imageType = document.getElementById("imageType").value;
+    if (!file) {
+        document.getElementById("uploadStatus").textContent = "Please select an image first.";
+        document.getElementById("uploadStatus").style.color = "red";
+        return;
+    }
+
+    let storagePath;
+    if (imageType === "logo") {
+        storagePath = 'HeaderPhotos/logo2.png';
+    } else if (imageType === "backdrop") {
+        storagePath = 'HeaderPhotos/FrontImage.png';
+    } else {
+        document.getElementById("uploadStatus").textContent = "Invalid image type selected.";
+        document.getElementById("uploadStatus").style.color = "red";
+        return;
+    }
+
+    const storageRef = ref(storage, storagePath);
+    try {
+        await uploadBytes(storageRef, file);
+        document.getElementById("uploadStatus").textContent = "Image uploaded successfully!";
+        document.getElementById("uploadStatus").style.color = "green";
+        document.getElementById("imagePreview").style.display = "none";
+        document.getElementById("imageUpload").value = "";
+    } catch (error) {
+        console.error("Error uploading image:", error);
+        document.getElementById("uploadStatus").textContent = "An error occurred. Please try again.";
+        document.getElementById("uploadStatus").style.color = "red";
+    }
+}
+
+window.getAboutHeader = getAboutHeader;
+window.getAboutBody = getAboutBody;
+window.getTeamNames = getTeamNames;
+window.getTeamPortraits = getTeamPortraits;
+window.uploadImage = uploadImage;
+window.getlinks = getlinks;
 window.signUpEmail = signUpEmail;
 window.signUpPhone = signUpPhone;
 window.setHeaderBackground = setHeaderBackground;
