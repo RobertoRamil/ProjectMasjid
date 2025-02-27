@@ -1,6 +1,11 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 
+import { getStorage, ref, getDownloadURL, uploadBytes } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js';
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, browserSessionPersistence, setPersistence }
+  from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
+
+
 import {
   getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, browserSessionPersistence, setPersistence,
   signInWithPopup, GoogleAuthProvider, RecaptchaVerifier, multiFactor, PhoneAuthProvider, PhoneMultiFactorGenerator,
@@ -24,7 +29,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth();
@@ -37,8 +42,24 @@ const resetSend = document.getElementById("resetSend");
 const forgotPassword = document.getElementById("forgotPassword");
 const modalOverlay = document.getElementById("modalOverlay")
 
+const storage = getStorage(app);
 
-// Manual Sign-In
+async function fetchLogo() {
+  console.log("fetchLogo function called"); // Debugging line
+  const storageRef = ref(storage, 'HeaderPhotos/logo2.png');
+  try {
+    const url = await getDownloadURL(storageRef);
+    console.log("Logo URL:", url); // Debugging line
+    document.getElementById('logo of MMSC').src = url;
+    console.log("Logo fetched and set successfully"); // Debugging line
+  } catch (error) {
+    console.error("Error fetching logo:", error);
+  }
+} 
+window.onload = function() {
+  fetchLogo();
+}
+
 submit.addEventListener("click", (event) => {
   event.preventDefault();
 
