@@ -2,8 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 
 import { getStorage, ref, getDownloadURL, uploadBytes } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js';
-import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, browserSessionPersistence, setPersistence }
-  from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
+
 
 
 import {

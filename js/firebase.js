@@ -244,3 +244,46 @@ getDocs(colRef)
     .catch(err => {
         console.log(err.message)
     })
+
+//This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.
+const prayerRef = doc(db, "prayerTimes", "Prayers");
+const prayerSnap = await getDoc(prayerRef);
+const prayerHourData = prayerSnap.data(); //Gets the data from the prayer database
+
+
+//This pulls the prayer times from the prayerTimes collection in firebase
+export async function pullPrayerTime(prayerName){
+  try{
+    const fieldCount = Object.keys(prayerHourData).length;//Gets the count of prayers in the database
+    let keys=Object.keys(prayerHourData); //Isolates data to prayer names
+    let info=Object.values(prayerHourData); //Isolates the data to the values
+
+    for(let i=0;i<fieldCount; i++){
+      if(keys[i]==prayerName){
+        let fullDate=info[i].toDate();
+        return(fullDate);
+      }
+    }
+  }catch (e) {
+    console.log("error getting prayer Times"+e);
+  }  
+}
+
+
+function createPrayerTime(prayerName, prayerNumber, prayerTimes){
+  let prayerTime;
+  let firebaseTimeStamp;
+  let currentDate=new Date();
+
+  if(prayerName.includes("Jumu'ah")){
+    prayerTime=document.getElementById(`sPrayerTime${prayerNumber}`).value;
+    let tempDate=new Date(prayerTime);
+    firebaseTimeStamp=Timestamp.fromDate(tempDate);
+  }else{
+    prayerTime=document.getElementById(`prayerTime${prayerNumber}`).value;
+    prayerTime=prayerTime.split(":");
+    firebaseTimeStamp=Timestamp.fromDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), prayerTime[0], prayerTime[1],0));
+  }
+
+  prayerTimes[prayerName] = firebaseTimeStamp;
+}

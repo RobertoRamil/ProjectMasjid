@@ -5,26 +5,27 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>About Page</title>
-        <link id="pageCSS" rel="stylesheet" href="User/aboutStyle.css">
+        <link id="pageCSS" rel="stylesheet" href="../css/aboutStyle.css">
 
-        <script src="firebase.js" type = "module" defer></script>
-        <script src="aboutScript.js" defer></script>
+        <script src="../js/firebase.js" type = "module" defer></script>
+        <script src="../js/aboutScript.js" defer></script>
 
         <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js" type = "module" defer></script>
         <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js" type = "module" defer></script>
 
-        <!--Importing jquery to get the function that makes the header-->
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
-        crossorigin="anonymous">
-        </script>
+        <!-- Import Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-        <script>
-            $(function(){
-                $('#header').load('User/header.html');
-                $('#footer').load('User/footer.html');
-            })
-        </script>
+        <!-- Bootstrap and jQuery -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+
+        <!-- Import Template System -->
+        <script src="../js/template.js" defer></script>
+        <script src="../js/header.js" defer></script>
+        <script type='module' src="../js/firebase.js" defer></script>
     </head>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -55,7 +56,9 @@
         });
     </script>
     <body>
-    <!--The header is inputted here-->
+    <!--Header-->
+    <div id="header"></div>
+    <!--Header-->
 
     <!--the title of the page-->
         <h2 class="Webpage-Tab-Title"> About</h2>
@@ -106,6 +109,9 @@
         
         <!-- footer added here -->
 
-        
+            <!-- Link to the JavaScript file -->
+    <script src="../js/footerScript.js" defer></script>
+    <script src = "../js/firebase.js" type="module" defer ></script>
+
     </body>
 </html>

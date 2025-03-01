@@ -1,3 +1,25 @@
+import { pullPrayerTime } from '../js/firebase.js';
+
+//announcment box auto makes the boxes
+function quotePanes(announcement_panes) {
+    const announcementGrid = document.getElementById("quoteRow");
+    for (let j = 0; j < announcement_panes; j++) {
+        // Create announcement box
+        const announcement = document.createElement("div");
+        announcement.classList.add("announcement");
+
+        // Create inner box for content
+        const boxInBox = document.createElement("div");
+        boxInBox.classList.add("inner-box");
+        boxInBox.textContent = "*Quote details go here*"; 
+        announcement.appendChild(boxInBox);
+
+        // Append announcement to grid
+        announcementGrid.appendChild(announcement);
+    }
+}
+  quotePanes(1);
+
 function prayerBoxEmotes(){
     //Grabs all of the prayer time hours based on the class name
     let prayerHour=document.getElementsByClassName("prayerHour");
@@ -149,12 +171,15 @@ function getDate(){
 getDate();
 
 
-
-
 // Alternative function for generating prayer boxes using prayerAmount
 let congregationAmount = 5;
 let congregationNames = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
-let congregationTimes = ["05:30", "12:45", "16:15", "18:30", "20:00"];
+let congregationTimes=[];
+
+for(let i=0; i<congregationNames.length; i++){
+    let timeTemp = await pullPrayerTime(congregationNames[i]);
+    congregationTimes[i] = timeTemp.toLocaleTimeString("en-US", {hour: 'numeric', minute: '2-digit'});   
+}
 
 let container = document.querySelector(".container"); // Selects the container div
 
@@ -177,7 +202,6 @@ for (let i = 0; i < congregationAmount; i++) {
     // Append box to the container
     container.appendChild(box);
 }
-
 
 
 
