@@ -65,6 +65,10 @@
     border-radius: 20px;
     background: linear-gradient(to right, #5560c4,#be469e,#f5b861);
 }
+.SocialMedia .youtube{
+    border-radius: 20px;
+    background: linear-gradient(to right, #b20000, #ffcccc);
+}
 
 
 /*---------------team member box (right box)------------ */
