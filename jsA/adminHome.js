@@ -40,6 +40,7 @@ document.getElementById("prayerSaveButton").addEventListener("click", function s
   const prayerAmount=document.getElementsByClassName("time").length;
   savePrayerTime(5);
   saveSPrayerTime(prayerAmount);
+  alert("Prayer Time submitted");
 
 });
 

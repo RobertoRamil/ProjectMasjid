@@ -345,7 +345,7 @@ async function createPrayerTime(prayerName, prayerNumber, prayerTimes){
     console.log(sPrayerTimes);
   
     try{
-      await setDoc(prayerSRef, sPrayerTimes);
+      setDoc(prayerSRef, sPrayerTimes);
     }catch(e){
       console.log("Error saving prayer times.",e);
       alert("All prayer hours must be submitted to update the prayer hours.");
