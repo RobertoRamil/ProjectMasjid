@@ -19,12 +19,12 @@
     #submit_announcement {
         width: 45%;
     }
-
 }
 
 @media screen and (max-width:1099px){
     #map_container{
-        max-width:95%;
+        max-width:95%;     
+
     }
 }
 
@@ -115,11 +115,11 @@
 /*This is the time inputs for the prayer times*/
     .time{
         font-size: 18px;
+        width:100%;
     }
 
     .prayerTitle {
         margin-top:8%;
-        padding-bottom: 20px;
 
         text-align: center;
     }
@@ -137,6 +137,10 @@
         margin-top: 10px;
     }
 
+    .sPrayerName{
+        padding:5px;
+    }
+
 /*This the dropdown box for the special prayer names*/
     .specialPrayerTime{
         width: fit-content;
@@ -145,6 +149,25 @@
 
         margin:10px;
     }
+
+    
+/*Close Button seen in special prayers*/
+.close_button{
+    margin-top: 0px;
+    background:none;
+    color:black;
+
+    cursor: pointer;
+
+    position: relative;
+    transform: translate(250%, 90%);
+
+}
+
+.close_button:hover{
+    background: #bbb;
+}
+
 
 /*Map section*/
     #map_container{

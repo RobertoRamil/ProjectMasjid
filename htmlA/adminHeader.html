@@ -15,13 +15,10 @@
 
     <body>            
         <div id="background_and_title">
+            <button onclick="darkSwitch()" id="darkModeToggle">&#9788</button>
+
             <button type="button" onclick="history.go(-1)"> < Back </button>
             <h2 id="update_image_visual_text"> Update Image </h2>
-
-
-            <button onclick="darkSwitch()">DarkMode</button>
-            For now I'm putting this dark mode here. this can be changed later.
-            Also, the coloring of all the pages will need to be redone later to make them look better.
         </div>
 
         <div id="background-upload-container">
@@ -33,14 +30,16 @@
                     <option value="backdrop">Backdrop</option>
                 </select>
             </div>
-
+            
             <!-- File input for image upload -->
             <input type="file" id="imageUpload" accept="image/*">
             <div class="preview-container">
                 <img id="imagePreview" src="#" alt="Image Preview" style="display:none;">
             </div>
-
+            
             <button id="uploadButton">Upload Image</button>
+            <button id="headerResetButton">Reset</button>
+
             <p id="uploadStatus"></p>
 
         </div>

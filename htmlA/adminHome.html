@@ -10,6 +10,8 @@
 
         <link rel="stylesheet" href="../cssA/adminHome.css">
         <script type="module" src="../jsA/adminHome.js"defer></script> 
+        <script type="module" src="../js/firebase.js"defer></script> 
+
 
         <script>
             $(function(){
@@ -63,7 +65,7 @@
                 </div>
                 <div>                 
                     <button id="addSPrayerRow">Add Prayer</button>
-                    <button id="prayerSaveButton"> Save </button> 
+                    <button id="prayerSaveButton" onclick="addPrayer()"> Save </button> 
                 </div>
             </div>
 

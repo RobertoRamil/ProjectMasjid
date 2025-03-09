@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 
 import { getStorage, ref, getDownloadURL, uploadBytes } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js';
-import { getFirestore, collection, doc, getDoc, updateDoc, getDocs, arrayUnion } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js'
+import { getFirestore, Timestamp, collection,setDoc, doc, getDoc, updateDoc, getDocs, arrayUnion } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js'
 
 
 
@@ -219,40 +219,14 @@ async function uploadImage() {
     }
 }
 
-window.getAboutHeader = getAboutHeader;
-window.getAboutBody = getAboutBody;
-window.getTeamNames = getTeamNames;
-window.getTeamPortraits = getTeamPortraits;
-window.uploadImage = uploadImage;
-window.getlinks = getlinks;
-window.signUpEmail = signUpEmail;
-window.signUpPhone = signUpPhone;
-window.setHeaderBackground = setHeaderBackground;
-window.fetchLogo = fetchLogo;
-window.fetchZelleLogo = fetchZelleLogo;
-window.getDonateBody = getDonateBody;
-window.getPaypalBody = getPaypalBody;
-
-getDocs(colRef)
-    .then((snapshot) => {
-        let users = []
-        snapshot.docs.forEach((doc) => {
-            users.push({ ...doc.data(), id: doc.id })
-        })
-        console.log(users)
-    })
-    .catch(err => {
-        console.log(err.message)
-    })
-
+//This pulls the prayer times from the prayerTimes collection in firebase
+async function pullPrayerTime(prayerName){
+  
 //This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.
-const prayerRef = doc(db, "prayerTimes", "Prayers");
+const prayerRef = doc(db, "prayerTimes", "prayerTime");
 const prayerSnap = await getDoc(prayerRef);
 const prayerHourData = prayerSnap.data(); //Gets the data from the prayer database
 
-
-//This pulls the prayer times from the prayerTimes collection in firebase
-export async function pullPrayerTime(prayerName){
   try{
     const fieldCount = Object.keys(prayerHourData).length;//Gets the count of prayers in the database
     let keys=Object.keys(prayerHourData); //Isolates data to prayer names
@@ -269,21 +243,144 @@ export async function pullPrayerTime(prayerName){
   }  
 }
 
+async function pullSPrayerTime(){
+  
+  //This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.
+  const prayerRef = doc(db, "prayerTimes", "specialPrayerTime");
+  const prayerSnap = await getDoc(prayerRef);
+  let prayerHourData = prayerSnap.data(); //Gets the data from the prayer database
 
-function createPrayerTime(prayerName, prayerNumber, prayerTimes){
-  let prayerTime;
+
+  var sortedData= Object.entries(prayerHourData).sort();
+
+    try{
+      const fieldCount = Object.keys(sortedData).length;//Gets the count of prayers in the database
+        let data=Object.values(sortedData); //Isolates the data to the values
+        let keys=[];
+        let info=[];
+
+
+      for(let i=0;i<fieldCount; i++){
+          info[i]=data[i][1].toDate();
+          keys[i]=sortedData[i][0]=data[i][0];
+      }
+       return([keys,info]);
+    }catch (e) {
+      console.log("error getting prayer Times"+e);
+    }  
+  }
+
+
+async function createPrayerTime(prayerName, prayerNumber, prayerTimes){
+  let prayerTime,sPrayerName;
   let firebaseTimeStamp;
   let currentDate=new Date();
 
-  if(prayerName.includes("Jumu'ah")){
-    prayerTime=document.getElementById(`sPrayerTime${prayerNumber}`).value;
+  if(prayerNumber>5){
+    let prayerTemp=prayerNumber-5;
+    prayerTime=document.getElementById(`sPrayerTime${prayerTemp}`).value;
+    sPrayerName=document.getElementById(`sPrayerName${prayerTemp}`).value;
     let tempDate=new Date(prayerTime);
     firebaseTimeStamp=Timestamp.fromDate(tempDate);
+    prayerTimes[sPrayerName] = firebaseTimeStamp;
   }else{
     prayerTime=document.getElementById(`prayerTime${prayerNumber}`).value;
     prayerTime=prayerTime.split(":");
     firebaseTimeStamp=Timestamp.fromDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), prayerTime[0], prayerTime[1],0));
+    prayerTimes[prayerName] = firebaseTimeStamp;
+  }
+}
+
+//Translating the prayer times to timestamps to put into database and then testing to push to the database.
+//If there are time slots present but not filled, it will not push all of the data and alert the user.
+//If it's a Jumu'ah prayer/speech it will translate the date value to timestamp to be stored.
+  //Else, it will grab the system's current day, month, and year at the time of pressing save to fill in those data points for the timestamp.
+
+  async function savePrayerTime(prayerAmount){
+    //This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.
+    const prayerRef = doc(db, "prayerTimes", "prayerTime");
+    const prayerSnap = await getDoc(prayerRef);
+
+    let prayerTimes={};
+  
+    for(let i=1; i<=prayerAmount;i++){ //Grabs the time slot's id number, associate it with a prayer name, grab that time's data 
+      switch(i){
+        case 1:
+          createPrayerTime("Fajr",1,prayerTimes);
+        break;
+        case 2:
+          createPrayerTime("Dhuhr",2,prayerTimes);
+          break;
+        case 3:
+          createPrayerTime("Asr",3,prayerTimes);
+          break;  
+        case 4:
+          createPrayerTime("Maghrib",4,prayerTimes);
+          break;
+        case 5:
+          createPrayerTime("Isha",5,prayerTimes);
+          break; 
+      }
+    }
+  
+    try{
+      setDoc(prayerRef, prayerTimes);
+    }catch(e){
+      console.log("Error saving prayer times.",e);
+      alert("All prayer hours must be submitted to update the prayer hours.");
+    }
   }
 
-  prayerTimes[prayerName] = firebaseTimeStamp;
-}
+  async function saveSPrayerTime(prayerAmount){
+    //This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.
+    const prayerSRef = doc(db, "prayerTimes", "specialPrayerTime");
+    const prayerSnap = await getDoc(prayerSRef);
+  
+    let sPrayerTimes={};
+  
+    for(let i=6; i<=prayerAmount;i++){ //Grabs the time slot's id number, associate it with a prayer name, grab that time's data 
+      createPrayerTime("",i,sPrayerTimes);
+    }
+
+    console.log(sPrayerTimes);
+  
+    try{
+      await setDoc(prayerSRef, sPrayerTimes);
+    }catch(e){
+      console.log("Error saving prayer times.",e);
+      alert("All prayer hours must be submitted to update the prayer hours.");
+    }
+  }
+
+
+window.getAboutHeader = getAboutHeader;
+window.getAboutBody = getAboutBody;
+window.getTeamNames = getTeamNames;
+window.getTeamPortraits = getTeamPortraits;
+window.uploadImage = uploadImage;
+window.getlinks = getlinks;
+window.signUpEmail = signUpEmail;
+window.signUpPhone = signUpPhone;
+window.setHeaderBackground = setHeaderBackground;
+window.fetchLogo = fetchLogo;
+window.fetchZelleLogo = fetchZelleLogo;
+window.getDonateBody = getDonateBody;
+window.getPaypalBody = getPaypalBody;
+window.pullPrayerTime = pullPrayerTime;
+window.pullSPrayerTime = pullSPrayerTime;
+
+window.savePrayerTime = savePrayerTime;
+window.saveSPrayerTime = saveSPrayerTime;
+
+
+getDocs(colRef)
+    .then((snapshot) => {
+        let users = []
+        snapshot.docs.forEach((doc) => {
+            users.push({ ...doc.data(), id: doc.id })
+        })
+        console.log(users)
+    })
+    .catch(err => {
+        console.log(err.message)
+    })

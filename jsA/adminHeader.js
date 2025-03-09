@@ -16,27 +16,48 @@ imageUpload.addEventListener("change", function () {
         reader.readAsDataURL(file);
     }
 });
-
-//Dark mode
-(function(){
-    var darkOn=localStorage.getItem("darkCookie");
-    var element=document.body;
-
-    if(darkOn==="true"){
-        element.classList.toggle("dark-mode");
-    }
-
-  })();
-
-function darkSwitch() {
-    var element = document.body;
-    var switchDark=element.classList.toggle("dark-mode");
-    document.cookie="darkCookie="+switchDark;
-    localStorage.setItem("darkCookie", switchDark);
-  }
-
 function handleUploadImage() {
     uploadImage();
 }
 
 uploadButton.addEventListener("click", handleUploadImage);
+
+//Reset the input for image input
+document.getElementById("headerResetButton").addEventListener("click", function (){
+    var imageInput=document.getElementById("imageUpload");
+    var imageInputPreview=document.getElementById("imagePreview");
+
+    imageInputPreview.style.display="none";
+    imageInput.value="";
+});
+
+
+//Dark mode
+(function(){
+    var element=document.body;
+    var darkOn=localStorage.getItem("darkCookie");
+    
+    if(darkOn==="true"){
+        element.classList.toggle("dark-mode");
+        var imageInput=document.getElementById("darkModeToggle");
+        imageInput.innerText=String.fromCodePoint("0x263E");   
+    }
+
+  })();
+
+function darkSwitch() {
+    var element=document.body;
+    var switchDark=element.classList.toggle("dark-mode");
+    
+    var imageInput=document.getElementById("darkModeToggle");
+
+
+    if(imageInput.innerText===String.fromCodePoint("0x263C")||switchDark){/*Sun=0x263C */
+        localStorage.setItem("darkCookie", true);
+        imageInput.innerText=String.fromCodePoint("0x263E");
+    }else{
+        localStorage.removeItem("darkCookie");
+        imageInput.innerText=String.fromCodePoint("0x263C");/* Moon=0x263E */
+    }
+  }
+
