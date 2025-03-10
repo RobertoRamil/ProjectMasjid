@@ -4,7 +4,7 @@ async function teamMems(){
   const memberGrid = document.getElementById("membersBox");
   const memberNames = await getTeamNames(); // Await the getTeamNames function
   const num_mems = memberNames.length;
-  //console.log("Number of team members:", num_mems); // Debug
+  console.log("Number of team members:", num_mems); // Debug
   //get the portrait URLs
   const portraitURLs = await getTeamPortraits(num_mems, memberNames); // Await the getTeamPort
   //console.log("Portrait URLs:", portraitURLs); // Debug
