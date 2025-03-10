@@ -107,7 +107,7 @@ To create content separation, use the class "centeredRow".
 .carousel-inner .carousel-item img {
     display: block;
     margin: auto;
-    max-width: 60%; /* Prevents the images from overflowing */
+    max-width: 97%; /* Prevents the images from overflowing */
     height: 61.9vw; /* Maintains the aspect ratio */
     border-radius: 8px;
 }
