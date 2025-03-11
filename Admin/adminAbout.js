@@ -220,8 +220,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("saveAbt").addEventListener("click", () => {
         // Save Left Box Content
         console.log("Saving Left Box Content...");
+        
         saveAbtHeader();
         saveAbtBody();
+        alert("Changes saved successfully!");
         
     });
 
