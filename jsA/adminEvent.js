@@ -173,8 +173,8 @@ export async function deleteEvent() {
   } else {
     alert('Event date and name are required to delete an event.');
   }
-  document.getElementById('event-date-input').value = '';
-  document.getElementById('event-name-input').value = '';
+  document.getElementById('event-date-delete').value = '';
+  document.getElementById('event-name-delete').value = '';
 }
 
 
