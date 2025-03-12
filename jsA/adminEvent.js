@@ -30,22 +30,69 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 // End: Redirect to login page if the user is not authenticated
-
-
-
-
-
 let currentDate = new Date();
-let events = {}; // Stores events as { "yyyy-mm-dd": ["Event 1", "Event 2"] }
+let monthEvents = []; // Stores events as [{date: "YYYY-MM-DD", data: {Event 1: "Time", Event 2: "Time"}}]
 
-function renderCalendar() {
+async function renderCalendar() {
   const calendar = document.getElementById('calendar');
+  const eventsDiv = document.getElementById('events');
+  
+  // Save the current scroll position
+  const scrollPosition = window.scrollY;
+
   calendar.innerHTML = '';
   const monthYear = document.getElementById('monthYear');
   const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
   const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
 
   monthYear.textContent = `${firstDay.toLocaleString('default', { month: 'long' })} ${currentDate.getFullYear()}`;
+
+  // Fetch events for the current month
+  const yearMonth = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-01`;
+  monthEvents = await getEventsByMonth(yearMonth);
+
+  eventsDiv.innerHTML = ''; // Clear previous events
+  eventsDiv.style.textAlign = 'center'; // Center align the events
+
+  // Fill Events Div
+  if (monthEvents.length === 0) {
+    eventsDiv.textContent = 'No events in month';
+  } else {
+    for (const eventObject of monthEvents) {
+      const eventDate = document.createElement('div');
+      eventDate.textContent = eventObject.date;
+      eventDate.style.textDecoration = 'underline'; // Underline the date
+      eventsDiv.appendChild(eventDate);
+
+      // Separate AM and PM events
+      const amEvents = [];
+      const pmEvents = [];
+
+      for (const [eventName, eventTime] of Object.entries(eventObject.data)) {
+        if (eventTime.includes('AM')) {
+          amEvents.push({ eventName, eventTime });
+        } else {
+          pmEvents.push({ eventName, eventTime });
+        }
+      }
+
+      // Append AM events first
+      amEvents.sort((a, b) => a.eventTime.localeCompare(b.eventTime));
+      for (const event of amEvents) {
+        const eventDetail = document.createElement('div');
+        eventDetail.textContent = `${event.eventName} at ${event.eventTime}`;
+        eventsDiv.appendChild(eventDetail);
+      }
+
+      // Append PM events next
+      pmEvents.sort((a, b) => a.eventTime.localeCompare(b.eventTime));
+      for (const event of pmEvents) {
+        const eventDetail = document.createElement('div');
+        eventDetail.textContent = `${event.eventName} at ${event.eventTime}`;
+        eventsDiv.appendChild(eventDetail);
+      }
+    }
+  }
 
   // Padding for days before the first day of the month
   for (let i = 0; i < firstDay.getDay(); i++) {
@@ -54,78 +101,88 @@ function renderCalendar() {
 
   for (let day = 1; day <= lastDay.getDate(); day++) {
     const date = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-    const eventList = events[date] || [];
+    const eventCount = getEventCountByDate(date);
     calendar.innerHTML += `
-      <div class="calendar-day" onclick="openPopup('${date}')">
+      <div class="calendar-day">
         <div>${day}</div>
-        ${eventList.length ? `<div class="event-circle">${eventList.length}</div>` : ''}
+        ${eventCount > 0 ? `<div class="event-circle">${eventCount}</div>` : ''}
       </div>
     `;
   }
+
+  // Restore the scroll position
+  window.scrollTo(0, scrollPosition);
 }
 
-function openPopup(date) {
-  document.getElementById('selectedDate').textContent = `Events on ${date}`;
-  document.getElementById('eventInput').value = '';
-  document.getElementById('eventPopup').style.display = 'block';
-  document.getElementById('overlay').style.display = 'block';
-
-  const eventList = document.getElementById('eventList');
-  eventList.innerHTML = '';
-  (events[date] || []).forEach((event, index) => {
-    eventList.innerHTML += `
-      <div class="event">
-        <span>${event}</span>
-        <button onclick="editEvent('${date}', ${index})">Edit</button>
-        <button onclick="deleteEvent('${date}', ${index})">Delete</button>
-      </div>
-    `;
-  });
-}
-
-function closePopup() {
-  document.getElementById('eventPopup').style.display = 'none';
-  document.getElementById('overlay').style.display = 'none';
-}
-
-function addEvent() {
-  const date = document.getElementById('selectedDate').textContent.split(' ')[2];
-  const eventInput = document.getElementById('eventInput');
-  const eventText = eventInput.value.trim();
-  if (!eventText) return;
-
-  if (!events[date]) events[date] = [];
-  events[date].push(eventText);
-  eventInput.value = '';
-  renderCalendar();
-  openPopup(date); // Refresh popup
-}
-
-function editEvent(date, index) {
-  const newEvent = prompt("Edit the event:", events[date][index]);
-  if (newEvent !== null) {
-    events[date][index] = newEvent.trim();
-    renderCalendar();
-    openPopup(date);
-  }
-}
-
-function deleteEvent(date, index) {
-    events[date].splice(index, 1);
-    if (events[date].length === 0) delete events[date];
-    renderCalendar();
-    openPopup(date);
-  
-}
-
-function prevMonth() {
+export function prevMonth() {
   currentDate.setMonth(currentDate.getMonth() - 1);
   renderCalendar();
 }
 
-function nextMonth() {
+export function nextMonth() {
   currentDate.setMonth(currentDate.getMonth() + 1);
   renderCalendar();
 }
 
+function getEventCountByDate(date) {
+  const eventObject = monthEvents.find(event => event.date === date);
+  if (eventObject) {
+    //console.log(Object.keys(eventObject.data).length)
+    return Object.keys(eventObject.data).length;
+  }
+  return 0;
+}
+
+export async function addEvent() {
+  const eventDate = document.getElementById('event-date-input').value;
+  const eventName = document.getElementById('event-name-input').value.trim();
+  let eventTime = document.getElementById('event-time-input').value;
+  const [hours, minutes] = eventTime.split(':');
+  const period = hours >= 12 ? 'PM' : 'AM';
+  const adjustedHours = hours % 12 || 12;
+  eventTime = `${adjustedHours}:${minutes} ${period}`;
+
+  console.log(eventTime);
+  if (eventDate && eventName && eventTime) {
+    try {
+      await addEventToFirebase(eventDate, eventName, eventTime);
+      renderCalendar(); // Re-render the calendar to show the new event
+    } catch (error) {
+      console.error('Error adding event:', error);
+      alert('Failed to add event. Please try again.');
+    }
+  } else {
+    alert('Please fill in all fields.');
+  }
+  document.getElementById('event-date-input').value = '';
+  document.getElementById('event-name-input').value = '';
+  document.getElementById('event-time-input').value = '';
+}
+
+export async function deleteEvent() {
+  const eventDate = document.getElementById('event-date-delete').value;
+  const eventName = document.getElementById('event-name-delete').value;
+  if (eventDate && eventName) {
+    try {
+      await deleteEventFromFirebase(eventDate, eventName);
+      renderCalendar(); // Re-render the calendar to reflect the deleted event
+    } catch (error) {
+      console.error('Error deleting event:', error);
+      alert('Failed to delete event. Please try again.');
+    }
+  } else {
+    alert('Event date and name are required to delete an event.');
+  }
+  document.getElementById('event-date-input').value = '';
+  document.getElementById('event-name-input').value = '';
+}
+
+
+// Ensure these functions are accessible globally
+window.nextMonth = nextMonth;
+window.prevMonth = prevMonth;
+window.addEvent = addEvent;
+window.deleteEvent = deleteEvent;
 renderCalendar();
+
+
