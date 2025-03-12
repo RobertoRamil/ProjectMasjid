@@ -54,7 +54,7 @@
         
     }
 
-    #announcementText{
+    #announcementText, #quoteText{
         position:relative;
 
         font-size: large;

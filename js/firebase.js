@@ -219,6 +219,38 @@ async function uploadImage() {
     }
 }
 
+const announcementRef = doc(db, "announcements", "announcement");
+
+
+function addAnnouncement(){
+   const announcementText = document.getElementById("announcementText").value;
+    updateDoc(announcementRef, {text: arrayUnion(announcementText)})
+    alert("Announcement posted");
+    announcementPanes(5);
+
+}
+
+async function getAnnouncements(){
+  const announcementSnap = await getDoc(announcementRef);
+  return announcementSnap.data();
+}
+
+const quoteRef = doc(db, "quotes", "quote");
+
+function addQuotes(){
+  const quoteText = document.getElementById("quoteText").value;
+   updateDoc(quoteRef, {text: arrayUnion(quoteText)})
+   alert("Quote posted");
+   quotePanes(5);
+
+}
+
+async function getQuotes(){
+  const quoteSnap = await getDoc(quoteRef);
+  console.error(quoteSnap.data());
+  return quoteSnap.data();
+}
+
 window.getAboutHeader = getAboutHeader;
 window.getAboutBody = getAboutBody;
 window.getTeamNames = getTeamNames;
@@ -232,6 +264,11 @@ window.fetchLogo = fetchLogo;
 window.fetchZelleLogo = fetchZelleLogo;
 window.getDonateBody = getDonateBody;
 window.getPaypalBody = getPaypalBody;
+window.addAnnouncement = addAnnouncement;
+window.getAnnouncements = getAnnouncements;
+window.addQuotes = addQuotes;
+window.getQuotes = getQuotes;
+
 
 getDocs(colRef)
     .then((snapshot) => {
@@ -239,10 +276,8 @@ getDocs(colRef)
         snapshot.docs.forEach((doc) => {
             users.push({ ...doc.data(), id: doc.id })
         })
-        console.log(users)
     })
     .catch(err => {
-        console.log(err.message)
     })
 
 //This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.

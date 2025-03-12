@@ -7,6 +7,7 @@
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"> </script>
+        <script type='module' src="/js/firebase.js" defer></script>
 
         <link rel="stylesheet" href="../cssA/adminHome.css">
         <script type="module" src="../jsA/adminHome.js"defer></script> 
@@ -67,24 +68,58 @@
                 </div>
             </div>
 
-            <div id="quoteChange" class="Announce_Background">
-                <h2>Change Quote</h2>
-                <form id = "quoteForm">
-                    <label for="quoteInput">Type quote here:</label>
-                    <input type="text" id="quoteInput">
-                    <button type="submit" id="submit_announcement">Post Quote</button>
-                </form>
+            <div id="Announcements-container" class="Announce_Background">
+                <h2>Add Quote</h2>
+               
+                    <!-- Commenting this out until used
+                        <p id="errorMessage"></form>
+                    -->
+                    <label for="quoteText">Type quote information here:</label>
+                    <textarea id="quoteText" required></textarea>
+                    <button onclick="addQuotes()" id="submit_quote">Post Quote</button>
+                    <div class="centeredRow">
+                        <div class="box">
+                        <h1 id="heading">Quotes</h1>
+                        <div class="quote-row" id="quoteRow"></div>
+
+
+                    </div>
+                    <!--
+                    This I feel needs more working on.
+                    A remove quote doesn't do anything with the current thing being
+                    only a input box. I think this should be a seperate section that has all the
+                    current quotes that can be edited. Something like the calender does, but for the quotes.
+
+
+                   
+                        <button type="button" id="remove_mode">Remove an quote</button>
+           
+                   
+                    also whats the point of the save when you have a post
+
+
+                        <button type="submit">Save Changes</button>      
+                   
+                    -->
+                </div>
+
             </div>
 
             <div id="Announcements-container" class="Announce_Background">
                 <h2>Add Announcement</h2>
-                <form id = "announcementForm">
+                
                     <!-- Commenting this out until used
                         <p id="errorMessage"></form>
                     -->
                     <label for="announcementText">Type announcement information here:</label>
                     <textarea id="announcementText" required></textarea>
-                    <button type="submit" id="submit_announcement">Post Announcement</button>
+                    <button onclick="addAnnouncement()" id="submit_announcement">Post Announcement</button>
+                    <div class="centeredRow"> 
+                        <div class="box">
+                        <h1 id="heading">Announcements</h1>
+                        <div class="announcement-row" id="announcementRow"></div>
+
+                    </div>
                     <!--
                     This I feel needs more working on. 
                     A remove announcement doesn't do anything with the current thing being
@@ -100,7 +135,7 @@
                         <button type="submit">Save Changes</button>       
                     
                     -->
-                </form>
+                
             </div>
             
         </div>

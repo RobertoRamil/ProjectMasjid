@@ -106,3 +106,48 @@ function getDate() {
 }
 getDate();
 
+async function announcementPanes(announcement_panes) {
+  const announcementGrid = document.getElementById("announcementRow");
+  $(announcementGrid).empty();
+  let announcements = (await getAnnouncements()).text;
+  for (let j = 0; j < announcements.length; j++) {
+    console.error(announcements[j]);
+      // Create announcement box
+      const announcement = document.createElement("div");
+      announcement.classList.add("announcement");
+
+      // Create inner box for content
+      const boxInBox = document.createElement("div");
+      boxInBox.classList.add("inner-box");
+      boxInBox.textContent = announcements[j]; 
+      announcement.appendChild(boxInBox);
+
+      // Append announcement to grid
+      announcementGrid.appendChild(announcement);
+  }
+}
+announcementPanes(5);
+window.announcementPanes = announcementPanes;
+//announcment box auto makes the boxes
+async function quotePanes(quote_panes) {
+  const quoteGrid = document.getElementById("quoteRow");
+  $(quoteGrid).empty();
+  let quotes = (await getQuotes()).text;
+  for (let j = 0; j < quotes.length; j++) {
+      // Create quote box
+      const quote = document.createElement("div");
+      quote.classList.add("quote");
+
+      // Create inner box for content
+      const boxInBox = document.createElement("div");
+      boxInBox.classList.add("inner-box");
+      console.error(quotes[j]);
+      boxInBox.textContent = quotes[j]; 
+      quote.appendChild(boxInBox);
+
+      // Append quote to grid
+      quoteGrid.appendChild(quote);
+  }
+}
+quotePanes(1);
+window.quotePanes = quotePanes;

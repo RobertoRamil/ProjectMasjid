@@ -1,21 +1,24 @@
 import { pullPrayerTime } from '../js/firebase.js';
 
 //announcment box auto makes the boxes
-function quotePanes(announcement_panes) {
-    const announcementGrid = document.getElementById("quoteRow");
-    for (let j = 0; j < announcement_panes; j++) {
-        // Create announcement box
-        const announcement = document.createElement("div");
-        announcement.classList.add("announcement");
+async function quotePanes(quote_panes) {
+    const quoteGrid = document.getElementById("quoteText");
+    console.error("pane");
+    let quotes = (await getQuotes()).text;
+    for (let j = 0; j < quotes.length; j++) {
+        // Create quote box
+        const quote = document.createElement("div");
+        quote.classList.add("quote");
 
         // Create inner box for content
         const boxInBox = document.createElement("div");
         boxInBox.classList.add("inner-box");
-        boxInBox.textContent = "*Quote details go here*"; 
-        announcement.appendChild(boxInBox);
+        console.error(quotes[j]);
+        boxInBox.textContent = quotes[j]; 
+        quote.appendChild(boxInBox);
 
-        // Append announcement to grid
-        announcementGrid.appendChild(announcement);
+        // Append quote to grid
+        quoteGrid.appendChild(quote);
     }
 }
   quotePanes(1);
@@ -121,24 +124,26 @@ function convertSpace(event){
 }    
 
 //announcment box auto makes the boxes
-function announcementPanes(announcement_panes) {
-    const announcementGrid = document.getElementById("announcementRow");
-    for (let j = 0; j < announcement_panes; j++) {
-        // Create announcement box
-        const announcement = document.createElement("div");
-        announcement.classList.add("announcement");
+async function quotePanes(quote_panes) {
+    const quoteGrid = document.getElementById("quoteRow");
+    let quotes = (await getquotes()).text;
+    for (let j = 0; j < quotes.length; j++) {
+        // Create quote box
+        const quote = document.createElement("div");
+        quote.classList.add("quote");
 
         // Create inner box for content
         const boxInBox = document.createElement("div");
         boxInBox.classList.add("inner-box");
-        boxInBox.textContent = "*Announcement details go here*"; 
-        announcement.appendChild(boxInBox);
+        console.error(quotes[j]);
+        boxInBox.textContent = quotes[j]; 
+        quote.appendChild(boxInBox);
 
-        // Append announcement to grid
-        announcementGrid.appendChild(announcement);
+        // Append quote to grid
+        quoteGrid.appendChild(quote);
     }
 }
-  announcementPanes(5);
+  quotePanes(5);
 
 //prayer time to auto get the current date on the system
 function getDate(){
