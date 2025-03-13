@@ -1,6 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
-  checkAuth();
-});
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAuth, onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
 import { getFirestore, doc, updateDoc } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
@@ -25,6 +22,21 @@ const auth = getAuth();
 const db = getFirestore(app);
 
 const storage = getStorage(app);
+// Check if the user is authenticated
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    // User is not signed in, redirect to login page
+    window.location.href = "adminLogin.html";
+    console.log("Page restricted until signed in");
+  } else {
+
+  }
+});
+// End: Redirect to login page if the user is not authenticated
+
+
+
+
 
 /*This shows the preview of the image uploaded*/
 zelleSubmitImg.onchange = evt => {

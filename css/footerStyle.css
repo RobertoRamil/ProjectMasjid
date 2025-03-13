@@ -54,14 +54,13 @@
     text-decoration: none;
     margin: 5px 0;
     display: flex;
-    padding-left: 13px;
     align-items: center;
     transition: transform 0.2s;
 }
 
 .footer-links a:hover {
     color: #4CAF50;
-    transform: translateX(5px);
+    transform: translateX(20px);
 }
 
 .footer-links a::before {
@@ -100,7 +99,7 @@
 .footer-contact {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     margin: 10px 0;
 }
 
@@ -119,7 +118,7 @@
 
 .footer-contact a:hover {
     color: #4CAF50;
-    transform: translateX(5px);
+    transform: translateX(20px);
 }
 
 /* Copyright text styling */

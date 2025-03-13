@@ -5,25 +5,16 @@ const yearElement = document.getElementById('current-year');
 const year = new Date().getFullYear();
 
 // "Back to Top" button in the footer
-//const backToTopButton = document.querySelector('.back-to-top');
-
-
-function scrollToTop() {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"  
-    });
-  }
+const backToTopButton = document.querySelector('.back-to-top');
 
 // Scroll back to top when button is clicked
-/*
 backToTopButton.addEventListener('click', () => {
     window.scrollTo({
         top: 0,
         behavior: 'smooth'
     });
 });
-*/
-//window.onload = function() {
- //   getlinks();
-//};
+
+window.onload = function() {
+    getlinks();
+};
