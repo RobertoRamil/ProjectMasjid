@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>    
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!--Title is what chrome shows on top-->
-        <title>Admin Event</title>
-        <!--CSS & Javascript-->
-        <link rel="stylesheet" href="../cssA/adminEvent.css">
 
-        <script type="module" src="../jsA/adminEvent.js" defer></script>
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"> </script>
-        <!--This imports the codes of the adminHeader (including whatever is imported in the header HTML file)-->
-        <script defer>
-            $(function(){
-                $('#header').load('adminHeader.html');
-            })
-        </script>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Title is what chrome shows on top-->
+    <title>Admin Event</title>
+    <!--CSS & Javascript-->
+    <link rel="stylesheet" href="../cssA/adminEvent.css">
+    <script src="../js/firebase.js" type="module" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"> </script>
+    <!--This imports the codes of the adminHeader (including whatever is imported in the header HTML file)-->
+    <script defer>
+        $(function () {
+            $('#header').load('adminHeader.html');
+        })
+    </script>
+    <script src="../jsA/adminEvent.js" type="module" defer></script>
+</head>
 
-    <header>
-        <div id="header"></div>
-    </header>
+<header>
+    <div id="header"></div>
+</header>
 
-    <body>   
-        <div id = "toggle_news_signup">
-            <strong>Newsletter Signup </strong>
-            <input type="checkbox" class="toggle" id="newspaper_toggle"/>
-        </div>           
-        <div id="Edit_newsLetter">
-            <!-- commenting out cuz its not used rn
+<body>
+    <div id="toggle_news_signup">
+        <strong>Newsletter Signup </strong>
+        <input type="checkbox" class="toggle" id="newspaper_toggle" />
+    </div>
+    <div id="Edit_newsLetter">
+        <!-- commenting out cuz its not used rn
             
             <p id="errorMessage"></p>
                         
@@ -37,50 +39,78 @@
                 color: red;
                 text-align: center;
             }
-            -->        
-            <!--Information section-->
-            <div id = "newsletter_info">
-                <p>Edit the newsletter info section here</p>
-                <textarea id = "info_box" name="ibox" ></textarea>
-                <button onclick = "uploadInfoBox()" id= "infoUp_button">Save text</button>
-            </div>
+            -->
+        <!--Information section-->
+        <div id="newsletter_info">
+            <p>Edit the newsletter info section here</p>
+            <textarea id="info_box" name="ibox"></textarea>
+            <button onclick="uploadInfoBox()" id="infoUp_button">Save text</button>
+        </div>
 
-            <!--Upload File-->
-            <div id = "newsletter_center">
-                <p>Upload and send newsletters <strong><br/>(only ".pdf" files)</strong></p>
-                <input type="file" class ="news_upload" id = "newsUp_field" accept = ".pdf">
-                <div id = "button_holder">
-                    <!-- What is the point of the save news letter
+        <!--Upload File-->
+        <div id="newsletter_center">
+            <p>Upload and send newsletters <strong><br />(only ".pdf" files)</strong></p>
+            <input type="file" class="news_upload" id="newsUp_field" accept=".pdf">
+            <div id="button_holder">
+                <!-- What is the point of the save news letter
                     <button onclick = "saveNewsLetter()" id = "newsUp_button">Save newsletter</button>
                     -->
-                    <button onclick = "sendNewsLetter()" id = "newsSend_button">Send newsletter</button>
-                </div>
-            </div> 
-        </div>
-
-        <div id="calendar-box">
-            <div class="cal_header">
-                <button onclick="prevMonth()">Previous</button>
-                <h2 id="monthYear"></h2>
-                <button onclick="nextMonth()">Next</button>
+                <button onclick="sendNewsLetter()" id="newsSend_button">Send newsletter</button>
             </div>
-    
-            <div class="calendar" id="calendar"></div>
-    
-            <button id="saveButton">Save</button>
         </div>
-    
-        <!-- Event Popup -->
-        <div id="eventPopup" class="event-popup" style="display: none;">
-          <h3 id="selectedDate"></h3>
-          <input type="text" id="eventInput" placeholder="Add or edit an event" />
-           <br>
-          <button onclick="addEvent()" class="eventPopup_button">Add Event</button>
-          <div class="event-list" id="eventList"></div>
-          <button onclick="closePopup()" class="eventPopup_button">Close</button>
+    </div>
+
+    <div id="calendar-box">
+        <div class="cal_header">
+            <button onclick="prevMonth()">Previous</button>
+            <h2 id="monthYear"></h2>
+            <button onclick="nextMonth()">Next</button>
         </div>
 
-        <div id="overlay" class="overlay" style="display: none;" onclick="closePopup()">
-        </div>        
+        <div class="calendar" id="calendar"></div>
+    </div>
+    <div id="event-box" class="event-box">
+        <h3 class="old-standard-tt-bold">Event List</h3>
+        <div id="events">
+
+        </div>
+
+        <ul id="event-list" class="old-standard-tt-regular"></ul>
+    </div>
+    <div id="event-input">
+        <h3>Add New Event</h3>
+        <div style="display: flex; gap: 10px;">
+            <div>
+                <label for="event-date-input">Event Date:</label>
+                <input type="date" id="event-date-input" name="event-date-input" pattern="\d{4}-\d{2}-\d{2}">
+            </div>
+            <div>
+                <label for="event-name-input">Event Name:</label>
+                <input type="text" id="event-name-input" name="event-name-input">
+            </div>
+            <div style="align-self: flex-end;"> at </div>
+            <div>
+                <label for="event-time-input">Time:</label>
+                <input type="time" id="event-time-input" name="event-time-input" step="900">
+            </div>
+        </div>
+        <button onclick="addEvent()">Add Event</button>
+    </div>
+    <div id="event-delete"></div>
+        <h3>Delete Event</h3>
+        <div style="display: flex; gap: 10px;">
+            <div>
+                <label for="event-date-delete">Event Date:</label>
+                <input type="date" id="event-date-delete" name="event-date-delete" pattern="\d{4}-\d{2}-\d{2}">
+            </div>
+            <div>
+                <label for="event-name-delete">Event Name:</label>
+                <input type="text" id="event-name-delete" name="event-name-delete">
+            </div>
+        </div>
+        <button onclick="deleteEvent()">Delete Event</button>
+    </div>
+    
 </body>
+
 </html>

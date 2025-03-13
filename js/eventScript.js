@@ -1,8 +1,3 @@
-//Connect to Firebase
-//import { arrayUnion } from "firebase/firestore";
-//const {arrayUnion, doc, updateDoc} = require("firebase/firestore");
-//Continue
-
 let currentDate = new Date();
 let monthEvents = []; // Stores events as [{date: "YYYY-MM-DD", data: {Event 1: "Time", Event 2: "Time"}}]
 
@@ -68,8 +63,6 @@ async function renderCalendar() {
       }
     }
   }
-  console.log(monthEvents);
-  getEventCountByDate("2025-03-07");
 
   // Padding for days before the first day of the month
   for (let i = 0; i < firstDay.getDay(); i++) {
@@ -80,7 +73,7 @@ async function renderCalendar() {
     const date = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
     const eventCount = getEventCountByDate(date);
     calendar.innerHTML += `
-      <div class="calendar-day" onclick="fetchAndPrintEvents('${date}')">
+      <div class="calendar-day">
         <div>${day}</div>
         ${eventCount > 0 ? `<div class="event-circle">${eventCount}</div>` : ''}
       </div>
@@ -98,6 +91,19 @@ function nextMonth() {
   renderCalendar();
 }
 
+
+function getEventCountByDate(date) {
+  const eventObject = monthEvents.find(event => event.date === date);
+  if (eventObject) {
+    //console.log(Object.keys(eventObject.data).length)
+    return Object.keys(eventObject.data).length;
+  }
+  return 0;
+}
+
+renderCalendar();
+
+/*
 async function fetchAndPrintEvents(date) {
   try {
     const result = await getEventsByDate(date);
@@ -108,17 +114,6 @@ async function fetchAndPrintEvents(date) {
     console.error(`Error fetching events for ${date}:`, error);
   }
 }
-
-function getEventCountByDate(date) {
-  const eventObject = monthEvents.find(event => event.date === date);
-  if (eventObject) {
-    console.log(Object.keys(eventObject.data).length)
-    return Object.keys(eventObject.data).length;
-  }
-  return 0;
-}
-
-renderCalendar();
-
+*/
 /*----Everything here is used for email and phone signup----*/
 //IMPORTANT note, we need to make a function to connect to the database first (This should be done anyway to support calendar events)
