@@ -134,6 +134,44 @@ async function getAboutBody(){
   return aboutBody;
 }
 //--------------------------------------------End of setup for about section-------------------------------------------
+
+//--------------------------------------------Setup for event section--------------------------------------------------//
+
+
+async function getEventsByDate(date) {
+  const eventRef = doc(db, "calendarDates", date);
+  try {
+    const eventSnap = await getDoc(eventRef);
+    if (eventSnap.exists()) {
+      return eventSnap.data();
+    } else {
+      //console.log("No events found for the given date.");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching events:", error);
+    return null;
+  }
+}
+
+async function getEventsByMonth(date) {
+  const [year, month] = date.split('-');
+  const events = [];
+  try {
+    const snapshot = await getDocs(collection(db, "calendarDates"));
+    snapshot.forEach(doc => {
+      const docDate = doc.id.split('-');
+      if (docDate[0] === year && docDate[1] === month) {
+        events.push({ date: doc.id, data: doc.data() });
+      }
+    });
+    return events;
+  } catch (error) {
+    console.error("Error fetching events by month:", error);
+    return [];
+  }
+}
+//--------------------------------------------End of setup for event section-------------------------------------------//
 const contactsRef = doc(db, "users", "userContacts");
 const contactsSnap = getDoc(contactsRef);
 
@@ -248,6 +286,9 @@ window.fetchZelleLogo = fetchZelleLogo;
 window.getDonateBody = getDonateBody;
 window.getPaypalBody = getPaypalBody;
 window.checkAuth = checkAuth; 
+window.getEventsByDate = getEventsByDate;
+window.getEventsByMonth = getEventsByMonth;
+
 
 getDocs(colRef)
     .then((snapshot) => {
@@ -255,7 +296,6 @@ getDocs(colRef)
         snapshot.docs.forEach((doc) => {
             users.push({ ...doc.data(), id: doc.id })
         })
-        console.log(users)
     })
     .catch(err => {
         console.log(err.message)
@@ -303,3 +343,4 @@ function createPrayerTime(prayerName, prayerNumber, prayerTimes){
 
   prayerTimes[prayerName] = firebaseTimeStamp;
 }
+

@@ -27,8 +27,7 @@
     <body>
         <div id="page_content">
             <form id="donate_about">
-                <!--Later replace the placeholder text to take from the database of the current about-->
-                <textarea placeholder="Edit Donation's about section"></textarea>
+                <textarea id="donate_about_text" placeholder="Edit Donation's about section"></textarea>
                 <br>
                 <button type="submit">Convert Changes</button>
             </form>
@@ -36,27 +35,25 @@
             <div id="donate_buttons">       
                 <form id="paypal">
                     <b>Turn off Paypal </b>      
-                    <!--Add thing that actually removes the image-->
                     <input type="checkbox" class="toggle"/>
                     <br>
-                    <!--Later replace the placeholder text with the current donation link-->
-                    <input type="url" placeholder="current URL" id="paypalURL">
+                    <input type="url" id="paypalURL">
                     <br>
-                    <button type="submit" >Update Paypal Link</button>
+                    <button id = "paypalupdate" type="submit" >Update Paypal Link</button>
                 </form>
 
                 <br>
 
                 <form id="zelle">
                     <b>Turn off Zelle </b>      
-                    <!--Add thing that actually removes the image-->
                     <input type="checkbox" class="toggle"/>
                     <br>
-                    <form id="zelleSubmit">
-                        <input type="file" placeholder="current URL" id="zelleSubmitImg" accept="image/*"/>
-                        <br>
-                        <img id="zelle_preview" src=""/>
-                    </form>
+                    <input type="file" placeholder="current URL" id="zelleSubmitImg" accept="image/*"/>
+                    <br>
+                    
+                    <img id="zelle_preview" src=""
+                         style="max-width: 300px; display: block; margin-top: 10px;"/>
+                    
                     <button type="submit">Update Zelle Link</button>
                 </form>
             </div>
