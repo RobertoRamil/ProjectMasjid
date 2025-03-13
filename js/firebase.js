@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebas
 
 import { getStorage, ref, getDownloadURL, uploadBytes } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js';
 import { getFirestore, collection, doc, getDoc, updateDoc, getDocs, arrayUnion } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js'
-
+import { getAuth, onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
 
 
 export const firebaseConfig = {
@@ -16,6 +16,21 @@ export const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
+const auth = getAuth();
+
+function checkAuth(){
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      // User is not signed in, redirect to login page
+      window.location.href = "adminLogin.html";
+      console.log("Page restricted until signed in");
+    } else {
+      // User is signed in, you can get the user ID if needed
+      console.log("Signed in as account Name:", user.displayName);
+    }
+  });
+}
 const db = getFirestore(app);
 const storage = getStorage(app);
 
@@ -270,8 +285,10 @@ window.fetchLogo = fetchLogo;
 window.fetchZelleLogo = fetchZelleLogo;
 window.getDonateBody = getDonateBody;
 window.getPaypalBody = getPaypalBody;
+window.checkAuth = checkAuth; 
 window.getEventsByDate = getEventsByDate;
 window.getEventsByMonth = getEventsByMonth;
+
 
 getDocs(colRef)
     .then((snapshot) => {
