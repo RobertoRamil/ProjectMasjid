@@ -1,12 +1,12 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 
-import { getStorage, ref, getDownloadURL, uploadBytes } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js';
+import { getStorage, ref, getDownloadURL, uploadBytes, listAll } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js';
 import { getFirestore, collection, doc, getDoc, updateDoc, getDocs, arrayUnion } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js'
 
 
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyChNmvSjjLzXfWeGsKHebXgGq_AMUdKzHo",
+  apiKey: "AIzaSyChNmvSjjLzXfWeGsKHebXgq_AMUdKzHo",
   authDomain: "project-musjid.firebaseapp.com",
   projectId: "project-musjid",
   storageBucket: "project-musjid.firebasestorage.app",
@@ -201,6 +201,7 @@ async function getlinks() {
   try {
     const snapshot = await getDocs(linksColRef);
     let links = {};
+    console.log("Fetching links..."); // Debugging line
     snapshot.docs.forEach((doc) => {
       links[doc.id] = doc.data().link;
     });
@@ -257,6 +258,38 @@ async function uploadImage() {
     }
 }
 
+export async function fetchCarouselImages() {
+  const storageRef = ref(storage, 'Slideshow');
+  try {
+    const listResult = await listAll(storageRef);
+    const imageUrls = await Promise.all(
+      listResult.items.map(itemRef => getDownloadURL(itemRef))
+    );
+    updateCarousel(imageUrls);
+  } catch (error) {
+    console.error("Error fetching carousel images:", error);
+  }
+}
+
+function updateCarousel(imageUrls) {
+  const carouselInner = document.querySelector('.carousel-inner');
+  const carouselIndicators = document.querySelector('.carousel-indicators');
+  carouselInner.innerHTML = '';
+  carouselIndicators.innerHTML = '';
+
+  imageUrls.forEach((url, index) => {
+    const isActive = index === 0 ? 'active' : '';
+    const indicator = `<li data-target="#carouselExampleIndicators" data-slide-to="${index}" class="${isActive}"></li>`;
+    const item = `
+      <div class="carousel-item ${isActive}">
+        <img class="d-block w-100" src="${url}" alt="Slide ${index + 1}">
+      </div>
+    `;
+    carouselIndicators.insertAdjacentHTML('beforeend', indicator);
+    carouselInner.insertAdjacentHTML('beforeend', item);
+  });
+}
+
 window.getAboutHeader = getAboutHeader;
 window.getAboutBody = getAboutBody;
 window.getTeamNames = getTeamNames;
@@ -270,8 +303,10 @@ window.fetchLogo = fetchLogo;
 window.fetchZelleLogo = fetchZelleLogo;
 window.getDonateBody = getDonateBody;
 window.getPaypalBody = getPaypalBody;
+window.fetchCarouselImages = fetchCarouselImages;
 window.getEventsByDate = getEventsByDate;
 window.getEventsByMonth = getEventsByMonth;
+
 
 getDocs(colRef)
     .then((snapshot) => {
