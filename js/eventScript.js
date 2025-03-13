@@ -3,118 +3,122 @@
 //const {arrayUnion, doc, updateDoc} = require("firebase/firestore");
 //Continue
 
-const calendarGrid = document.getElementById("calendar-grid");
-const monthYearLabel = document.getElementById("month-year");
 let currentDate = new Date();
+let monthEvents = []; // Stores events as [{date: "YYYY-MM-DD", data: {Event 1: "Time", Event 2: "Time"}}]
 
-// Sample events data
-const events = [
-  { date: "2024-10-31", keyword: "Halloween", details: "Costume Party at 8 PM" },
-  { date: "2024-11-11", keyword: "Veteran's Day", details: "Ceremony at 10 AM" },
-  { date: "2024-04-22", keyword: "Eid", details: "Family Gathering" }
-];
+async function renderCalendar() {
+  const calendar = document.getElementById('calendar');
+  calendar.innerHTML = '';
+  const monthYear = document.getElementById('monthYear');
+  const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+  const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
 
-function renderCalendar(date) {
-  const month = date.getMonth();
-  const year = date.getFullYear();
+  monthYear.textContent = `${firstDay.toLocaleString('default', { month: 'long' })} ${currentDate.getFullYear()}`;
+
+  // Fetch events for the current month
+  const yearMonth = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-01`;
+  monthEvents = await getEventsByMonth(yearMonth);
   
-  monthYearLabel.textContent = `${date.toLocaleString("default", { month: "long" })} ${year}`;
+  //console.log('Events for the month:', monthEvents);
+
+  //console.log(monthEvents[0].data["Event 1"]);
   
-  const firstDayOfMonth = new Date(year, month, 1);
-  const lastDayOfMonth = new Date(year, month + 1, 0);
-  const firstDayOfWeek = firstDayOfMonth.getDay();
-  const daysInMonth = lastDayOfMonth.getDate();
-  const prevMonthLastDay = new Date(year, month, 0).getDate();
-  
-  calendarGrid.innerHTML = ''; // Clear previous calendar
+  const eventsDiv = document.getElementById('events');
+  eventsDiv.innerHTML = ''; // Clear previous events
+  eventsDiv.style.textAlign = 'center'; // Center align the events
 
-  // Fill the days from the previous month
-  for (let i = firstDayOfWeek - 1; i >= 0; i--) {
-      const day = document.createElement("div");
-      day.classList.add("calendar-day", "other-month");
-      day.textContent = prevMonthLastDay - i;
-      calendarGrid.appendChild(day);
-  }
+  //Fill Events Div
+  if (monthEvents.length === 0) {
+    eventsDiv.textContent = 'No events in month';
+  } else {
+    for (const eventObject of monthEvents) {
+      const eventDate = document.createElement('div');
+      eventDate.textContent = eventObject.date;
+      eventDate.style.textDecoration = 'underline'; // Underline the date
+      eventsDiv.appendChild(eventDate);
 
-  // Fill the current month
-  for (let i = 1; i <= daysInMonth; i++) {
-      const day = document.createElement("div");
-      day.classList.add("calendar-day");
-      day.textContent = i;
+      // Separate AM and PM events
+      const amEvents = [];
+      const pmEvents = [];
 
-      // Event container
-      const eventContainer = document.createElement("div");
-      eventContainer.classList.add("event-container");
-
-      // Find events for this date
-      const eventDate = `${year}-${String(month + 1).padStart(2, "0")}-${String(i).padStart(2, "0")}`;
-      events.forEach(event => {
-          if (event.date === eventDate) {
-              const keyword = document.createElement("span");
-              keyword.classList.add("event-keyword");
-              keyword.textContent = event.keyword;
-              
-              // Initially hidden details container
-              const details = document.createElement("div");
-              details.classList.add("event-details");
-              details.textContent = event.details;
-              details.style.display = "none"; // Hide initially
-              keyword.appendChild(details);
-
-              eventContainer.appendChild(keyword);
-          }
-      });
-
-      day.appendChild(eventContainer);
-      calendarGrid.appendChild(day);
-  }
-
-  // Fill the next month's days to complete the last row if needed
-  const totalDays = firstDayOfWeek + daysInMonth;
-  for (let i = 1; i <= (7 - (totalDays % 7)) % 7; i++) {
-      const day = document.createElement("div");
-      day.classList.add("calendar-day", "other-month");
-      day.textContent = i;
-      calendarGrid.appendChild(day);
-  }
-}
-
-// Event delegation to toggle event details visibility
-calendarGrid.addEventListener("click", (event) => {
-  if (event.target.classList.contains("event-keyword")) {
-      const details = event.target.querySelector(".event-details");
-      if (details) {
-          details.style.display = details.style.display === "none" ? "block" : "none";
+      for (const [eventName, eventTime] of Object.entries(eventObject.data)) {
+        if (eventTime.includes('AM')) {
+          amEvents.push({ eventName, eventTime });
+        } else {
+          pmEvents.push({ eventName, eventTime });
+        }
       }
+
+      // Append AM events first
+      // Sort AM events alphabetically by eventTime
+      amEvents.sort((a, b) => a.eventTime.localeCompare(b.eventTime));
+      for (const event of amEvents) {
+        const eventDetail = document.createElement('div');
+        eventDetail.textContent = `${event.eventName} at ${event.eventTime}`;
+        eventsDiv.appendChild(eventDetail);
+      }
+
+      // Append PM events next
+      // Sort PM events alphabetically by eventTime
+      pmEvents.sort((a, b) => a.eventTime.localeCompare(b.eventTime));
+      for (const event of pmEvents) {
+        const eventDetail = document.createElement('div');
+        eventDetail.textContent = `${event.eventName} at ${event.eventTime}`;
+        eventsDiv.appendChild(eventDetail);
+      }
+    }
   }
-});
+  console.log(monthEvents);
+  getEventCountByDate("2025-03-07");
 
-document.getElementById("prev-month").addEventListener("click", () => {
-  currentDate.setMonth(currentDate.getMonth() - 1);
-  renderCalendar(currentDate);
-});
+  // Padding for days before the first day of the month
+  for (let i = 0; i < firstDay.getDay(); i++) {
+    calendar.innerHTML += `<div class="calendar-day empty"></div>`;
+  }
 
-document.getElementById("next-month").addEventListener("click", () => {
-  currentDate.setMonth(currentDate.getMonth() + 1);
-  renderCalendar(currentDate);
-});
-
-// Initialize the calendar on page load
-renderCalendar(currentDate);
-
-function eventList(events){
-  numEvents = events.length
-  const eventGrid = document.getElementById("eventBox");
-  for(let i = 0; i < numEvents; i++){
-    const eventObj = document.createElement("div");
-    eventObj.classList.add("eventItem");
-    var eventcontent = document.createElement("eventItemBox");
-    eventcontent.textContent= "item"; 
-    eventObj.appendChild(eventcontent);
-    eventGrid.appendChild(eventItem);
+  for (let day = 1; day <= lastDay.getDate(); day++) {
+    const date = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    const eventCount = getEventCountByDate(date);
+    calendar.innerHTML += `
+      <div class="calendar-day" onclick="fetchAndPrintEvents('${date}')">
+        <div>${day}</div>
+        ${eventCount > 0 ? `<div class="event-circle">${eventCount}</div>` : ''}
+      </div>
+    `;
   }
 }
-eventList(events);
+
+function prevMonth() {
+  currentDate.setMonth(currentDate.getMonth() - 1);
+  renderCalendar();
+}
+
+function nextMonth() {
+  currentDate.setMonth(currentDate.getMonth() + 1);
+  renderCalendar();
+}
+
+async function fetchAndPrintEvents(date) {
+  try {
+    const result = await getEventsByDate(date);
+    if (result != null ) {
+      console.log(`Events for ${date}:`, result);
+    }
+  } catch (error) {
+    console.error(`Error fetching events for ${date}:`, error);
+  }
+}
+
+function getEventCountByDate(date) {
+  const eventObject = monthEvents.find(event => event.date === date);
+  if (eventObject) {
+    console.log(Object.keys(eventObject.data).length)
+    return Object.keys(eventObject.data).length;
+  }
+  return 0;
+}
+
+renderCalendar();
 
 /*----Everything here is used for email and phone signup----*/
 //IMPORTANT note, we need to make a function to connect to the database first (This should be done anyway to support calendar events)
