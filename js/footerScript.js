@@ -1,20 +1,24 @@
 // footerScript.js
 
-// Display the current year in the footer
-const yearElement = document.getElementById('current-year');
-const year = new Date().getFullYear();
-
-// "Back to Top" button in the footer
-const backToTopButton = document.querySelector('.back-to-top');
-
-// Scroll back to top when button is clicked
-backToTopButton.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
+document.addEventListener('DOMContentLoaded', function() {
+    getlinks();
+    displayCurrentYear();
+    setupBackToTopButton();
 });
 
-window.onload = function() {
-    getlinks();
-};
+function displayCurrentYear() {
+  const yearElement = document.getElementById('current-year');
+  const year = new Date().getFullYear();
+  yearElement.textContent = year;
+}
+
+function setupBackToTopButton() {
+  const backToTopButton = document.querySelector('.back-to-top');
+  backToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+}
+

@@ -54,22 +54,21 @@
     <!--<h2 class="Webpage-Tab-Title old-standard-tt-bold">Events</h2>-->
     <h2 class="Webpage-Tab-Title old-standard-tt-bold"> Events</h2>
     <div class="calendar-container old-standard-tt-regular">
-        <div id="calendar">
-            <div class="container">
-                <div class="calendar">
-                    <div class="calendar-header">
-                        <button id="prev-month" class="old-standard-tt-regular">Previous</button>
-                        <h2 id="month-year" class="old-standard-tt-bold">February 2025</h2>
-                        <button id="next-month" class="old-standard-tt-regular">Next</button>
-                    </div>
-                    <div class="calendar-grid" id="calendar-grid">
-                    <!-- Calendar days will be dynamically generated here -->
-                    </div>
-                </div>
+        <div id="calendar-box">
+            <div class="cal_header">
+                <button onclick="prevMonth()">Previous</button>
+                <h2 id="monthYear"></h2>
+                <button onclick="nextMonth()">Next</button>
             </div>
+    
+            <div class="calendar" id="calendar"></div>
         </div>
-        <div id="event-box">
+        <div id="event-box" class="event-box">
             <h3 class="old-standard-tt-bold">Event List</h3>
+            <div id="events">
+                
+            </div>
+
             <ul id="event-list" class="old-standard-tt-regular"></ul>
         </div>
     </div>

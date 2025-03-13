@@ -3,8 +3,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebas
 
 import { getStorage, ref, getDownloadURL, uploadBytes } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js';
 
-
-
 import {
   getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, browserSessionPersistence, setPersistence,
   signInWithPopup, GoogleAuthProvider, RecaptchaVerifier, multiFactor, PhoneAuthProvider, PhoneMultiFactorGenerator,

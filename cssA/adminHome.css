@@ -6,6 +6,7 @@
 
     #Announcements-container {
         width: 30%; 
+        display: flex;
     }
 
     #map_container{
@@ -188,7 +189,50 @@
         justify-self:center;
     }
 
+/* Slideshow management section */
+#slideshowChange {
+    width: fit-content; /* Increase width by 10% */
+    margin: 10px;
+    padding: 20px;
+    display: flow-root;
+}
 
+#slideshowPreview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.slideshowImage {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.slideshowImage.selected {
+    border-color: red;
+}
+
+#slideshowForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#slideshowForm input,
+#slideshowForm button {
+    margin: 5px 0;
+}
+
+.photoPreview {
+    display: none;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-top: 10px;
+}
 
 /*Commenting out until used
 

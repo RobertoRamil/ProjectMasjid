@@ -1,12 +1,10 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 
 import { getStorage, ref, getDownloadURL, uploadBytes } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js';
-import { getFirestore, collection, doc, getDoc, updateDoc, getDocs, arrayUnion } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js'
-
-
+import { getFirestore, collection, doc, setDoc, getDoc, deleteDoc, updateDoc, getDocs, arrayUnion } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js'
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyChNmvSjjLzXfWeGsKHebXgGq_AMUdKzHo",
+  apiKey: "AIzaSyChNmvSjjLzXfWeGsKHebXgq_AMUdKzHo",
   authDomain: "project-musjid.firebaseapp.com",
   projectId: "project-musjid",
   storageBucket: "project-musjid.firebasestorage.app",
@@ -119,6 +117,90 @@ async function getAboutBody(){
   return aboutBody;
 }
 //--------------------------------------------End of setup for about section-------------------------------------------
+
+//--------------------------------------------Setup for event section--------------------------------------------------//
+
+
+async function getEventsByDate(date) {
+  const eventRef = doc(db, "calendarDates", date);
+  try {
+    const eventSnap = await getDoc(eventRef);
+    if (eventSnap.exists()) {
+      return eventSnap.data();
+    } else {
+      //console.log("No events found for the given date.");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching events:", error);
+    return null;
+  }
+}
+
+async function getEventsByMonth(date) {
+  const [year, month] = date.split('-');
+  const events = [];
+  try {
+    const snapshot = await getDocs(collection(db, "calendarDates"));
+    snapshot.forEach(doc => {
+      const docDate = doc.id.split('-');
+      if (docDate[0] === year && docDate[1] === month) {
+        events.push({ date: doc.id, data: doc.data() });
+      }
+    });
+    return events;
+  } catch (error) {
+    console.error("Error fetching events by month:", error);
+    return [];
+  }
+}
+
+async function addEventToFirebase(eventDate, eventName, eventTime) {
+  const eventRef = doc(db, "calendarDates", eventDate);
+  const eventSnap = await getDoc(eventRef);
+
+  if (eventSnap.exists()) {
+    const eventData = eventSnap.data();
+    if (eventData[eventName]) {
+      alert("ERROR: An event with the same name already exists for this date.");
+    } else {
+      // Document exists, update the existing document
+      await updateDoc(eventRef, {
+        [eventName]: eventTime
+      });
+    }
+  } else {
+    // Document does not exist, create a new document
+    await setDoc(eventRef, {
+      [eventName]: eventTime
+    });
+  }
+}
+
+async function deleteEventFromFirebase(eventDate, eventName) {
+  const eventRef = doc(db, "calendarDates", eventDate);
+  const eventSnap = await getDoc(eventRef);
+
+  if (eventSnap.exists()) {
+    const eventData = eventSnap.data();
+    if (eventData[eventName]) {
+      const updatedData = { ...eventData };
+      delete updatedData[eventName];
+
+      if (Object.keys(updatedData).length === 0) {
+        await deleteDoc(eventRef);
+      } else {
+        await setDoc(eventRef, updatedData);
+      }
+    } else {
+      alert("ERROR: No event with the given name exists for this date.");
+    }
+  } else {
+    alert("ERROR: No events found for the given date.");
+  }
+}
+
+//--------------------------------------------End of setup for event section-------------------------------------------//
 const contactsRef = doc(db, "users", "userContacts");
 const contactsSnap = getDoc(contactsRef);
 
@@ -163,6 +245,7 @@ async function getlinks() {
   try {
     const snapshot = await getDocs(linksColRef);
     let links = {};
+    console.log("Fetching links..."); // Debugging line
     snapshot.docs.forEach((doc) => {
       links[doc.id] = doc.data().link;
     });
@@ -249,6 +332,38 @@ async function getQuotes(){
   const quoteSnap = await getDoc(quoteRef);
   console.error(quoteSnap.data());
   return quoteSnap.data();
+
+export async function fetchCarouselImages() {
+  const storageRef = ref(storage, 'Slideshow');
+  try {
+    const listResult = await listAll(storageRef);
+    const imageUrls = await Promise.all(
+      listResult.items.map(itemRef => getDownloadURL(itemRef))
+    );
+    updateCarousel(imageUrls);
+  } catch (error) {
+    console.error("Error fetching carousel images:", error);
+  }
+}
+
+function updateCarousel(imageUrls) {
+  const carouselInner = document.querySelector('.carousel-inner');
+  const carouselIndicators = document.querySelector('.carousel-indicators');
+  carouselInner.innerHTML = '';
+  carouselIndicators.innerHTML = '';
+
+  imageUrls.forEach((url, index) => {
+    const isActive = index === 0 ? 'active' : '';
+    const indicator = `<li data-target="#carouselExampleIndicators" data-slide-to="${index}" class="${isActive}"></li>`;
+    const item = `
+      <div class="carousel-item ${isActive}">
+        <img class="d-block w-100" src="${url}" alt="Slide ${index + 1}">
+      </div>
+    `;
+    carouselIndicators.insertAdjacentHTML('beforeend', indicator);
+    carouselInner.insertAdjacentHTML('beforeend', item);
+  });
+
 }
 
 window.getAboutHeader = getAboutHeader;
@@ -268,6 +383,11 @@ window.addAnnouncement = addAnnouncement;
 window.getAnnouncements = getAnnouncements;
 window.addQuotes = addQuotes;
 window.getQuotes = getQuotes;
+window.fetchCarouselImages = fetchCarouselImages;
+window.getEventsByDate = getEventsByDate;
+window.getEventsByMonth = getEventsByMonth;
+window.addEventToFirebase = addEventToFirebase;
+window.deleteEventFromFirebase = deleteEventFromFirebase;
 
 
 getDocs(colRef)
@@ -322,3 +442,4 @@ function createPrayerTime(prayerName, prayerNumber, prayerTimes){
 
   prayerTimes[prayerName] = firebaseTimeStamp;
 }
+

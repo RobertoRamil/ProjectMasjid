@@ -1,5 +1,9 @@
 import { pullPrayerTime } from '../js/firebase.js';
 
+window.onload = function() {
+    fetchCarouselImages();
+}
+
 //announcment box auto makes the boxes
 async function quotePanes(quote_panes) {
     const quoteGrid = document.getElementById("quoteText");
