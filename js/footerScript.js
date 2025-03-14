@@ -12,13 +12,10 @@ function displayCurrentYear() {
   yearElement.textContent = year;
 }
 
-function setupBackToTopButton() {
-  const backToTopButton = document.querySelector('.back-to-top');
-  backToTopButton.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"  
   });
 }
-

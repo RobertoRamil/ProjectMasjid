@@ -1,6 +1,9 @@
 // Start: Redirect to login page if the user is not authenticated
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAuth, onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
+import { getStorage, ref, getDownloadURL, uploadBytes, listAll } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js';
+import { getFirestore, collection, doc, setDoc, getDoc, deleteDoc, updateDoc, getDocs, arrayUnion } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js'
+
 
 //Hide this later
 const firebaseConfig = {
@@ -15,6 +18,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
+const db = getFirestore();
+const storage = getStorage();
 
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth();
@@ -122,6 +127,68 @@ export function prevMonth() {
 export function nextMonth() {
   currentDate.setMonth(currentDate.getMonth() + 1);
   renderCalendar();
+}
+
+async function getEventsByMonth(date) {
+  const [year, month] = date.split('-');
+  const events = [];
+  try {
+    const snapshot = await getDocs(collection(db, "calendarDates"));
+    snapshot.forEach(doc => {
+      const docDate = doc.id.split('-');
+      if (docDate[0] === year && docDate[1] === month) {
+        events.push({ date: doc.id, data: doc.data() });
+      }
+    });
+    return events;
+  } catch (error) {
+    console.error("Error fetching events by month:", error);
+    return [];
+  }
+}
+async function addEventToFirebase(eventDate, eventName, eventTime) {
+  const eventRef = doc(db, "calendarDates", eventDate);
+  const eventSnap = await getDoc(eventRef);
+
+  if (eventSnap.exists()) {
+    const eventData = eventSnap.data();
+    if (eventData[eventName]) {
+      alert("ERROR: An event with the same name already exists for this date.");
+    } else {
+      // Document exists, update the existing document
+      await updateDoc(eventRef, {
+        [eventName]: eventTime
+      });
+    }
+  } else {
+    // Document does not exist, create a new document
+    await setDoc(eventRef, {
+      [eventName]: eventTime
+    });
+  }
+}
+
+async function deleteEventFromFirebase(eventDate, eventName) {
+  const eventRef = doc(db, "calendarDates", eventDate);
+  const eventSnap = await getDoc(eventRef);
+
+  if (eventSnap.exists()) {
+    const eventData = eventSnap.data();
+    if (eventData[eventName]) {
+      const updatedData = { ...eventData };
+      delete updatedData[eventName];
+
+      if (Object.keys(updatedData).length === 0) {
+        await deleteDoc(eventRef);
+      } else {
+        await setDoc(eventRef, updatedData);
+      }
+    } else {
+      alert("ERROR: No event with the given name exists for this date.");
+    }
+  } else {
+    alert("ERROR: No events found for the given date.");
+  }
 }
 
 function getEventCountByDate(date) {
