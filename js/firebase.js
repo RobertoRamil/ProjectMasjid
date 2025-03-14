@@ -360,19 +360,20 @@ window.saveSPrayerTime = saveSPrayerTime;
 
 
 getDocs(colRef)
-    .then((snapshot) => {
-        let users = []
-        snapshot.docs.forEach((doc) => {
-            users.push({ ...doc.data(), id: doc.id })
-        })
+.then((snapshot) => {
+    let users = []
+    snapshot.docs.forEach((doc) => {
+        users.push({ ...doc.data(), id: doc.id })
     })
-    .catch(err => {
-        console.log(err.message)
-    })
+})
+.catch(err => {
+    console.log(err.message)
+})
 //This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.
-const prayerRef = doc(db, "prayerTimes", "prayerTime");
-const prayerSnap = await getDoc(prayerRef);
-const prayerHourData = prayerSnap.data(); //Gets the data from the prayer database
+async function pullPrayerTime(prayerName){
+  const prayerRef = doc(db, "prayerTimes", "prayerTime");
+  const prayerSnap = await getDoc(prayerRef);
+  const prayerHourData = prayerSnap.data(); //Gets the data from the prayer database
 
   try{
     const fieldCount = Object.keys(prayerHourData).length;//Gets the count of prayers in the database
