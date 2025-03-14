@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin About</title>
     <link rel="stylesheet" href="../cssA/adminAbout.css">
-    <script type="module" src="../jsA/adminAbout.js" defer></script>
+    
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script defer>
+    
+    <script src="../jsA/adminAbout.js" type = "module" defer></script>
+    <script defer> 
         $(function(){
             $('#header').load('adminHeader.html');
         })
@@ -27,6 +29,7 @@
             <div id="information">
                 <h2 contenteditable="true" id="adminLeftTitle">*Title of the information here*</h2>
                 <p contenteditable="true" id="adminLeftText">The full text goes here.</p>
+                <button id = "saveAbt">Save changes</button>
             </div>
 
             <!-- Right Box -->

@@ -43,13 +43,6 @@ async function setupAbout(){
 }
 
 //initialize the member list
-document.addEventListener("DOMContentLoaded", function() {
-  teamMems();
-});
-document.addEventListener("DOMContentLoaded", function() {
-  setupAbout();
-});
-
 console.log("setupAbout called"); // Debugging line
 setupAbout();
 console.log("teamMems called"); // Debugging line
