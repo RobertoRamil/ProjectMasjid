@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   console.log("DOMContentLoaded event triggered"); // Debugging line
   pullPrayerTime();
+  pullSPrayerTime();
   fetchCarouselImages();
 });
 //announcment box auto makes the boxes
@@ -21,7 +22,7 @@ function quotePanes(announcement_panes) {
         announcementGrid.appendChild(announcement);
     }
 }
-  quotePanes(1);
+quotePanes(1);
 
 function prayerBoxEmotes(){
     //Grabs all of the prayer time hours based on the class name
