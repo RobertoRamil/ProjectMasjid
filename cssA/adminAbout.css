@@ -70,6 +70,16 @@
         margin: 10px 0;
         font-size: 16px;
     }
+    #Team .member .memberName{
+        width: 90%;
+        margin-top: 10px;
+    }
+    #Team .member .memberUpload{
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
 
 
 /*This is the social media changing section*/
