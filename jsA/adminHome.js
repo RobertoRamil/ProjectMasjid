@@ -1,6 +1,7 @@
 // Start: Redirect to login page if the user is not authenticated
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAuth, onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
+import { getStorage, ref, listAll, getDownloadURL, uploadBytes, deleteObject } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js";
 
 //Hide this later
 const firebaseConfig = {
@@ -14,10 +15,13 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase Authentication and get a reference to the service
-const auth = getAuth();
+const auth = getAuth(app);
+
+// Initialize Firebase Storage
+const storage = getStorage(app);
 
 // Check if the user is authenticated
 onAuthStateChanged(auth, (user) => {
@@ -31,6 +35,54 @@ onAuthStateChanged(auth, (user) => {
 });
 // End: Redirect to login page if the user is not authenticated
 
+// Load existing slideshow photos
+function loadSlideshowPhotos() {
+    const slideshowPreview = document.getElementById("slideshowPreview");
+    const slideshowRef = ref(storage, 'Slideshow/');
+    listAll(slideshowRef).then((result) => {
+        result.items.forEach((itemRef) => {
+            getDownloadURL(itemRef).then((url) => {
+                const img = document.createElement("img");
+                img.src = url;
+                img.className = "slideshowImage";
+                img.onclick = () => img.classList.toggle("selected");
+                slideshowPreview.appendChild(img);
+            });
+        });
+    }).catch((error) => {
+        console.error("Error loading slideshow photos:", error);
+    });
+}
+
+// Add a new photo to the slideshow
+document.getElementById("addPhotoButton").addEventListener("click", () => {
+    const slideshowInput = document.getElementById("slideshowInput");
+    const file = slideshowInput.files[0];
+    if (!file) return;
+
+    const slideshowPreview = document.getElementById("slideshowPreview");
+    if (slideshowPreview.children.length >= 5) {
+        alert("Maximum number of photos reached.");
+        return;
+    }
+
+    const storageRef = ref(storage, `Slideshow/${file.name}`);
+    uploadBytes(storageRef, file).then(() => {
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(file);
+        img.className = "slideshowImage";
+        img.onclick = () => img.classList.toggle("selected");
+        slideshowPreview.appendChild(img);
+
+        // Alert success and reset input and preview
+        alert("Photo added successfully.");
+        slideshowInput.value = "";
+        document.getElementById("photoPreview").style.display = "none";
+    }).catch((error) => {
+        console.error("Error uploading photo:", error);
+        alert("Failed to add photo.");
+    });
+});
 
 //Prayer List
 let sPrayerCounter = 1;
@@ -43,6 +95,46 @@ document.getElementById("prayerSaveButton").addEventListener("click", function s
   alert("Prayer Time submitted");
 
 });
+// Show photo preview when a file is selected
+document.getElementById("slideshowInput").addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    const photoPreview = document.getElementById("photoPreview");
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            photoPreview.src = e.target.result;
+            photoPreview.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+    } else {
+        photoPreview.style.display = "none";
+    }
+});
+
+// Delete selected photos from the slideshow
+document.getElementById("deletePhotoButton").addEventListener("click", () => {
+    const selectedImages = document.querySelectorAll(".slideshowImage.selected");
+    const deletePromises = [];
+
+    selectedImages.forEach((img) => {
+        const fileName = decodeURIComponent(img.src.split('/').pop().split('#')[0].split('?')[0]);
+        const storageRef = ref(storage, `/${fileName}`);
+        deletePromises.push(deleteObject(storageRef).then(() => {
+            img.remove();
+        }).catch((error) => {
+            console.error("Error deleting photo:", error);
+        }));
+    });
+
+    Promise.all(deletePromises).then(() => {
+        // Reload the slideshow photos after deletion
+        document.getElementById("slideshowPreview").innerHTML = ""; // Clear existing photos
+        loadSlideshowPhotos();
+    });
+});
+
+loadSlideshowPhotos();
 
 //This is for generating the special prayer times and name
 function addPrayer(){

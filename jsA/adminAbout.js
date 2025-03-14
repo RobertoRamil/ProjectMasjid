@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAuth, onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
+import { getFirestore, doc, updateDoc } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
 
 //Hide this later
 const firebaseConfig = {
@@ -13,10 +14,13 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth();
+
+// Initialize Firestore
+const db = getFirestore(app);
 
 // Check if the user is authenticated
 onAuthStateChanged(auth, (user) => {
@@ -106,31 +110,37 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     renderTeamMembers();
+
+    
 });
 
-//social media 
-$(document).ready(function() {
+// Handle update buttons for social media links
+document.getElementById("updateFacebookLink").addEventListener("click", async () => {
+    const facebookLink = document.getElementById("facebookLink").value.trim();
+    if (facebookLink) {
+        await updateDoc(doc(db, "Links", "facebook"), { link: facebookLink });
+        alert("Facebook link updated successfully!");
+    } else {
+        alert("Please enter a valid Facebook URL.");
+    }
+});
 
-    // Handle form submission for social media links
-    $('#socialLinksForm').on('submit', function(event) {
-        event.preventDefault();  
+document.getElementById("updateInstagramLink").addEventListener("click", async () => {
+    const instagramLink = document.getElementById("instagramLink").value.trim();
+    if (instagramLink) {
+        await updateDoc(doc(db, "Links", "instagram"), { link: instagramLink });
+        alert("Instagram link updated successfully!");
+    } else {
+        alert("Please enter a valid Instagram URL.");
+    }
+});
 
-        // Get values from input fields
-        const facebookLink = $('#facebookLink').val().trim();
-        const instagramLink = $('#instagramLink').val().trim();
-
-        // Check if at least one link is provided
-        if (!facebookLink && !instagramLink) {
-            alert('Please enter at least one social media link.');
-            return; 
-        }
-
-        // Placeholder for Firebase 
-        const updates = {};
-        if (facebookLink) updates.facebook = facebookLink;
-        if (instagramLink) updates.instagram = instagramLink;
-
-        // Temporary alert as a placeholder
-        alert(`Updates:\n${facebookLink ? "Facebook: " + facebookLink : ""}\n${instagramLink ? "Instagram: " + instagramLink : ""}`);
-    });
+document.getElementById("updateYouTubeLink").addEventListener("click", async () => {
+    const youtubeLink = document.getElementById("youtubeLink").value.trim();
+    if (youtubeLink) {
+        await updateDoc(doc(db, "Links", "youtube"), { link: youtubeLink });
+        alert("YouTube link updated successfully!");
+    } else {
+        alert("Please enter a valid YouTube URL.");
+    }
 });

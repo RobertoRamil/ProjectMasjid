@@ -69,12 +69,52 @@
                 </div>
             </div>
 
+            <div id="slideshowChange" class="Announce_Background">
+                <h2>Manage Slideshow</h2>
+                <div id="slideshowPreview">
+                    <!-- Slideshow images will be loaded here -->
+                </div>
+                <form id="slideshowForm">
+                    <label for="slideshowInput">Add a new photo:</label>
+                    <input type="file" id="slideshowInput" accept="image/*">
+                    <img id="photoPreview" class="photoPreview" src="" alt="Photo Preview">
+                    <button type="button" id="addPhotoButton">Add Photo</button>
+                    <button type="button" id="deletePhotoButton">Delete Selected Photos</button>
+                </form>
+            </div>
+
             <div id="quoteChange" class="Announce_Background">
                 <h2>Change Quote</h2>
                 <form id = "quoteForm">
                     <label for="quoteInput">Type quote here:</label>
                     <input type="text" id="quoteInput">
                     <button type="submit" id="submit_announcement">Post Quote</button>
+                </form>
+            </div>
+
+            
+            
+        </div>
+
+
+        <div style="display: flex;">
+            <div id="map_container">
+                <form id="mapChange">
+                    <b>
+                        Location Name on Google Maps: <br>
+                    </b>
+
+                    <div id="example_map_input">
+                        Example: Maunatul Muslimeen Society of CA (Islamic Center) - MMSC - Sacramento
+                        <br><br>
+                    </div>
+
+                    <input type="text" id="Location">
+                    <button type="submit">Submit</button>
+                   <!-- Commenting out because not working.
+
+                    <button type="submit" onclick="convertSpace(event)">Submit</button> 
+                    -->
                 </form>
             </div>
 
@@ -92,43 +132,18 @@
                     A remove announcement doesn't do anything with the current thing being
                     only a input box. I think this should be a seperate section that has all the 
                     current announcements that can be edited. Something like the calender does, but for the announcements.
-
-                    
+                        
+                        
                         <button type="button" id="remove_mode">Remove an announcement</button>
-            
-                    
+                        
+                        
                     also whats the point of the save when you have a post
-
+                        
                         <button type="submit">Save Changes</button>       
-                    
+                        
                     -->
                 </form>
             </div>
-            
-        </div>
-
-
-        SLIDE SHOW CHANGES PUT WHERE QUOTES ARE THEN QUOTE DOWN WITH MAP OR SOMETHING
-
-
-        <div id="map_container">
-            <form id="mapChange">
-                <b>
-                    Location Name on Google Maps: <br>
-                </b>
-                
-                <div id="example_map_input">
-                    Example: Maunatul Muslimeen Society of CA (Islamic Center) - MMSC - Sacramento
-                    <br><br>
-                </div>
-
-                <input type="text" id="Location">
-                <button type="submit">Submit</button>
-               <!-- Commenting out because not working.
-                
-                <button type="submit" onclick="convertSpace(event)">Submit</button> 
-                -->
-            </form>
         </div>
     </body>
 

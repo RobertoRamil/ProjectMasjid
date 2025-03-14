@@ -1,12 +1,12 @@
 // Initialize Firebase
 
-window.onload = function() {
-  console.log("Window onload event triggered"); // Debugging line
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("DOMContentLoaded event triggered"); // Debugging line
   fetchLogo();
   setHeaderBackground();
   backgroundHourChange();
   setInterval(backgroundHourChange, 3.6e+6);
-};
+});
 
 async function backgroundHourChange(){
   prayerNames=["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
@@ -43,4 +43,3 @@ async function backgroundHourChange(){
         filter.style.backdropFilter="brightness(120%)";
     }
 }
-  

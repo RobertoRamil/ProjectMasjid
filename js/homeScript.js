@@ -1,3 +1,8 @@
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("DOMContentLoaded event triggered"); // Debugging line
+  pullPrayerTime();
+  fetchCarouselImages();
+});
 //announcment box auto makes the boxes
 function quotePanes(announcement_panes) {
     const announcementGrid = document.getElementById("quoteRow");
