@@ -26,7 +26,6 @@ button:hover {
 }
 
 label{
-    display: block;
     margin-bottom: 5px;
 }
 
@@ -36,9 +35,24 @@ h2{
 
 /*-------------------Dark Mode------------------------ */
 .dark-mode {
-    background-color: black;
-    color: white;
+    background-color: rgb(102 102 104);
   }
+
+#darkModeToggle{
+    font-size: x-large;
+
+    color:black;
+    background-color: unset;
+    
+    margin-top: 8px;
+    padding: 0%;
+    margin-left: 10px;
+    
+    position: absolute;
+    left:0%;
+    top:0%;
+}
+
 
 
 /*-------------------Update Image------------------------ */
@@ -54,20 +68,15 @@ when screen size is larger then 1100px (like laptops)*/
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
 }
 
 #update_image_visual_text{
-    margin:0.5%;
-    padding-top: 0.9%;
+    margin:10px;
+    margin-bottom: 0px;
 }
 
 #background-upload-container {    
-    position:relative;
     top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #fff;
     padding: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
@@ -75,13 +84,16 @@ when screen size is larger then 1100px (like laptops)*/
 }
 
 #logoChange{
+    display:flex;
+    justify-content: center;
     padding: 10px 0px;
 }
 
 #imagePreview {
-    max-width: 100%;
     max-height: 150px;
     border-radius: 8px;
+    margin: auto;
+    margin-top:15px;
 }
 
 /* Upload Status Styling */
