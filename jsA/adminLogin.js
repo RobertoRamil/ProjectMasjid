@@ -157,11 +157,13 @@ async function verifyAdminAndSignIn(user) {
       const verificationCode = prompt("Please enter the verification code sent to your phone:");
       const result = await confirmationResult.confirm(verificationCode);
       const user = result.user;
+      console.log(result);
       //console.log("Phone number verified and user signed in:");
       window.location.href = "adminHome.html";
     } catch (error) {
       grecaptcha.reset(window.recaptchaVerifier);
       console.error("Error during phone number sign-in:", error);
+
       alert("Error: Unable to sign in with phone number.");
     }
   } else {
