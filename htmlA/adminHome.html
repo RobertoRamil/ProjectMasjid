@@ -83,13 +83,12 @@
                 </form>
             </div>
 
-            <div id="quoteChange" class="Announce_Background">
+            <div id="Announcements-container" class="Announce_Background">
                 <h2>Change Quote</h2>
-                <form id = "quoteForm">
-                    <label for="quoteInput">Type quote here:</label>
-                    <input type="text" id="quoteInput">
-                    <button type="submit" id="submit_announcement">Post Quote</button>
-                </form>
+                <label for="quoteText">Type quote information here:</label>
+                <textarea id="quoteText" required></textarea>
+                <button id="submit_quote" onclick="addQuotes()">Post Quote</button>
+            </div>
             </div>
 
             
@@ -120,29 +119,15 @@
 
             <div id="Announcements-container" class="Announce_Background">
                 <h2>Add Announcement</h2>
-                <form id = "announcementForm">
-                    <!-- Commenting this out until used
-                        <p id="errorMessage"></form>
-                    -->
-                    <label for="announcementText">Type announcement information here:</label>
-                    <textarea id="announcementText" required></textarea>
-                    <button type="submit" id="submit_announcement">Post Announcement</button>
-                    <!--
-                    This I feel needs more working on. 
-                    A remove announcement doesn't do anything with the current thing being
-                    only a input box. I think this should be a seperate section that has all the 
-                    current announcements that can be edited. Something like the calender does, but for the announcements.
-                        
-                        
-                        <button type="button" id="remove_mode">Remove an announcement</button>
-                        
-                        
-                    also whats the point of the save when you have a post
-                        
-                        <button type="submit">Save Changes</button>       
-                        
-                    -->
-                </form>
+            
+                <!-- Commenting this out until used
+                    <p id="errorMessage"></form>
+                -->
+                <label for="announcementText">Type announcement information here:</label>
+                <textarea id="announcementText" required></textarea>
+                <button onclick="addAnnouncement()" id="submit_announcement">Post Announcement</button>
+            
+            
             </div>
         </div>
     </body>
