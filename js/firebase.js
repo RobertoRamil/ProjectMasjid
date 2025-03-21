@@ -345,6 +345,27 @@ async function signUpEmail(){
     }
     
   }
+
+async function removeEmail() {
+  const contactsRef = doc(db, "users", "userContacts");
+  const contactsSnap = await getDoc(contactsRef);
+  const userEmail = document.getElementById("emailField").value; // Get the email from the input field
+
+  const contactsData = contactsSnap.data();
+  console.log("Removing email:", userEmail); // Debugging line
+
+  if (contactsData && contactsData.emails) {
+    const index = contactsData.emails.indexOf(userEmail);
+    if (index > -1) {
+      contactsData.emails.splice(index, 1); // Remove the email from the array
+      await updateDoc(contactsRef, { emails: contactsData.emails }); // Update the document
+      alert("Email successfully unenrolled from the newsletter.");
+    } else {
+      alert("Email not enrolled in the newsletter.");
+    }
+  }
+  
+}
   
 async function signUpPhone(){
     const userPhone = document.getElementById("phoneField").value;
@@ -372,6 +393,36 @@ async function signUpPhone(){
       alert("Invalid Phone number");
     }
     
+}
+function processPhoneNumber(userPhone) {
+  var phoneNum = userPhone.replace(/[^A-Z0-9]/ig, "");
+  // If the phone number does not have a country code, assume it is from the US
+  if (phoneNum.length == 10) {
+    phoneNum = "1" + phoneNum;
+  }
+  return phoneNum;
+}
+
+async function removePhone() {
+  const contactsRef = doc(db, "users", "userContacts");
+  const contactsSnap = await getDoc(contactsRef);
+
+  const userPhone = document.getElementById("phoneField").value; // Get the phone number from the input field
+  const phoneNum = processPhoneNumber(userPhone); // Pass userPhone to processPhoneNumber
+  const contactsData = contactsSnap.data();
+
+  console.log("Removing phone number:", phoneNum); // Debugging line
+
+  if (contactsData && contactsData.phoneNums) {
+    const index = contactsData.phoneNums.indexOf(phoneNum);
+    if (index > -1) {
+      contactsData.phoneNums.splice(index, 1); // Remove the phone number from the array
+      await updateDoc(contactsRef, { phoneNums: contactsData.phoneNums }); // Update the document
+      alert("Phone number successfully unenrolled from newsletter.");
+    } else {
+      alert("Phone number not enrolled in the newsletter.");
+    }
+  } 
 }
 
 async function getlinks() {
@@ -499,6 +550,8 @@ window.saveSPrayerTime = saveSPrayerTime;
 window.getAnnouncements = getAnnouncements;
 window.getQuotes = getQuotes;
 window.getTeamTitles = getTeamTitles;
+window.removeEmail = removeEmail;
+window.removePhone = removePhone;
 
 
 getDocs(colRef)
