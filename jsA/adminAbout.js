@@ -50,6 +50,22 @@ const storage = getStorage(app);
     //console.log(teamNames);
     return teamNames;
   }
+  async function getTeamTitles(){
+    const teamRef = doc(db, "team", "team_members");
+    const teamSnap = await getDoc(teamRef); // Await the getDoc call
+    const teamTitles = [];
+    //get all the team titles from the database
+    if (teamSnap.exists()) {
+      const teamData = teamSnap.data();
+      if (teamData.teamTitles) { 
+        teamData.teamTitles.forEach((title) => {
+          teamTitles.push(title);
+        });
+      }
+    }
+    //console.log(teamTitles);
+    return teamTitles;
+  }
   
   async function getTeamPortraits(num_mems, memberNames){
     //create array to store portraitURLs
@@ -75,6 +91,7 @@ const storage = getStorage(app);
       const index = teamData.teamNames.indexOf(name);
       if (index > -1) {
         teamData.teamNames.splice(index, 1);
+        teamData.teamTitles.splice(index, 1);
       }
     }
     updateDoc(teamRef, { teamNames: teamData.teamNames });
@@ -112,9 +129,10 @@ const storage = getStorage(app);
     const aboutRef = doc(db, "about", "about_body");
     updateDoc(aboutRef, {body: aboutBody});
   }
-  async function saveTeamMember(name, portrait){
+  async function saveTeamMember(name, title, portrait){
     const teamRef = doc(db, "team", "team_members");
     updateDoc(teamRef, {teamNames: arrayUnion(name)});
+    updateDoc(teamRef, {teamTitles: arrayUnion(title)}); // Placeholder for title, can be modified later
     //Rename portrait file name to match the name
     const storageRef = ref(storage, `team_portraits/${name}.PNG`);
     try {
@@ -129,6 +147,7 @@ const storage = getStorage(app);
 // Initialize Firebase
 
 let teamMembers;
+let teamTitles;
 let teamPortraits;
 
 // End: Redirect to login page if the user is not authenticated
@@ -147,6 +166,7 @@ async function setupInfo(){
 
 async function initTeamMembers(){
     teamMembers = await getTeamNames();
+    teamTitles = await getTeamTitles();
     teamPortraits = await getTeamPortraits(teamMembers.length, teamMembers);
     renderTeamMembers();
 }
@@ -195,22 +215,29 @@ async function addTeamMember(){
     nameInput.classList.add("memberName");
     nameInput.placeholder = "Member Name";
 
+    // Create an input for the member title
+    const titleInput = document.createElement("input");
+    titleInput.type = "text";
+    titleInput.classList.add("memberTitle");
+    titleInput.placeholder = "Member Title";
+
     // Create a save button
     const saveButton = document.createElement("button");
     saveButton.textContent = "Save";
     saveButton.addEventListener("click", async () => {
         //Get files
         const name = nameInput.value;
+        const title = titleInput.value;
         const portrait = imageInput.files[0];
-        if (!name || !portrait) {
-            alert("Please provide a name and portrait.");
+        if (!name || !title || !portrait) {
+            alert("Please provide a name, title, and portrait.");
             return;
         }
         //Save the portrait to storage
         console.log("Adding team member:", name); // Debugging line
         console.log("Portrait file:", portrait); // Debugging line
         //Save the name and portrait
-        await saveTeamMember(name, portrait);
+        await saveTeamMember(name, title, portrait);
 
 
 
@@ -230,6 +257,7 @@ async function addTeamMember(){
     tempDiv.appendChild(imageInput);
     tempDiv.appendChild(imagePreview);
     tempDiv.appendChild(nameInput);
+    tempDiv.appendChild(titleInput);
     tempDiv.appendChild(saveButton);
     tempDiv.appendChild(cancelButton);
 
@@ -257,12 +285,17 @@ function renderTeamMembers(){
         name.textContent = teamMembers[i]; // Set the text content to the name
         // Update the name in the teamMembers array on blur (when editing ends)
 
+        var title = document.createElement("p");
+        title.textContent = teamTitles[i]; // Placeholder for title, can be modified later
+
+
         const removeButton = document.createElement("button");
         removeButton.textContent = "- Remove";
         removeButton.addEventListener("click", () => {
             //teamMembers.splice(index, 1);
             //renderTeamMembers();
-            const nameParagraph = removeButton.previousElementSibling;
+            const titleParagraph = removeButton.previousElementSibling;
+            const nameParagraph = titleParagraph.previousElementSibling;
             remove(nameParagraph.textContent);
 
         });
@@ -273,6 +306,7 @@ function renderTeamMembers(){
         // Append portrait and name to the member div
         member.appendChild(portrait);
         member.appendChild(name);
+        member.appendChild(title);
         member.appendChild(removeButton);
 
         // Append the member div to the memberGrid
@@ -289,54 +323,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initTeamMembers();
 
     const adminMembersBox = document.getElementById("adminMembersBox");
-
-    
-
-    // Load Left Box Content
-    
-
-    // Render Team Members
-    function renderTeamMembers() {
-        adminMembersBox.innerHTML = ""; // Clear existing members
-        /*teamMembers.forEach((member, index) => {
-            const memberDiv = document.createElement("div");
-            memberDiv.classList.add("member");
-
-            const portrait = document.createElement("img");
-            portrait.setAttribute("src", member.photo || "https://tinyurl.com/2s3cwmnp");
-
-            const name = document.createElement("p");
-            name.textContent = member.name || "*Member Name*";
-            name.contentEditable = "true";
-
-            // Update the name in the teamMembers array on blur (when editing ends)
-            name.addEventListener("blur", () => {
-                teamMembers[index].name = name.textContent;
-            });
-
-            const editPhoto = document.createElement("textarea");
-            editPhoto.type = "text";
-            editPhoto.placeholder = "Photo URL";
-            editPhoto.value = member.photo;
-            editPhoto.addEventListener("input", (e) => {
-                member.photo = e.target.value;
-                portrait.src = e.target.value;
-            });
-
-            const removeButton = document.createElement("button");
-            removeButton.textContent = "- Remove";
-            removeButton.addEventListener("click", () => {
-                teamMembers.splice(index, 1);
-                renderTeamMembers();
-            });
-
-            memberDiv.appendChild(portrait);
-            memberDiv.appendChild(name);
-            memberDiv.appendChild(editPhoto);
-            memberDiv.appendChild(removeButton);
-            adminMembersBox.appendChild(memberDiv);
-        });*/
-    }
+   
 
     // Add New Member
     document.getElementById("addNewMember").addEventListener("click", () => {

@@ -103,6 +103,23 @@ async function getTeamNames(){
   return teamNames;
 }
 
+async function getTeamTitles(){
+  const teamRef = doc(db, "team", "team_members");
+  const teamSnap = await getDoc(teamRef); // Await the getDoc call
+  const teamTitles = [];
+  //get all the team titles from the database
+  if (teamSnap.exists()) {
+    const teamData = teamSnap.data();
+    if (teamData.teamTitles) { 
+      teamData.teamTitles.forEach((title) => {
+        teamTitles.push(title);
+      });
+    }
+  }
+  //console.log(teamTitles);
+  return teamTitles;
+}
+
 async function getTeamPortraits(num_mems, memberNames){
   //create array to store portraitURLs
   const portraitURLs = [];
@@ -481,6 +498,7 @@ window.savePrayerTime = savePrayerTime;
 window.saveSPrayerTime = saveSPrayerTime;
 window.getAnnouncements = getAnnouncements;
 window.getQuotes = getQuotes;
+window.getTeamTitles = getTeamTitles;
 
 
 getDocs(colRef)
