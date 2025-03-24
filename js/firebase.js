@@ -39,7 +39,7 @@ async function fetchLogo() {
   try {
     const url = await getDownloadURL(storageRef);
     console.log("Logo URL:", url); // Debugging line
-    document.getElementById('logo of MMSC').src = url;
+    document.getElementById('logo').src = url;
     console.log("Logo fetched and set successfully"); // Debugging line
   } catch (error) {
     console.error("Error fetching logo:", error);
@@ -611,9 +611,7 @@ async function createPrayerTime(prayerName, prayerNumber, prayerTimes){
     for(let i=6; i<=prayerAmount;i++){ //Grabs the time slot's id number, associate it with a prayer name, grab that time's data 
       createPrayerTime("",i,sPrayerTimes);
     }
-
-    console.log(sPrayerTimes);
-  
+      
     try{
       setDoc(prayerSRef, sPrayerTimes);
     }catch(e){

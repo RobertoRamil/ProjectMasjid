@@ -24,92 +24,6 @@ function quotePanes(announcement_panes) {
 }
 quotePanes(1);
 
-function prayerBoxEmotes(){
-    //Grabs all of the prayer time hours based on the class name
-    let prayerHour=document.getElementsByClassName("prayerHour");
-    let specialPrayerHour=document.getElementsByClassName("specialPrayerHour");
-
-    //Checks if multiple elements are in the class. Then splits the time to only grab the hour to compare and use the emote
-    if(prayerHour.length>0){
-        for(i=0; i<prayerHour.length; i++){
-            const splitTxt=prayerHour[i].innerText;
-            var hour=splitTxt.split(":")[0];
-            
-            //This is for if we are sticking to am and pm where it adds 12 hours to signify pms for easier comparisons.
-            var timeOfDay=splitTxt.includes("pm");
-            if(timeOfDay){
-                hour=Number(hour)+12;  
-            }
-            
-            var emote=emoteHour(hour);
-
-            //This keeps the text to only have one emoji
-            let prayerName=document.getElementsByClassName("prayerName");
-            let temp=prayerName[i].innerText.split(")")[0];
-            
-            prayerName[i].innerText=temp+")"+String.fromCodePoint(emote);
-        }
-    }
-
-    //Takes the home page's prayer name and hour. Splits the name to ensure only one emote is seen with each interval at the end of the Jumu'ah(Speech/Prayer)
-    //It takes the prayer time and splits the hour seen to check if it's day or night time.
-    if(specialPrayerHour.length>0){
-        for(i=0; i<specialPrayerHour.length; i++){
-            var splitSpecialTxt=specialPrayerHour[i].innerText.split(" ")[2];
-            var hour=splitSpecialTxt.split(":")[0];
-
-            //This is for if we are sticking to am and pm where it adds 12 hours to signify pms for easier comparisons.
-            var timeOfDay=splitSpecialTxt.includes("pm");
-            if(timeOfDay){
-                hour=Number(hour)+12;  
-            }
-
-            var emote=emoteHour(hour);
-            
-            let specialPrayerName=document.getElementsByClassName("specialPrayerName");
-            splitSpecialTxt=specialPrayerName[i].innerText.split(")")[0];
-            
-            specialPrayerName[i].innerText=splitSpecialTxt+")"+String.fromCodePoint(emote);
-
-        }
-    } 
-}
-
-//It will return the UTF-8 emote value depending on the hour.
-function emoteHour(hour){
-    hour=Number(hour);
-
-        //Sunrise
-        if(hour>=6 && hour<8){
-            return("0x1F305");
-        }
-        //Midday
-        else if(hour>=12 && hour<15){
-            return("0x26C5");
-        
-        }        
-        //Afternoon
-        else if(hour>=15 && hour<17){
-            return("0x2600");
-        }
-        //Sundown
-        else if(hour>=17 && hour<18){
-            return("0x1F307");
-        }
-        //Night
-        else if(hour>=18 && hour<20){
-            return("0x1F303");
-        }
-        //If not within the times, use prayer emote
-        return("0x1F64F");    
-}    
-
-
-//This will check for prayer time changes every hour (it goes based on milliseconds)
-prayerBoxEmotes();
-setInterval(prayerBoxEmotes, 3.6e+6);
-
-
 function map(URL){
     //If there is already a map embed, this gets rid of it
     const existingIframe = document.querySelector("iframe");
@@ -177,7 +91,7 @@ getDate();
 // Alternative function for generating prayer boxes using prayerAmount
 async function loadPrayerTimes(){
     let congregationAmount = 5;
-    let congregationNames = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+    const congregationNames = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
     let congregationTimes=[];
 
     for(let i=0; i<congregationNames.length; i++){
