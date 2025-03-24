@@ -60,6 +60,8 @@ h3 {
     color: white;
     cursor: pointer;
     border: 1px solid #0f5952;
+    font-family: 'Old Standard TT', serif;
+    font-size: 18px;
 }
 
 .tab:hover {

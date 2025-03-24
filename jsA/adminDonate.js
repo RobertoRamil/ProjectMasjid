@@ -77,7 +77,7 @@ document.getElementById('zelle').addEventListener('submit', async (e) => {
     const paypalLink = document.getElementById('paypalURL').value.trim();
     if (paypalLink) {
         await updateDoc(doc(db, "donate", "donate_paypal"), { body: paypalLink });
-        alert("Paypal link updated successfully");
+        alert("Square link updated successfully");
     } else {
         alert("Please enter a valid link");
     }

@@ -36,17 +36,28 @@ To create content separation, use the class "centeredRow".
 
 #heading{
     font-family: 'Abril Fatface', serif;
-    font-size: clamp(2rem, 5vw, 4rem);
+    font-size: clamp(2rem, 4vw, 4rem);
     text-align: center;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 #headingDate{
-    font-family: 'Abril Fatface', serif;
     font-size: clamp(1rem, 5vw, 4rem);
     text-align: center;
     margin-top: 20px;
     margin-bottom: 20px;
+    font-family: 'Old Standard TT', serif;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#headingText{
+    font-size: clamp(1rem, 5vw, 4rem);
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: 'Old Standard TT', serif;
+    font-size: 30px;
 }
 
 /*Quote*/
@@ -65,11 +76,13 @@ To create content separation, use the class "centeredRow".
 .prayer-name {
     font-size: clamp(0rem, 6vw, 1.5rem);
     margin-bottom: 10px; /* Space between name and time */
+    font-size: 30px;
 }
 
 .prayer-time {
     font-family: 'Old Standard TT', serif;
-    font-size: 14px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 

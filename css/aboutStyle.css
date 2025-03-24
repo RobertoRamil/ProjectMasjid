@@ -13,11 +13,21 @@
     background-color: white; 
     border-radius: 8px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    
+    font-family: 'Old Standard TT', serif;
+    font-size: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
 }
 .information h2 {
     text-align: center;
-    text-shadow: 1px 1px 1px #000;
+    font-family: 'Abril Fatface', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    
+}
+.Webpage-Tab-Title {
+    font-family: 'Old Standard TT', serif;
+    font-size: 32px; 
+    text-align: center;
+    font-weight: bold;
 }
 /*---------------social medias box (bottom boxes)------------ */
 
@@ -43,8 +53,8 @@
 /*The text we see in the social media boxes */
 .SocialMedia a {
     text-decoration: none; /* Removes the underline */
-    font-family: 'Arial', sans-serif;
-    font-size: 18px;
+    font-family: 'Old Standard TT', serif;
+    font-size: 20px;
     padding-top: 5px;
     font-weight: bold;
     max-width: 300px;
@@ -76,19 +86,23 @@
 .Team{
     float: right;
     width: 80%;
-    min-width: 90%;
+    min-width: 80%;
     padding: 10px;
     height: fit-content;
     min-height: 200px;
     background-color: white; 
     border-radius: 8px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    font-family: 'Abril Fatface', serif;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.9);
 }
 
 .Team .membersBox{
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+    font-family: 'Old Standard TT', serif;
+    font-size: 20px;
 }
 .Team .membersBox .member{
     padding-right: 30px;
