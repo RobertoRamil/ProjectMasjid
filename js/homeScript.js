@@ -6,25 +6,27 @@ document.addEventListener('DOMContentLoaded', function() {
   getAnnouncements();
   getQuotes();
 });
+
 //announcment box auto makes the boxes
-function quotePanes(announcement_panes) {
+async function quotePanes() {
     const announcementGrid = document.getElementById("quoteRow");
-    for (let j = 0; j < announcement_panes; j++) {
-        // Create announcement box
-        const announcement = document.createElement("div");
-        announcement.classList.add("announcement");
+    $(announcementGrid).empty();
+    let quote = (await getQuotes()).text;
+    console.error(quote);
+    // Create announcement box
+    const announcement = document.createElement("div");
+    announcement.classList.add("announcement");
 
-        // Create inner box for content
-        const boxInBox = document.createElement("div");
-        boxInBox.classList.add("inner-box");
-        boxInBox.textContent = "*Quote details go here*"; 
-        announcement.appendChild(boxInBox);
+    // Create inner box for content
+    const boxInBox = document.createElement("div");
+    boxInBox.classList.add("inner-box");
+    boxInBox.textContent = quote; 
+    announcement.appendChild(boxInBox);
 
-        // Append announcement to grid
-        announcementGrid.appendChild(announcement);
-    }
+    // Append announcement to grid
+    announcementGrid.appendChild(announcement);
 }
-quotePanes(1);
+quotePanes();
 
 function prayerBoxEmotes(){
     //Grabs all of the prayer time hours based on the class name

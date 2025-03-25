@@ -481,7 +481,8 @@ window.savePrayerTime = savePrayerTime;
 window.saveSPrayerTime = saveSPrayerTime;
 window.getAnnouncements = getAnnouncements;
 window.getQuotes = getQuotes;
-
+window.addQuotes = addQuotes;
+window.addAnnouncement = addAnnouncement;
 
 getDocs(colRef)
 .then((snapshot) => {
@@ -657,4 +658,32 @@ async function getQuotes(){
   const quoteSnap = await getDoc(quoteRef);
   console.error("Error fetching quote:", quoteSnap.data());
   return quoteSnap.data();
+}
+
+async function addAnnouncement(){
+  const announcementRef = doc(db, "announcements", "announcement");
+  const announcementText = document.getElementById("announcementText").value;
+  getDoc(announcementRef).then((docSnap) => {
+    if (docSnap.exists()) {
+      const existingAnnouncements = docSnap.data().text || [];
+      updateDoc(announcementRef, { text: [...existingAnnouncements, announcementText] });
+    } else {
+      setDoc(announcementRef, { text: [announcementText] });
+    }
+    alert("Announcement posted");
+    announcementPanes(5);
+  }).catch((error) => {
+    console.error("Error adding announcement:", error);
+  });
+}
+
+async function addQuote(){
+  const quoteRef = doc(db, "quotes", "quote");
+  const quoteText = document.getElementById("quoteText").value;
+  setDoc(quoteRef, { text: quoteText }).then(() => {
+    alert("Quote posted");
+    quotePanes(1);
+  }).catch((error) => {
+    console.error("Error adding quote:", error);
+  });
 }
