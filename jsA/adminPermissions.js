@@ -98,23 +98,33 @@ document.getElementById('permissionsContainer').addEventListener('change', async
 
 
 document.getElementById('createAdminBtn').addEventListener('click', async () => {
-  onAuthStateChanged(auth, async (user) => {
+  console.log("Admin Phone Number: +" + document.getElementById('adminPhoneNumberCountryCode').value.trim() + document.getElementById('adminPhoneNumber').value.trim());
+  const email = document.getElementById('adminEmail').value.trim();
+  const adminPhoneNumberCountryCode = document.getElementById('adminPhoneNumberCountryCode').value.trim();
+  const adminPhoneNumber = document.getElementById('adminPhoneNumber').value.trim();
+  const password = document.getElementById('adminPassword').value;
+  const canEditPayments = document.getElementById('canEditPayments').checked;
+  const canEditSocials = document.getElementById('canEditSocials').checked;
+
+  onAuthStateChanged(auth, async (user) => 
+    {
+    console.log(user);
+    const hasPermission = await canEditElement(user.phoneNumber, "isSuperAdmin");
+    
     if (user) {
       try {
-        const hasPermission = await canEditElement(user.phoneNumber, "isSuperAdmin");
         if (!hasPermission) {
           alert("You do not have permission to perform this function.");
 
         } else {
-          const email = document.getElementById('adminEmail').value.trim;
-
-          if (!email || !document.getElementById('adminPhoneNumberCountryCode').value.trim() || !document.getElementById('adminPhoneNumber').value.trim()) {
-            alert("Error: Fields not filled properly");
-            return;
-          }
-
-          const adminFullPhoneNumber = "+" + document.getElementById('adminPhoneNumberCountryCode').value.trim + document.getElementById('adminPhoneNumber').value;
-          const password = document.getElementById('adminPassword').value;
+            if (!email || !adminPhoneNumberCountryCode || !adminPhoneNumber) {
+              console.log(email);
+              console.log("+" + adminPhoneNumberCountryCode + adminPhoneNumber);
+              alert("Error: Fields not filled properly");
+              return;
+            }
+          const adminFullPhoneNumber = "+" + adminPhoneNumberCountryCode + adminPhoneNumber;
+          
 
           const adminDocRef = doc(db, "whitelistedAdmins", email);
           const adminDocSnap = await getDoc(adminDocRef);
@@ -122,19 +132,19 @@ document.getElementById('createAdminBtn').addEventListener('click', async () => 
             console.log("Admin already exists in whitelistedAdmins.");
           }
           else {
-
             await setDoc(adminDocRef, {
               isSuperAdmin: false,
               phoneNumber: adminFullPhoneNumber,
-              canEditSocials: false,
-              canEditPayments: false
+              canEditSocials: canEditSocials,
+              canEditPayments: canEditPayments
             });
 
             try {
               const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-              const user = userCredential.user;
-              console.log('User created:', user);
-              alert('Admin created successfully');
+              //const user = userCredential.user;
+              console.log('User created:', userCredential.user);
+              alert('Admin created successfully. Please relogin to add first time admin account');
+              window.location.href = "adminLogin.html";
 
             } catch (error) {
               if (error.code === "auth/email-already-in-use") {
@@ -146,55 +156,59 @@ document.getElementById('createAdminBtn').addEventListener('click', async () => 
             }
 
             populateAdminDropDown();
+            }
+          }
+          console.log(hasPermission);
+          } catch (error) {
+          console.error('Error checking permissions:', error);
           }
         }
-        console.log(hasPermission);
-      } catch (error) {
-        console.error('Error checking permissions:', error);
+        });
+
+        document.getElementById('adminEmail').value = '';
+        document.getElementById('adminPhoneNumberCountryCode').value = '';
+        document.getElementById('adminPhoneNumber').value = '';
+        document.getElementById('adminPassword').value = '';
+        document.getElementById('canEditSocials').checked = false;
+        document.getElementById('canEditPayments').checked = false;
+
+      });
+
+      // Populate the adminDropDown with documents within whitelistedAdmins that contain the field isSuperAdmin = false
+      const adminDropDown = document.getElementById('adminDropDown');
+      const adminDropDown2 = document.getElementById('adminDropDown2');
+
+      async function populateAdminDropDown() {
+        // Clear existing options to prevent duplicates
+        adminDropDown.innerHTML = '';
+        adminDropDown2.innerHTML = '';
+
+        // Add a "No option selected" option as the first option for both dropdowns
+        const noOptionSelected1 = document.createElement('option');
+        noOptionSelected1.value = '';
+        noOptionSelected1.textContent = 'No Selection';
+        adminDropDown.appendChild(noOptionSelected1);
+
+        const noOptionSelected2 = document.createElement('option');
+        noOptionSelected2.value = '';
+        noOptionSelected2.textContent = 'No Selection';
+        adminDropDown2.appendChild(noOptionSelected2);
+
+        const querySnapshot = await getDocs(collection(db, "whitelistedAdmins"));
+        querySnapshot.forEach((doc) => {
+        if (doc.data().isSuperAdmin === false) {
+          const option1 = document.createElement('option');
+          option1.value = doc.id;
+          option1.textContent = doc.id;
+          adminDropDown.appendChild(option1);
+
+          const option2 = document.createElement('option');
+          option2.value = doc.id;
+          option2.textContent = doc.id;
+          adminDropDown2.appendChild(option2);
+        }
+        });
       }
-    }
-  });
-
-  document.getElementById('adminEmail').value = '';
-  document.getElementById('adminPhoneNumberCountryCode').value = '';
-  document.getElementById('adminPhoneNumber').value = '';
-  document.getElementById('adminPassword').value = '';
-  document.getElementById('canEditHome').checked = false;
-  document.getElementById('canEditAbout').checked = false;
-
-});
-
-// Populate the adminDropDown with documents within whitelistedAdmins that contain the field isSuperAdmin = false
-const adminDropDown = document.getElementById('adminDropDown');
-const adminDropDown2 = document.getElementById('adminDropDown2');
-
-async function populateAdminDropDown() {
-  // Add a "No option selected" option as the first option for both dropdowns
-  const noOptionSelected1 = document.createElement('option');
-  noOptionSelected1.value = '';
-  noOptionSelected1.textContent = 'No Selection';
-  adminDropDown.appendChild(noOptionSelected1);
-
-  const noOptionSelected2 = document.createElement('option');
-  noOptionSelected2.value = '';
-  noOptionSelected2.textContent = 'No Selection';
-  adminDropDown2.appendChild(noOptionSelected2);
-
-  const querySnapshot = await getDocs(collection(db, "whitelistedAdmins"));
-  querySnapshot.forEach((doc) => {
-    if (doc.data().isSuperAdmin === false) {
-      const option1 = document.createElement('option');
-      option1.value = doc.id;
-      option1.textContent = doc.id;
-      adminDropDown.appendChild(option1);
-
-      const option2 = document.createElement('option');
-      option2.value = doc.id;
-      option2.textContent = doc.id;
-      adminDropDown2.appendChild(option2);
-    }
-  });
-}
 
 async function deleteAdmin() {
   onAuthStateChanged(auth, async (user) => {

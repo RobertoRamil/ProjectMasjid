@@ -406,9 +406,8 @@ document.getElementById("updateFacebookLink").addEventListener("click", async ()
         const hasPermission = await canEditElement(user.phoneNumber, "canEditSocials");
         if (!hasPermission) {
           alert("You do not have permission to perform this function.");
-
+          return;
         } else {
-          const facebookLink = document.getElementById("facebookLink").value.trim();
           if (facebookLink) {
             await updateDoc(doc(db, "Links", "facebook"), { link: facebookLink });
             alert("Facebook link updated successfully!");

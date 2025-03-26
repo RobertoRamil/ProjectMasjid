@@ -48,21 +48,24 @@ document.getElementById('zelleSubmitImg').onchange = evt => {
 document.getElementById('zelle').addEventListener('submit', async (e) => {
   e.preventDefault(); // Prevent the page from refreshing
 
+  const file = document.getElementById('zelleSubmitImg').files[0];
+  const storageRef = ref(storage, 'Donation_Photos/zelle.png');
+  const downloadURL = await getDownloadURL(storageRef);
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       try {
         const hasPermission = await canEditElement(user.phoneNumber, "canEditPayments");
         if (!hasPermission) {
           alert("You do not have permission to perform this function.");
+          console.log("test");
+          return;
         } else {
-          const file = document.getElementById('zelleSubmitImg').files[0];
+          
 
           if (file) {
-            const storageRef = ref(storage, 'Donation_Photos/zelle.png');
 
             try {
               await uploadBytes(storageRef, file);
-              const downloadURL = await getDownloadURL(storageRef);
 
               document.getElementById('zelle_preview').src = downloadURL;
               alert('Zelle image updated successfully!');
@@ -83,16 +86,17 @@ document.getElementById('zelle').addEventListener('submit', async (e) => {
 
 document.getElementById('paypal').addEventListener('submit', async (e) => {
   e.preventDefault();
-
+  const paypalLink = document.getElementById('paypalURL').value.trim();
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       try {
         const hasPermission = await canEditElement(user.phoneNumber, "canEditPayments");
         if (!hasPermission) {
           alert("You do not have permission to perform this function.");
+          return;
 
         } else {
-          const paypalLink = document.getElementById('paypalURL').value.trim();
+
           if (paypalLink) {
             await updateDoc(doc(db, "donate", "donate_paypal"), { body: paypalLink });
             alert("Paypal link updated successfully");
