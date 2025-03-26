@@ -29,7 +29,7 @@ async function backgroundHourChange(){
     //Change the background colors on the filter div that rests behind all objects but on top of the background image
  
     //Fajr
-    if(hour>prayerTimes[4]&& hour<=prayerTimes[0]){
+    if(hour>prayerTimes[4]){
       filter.style.backdropFilter="hue-rotate(150deg)";
       headerFilter.style.filter="hue-rotate(302deg) brightness(80%)";
     }

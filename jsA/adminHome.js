@@ -86,6 +86,7 @@ document.getElementById("addPhotoButton").addEventListener("click", () => {
     });
 });
 
+
 //Prayer List
 let sPrayerCounter = 1;
 let sPrayerRows=1;
@@ -146,6 +147,9 @@ function addPrayer(){
       newRow.className = "prayer_time_and_label";
       newRow.id = `sPrayerRow${sPrayerCounter}`; // Assign a unique ID to the row
 
+      const sLabel=document.createElement("div");
+      sLabel.className="sPrayerLabel";
+
       //Create the label of the speech and prayer
       const sPrayerLabel = document.createElement("label");
       sPrayerLabel.style.fontSize="medium";
@@ -183,7 +187,10 @@ function addPrayer(){
       timeSpan.appendChild(sPrayerTimeInput);
 
       // Append inputs to the new row
-      newRow.appendChild(sPrayerLabel);
+      sLabel.appendChild(sPrayerLabel);
+      sLabel.appendChild(sPrayerClose);
+
+      newRow.appendChild(sLabel);
       newRow.appendChild(sPrayerName);
       newRow.appendChild(timeSpan);
 
