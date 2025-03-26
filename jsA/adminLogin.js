@@ -37,8 +37,9 @@ const db = getFirestore();
 const submit = document.getElementById("submit");
 const resetSend = document.getElementById("resetSend");
 const forgotPassword = document.getElementById("forgotPassword");
-const modalOverlay = document.getElementById("modalOverlay")
-
+const modalOverlay = document.getElementById("modalOverlay");
+const userLogin = document.getElementById("username");
+const userPass = document.getElementById("password");
 const storage = getStorage(app);
 
 async function fetchLogo() {
@@ -56,6 +57,17 @@ async function fetchLogo() {
 window.onload = function() {
   fetchLogo();
 }
+
+userLogin.addEventListener('keydown', onEnterKeyPress);
+userPass.addEventListener('keydown', onEnterKeyPress);
+
+function onEnterKeyPress(event) {
+  if (event.key === 'Enter') {
+    console.log("click submitted");
+    submit.click();
+  }
+}
+
 
 submit.addEventListener("click", (event) => {
   event.preventDefault();
