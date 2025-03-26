@@ -105,6 +105,11 @@ resetSend.addEventListener("click", (event) => {
     });
 })
 
+const whitelistedAdmins = await getDocs(collection(db, "whitelistedAdmins"));
+const appVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+  size: 'normal'
+});
+
 //Forgot password button
 forgotPassword.addEventListener("click", (event) => {
   event.preventDefault();
@@ -119,17 +124,6 @@ modalOverlay.addEventListener("click", (event) => {
     document.getElementById("modalOverlay").style.display = "none";
   }
 })
-
-
-const whitelistedAdmins = await getDocs(collection(db, "whitelistedAdmins"));
-window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-  'size': 'invisible',
-  'callback': (response) => {
-    // reCAPTCHA solved, allow signInWithPhoneNumber.
-    onSignInSubmit();
-  }
-});
-window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {});
 
 // Google Sign-In
 const googleLogin = document.getElementById("googleLogin");
@@ -149,7 +143,7 @@ async function verifyAdminAndSignIn(user) {
   const isAdmin = whitelistedAdmins.docs.some(doc => doc.id === user.email);
   if (isAdmin) {
     const phoneNumber = whitelistedAdmins.docs.find(doc => doc.id === user.email).data().phoneNumber;
-    const appVerifier = window.recaptchaVerifier;
+
     //const adminDocId = whitelistedAdmins.docs.find(doc => doc.id === user.email).id;
 
     try {
@@ -161,7 +155,7 @@ async function verifyAdminAndSignIn(user) {
       //console.log("Phone number verified and user signed in:");
       window.location.href = "adminHome.html";
     } catch (error) {
-      grecaptcha.reset(window.recaptchaVerifier);
+      grecaptcha.reset(appVerifier);
       console.error("Error during phone number sign-in:", error);
 
       alert("Error: Unable to sign in with phone number.");
