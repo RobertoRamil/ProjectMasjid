@@ -1,0 +1,15 @@
+{
+  "name": "selenium-mocha-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --timeout 5500"
+  },
+  "devDependencies": {
+    "chai": "^5.2.0",
+    "chromedriver": "^122.0.6",
+    "webdriver-manager": "^5.0.0"
+  },
+  "type": "module"
+}
