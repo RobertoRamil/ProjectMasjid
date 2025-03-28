@@ -348,43 +348,38 @@ async function signUpEmail() {
       alert("Email already enrolled!");
       return;
     }
-
-    alert("You have joined the newsletter!");
-    updateDoc(contactsRef, { emails: arrayUnion(userEmail) })
-  }
-  else {
-    alert("Invalid Email");
-
-  }
-
-}
-
-async function signUpPhone() {
-  const userPhone = document.getElementById("phoneField").value;
-  var phoneRegex = /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
-  var phoneNum = userPhone.replace(/[^A-Z0-9]/ig, "");
-  //If the phone number does not have a country code, assume it is from the US
-  if (phoneNum.length == 10) {
-    phoneNum = "1" + phoneNum;
-  }
-  //IMPORTANT NOTE FOR LATER: Add functionality to ensure that the phonenumber is not a duplicate
-  //IMPORTANT NOTE FOR LATER: When sms is function we need to make an authentification method to avoid botting
-  if (phoneRegex.test(userPhone)) {
-    //This alert can be polished later into something prettier
-    //If number is valid, ensure it is not a duplicate
-    //Get phone numbers from the database
-    let phones = await getPhoneList();
-    if (phones.includes(phoneNum)) {
-      alert("Phone number already enrolled!");
-      return;
+    else{
+      alert("Invalid Email");
+  
     }
-    alert("You have joined the newsletter!");
-    updateDoc(contactsRef, { phoneNums: arrayUnion(phoneNum) })
+    
   }
-  else {
-    alert("Invalid Phone number");
-  }
-
+  
+async function signUpPhone(){
+    const userPhone = document.getElementById("phoneField").value;
+    var phoneRegex = /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\\s.-]?\d{4}$/;
+    var phoneNum = userPhone.replace(/[^A-Z0-9]/ig, "");
+    //If the phone number does not have a country code, assume it is from the US
+    if(phoneNum.length == 10){
+        phoneNum = "1" + phoneNum;
+    }
+    //IMPORTANT NOTE FOR LATER: Add functionality to ensure that the phonenumber is not a duplicate
+    //IMPORTANT NOTE FOR LATER: When sms is function we need to make an authentification method to avoid botting
+    if(phoneRegex.test(userPhone)){
+        //This alert can be polished later into something prettier
+        //If number is valid, ensure it is not a duplicate
+        //Get phone numbers from the database
+        let phones = await getPhoneList();
+        if(phones.includes(phoneNum)){
+          alert("Phone number already enrolled!");
+          return;
+        }
+        alert("You have joined the newsletter!");
+        updateDoc(contactsRef, {phoneNums: arrayUnion(phoneNum)})
+    }
+    else{
+      alert("Invalid Phone number");
+    }
 }
 
 async function getlinks() {
@@ -510,6 +505,8 @@ window.pullSPrayerTime = pullSPrayerTime;
 window.savePrayerTime = savePrayerTime;
 window.saveSPrayerTime = saveSPrayerTime;
 window.canEditElement = canEditElement;
+window.getAnnouncements = getAnnouncements;
+window.getQuotes = getQuotes;
 
 
 getDocs(colRef)
@@ -653,4 +650,37 @@ async function saveSPrayerTime(prayerAmount) {
   }
 }
 
+async function getAnnouncements(){
+  const announcementRef = doc(db, "announcements", "announcement");
+  const announcementSnap = await getDoc(announcementRef);
+  const announcements = announcementSnap.data().text;
 
+  const announcementRow = document.getElementById("announcementRow");
+  announcementRow.innerHTML = ''; // Clear existing announcements
+
+  announcements.forEach(announcement => {
+    const announcementDiv = document.createElement("div");
+    announcementDiv.className = "announcement";
+    announcementDiv.textContent = announcement;
+    announcementRow.appendChild(announcementDiv);
+  });
+
+  return announcements;
+}
+
+
+function addQuotes(){
+  const quoteRef = doc(db, "quotes", "quote");
+  const quoteText = document.getElementById("quoteText").value;
+  updateDoc(quoteRef, {text: arrayUnion(quoteText)})
+  alert("Quote posted");
+  quotePanes(5);
+
+}
+
+async function getQuotes(){
+  const quoteRef = doc(db, "quotes", "quote");
+  const quoteSnap = await getDoc(quoteRef);
+  console.error("Error fetching quote:", quoteSnap.data());
+  return quoteSnap.data();
+}

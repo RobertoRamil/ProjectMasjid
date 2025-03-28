@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
   pullPrayerTime();
   pullSPrayerTime();
   fetchCarouselImages();
+  getAnnouncements();
+  getQuotes();
 });
 //announcment box auto makes the boxes
 function quotePanes(announcement_panes) {
@@ -125,8 +127,8 @@ function convertSpace(event){
 }    
 
 //announcment box auto makes the boxes
-function announcementPanes(announcement_panes) {
-    const announcementGrid = document.getElementById("announcementRow");
+function announcement_Panes(announcement_panes) {
+    const announcementGrid = document.getElementById("quoteRow");
     for (let j = 0; j < announcement_panes; j++) {
         // Create announcement box
         const announcement = document.createElement("div");
@@ -135,14 +137,13 @@ function announcementPanes(announcement_panes) {
         // Create inner box for content
         const boxInBox = document.createElement("div");
         boxInBox.classList.add("inner-box");
-        boxInBox.textContent = "*Announcement details go here*"; 
+        boxInBox.textContent = "*Quote details go here*"; 
         announcement.appendChild(boxInBox);
 
         // Append announcement to grid
         announcementGrid.appendChild(announcement);
     }
 }
-  announcementPanes(5);
 
 //prayer time to auto get the current date on the system
 function getDate(){
