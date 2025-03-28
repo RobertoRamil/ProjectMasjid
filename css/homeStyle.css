@@ -114,14 +114,16 @@ To create content separation, use the class "centeredRow".
 }
 .carousel-inner {
     width: 100%;
-    max-height: 80vh; /* Keeps it responsive on large screens */
+    max-height: 100%; /* Keeps it responsive on large screens */
     border-radius: 8px;
 }
 .carousel-inner .carousel-item img {
     display: block;
     margin: auto;
-    max-width: 97%; /* Prevents the images from overflowing */
-    height: 61.9vw; /* Maintains the aspect ratio */
+    width: 100%;
+    max-width: 80vw; /* Prevents the images from overflowing */
+    max-height: 100%;
+    height: 100%; /* Maintains the aspect ratio */
     border-radius: 8px;
 }
 
