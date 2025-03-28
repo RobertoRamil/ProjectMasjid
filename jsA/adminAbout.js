@@ -34,58 +34,89 @@ onAuthStateChanged(auth, (user) => {
 });
 
 
-async function getTeamNames() {
-  const teamRef = doc(db, "team", "team_members");
-  const teamSnap = await getDoc(teamRef); // Await the getDoc call
-  const teamNames = [];
-  //get all the team names from the database
-  if (teamSnap.exists()) {
+  async function getTeamNames(){
+    const teamRef = doc(db, "team", "team_members");
+    const teamSnap = await getDoc(teamRef); // Await the getDoc call
+    const teamNames = [];
+    //get all the team names from the database
+    if (teamSnap.exists()) {
+      const teamData = teamSnap.data();
+      if (teamData.teamNames) { 
+        teamData.teamNames.forEach((name) => {
+          teamNames.push(name);
+        });
+      }
+    }
+    //console.log(teamNames);
+    return teamNames;
+  }
+  async function getTeamTitles(){
+    const teamRef = doc(db, "team", "team_members");
+    const teamSnap = await getDoc(teamRef); // Await the getDoc call
+    const teamTitles = [];
+    //get all the team titles from the database
+    if (teamSnap.exists()) {
+      const teamData = teamSnap.data();
+      if (teamData.teamTitles) { 
+        teamData.teamTitles.forEach((title) => {
+          teamTitles.push(title);
+        });
+      }
+    }
+    //console.log(teamTitles);
+    return teamTitles;
+  }
+  
+  async function getTeamPortraits(num_mems, memberNames){
+    //create array to store portraitURLs
+    const portraitURLs = [];
+    for(let i = 0; i < num_mems; i++){
+      console.log("Getting portrait for", memberNames[i]); // Debugging line
+      const portraitRef = ref(storage, `team_portraits/${memberNames[i]}.PNG`);
+      const portraitURL = await getDownloadURL(portraitRef); // Await the getDownloadURL call
+      //add portraitURL to an array
+      portraitURLs.push(portraitURL);
+    }
+    //console.log(portraitURLs);
+    return portraitURLs;
+  }
+  
+  async function removeTeamMember(name){
+    console.log("Removing team member:", name); // Debugging line
+    const teamRef = doc(db, "team", "team_members");
+    
+    const teamSnap = await getDoc(teamRef); // Await the getDoc call
     const teamData = teamSnap.data();
     if (teamData.teamNames) {
-      teamData.teamNames.forEach((name) => {
-        teamNames.push(name);
-      });
+      const index = teamData.teamNames.indexOf(name);
+      if (index > -1) {
+        teamData.teamNames.splice(index, 1);
+        teamData.teamTitles.splice(index, 1);
+      }
+    }
+    updateDoc(teamRef, { teamNames: teamData.teamNames });
+    //Remove the portrait from storage
+    const portraitRef = ref(storage, `team_portraits/${name}.PNG`);
+    try {
+      await deleteObject(portraitRef);
+      console.log("Portrait deleted successfully");
+    } catch (error) {
+      console.error("Error deleting portrait:", error);
     }
   }
-  //console.log(teamNames);
-  return teamNames;
-}
-
-async function getTeamPortraits(num_mems, memberNames) {
-  //create array to store portraitURLs
-  const portraitURLs = [];
-  for (let i = 0; i < num_mems; i++) {
-    console.log("Getting portrait for", memberNames[i]); // Debugging line
-    const portraitRef = ref(storage, `team_portraits/${memberNames[i]}.PNG`);
-    const portraitURL = await getDownloadURL(portraitRef); // Await the getDownloadURL call
-    //add portraitURL to an array
-    portraitURLs.push(portraitURL);
-  }
-  //console.log(portraitURLs);
-  return portraitURLs;
-}
-
-async function removeTeamMember(name) {
-  console.log("Removing team member:", name); // Debugging line
-  const teamRef = doc(db, "team", "team_members");
-
-  const teamSnap = await getDoc(teamRef); // Await the getDoc call
-  const teamData = teamSnap.data();
-  if (teamData.teamNames) {
-    const index = teamData.teamNames.indexOf(name);
-    if (index > -1) {
-      teamData.teamNames.splice(index, 1);
+  async function saveTeamMember(name, title, portrait){
+    const teamRef = doc(db, "team", "team_members");
+    updateDoc(teamRef, {teamNames: arrayUnion(name)});
+    updateDoc(teamRef, {teamTitles: arrayUnion(title)}); // Placeholder for title, can be modified later
+    //Rename portrait file name to match the name
+    const storageRef = ref(storage, `team_portraits/${name}.PNG`);
+    try {
+      await uploadBytes(storageRef, portrait);
+      console.log("Portrait uploaded successfully");
+    } catch (error) {
+      console.error("Error uploading portrait:", error);
     }
-  }
-  updateDoc(teamRef, { teamNames: teamData.teamNames });
-  //Remove the portrait from storage
-  const portraitRef = ref(storage, `team_portraits/${name}.PNG`);
-  try {
-    await deleteObject(portraitRef);
-    console.log("Portrait deleted successfully");
-  } catch (error) {
-    console.error("Error deleting portrait:", error);
-  }
+  
 }
 async function getAboutHeader() {
   const aboutRef = doc(db, "about", "about_header");
@@ -112,23 +143,11 @@ async function saveAbtBody() {
   const aboutRef = doc(db, "about", "about_body");
   updateDoc(aboutRef, { body: aboutBody });
 }
-async function saveTeamMember(name, portrait) {
-  const teamRef = doc(db, "team", "team_members");
-  updateDoc(teamRef, { teamNames: arrayUnion(name) });
-  //Rename portrait file name to match the name
-  const storageRef = ref(storage, `team_portraits/${name}.PNG`);
-  try {
-    await uploadBytes(storageRef, portrait);
-    console.log("Portrait uploaded successfully");
-  } catch (error) {
-    console.error("Error uploading portrait:", error);
-  }
 
-
-}
 // Initialize Firebase
 
 let teamMembers;
+let teamTitles;
 let teamPortraits;
 
 // End: Redirect to login page if the user is not authenticated
@@ -145,10 +164,11 @@ async function setupInfo() {
 
 }
 
-async function initTeamMembers() {
-  teamMembers = await getTeamNames();
-  teamPortraits = await getTeamPortraits(teamMembers.length, teamMembers);
-  renderTeamMembers();
+async function initTeamMembers(){
+    teamMembers = await getTeamNames();
+    teamTitles = await getTeamTitles();
+    teamPortraits = await getTeamPortraits(teamMembers.length, teamMembers);
+    renderTeamMembers();
 }
 
 async function remove(name) {
@@ -188,32 +208,35 @@ async function addTeamMember() {
       imagePreview.style.display = "none"; // Hide the preview if no file is selected
     }
   });
+    // Create an input for the member name
+    const nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.classList.add("memberName");
+    nameInput.placeholder = "Member Name";
 
-  // Create an input for the member name
-  const nameInput = document.createElement("input");
-  nameInput.type = "text";
-  nameInput.classList.add("memberName");
-  nameInput.placeholder = "Member Name";
+    // Create an input for the member title
+    const titleInput = document.createElement("input");
+    titleInput.type = "text";
+    titleInput.classList.add("memberTitle");
+    titleInput.placeholder = "Member Title";
 
-  // Create a save button
-  const saveButton = document.createElement("button");
-  saveButton.textContent = "Save";
-  saveButton.addEventListener("click", async () => {
-    //Get files
-    const name = nameInput.value;
-    const portrait = imageInput.files[0];
-    if (!name || !portrait) {
-      alert("Please provide a name and portrait.");
-      return;
-    }
-    //Save the portrait to storage
-    console.log("Adding team member:", name); // Debugging line
-    console.log("Portrait file:", portrait); // Debugging line
-    //Save the name and portrait
-    await saveTeamMember(name, portrait);
-
-
-
+    // Create a save button
+    const saveButton = document.createElement("button");
+    saveButton.textContent = "Save";
+    saveButton.addEventListener("click", async () => {
+        //Get files
+        const name = nameInput.value;
+        const title = titleInput.value;
+        const portrait = imageInput.files[0];
+        if (!name || !title || !portrait) {
+            alert("Please provide a name, title, and portrait.");
+            return;
+        }
+        //Save the portrait to storage
+        console.log("Adding team member:", name); // Debugging line
+        console.log("Portrait file:", portrait); // Debugging line
+        //Save the name and portrait
+        await saveTeamMember(name, title, portrait);
     //Rerender
     initTeamMembers();
   });
@@ -225,18 +248,15 @@ async function addTeamMember() {
     // Remove the temporary div
     tempDiv.remove();
   });
-
-  // Append inputs and button to the temporary div
-  tempDiv.appendChild(imageInput);
-  tempDiv.appendChild(imagePreview);
-  tempDiv.appendChild(nameInput);
-  tempDiv.appendChild(saveButton);
-  tempDiv.appendChild(cancelButton);
-
+    // Append inputs and button to the temporary div
+    tempDiv.appendChild(imageInput);
+    tempDiv.appendChild(imagePreview);
+    tempDiv.appendChild(nameInput);
+    tempDiv.appendChild(titleInput);
+    tempDiv.appendChild(saveButton);
+    tempDiv.appendChild(cancelButton);
   // Append the temporary div to the adminMembersBox
   adminMembersBox.appendChild(tempDiv);
-
-
 }
 
 function renderTeamMembers() {
@@ -265,11 +285,28 @@ function renderTeamMembers() {
       const nameParagraph = removeButton.previousElementSibling;
       remove(nameParagraph.textContent);
 
+        var title = document.createElement("p");
+        title.textContent = teamTitles[i]; // Placeholder for title, can be modified later
+
+
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "- Remove";
+        removeButton.addEventListener("click", () => {
+            //teamMembers.splice(index, 1);
+            //renderTeamMembers();
+            const titleParagraph = removeButton.previousElementSibling;
+            const nameParagraph = titleParagraph.previousElementSibling;
+            remove(nameParagraph.textContent);
     });
 
 
 
 
+        // Append portrait and name to the member div
+        member.appendChild(portrait);
+        member.appendChild(name);
+        member.appendChild(title);
+        member.appendChild(removeButton);
     // Append portrait and name to the member div
     member.appendChild(portrait);
     member.appendChild(name);
@@ -288,7 +325,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initTeamMembers();
 
-  const adminMembersBox = document.getElementById("adminMembersBox");
+    const adminMembersBox = document.getElementById("adminMembersBox");
+
 
 
 
