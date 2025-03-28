@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 
-import { getAuth, onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
+import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
 import { getStorage, ref, getDownloadURL, uploadBytes, listAll } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js';
 import { getFirestore, Timestamp, collection, doc, setDoc, getDoc, deleteDoc, updateDoc, getDocs, arrayUnion } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js'
 
@@ -20,7 +20,7 @@ const storage = getStorage(app);
 const auth = getAuth();
 
 
-function checkAuth(){
+function checkAuth() {
   onAuthStateChanged(auth, (user) => {
     if (!user) {
       // User is not signed in, redirect to login page
@@ -44,7 +44,7 @@ async function fetchLogo() {
   } catch (error) {
     console.error("Error fetching logo:", error);
   }
-} 
+}
 
 async function setHeaderBackground() {
   const storageRef = ref(storage, 'HeaderPhotos/FrontImage.png');
@@ -59,41 +59,41 @@ async function setHeaderBackground() {
 
 //--------------------------------------------Setup for donate section--------------------------------------------------//
 async function fetchZelleLogo() {
-  console.log("fetchZelleLogo function called"); 
+  console.log("fetchZelleLogo function called");
   const storageRef = ref(storage, 'Donation_Photos/zelle.png');
   try {
     const url = await getDownloadURL(storageRef);
     console.log("Zelle Logo URL:", url);
     document.getElementById('zellelogo').src = url;
-    console.log("Zelle logo fetched and set successfully"); 
+    console.log("Zelle logo fetched and set successfully");
   } catch (error) {
     console.error("Error fetching Zelle logo:", error);
   }
 }
 
-async function getDonateBody(){
+async function getDonateBody() {
   const aboutRef = doc(db, "donate", "donate_body");
-  const aboutSnap = await getDoc(aboutRef); 
+  const aboutSnap = await getDoc(aboutRef);
   const aboutBody = aboutSnap.data().body;
   return aboutBody;
 }
 
-async function getPaypalBody(){
+async function getPaypalBody() {
   const aboutRef = doc(db, "donate", "donate_paypal");
-  const aboutSnap = await getDoc(aboutRef); 
+  const aboutSnap = await getDoc(aboutRef);
   const aboutBody = aboutSnap.data().body;
   return aboutBody;
 }
 
 //--------------------------------------------Setup for team members---------------------------------------------------
-async function getTeamNames(){
+async function getTeamNames() {
   const teamRef = doc(db, "team", "team_members");
   const teamSnap = await getDoc(teamRef); // Await the getDoc call
   const teamNames = [];
   //get all the team names from the database
   if (teamSnap.exists()) {
     const teamData = teamSnap.data();
-    if (teamData.teamNames) { 
+    if (teamData.teamNames) {
       teamData.teamNames.forEach((name) => {
         teamNames.push(name);
       });
@@ -103,10 +103,10 @@ async function getTeamNames(){
   return teamNames;
 }
 
-async function getTeamPortraits(num_mems, memberNames){
+async function getTeamPortraits(num_mems, memberNames) {
   //create array to store portraitURLs
   const portraitURLs = [];
-  for(let i = 0; i < num_mems; i++){
+  for (let i = 0; i < num_mems; i++) {
     console.log("Getting portrait for", memberNames[i]); // Debugging line
     const portraitRef = ref(storage, `team_portraits/${memberNames[i]}.PNG`);
     const portraitURL = await getDownloadURL(portraitRef); // Await the getDownloadURL call
@@ -117,10 +117,10 @@ async function getTeamPortraits(num_mems, memberNames){
   return portraitURLs;
 }
 
-async function removeTeamMember(name){
+async function removeTeamMember(name) {
   console.log("Removing team member:", name); // Debugging line
   const teamRef = doc(db, "team", "team_members");
-  
+
   const teamSnap = await getDoc(teamRef); // Await the getDoc call
   const teamData = teamSnap.data();
   if (teamData.teamNames) {
@@ -140,9 +140,9 @@ async function removeTeamMember(name){
   }
 }
 
-async function saveTeamMember(name, portrait){
+async function saveTeamMember(name, portrait) {
   const teamRef = doc(db, "team", "team_members");
-  updateDoc(teamRef, {teamNames: arrayUnion(name)});
+  updateDoc(teamRef, { teamNames: arrayUnion(name) });
   //Rename portrait file name to match the name
   const storageRef = ref(storage, `team_portraits/${name}.PNG`);
   try {
@@ -157,32 +157,32 @@ async function saveTeamMember(name, portrait){
 //--------------------------------------------End of setup for team members--------------------------------------------
 
 //--------------------------------------------Setup for about section--------------------------------------------------
-async function getAboutHeader(){
+async function getAboutHeader() {
   const aboutRef = doc(db, "about", "about_header");
   const aboutSnap = await getDoc(aboutRef); // Await the getDoc call
   const aboutHeader = aboutSnap.data().header;
   return aboutHeader;
 }
 
-async function getAboutBody(){
+async function getAboutBody() {
   const aboutRef = doc(db, "about", "about_body");
   const aboutSnap = await getDoc(aboutRef); // Await the getDoc call
   const aboutBody = aboutSnap.data().body;
   return aboutBody;
 }
 
-async function saveAbtHeader(){
+async function saveAbtHeader() {
   const aboutHeader = document.getElementById("adminLeftTitle").textContent;
   const aboutRef = doc(db, "about", "about_header");
-  updateDoc(aboutRef, {header: aboutHeader});
+  updateDoc(aboutRef, { header: aboutHeader });
 }
 
-async function saveAbtBody(){
+async function saveAbtBody() {
   const aboutBody = document.getElementById("adminLeftText").textContent;
   const aboutRef = doc(db, "about", "about_body");
-  updateDoc(aboutRef, {body: aboutBody});
+  updateDoc(aboutRef, { body: aboutBody });
 }
-//--------------------------------------------End of setup for about section-------------------------------------------
+//--------------------------------------------End of setup for about section-------------------------------------------//
 
 //--------------------------------------------Setup for event section--------------------------------------------------//
 
@@ -267,18 +267,48 @@ async function deleteEventFromFirebase(eventDate, eventName) {
 }
 
 //--------------------------------------------End of setup for event section-------------------------------------------//
+//--------------------------------------------Start setup for Permissions section--------------------------------------------//
+async function getEmail(phoneNumber) {
+  const querySnapshot = await getDocs(collection(db, "whitelistedAdmins"));
+  let documentName = null;
+
+  querySnapshot.forEach((doc) => {
+    if (doc.data().phoneNumber === phoneNumber) {
+      documentName = doc.id;
+    }
+  });
+  console.log(documentName);
+
+  return documentName;
+}
+export async function canEditElement(phoneNumber, permission) {
+  const email = await getEmail(phoneNumber);
+  if (!email) {
+    return false;
+  }
+
+  const doc = await getDoc(doc(db, "whitelistedAdmins", email));
+  const hasPermission = doc.data()[permission];
+  return hasPermission;
+}
+
+
+
+
+
+//--------------------------------------------End of setup for Permissions section-------------------------------------------//
 const contactsRef = doc(db, "users", "userContacts");
 const contactsSnap = getDoc(contactsRef);
 
 const colRef = collection(db, "users");
 
-async function getEmailsList(){
+async function getEmailsList() {
   const emailSnap = await getDoc(contactsRef); // Await the getDoc call
   const emails = [];
   //get all the emails from the database
   if (emailSnap.exists()) {
     const emailData = emailSnap.data();
-    if (emailData.emails) { 
+    if (emailData.emails) {
       emailData.emails.forEach((name) => {
         emails.push(name);
       });
@@ -287,13 +317,13 @@ async function getEmailsList(){
   return emails;
 }
 
-async function getPhoneList(){
+async function getPhoneList() {
   const phoneSnap = await getDoc(contactsRef); // Await the getDoc call
   const phones = [];
   //get all the phone numbers from the database
   if (phoneSnap.exists()) {
     const phoneData = phoneSnap.data();
-    if (phoneData.phoneNums) { 
+    if (phoneData.phoneNums) {
       phoneData.phoneNums.forEach((name) => {
         phones.push(name);
       });
@@ -302,25 +332,21 @@ async function getPhoneList(){
   return phones;
 }
 
-async function signUpEmail(){
-    const userEmail = document.getElementById("emailField").value;
-    var emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-      //IMPORTANT NOTE FOR LATER: Add functionality to ensure that the email is not a duplicate
-      //IMPORTANT NOTE FOR LATER: When email sending is function we need to make an authentification method to avoid botting
-    if(emailRegex.test(userEmail)){
-        //This alert can be polished later into something prettier
-        //If email is valid, ensure it is not a duplicate
-        //Get emails from the database
-        
-        //Check if the email is already in the database
-        let emails = await getEmailsList();
-        if(emails.includes(userEmail)){
-          alert("Email already enrolled!");
-          return;
-        }
-        
-      alert("You have joined the newsletter!");
-      updateDoc(contactsRef, {emails: arrayUnion(userEmail)})
+async function signUpEmail() {
+  const userEmail = document.getElementById("emailField").value;
+  var emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  //IMPORTANT NOTE FOR LATER: Add functionality to ensure that the email is not a duplicate
+  //IMPORTANT NOTE FOR LATER: When email sending is function we need to make an authentification method to avoid botting
+  if (emailRegex.test(userEmail)) {
+    //This alert can be polished later into something prettier
+    //If email is valid, ensure it is not a duplicate
+    //Get emails from the database
+
+    //Check if the email is already in the database
+    let emails = await getEmailsList();
+    if (emails.includes(userEmail)) {
+      alert("Email already enrolled!");
+      return;
     }
     else{
       alert("Invalid Email");
@@ -354,7 +380,6 @@ async function signUpPhone(){
     else{
       alert("Invalid Phone number");
     }
-    
 }
 
 async function getlinks() {
@@ -377,7 +402,7 @@ async function getlinks() {
     }
     if (links.youtube) {
       document.getElementById('youtube_footer_link').href = links.youtube;
-      console.log("YouTube link set to:", links.youtube); 
+      console.log("YouTube link set to:", links.youtube);
     }
     console.log(links);
   } catch (error) {
@@ -386,37 +411,37 @@ async function getlinks() {
 }
 
 async function uploadImage() {
-    const file = document.getElementById("imageUpload").files[0];
-    const imageType = document.getElementById("imageType").value;
-    if (!file) {
-        document.getElementById("uploadStatus").textContent = "Please select an image first.";
-        document.getElementById("uploadStatus").style.color = "red";
-        return;
-    }
+  const file = document.getElementById("imageUpload").files[0];
+  const imageType = document.getElementById("imageType").value;
+  if (!file) {
+    document.getElementById("uploadStatus").textContent = "Please select an image first.";
+    document.getElementById("uploadStatus").style.color = "red";
+    return;
+  }
 
-    let storagePath;
-    if (imageType === "logo") {
-        storagePath = 'HeaderPhotos/logo2.png';
-    } else if (imageType === "backdrop") {
-        storagePath = 'HeaderPhotos/FrontImage.png';
-    } else {
-        document.getElementById("uploadStatus").textContent = "Invalid image type selected.";
-        document.getElementById("uploadStatus").style.color = "red";
-        return;
-    }
+  let storagePath;
+  if (imageType === "logo") {
+    storagePath = 'HeaderPhotos/logo2.png';
+  } else if (imageType === "backdrop") {
+    storagePath = 'HeaderPhotos/FrontImage.png';
+  } else {
+    document.getElementById("uploadStatus").textContent = "Invalid image type selected.";
+    document.getElementById("uploadStatus").style.color = "red";
+    return;
+  }
 
-    const storageRef = ref(storage, storagePath);
-    try {
-        await uploadBytes(storageRef, file);
-        document.getElementById("uploadStatus").textContent = "Image uploaded successfully!";
-        document.getElementById("uploadStatus").style.color = "green";
-        document.getElementById("imagePreview").style.display = "none";
-        document.getElementById("imageUpload").value = "";
-    } catch (error) {
-        console.error("Error uploading image:", error);
-        document.getElementById("uploadStatus").textContent = "An error occurred. Please try again.";
-        document.getElementById("uploadStatus").style.color = "red";
-    }
+  const storageRef = ref(storage, storagePath);
+  try {
+    await uploadBytes(storageRef, file);
+    document.getElementById("uploadStatus").textContent = "Image uploaded successfully!";
+    document.getElementById("uploadStatus").style.color = "green";
+    document.getElementById("imagePreview").style.display = "none";
+    document.getElementById("imageUpload").value = "";
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    document.getElementById("uploadStatus").textContent = "An error occurred. Please try again.";
+    document.getElementById("uploadStatus").style.color = "red";
+  }
 }
 
 async function fetchCarouselImages() {
@@ -474,91 +499,92 @@ window.removeTeamMember = removeTeamMember;
 window.saveAbtHeader = saveAbtHeader;
 window.saveAbtBody = saveAbtBody;
 window.saveTeamMember = saveTeamMember;
-window.checkAuth = checkAuth; 
+window.checkAuth = checkAuth;
 window.pullPrayerTime = pullPrayerTime;
 window.pullSPrayerTime = pullSPrayerTime;
 window.savePrayerTime = savePrayerTime;
 window.saveSPrayerTime = saveSPrayerTime;
+window.canEditElement = canEditElement;
 window.getAnnouncements = getAnnouncements;
 window.getQuotes = getQuotes;
 
 
 getDocs(colRef)
-.then((snapshot) => {
+  .then((snapshot) => {
     let users = []
     snapshot.docs.forEach((doc) => {
-        users.push({ ...doc.data(), id: doc.id })
+      users.push({ ...doc.data(), id: doc.id })
     })
-})
-.catch(err => {
+  })
+  .catch(err => {
     console.log(err.message)
-})
+  })
 //This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.
-async function pullPrayerTime(prayerName){
+async function pullPrayerTime(prayerName) {
   const prayerRef = doc(db, "prayerTimes", "prayerTime");
   const prayerSnap = await getDoc(prayerRef);
   const prayerHourData = prayerSnap.data(); //Gets the data from the prayer database
 
-  try{
+  try {
     const fieldCount = Object.keys(prayerHourData).length;//Gets the count of prayers in the database
-    let keys=Object.keys(prayerHourData); //Isolates data to prayer names
-    let info=Object.values(prayerHourData); //Isolates the data to the values
+    let keys = Object.keys(prayerHourData); //Isolates data to prayer names
+    let info = Object.values(prayerHourData); //Isolates the data to the values
 
-    for(let i=0;i<fieldCount; i++){
-      if(keys[i]==prayerName){
-        let fullDate=info[i].toDate();
-        return(fullDate);
+    for (let i = 0; i < fieldCount; i++) {
+      if (keys[i] == prayerName) {
+        let fullDate = info[i].toDate();
+        return (fullDate);
       }
     }
-  }catch (e) {
-    console.log("error getting prayer Times"+e);
-  }  
+  } catch (e) {
+    console.log("error getting prayer Times" + e);
+  }
 }
 
-async function pullSPrayerTime(){
-  
+async function pullSPrayerTime() {
+
   //This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.
   const prayerRef = doc(db, "prayerTimes", "specialPrayerTime");
   const prayerSnap = await getDoc(prayerRef);
   let prayerHourData = prayerSnap.data(); //Gets the data from the prayer database
 
 
-  var sortedData= Object.entries(prayerHourData).sort();
+  var sortedData = Object.entries(prayerHourData).sort();
 
-    try{
-      const fieldCount = Object.keys(sortedData).length;//Gets the count of prayers in the database
-        let data=Object.values(sortedData); //Isolates the data to the values
-        let keys=[];
-        let info=[];
+  try {
+    const fieldCount = Object.keys(sortedData).length;//Gets the count of prayers in the database
+    let data = Object.values(sortedData); //Isolates the data to the values
+    let keys = [];
+    let info = [];
 
 
-      for(let i=0;i<fieldCount; i++){
-          info[i]=data[i][1].toDate();
-          keys[i]=sortedData[i][0]=data[i][0];
-      }
-       return([keys,info]);
-    }catch (e) {
-      console.log("error getting prayer Times"+e);
-    }  
+    for (let i = 0; i < fieldCount; i++) {
+      info[i] = data[i][1].toDate();
+      keys[i] = sortedData[i][0] = data[i][0];
+    }
+    return ([keys, info]);
+  } catch (e) {
+    console.log("error getting prayer Times" + e);
   }
+}
 
 
-async function createPrayerTime(prayerName, prayerNumber, prayerTimes){
-  let prayerTime,sPrayerName;
+async function createPrayerTime(prayerName, prayerNumber, prayerTimes) {
+  let prayerTime, sPrayerName;
   let firebaseTimeStamp;
-  let currentDate=new Date();
+  let currentDate = new Date();
 
-  if(prayerNumber>5){
-    let prayerTemp=prayerNumber-5;
-    prayerTime=document.getElementById(`sPrayerTime${prayerTemp}`).value;
-    sPrayerName=document.getElementById(`sPrayerName${prayerTemp}`).value;
-    let tempDate=new Date(prayerTime);
-    firebaseTimeStamp=Timestamp.fromDate(tempDate);
+  if (prayerNumber > 5) {
+    let prayerTemp = prayerNumber - 5;
+    prayerTime = document.getElementById(`sPrayerTime${prayerTemp}`).value;
+    sPrayerName = document.getElementById(`sPrayerName${prayerTemp}`).value;
+    let tempDate = new Date(prayerTime);
+    firebaseTimeStamp = Timestamp.fromDate(tempDate);
     prayerTimes[sPrayerName] = firebaseTimeStamp;
-  }else{
-    prayerTime=document.getElementById(`prayerTime${prayerNumber}`).value;
-    prayerTime=prayerTime.split(":");
-    firebaseTimeStamp=Timestamp.fromDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), prayerTime[0], prayerTime[1],0));
+  } else {
+    prayerTime = document.getElementById(`prayerTime${prayerNumber}`).value;
+    prayerTime = prayerTime.split(":");
+    firebaseTimeStamp = Timestamp.fromDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), prayerTime[0], prayerTime[1], 0));
     prayerTimes[prayerName] = firebaseTimeStamp;
   }
 }
@@ -566,63 +592,63 @@ async function createPrayerTime(prayerName, prayerNumber, prayerTimes){
 //Translating the prayer times to timestamps to put into database and then testing to push to the database.
 //If there are time slots present but not filled, it will not push all of the data and alert the user.
 //If it's a Jumu'ah prayer/speech it will translate the date value to timestamp to be stored.
-  //Else, it will grab the system's current day, month, and year at the time of pressing save to fill in those data points for the timestamp.
+//Else, it will grab the system's current day, month, and year at the time of pressing save to fill in those data points for the timestamp.
 
-  async function savePrayerTime(prayerAmount){
-    //This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.
-    const prayerRef = doc(db, "prayerTimes", "prayerTime");
-    const prayerSnap = await getDoc(prayerRef);
+async function savePrayerTime(prayerAmount) {
+  //This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.
+  const prayerRef = doc(db, "prayerTimes", "prayerTime");
+  const prayerSnap = await getDoc(prayerRef);
 
-    let prayerTimes={};
-  
-    for(let i=1; i<=prayerAmount;i++){ //Grabs the time slot's id number, associate it with a prayer name, grab that time's data 
-      switch(i){
-        case 1:
-          createPrayerTime("Fajr",1,prayerTimes);
+  let prayerTimes = {};
+
+  for (let i = 1; i <= prayerAmount; i++) { //Grabs the time slot's id number, associate it with a prayer name, grab that time's data 
+    switch (i) {
+      case 1:
+        createPrayerTime("Fajr", 1, prayerTimes);
         break;
-        case 2:
-          createPrayerTime("Dhuhr",2,prayerTimes);
-          break;
-        case 3:
-          createPrayerTime("Asr",3,prayerTimes);
-          break;  
-        case 4:
-          createPrayerTime("Maghrib",4,prayerTimes);
-          break;
-        case 5:
-          createPrayerTime("Isha",5,prayerTimes);
-          break; 
-      }
-    }
-  
-    try{
-      setDoc(prayerRef, prayerTimes);
-    }catch(e){
-      console.log("Error saving prayer times.",e);
-      alert("All prayer hours must be submitted to update the prayer hours.");
+      case 2:
+        createPrayerTime("Dhuhr", 2, prayerTimes);
+        break;
+      case 3:
+        createPrayerTime("Asr", 3, prayerTimes);
+        break;
+      case 4:
+        createPrayerTime("Maghrib", 4, prayerTimes);
+        break;
+      case 5:
+        createPrayerTime("Isha", 5, prayerTimes);
+        break;
     }
   }
 
-  async function saveSPrayerTime(prayerAmount){
-    //This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.
-    const prayerSRef = doc(db, "prayerTimes", "specialPrayerTime");
-    const prayerSnap = await getDoc(prayerSRef);
-  
-    let sPrayerTimes={};
-  
-    for(let i=6; i<=prayerAmount;i++){ //Grabs the time slot's id number, associate it with a prayer name, grab that time's data 
-      createPrayerTime("",i,sPrayerTimes);
-    }
-
-    console.log(sPrayerTimes);
-  
-    try{
-      setDoc(prayerSRef, sPrayerTimes);
-    }catch(e){
-      console.log("Error saving prayer times.",e);
-      alert("All prayer hours must be submitted to update the prayer hours.");
-    }
+  try {
+    setDoc(prayerRef, prayerTimes);
+  } catch (e) {
+    console.log("Error saving prayer times.", e);
+    alert("All prayer hours must be submitted to update the prayer hours.");
   }
+}
+
+async function saveSPrayerTime(prayerAmount) {
+  //This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.
+  const prayerSRef = doc(db, "prayerTimes", "specialPrayerTime");
+  const prayerSnap = await getDoc(prayerSRef);
+
+  let sPrayerTimes = {};
+
+  for (let i = 6; i <= prayerAmount; i++) { //Grabs the time slot's id number, associate it with a prayer name, grab that time's data 
+    createPrayerTime("", i, sPrayerTimes);
+  }
+
+  console.log(sPrayerTimes);
+
+  try {
+    setDoc(prayerSRef, sPrayerTimes);
+  } catch (e) {
+    console.log("Error saving prayer times.", e);
+    alert("All prayer hours must be submitted to update the prayer hours.");
+  }
+}
 
 async function getAnnouncements(){
   const announcementRef = doc(db, "announcements", "announcement");
