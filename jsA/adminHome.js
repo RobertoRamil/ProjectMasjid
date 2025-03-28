@@ -86,6 +86,7 @@ document.getElementById("addPhotoButton").addEventListener("click", () => {
     });
 });
 
+
 //Prayer List
 let sPrayerCounter = 1;
 let sPrayerRows=1;
@@ -94,9 +95,8 @@ document.getElementById("prayerSaveButton").addEventListener("click", function s
   const prayerAmount=document.getElementsByClassName("time").length;
   savePrayerTime(5);
   saveSPrayerTime(prayerAmount);
-  alert("Prayer Time submitted");
-
 });
+
 // Show photo preview when a file is selected
 document.getElementById("slideshowInput").addEventListener("change", (event) => {
     const file = event.target.files[0];
@@ -146,6 +146,9 @@ function addPrayer(){
       newRow.className = "prayer_time_and_label";
       newRow.id = `sPrayerRow${sPrayerCounter}`; // Assign a unique ID to the row
 
+      const sLabel=document.createElement("div");
+      sLabel.className="sPrayerLabel";
+
       //Create the label of the speech and prayer
       const sPrayerLabel = document.createElement("label");
       sPrayerLabel.style.fontSize="medium";
@@ -183,7 +186,10 @@ function addPrayer(){
       timeSpan.appendChild(sPrayerTimeInput);
 
       // Append inputs to the new row
-      newRow.appendChild(sPrayerLabel);
+      sLabel.appendChild(sPrayerLabel);
+      sLabel.appendChild(sPrayerClose);
+
+      newRow.appendChild(sLabel);
       newRow.appendChild(sPrayerName);
       newRow.appendChild(timeSpan);
 
@@ -196,6 +202,7 @@ function addPrayer(){
       alert("Too many special prayers, change or delete.");
     }
 }
+
 document.getElementById("addSPrayerRow").addEventListener("click", addPrayer);
 
 //This presets the prayer times on admin side to remind admins what size is in the database
@@ -334,6 +341,12 @@ async function createPrayerTime(prayerName, prayerNumber, prayerTimes){
   
     try{
       setDoc(prayerRef, prayerTimes);
+      var popup=document.getElementById("popupItem");
+      popup.classList.toggle("show");
+      //Times popout out after 3 seconds
+      setTimeout(() => {
+        popup.style.display = "none";
+      }, 3000);
     }catch(e){
       console.log("Error saving prayer times.",e);
       alert("All prayer hours must be submitted to update the prayer hours.");
@@ -349,10 +362,7 @@ async function createPrayerTime(prayerName, prayerNumber, prayerTimes){
   
     for(let i=6; i<=prayerAmount;i++){ //Grabs the time slot's id number, associate it with a prayer name, grab that time's data 
       createPrayerTime("",i,sPrayerTimes);
-    }
-
-    console.log(sPrayerTimes);
-  
+    }  
     try{
       setDoc(prayerSRef, sPrayerTimes);
     }catch(e){
