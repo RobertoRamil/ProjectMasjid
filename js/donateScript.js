@@ -22,7 +22,7 @@ async function setupDonate(){
     if (body.trim()) {
         donatePaypalBody.innerHTML = `
             <a href="${body}" class="donation-link" target="_blank">
-                <button class="paypal-button">Donate with PayPal</button>
+                <button class="paypal-button">Donate with Square</button>
             </a>`;
     }
 

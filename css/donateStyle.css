@@ -23,6 +23,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     font-family: 'Old Standard TT', serif; 
     font-weight: 500; 
+    background-color: rgba(255, 255, 255, 0.9);
 }
 /* -------Donate section: holds donation methods------------ */
 .donation-section {
@@ -46,16 +47,19 @@
 
 /* Default styles for mobile view */
 .donation-method .logo {
-    width: 300px;
-    height: auto;
-    margin: 0; 
+    width: 100%; /* Ensure the image scales within the container */
+    max-width: 300px; /* Set a maximum width for the image */
+    height: auto; 
+    margin: 0 auto; 
 }
 
 /* Styles for larger screens */
 @media (min-width: 768px) {
     .donation-method .logo {
-        width: 400px; 
+        width: 100%; 
+        max-width: 400px; 
         height: auto;
+        margin: 0 auto; 
     }
 }
 
@@ -83,7 +87,7 @@
     font-weight: 500; 
 }
 .donation-link:hover p {
-    text-decoration: underline; 
+    text-decoration: none; 
 }
 
 
@@ -93,7 +97,7 @@
 }
 
 .paypal-button {
-    background-color: #0070ba;
+    background-color: #070707;
     color: white;
     border: none;
     padding: 12px 24px;
@@ -102,7 +106,7 @@
     border-radius: 8px;
     font-weight: bold;
     transition: all 0.3s ease-in-out;
-    box-shadow: 0 4px 10px rgba(0, 112, 186, 0.4);
+    box-shadow: 0 4px 10px rgba(15, 89, 82, 0.4);
     position: relative;
     overflow: hidden;
     display: inline-block;
@@ -115,16 +119,16 @@
 /* Desktop Hover Effect */
 @media (hover: hover) {
     .paypal-button:hover {
-        background-color: #005ea6;
+        background-color: #0f5952;
         transform: scale(1.05);
-        box-shadow: 0 6px 15px rgba(0, 112, 186, 0.6);
+        box-shadow: 0 6px 15px rgba(15, 89, 82, 0.4);
     }
 
     /* Glow Effect for Desktop */
     @keyframes glow {
-        0% { box-shadow: 0 4px 10px rgba(0, 112, 186, 0.4); }
-        50% { box-shadow: 0 8px 20px rgba(0, 112, 186, 0.8); }
-        100% { box-shadow: 0 4px 10px rgba(0, 112, 186, 0.4); }
+        0% { box-shadow: 0 4px 10px rgba(15, 89, 82, 0.4); }
+        50% { box-shadow: 0 8px 20px rgba(15, 89, 82, 0.4); }
+        100% { box-shadow: 0 4px 10px rgba(15, 89, 82, 0.4); }
     }
 
     .paypal-button:hover {
@@ -134,16 +138,16 @@
 
 /* Mobile-Tap Effect */
 .paypal-button:active {
-    background-color: #004c80;
+    background-color: #0f5952;
     transform: scale(0.92);
-    box-shadow: 0 2px 6px rgba(0, 112, 186, 0.3);
+    box-shadow: 0 2px 6px rgba(15, 89, 82, 0.4);
 }
 
 /*Pulse Effect for mobile */
 @keyframes pulse {
-    0% { transform: scale(1); box-shadow: 0 4px 10px rgba(0, 112, 186, 0.4); }
-    50% { transform: scale(1.07); box-shadow: 0 6px 15px rgba(0, 112, 186, 0.6); }
-    100% { transform: scale(1); box-shadow: 0 4px 10px rgba(0, 112, 186, 0.4); }
+    0% { transform: scale(1); box-shadow: 0 4px 10px rgba(15, 89, 82, 0.4); }
+    50% { transform: scale(1.07); box-shadow: 0 6px 15px rgba(15, 89, 82, 0.4); }
+    100% { transform: scale(1); box-shadow: 0 4px 10px rgba(15, 89, 82, 0.4); }
 }
 
 /* Ensure button centered */
