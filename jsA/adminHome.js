@@ -32,7 +32,7 @@ onAuthStateChanged(auth, (user) => {
     window.location.href = "adminLogin.html";
     console.log("Page restricted until signed in");
   } else {
-
+    console.log(user);
   }
 });
 // End: Redirect to login page if the user is not authenticated
