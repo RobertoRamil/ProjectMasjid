@@ -118,7 +118,6 @@ document.getElementById("slideshowInput").addEventListener("change", (event) => 
 document.getElementById("deletePhotoButton").addEventListener("click", () => {
     const selectedImages = document.querySelectorAll(".slideshowImage.selected");
     const deletePromises = [];
-
     selectedImages.forEach((img) => {
         const fileName = decodeURIComponent(img.src.split('/').pop().split('#')[0].split('?')[0]);
         const storageRef = ref(storage, `/${fileName}`);
@@ -401,4 +400,75 @@ function getDate() {
 
 }
 getDate();
+window.addAnnouncement = addAnnouncement;
 
+async function addAnnouncement(){
+  const announcementRef = doc(db, "announcements", "announcement");
+  const announcementText = document.getElementById("announcementText").value;
+  getDoc(announcementRef).then((docSnap) => {
+    if (docSnap.exists()) {
+      const existingAnnouncements = docSnap.data().text || [];
+      updateDoc(announcementRef, { text: [...existingAnnouncements, announcementText] });
+    } else {
+      setDoc(announcementRef, { text: [announcementText] });
+    }
+    alert("Announcement posted");
+    announcementPanes(5);
+  }).catch((error) => {
+    console.error("Error adding announcement:", error);
+  });
+}
+window.addQuotes = addQuotes;
+async function addQuotes(){
+  const quoteRef = doc(db, "quotes", "quote");
+  const quoteText = document.getElementById("quoteText").value;
+  setDoc(quoteRef, { text: quoteText }).then(() => {
+    alert("Quote posted");
+    quotePanes(1);
+  }).catch((error) => {
+    console.error("Error adding quote:", error);
+  });
+}
+
+async function announcementPanes(announcement_panes) {
+  const announcementGrid = document.getElementById("announcementRow");
+  $(announcementGrid).empty();
+  let announcements = (await getAnnouncements()).text;
+  for (let j = 0; j < announcements.length; j++) {
+    console.error(announcements[j]);
+      // Create announcement box
+      const announcement = document.createElement("div");
+      announcement.classList.add("announcement");
+
+      // Create inner box for content
+      const boxInBox = document.createElement("div");
+      boxInBox.classList.add("inner-box");
+      boxInBox.textContent = announcements[j]; 
+      announcement.appendChild(boxInBox);
+
+      // Append announcement to grid
+      announcementGrid.appendChild(announcement);
+  }
+}
+announcementPanes(5);
+window.announcementPanes = announcementPanes;
+//announcment box auto makes the boxes
+async function quotePanes(quote_panes) {
+  const quoteGrid = document.getElementById("quoteRow");
+  $(quoteGrid).empty();
+  let quote = (await getDoc(doc(db, "quotes", "quote"))).data().text;
+  // Create quote box
+  const quoteBox = document.createElement("div");
+  quoteBox.classList.add("quote");
+
+  // Create inner box for content
+  const boxInBox = document.createElement("div");
+  boxInBox.classList.add("inner-box");
+  boxInBox.textContent = quote; 
+  quoteBox.appendChild(boxInBox);
+
+  // Append quote to grid
+  quoteGrid.appendChild(quoteBox);
+}
+quotePanes(1);
+window.quotePanes = quotePanes;
