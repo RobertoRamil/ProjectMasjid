@@ -285,35 +285,32 @@ function renderTeamMembers() {
       const nameParagraph = removeButton.previousElementSibling;
       remove(nameParagraph.textContent);
 
-        var title = document.createElement("p");
-        title.textContent = teamTitles[i]; // Placeholder for title, can be modified later
+      var title = document.createElement("p");
+      title.textContent = teamTitles[i]; // Placeholder for title, can be modified later;
 
+      const removeButton = document.createElement("button");
+      removeButton.textContent = "- Remove";
+      removeButton.addEventListener("click", () => {
+        //teamMembers.splice(index, 1);
+        //renderTeamMembers();
+        const titleParagraph = removeButton.previousElementSibling;
+        const nameParagraph = titleParagraph.previousElementSibling;
+        remove(nameParagraph.textContent);
+      });
 
-        const removeButton = document.createElement("button");
-        removeButton.textContent = "- Remove";
-        removeButton.addEventListener("click", () => {
-            //teamMembers.splice(index, 1);
-            //renderTeamMembers();
-            const titleParagraph = removeButton.previousElementSibling;
-            const nameParagraph = titleParagraph.previousElementSibling;
-            remove(nameParagraph.textContent);
+      // Append portrait and name to the member div
+      member.appendChild(portrait);
+      member.appendChild(name);
+      member.appendChild(title);
+      member.appendChild(removeButton);
+      // Append portrait and name to the member div
+      member.appendChild(portrait);
+      member.appendChild(name);
+      member.appendChild(removeButton);
+
+      // Append the member div to the memberGrid
+      adminMembersBox.appendChild(member);
     });
-
-
-
-
-        // Append portrait and name to the member div
-        member.appendChild(portrait);
-        member.appendChild(name);
-        member.appendChild(title);
-        member.appendChild(removeButton);
-    // Append portrait and name to the member div
-    member.appendChild(portrait);
-    member.appendChild(name);
-    member.appendChild(removeButton);
-
-    // Append the member div to the memberGrid
-    adminMembersBox.appendChild(member);
   }
 }
 
