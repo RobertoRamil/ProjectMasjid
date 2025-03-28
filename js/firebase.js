@@ -354,6 +354,7 @@ async function signUpEmail() {
     }
     
   }
+}
   
 async function signUpPhone(){
     const userPhone = document.getElementById("phoneField").value;
