@@ -371,6 +371,7 @@ async function signUpEmail() {
     }
     
   }
+}
 async function removeEmail() {
   const contactsRef = doc(db, "users", "userContacts");
   const contactsSnap = await getDoc(contactsRef);
