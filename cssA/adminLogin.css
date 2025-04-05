@@ -1,6 +1,7 @@
 /* --------------------General------------------------ */
 #login-container {
-    display: grid;
+    display: flex;
+    flex-direction: column;
 
     width: 40%;
     max-height: fit-content;
@@ -14,6 +15,8 @@
 
     border-radius: 5px;
     box-shadow: 0 0 10px rgb(0, 0, 0, .1);
+    justify-content: flex-start;
+    overflow: hidden;
 }
 
 #loginTitle {
@@ -27,15 +30,19 @@ label {
 }
 
 input {
-    width: 90%;
-    padding: 8px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 98%;
+    padding: 5px;
     margin-bottom: 10px;
     border-radius: 4px;
     border: 1px solid #ccc;
 }
 
 button {
-    max-width: 50%;
+    align-items: center;
+    text-align: center;
     padding: 10px;
     margin-bottom: 10px;
     background-color: #0f5952;
@@ -43,18 +50,23 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 #submit {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     float: inline-start;
-    width: 45%;
-    margin-right: 2%;
+    
 }
 
 #forgot_password {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     float: inline-end;
-    width: 45%;
-    margin-left: 2%;
+    
 
 }
 
@@ -70,6 +82,7 @@ button:hover {
     color: red;
     text-align: center;
 }
+
 
 /* --------------------Header------------------------ */
 #header a img {
@@ -154,10 +167,28 @@ button:hover {
 
 .email-input {
     width: 100%;
-    padding: 8px;
+    padding: 3px;
     margin-top: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+/*---------------------Back ground------------------------*/
+body { 
+    background-image: url('../images/mosque-6231915.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size:cover ;
+}
+
+#filter{
+    opacity:0.8;
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0px;
+    left:0px;
+    z-index:-1;
 }
 
 /* --------------------Home Page ------------------------ */
