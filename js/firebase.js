@@ -331,7 +331,7 @@ async function signUpEmail(){
   
 async function signUpPhone(){
     const userPhone = document.getElementById("phoneField").value;
-    var phoneRegex = /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+    var phoneRegex = /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\\s.-]?\d{4}$/;
     var phoneNum = userPhone.replace(/[^A-Z0-9]/ig, "");
     //If the phone number does not have a country code, assume it is from the US
     if(phoneNum.length == 10){
@@ -479,7 +479,10 @@ window.pullPrayerTime = pullPrayerTime;
 window.pullSPrayerTime = pullSPrayerTime;
 window.savePrayerTime = savePrayerTime;
 window.saveSPrayerTime = saveSPrayerTime;
-
+window.getAnnouncements = getAnnouncements;
+window.getQuotes = getQuotes;
+window.addQuotes = addQuotes;
+window.addAnnouncement = addAnnouncement;
 
 getDocs(colRef)
 .then((snapshot) => {
@@ -620,4 +623,65 @@ async function createPrayerTime(prayerName, prayerNumber, prayerTimes){
     }
   }
 
+async function getAnnouncements(){
+  const announcementRef = doc(db, "announcements", "announcement");
+  const announcementSnap = await getDoc(announcementRef);
+  const announcements = announcementSnap.data().text;
 
+  const announcementRow = document.getElementById("announcementRow");
+  announcementRow.innerHTML = ''; // Clear existing announcements
+
+  announcements.forEach(announcement => {
+    const announcementDiv = document.createElement("div");
+    announcementDiv.className = "announcement";
+    announcementDiv.textContent = announcement;
+    announcementRow.appendChild(announcementDiv);
+  });
+
+  return announcements;
+}
+
+
+function addQuotes(){
+  const quoteRef = doc(db, "quotes", "quote");
+  const quoteText = document.getElementById("quoteText").value;
+  updateDoc(quoteRef, {text: arrayUnion(quoteText)})
+  alert("Quote posted");
+  quotePanes(5);
+
+}
+
+async function getQuotes(){
+  const quoteRef = doc(db, "quotes", "quote");
+  const quoteSnap = await getDoc(quoteRef);
+  console.error("Error fetching quote:", quoteSnap.data());
+  return quoteSnap.data();
+}
+
+async function addAnnouncement(){
+  const announcementRef = doc(db, "announcements", "announcement");
+  const announcementText = document.getElementById("announcementText").value;
+  getDoc(announcementRef).then((docSnap) => {
+    if (docSnap.exists()) {
+      const existingAnnouncements = docSnap.data().text || [];
+      updateDoc(announcementRef, { text: [...existingAnnouncements, announcementText] });
+    } else {
+      setDoc(announcementRef, { text: [announcementText] });
+    }
+    alert("Announcement posted");
+    announcementPanes(5);
+  }).catch((error) => {
+    console.error("Error adding announcement:", error);
+  });
+}
+
+async function addQuote(){
+  const quoteRef = doc(db, "quotes", "quote");
+  const quoteText = document.getElementById("quoteText").value;
+  setDoc(quoteRef, { text: quoteText }).then(() => {
+    alert("Quote posted");
+    quotePanes(1);
+  }).catch((error) => {
+    console.error("Error adding quote:", error);
+  });
+}

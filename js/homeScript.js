@@ -3,26 +3,30 @@ document.addEventListener('DOMContentLoaded', function() {
   pullPrayerTime();
   pullSPrayerTime();
   fetchCarouselImages();
+  getAnnouncements();
+  getQuotes();
 });
+
 //announcment box auto makes the boxes
-function quotePanes(announcement_panes) {
+async function quotePanes() {
     const announcementGrid = document.getElementById("quoteRow");
-    for (let j = 0; j < announcement_panes; j++) {
-        // Create announcement box
-        const announcement = document.createElement("div");
-        announcement.classList.add("announcement");
+    $(announcementGrid).empty();
+    let quote = (await getQuotes()).text;
+    console.error(quote);
+    // Create announcement box
+    const announcement = document.createElement("div");
+    announcement.classList.add("announcement");
 
-        // Create inner box for content
-        const boxInBox = document.createElement("div");
-        boxInBox.classList.add("inner-box");
-        boxInBox.textContent = "*Quote details go here*"; 
-        announcement.appendChild(boxInBox);
+    // Create inner box for content
+    const boxInBox = document.createElement("div");
+    boxInBox.classList.add("inner-box");
+    boxInBox.textContent = quote; 
+    announcement.appendChild(boxInBox);
 
-        // Append announcement to grid
-        announcementGrid.appendChild(announcement);
-    }
+    // Append announcement to grid
+    announcementGrid.appendChild(announcement);
 }
-quotePanes(1);
+quotePanes();
 
 function map(URL){
     //If there is already a map embed, this gets rid of it
@@ -39,8 +43,8 @@ function convertSpace(event){
 }    
 
 //announcment box auto makes the boxes
-function announcementPanes(announcement_panes) {
-    const announcementGrid = document.getElementById("announcementRow");
+function announcement_Panes(announcement_panes) {
+    const announcementGrid = document.getElementById("quoteRow");
     for (let j = 0; j < announcement_panes; j++) {
         // Create announcement box
         const announcement = document.createElement("div");
@@ -49,14 +53,13 @@ function announcementPanes(announcement_panes) {
         // Create inner box for content
         const boxInBox = document.createElement("div");
         boxInBox.classList.add("inner-box");
-        boxInBox.textContent = "*Announcement details go here*"; 
+        boxInBox.textContent = "*Quote details go here*"; 
         announcement.appendChild(boxInBox);
 
         // Append announcement to grid
         announcementGrid.appendChild(announcement);
     }
 }
-  announcementPanes(5);
 
 //prayer time to auto get the current date on the system
 function getDate(){
