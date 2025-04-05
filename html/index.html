@@ -31,11 +31,6 @@
         <script src="../js/template.js" defer></script>
         <script src="../js/header.js" defer></script>
         <script type='module' src="../js/firebase.js" defer></script>
-        <script>
-          document.addEventListener('DOMContentLoaded', () => {
-            fetchCarouselImages();
-          });
-        </script>
     </head>
 
 
@@ -62,6 +57,8 @@
 <!--Prayer Container-->    
     <div class="centeredRow">
             <div class="box" id="prayerBox">
+                <h1 id="heading">Daily Congregational Prayer Time</h1>
+                <h1 id="headingText">(Join us for all five daily prayers at MMSC)</h1>
                 <h1 id="headingDate"><div id="date" class="clock" onload="getDate()"></div> </h1>
                 <div class="container"></div> <!-- Container to hold prayer boxes -->
                 <script src="../js/script.js"></script>                               
@@ -73,26 +70,25 @@
         
 <!--Image Carousel-->   
 <div class="centeredRow">     
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-              <!-- Remove hardcoded indicators -->
-              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner"></div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-          </a>
-        </div>
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <!-- Remove hardcoded indicators -->
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner"></div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
 </div>
 <!--Image Carousel--->
-
 
 
 <!--Announcements-->
@@ -112,7 +108,7 @@
 <div id="footer"></div>
 
     <!-- Link to the JavaScript file -->
-    <script  src="../js/homeScript.js" type="module" defer></script>
+    <script src="../js/homeScript.js" type="module" defer></script>
     <script src="../js/footerScript.js" defer></script>
     <script src = "../js/firebase.js" type="module" defer ></script>
 

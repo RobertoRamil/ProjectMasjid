@@ -191,8 +191,7 @@
     font-size: 16px;
 }
 
-.Psign, .Esign {
-    margin-top: 30px;
+.Psign, .Esign, .Eremove, .Premove {
     margin-bottom: 30px;
     background-color: #0f5952;
     border-radius: 8px;
@@ -200,12 +199,13 @@
     color: white;
 }
 
-.Psign:hover, .Esign:hover {
+.Psign:hover, .Esign:hover, .Premove:hover, .Eremove:hover {
     transform: scale(1.1);
     background-color: #157269;
 }
 
 .Ebox, .Pbox {
+    margin-bottom: 30px;
     width: 70%;
     font-size: 16px;
 }

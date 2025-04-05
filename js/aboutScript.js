@@ -8,6 +8,7 @@ async function teamMems(){
   //get the portrait URLs
   const portraitURLs = await getTeamPortraits(num_mems, memberNames); // Await the getTeamPort
   //console.log("Portrait URLs:", portraitURLs); // Debug
+  const titles = await getTeamTitles(); // Await the getTeamTitles function
 
 
   for(let i = 0; i < num_mems; i++){
@@ -23,9 +24,14 @@ async function teamMems(){
     var name = document.createElement("p");
     name.textContent = memberNames[i]; // Set the text content to the name
 
+    // Create the members title
+    var title = document.createElement("p");
+    title.textContent = titles[i]; // Placeholder for title, can be modified later
+
     // Append portrait and name to the member div
     member.appendChild(portrait);
     member.appendChild(name);
+    member.appendChild(title);
 
     // Append the member div to the memberGrid
     memberGrid.appendChild(member);

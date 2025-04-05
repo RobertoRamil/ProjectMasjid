@@ -2,36 +2,36 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebas
 
 import { getStorage, ref, getDownloadURL, uploadBytes } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js';
 import { getFirestore, collection, doc, setDoc, getDoc, deleteDoc, updateDoc, getDocs, arrayUnion } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js'
-import { getAuth, onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
+import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
 
 //Hide this later
 const firebaseConfig = {
-    apiKey: "AIzaSyChNmvSjjLzXfWeGsKHebXgGq_AMUdKzHo",
-    authDomain: "project-musjid.firebaseapp.com",
-    projectId: "project-musjid",
-    storageBucket: "project-musjid.firebasestorage.app",
-    messagingSenderId: "445451894728",
-    appId: "1:445451894728:web:09bffcb1743ae1ecec4afd",
-    measurementId: "G-H5XN7NRJ6V"
-  };
-  
-  // Initialize Firebase
-  
+  apiKey: "AIzaSyChNmvSjjLzXfWeGsKHebXgGq_AMUdKzHo",
+  authDomain: "project-musjid.firebaseapp.com",
+  projectId: "project-musjid",
+  storageBucket: "project-musjid.firebasestorage.app",
+  messagingSenderId: "445451894728",
+  appId: "1:445451894728:web:09bffcb1743ae1ecec4afd",
+  measurementId: "G-H5XN7NRJ6V"
+};
+
+// Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app);
-  const auth = getAuth();
-  
-  // Check if the user is authenticated
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      // User is not signed in, redirect to login page
-      window.location.href = "adminLogin.html";
-      console.log("Page restricted until signed in");
-    } else {
-      // User is signed in, you can get the user ID if needed
-    }
-  });
+const auth = getAuth();
+
+// Check if the user is authenticated
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    // User is not signed in, redirect to login page
+    window.location.href = "adminLogin.html";
+    console.log("Page restricted until signed in");
+  } else {
+    // User is signed in, you can get the user ID if needed
+  }
+});
 
 
   async function getTeamNames(){
@@ -49,6 +49,22 @@ const storage = getStorage(app);
     }
     //console.log(teamNames);
     return teamNames;
+  }
+  async function getTeamTitles(){
+    const teamRef = doc(db, "team", "team_members");
+    const teamSnap = await getDoc(teamRef); // Await the getDoc call
+    const teamTitles = [];
+    //get all the team titles from the database
+    if (teamSnap.exists()) {
+      const teamData = teamSnap.data();
+      if (teamData.teamTitles) { 
+        teamData.teamTitles.forEach((title) => {
+          teamTitles.push(title);
+        });
+      }
+    }
+    //console.log(teamTitles);
+    return teamTitles;
   }
   
   async function getTeamPortraits(num_mems, memberNames){
@@ -75,6 +91,7 @@ const storage = getStorage(app);
       const index = teamData.teamNames.indexOf(name);
       if (index > -1) {
         teamData.teamNames.splice(index, 1);
+        teamData.teamTitles.splice(index, 1);
       }
     }
     updateDoc(teamRef, { teamNames: teamData.teamNames });
@@ -87,34 +104,10 @@ const storage = getStorage(app);
       console.error("Error deleting portrait:", error);
     }
   }
-  async function getAboutHeader(){
-    const aboutRef = doc(db, "about", "about_header");
-    const aboutSnap = await getDoc(aboutRef); // Await the getDoc call
-    const aboutHeader = aboutSnap.data().header;
-    return aboutHeader;
-  }
-  
-  async function getAboutBody(){
-    const aboutRef = doc(db, "about", "about_body");
-    const aboutSnap = await getDoc(aboutRef); // Await the getDoc call
-    const aboutBody = aboutSnap.data().body;
-    return aboutBody;
-  }
-  
-  async function saveAbtHeader(){
-    const aboutHeader = document.getElementById("adminLeftTitle").textContent;
-    const aboutRef = doc(db, "about", "about_header");
-    updateDoc(aboutRef, {header: aboutHeader});
-  }
-  
-  async function saveAbtBody(){
-    const aboutBody = document.getElementById("adminLeftText").textContent;
-    const aboutRef = doc(db, "about", "about_body");
-    updateDoc(aboutRef, {body: aboutBody});
-  }
-  async function saveTeamMember(name, portrait){
+  async function saveTeamMember(name, title, portrait){
     const teamRef = doc(db, "team", "team_members");
     updateDoc(teamRef, {teamNames: arrayUnion(name)});
+    updateDoc(teamRef, {teamTitles: arrayUnion(title)}); // Placeholder for title, can be modified later
     //Rename portrait file name to match the name
     const storageRef = ref(storage, `team_portraits/${name}.PNG`);
     try {
@@ -124,76 +117,108 @@ const storage = getStorage(app);
       console.error("Error uploading portrait:", error);
     }
   
-  
-  }
+}
+async function getAboutHeader() {
+  const aboutRef = doc(db, "about", "about_header");
+  const aboutSnap = await getDoc(aboutRef); // Await the getDoc call
+  const aboutHeader = aboutSnap.data().header;
+  return aboutHeader;
+}
+
+async function getAboutBody() {
+  const aboutRef = doc(db, "about", "about_body");
+  const aboutSnap = await getDoc(aboutRef); // Await the getDoc call
+  const aboutBody = aboutSnap.data().body;
+  return aboutBody;
+}
+
+async function saveAbtHeader() {
+  const aboutHeader = document.getElementById("adminLeftTitle").textContent;
+  const aboutRef = doc(db, "about", "about_header");
+  updateDoc(aboutRef, { header: aboutHeader });
+}
+
+async function saveAbtBody() {
+  const aboutBody = document.getElementById("adminLeftText").textContent;
+  const aboutRef = doc(db, "about", "about_body");
+  updateDoc(aboutRef, { body: aboutBody });
+}
+
 // Initialize Firebase
 
 let teamMembers;
+let teamTitles;
 let teamPortraits;
 
 // End: Redirect to login page if the user is not authenticated
 
-async function setupInfo(){
-    const aboutBody = document.getElementById("adminLeftText");
-    const aboutHeader = document.getElementById("adminLeftTitle");
-    let body = await getAboutBody();
-    let header = await getAboutHeader();
+async function setupInfo() {
+  const aboutBody = document.getElementById("adminLeftText");
+  const aboutHeader = document.getElementById("adminLeftTitle");
+  let body = await getAboutBody();
+  let header = await getAboutHeader();
 
-    aboutBody.textContent = body;
-    aboutHeader.textContent = header;
+  aboutBody.textContent = body;
+  aboutHeader.textContent = header;
 
 
 }
 
 async function initTeamMembers(){
     teamMembers = await getTeamNames();
+    teamTitles = await getTeamTitles();
     teamPortraits = await getTeamPortraits(teamMembers.length, teamMembers);
     renderTeamMembers();
 }
 
-async function remove(name){
-    await removeTeamMember(name);
-    initTeamMembers();
+async function remove(name) {
+  await removeTeamMember(name);
+  initTeamMembers();
 }
 
-async function addTeamMember(){
-    //create a temporary div with to accept inputs
-    const adminMembersBox = document.getElementById("adminMembersBox");
-    // Create a temporary div to accept inputs
-    const tempDiv = document.createElement("div");
-    tempDiv.classList.add("member");
+async function addTeamMember() {
+  //create a temporary div with to accept inputs
+  const adminMembersBox = document.getElementById("adminMembersBox");
+  // Create a temporary div to accept inputs
+  const tempDiv = document.createElement("div");
+  tempDiv.classList.add("member");
 
-    // Create an input for the image upload
-    const imageInput = document.createElement("input");
-    imageInput.type = "file";
-    imageInput.classList.add("memberUpload");
-    imageInput.accept = "image/png";
+  // Create an input for the image upload
+  const imageInput = document.createElement("input");
+  imageInput.type = "file";
+  imageInput.classList.add("memberUpload");
+  imageInput.accept = "image/png";
 
-    // Create an image element for preview
-    const imagePreview = document.createElement("img");
-    imagePreview.classList.add("imagePreview");
-    imagePreview.style.display = "none"; // Hide the preview initially
+  // Create an image element for preview
+  const imagePreview = document.createElement("img");
+  imagePreview.classList.add("imagePreview");
+  imagePreview.style.display = "none"; // Hide the preview initially
 
-    // Add an event listener to show the preview when an image is selected
-    imageInput.addEventListener("change", (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                imagePreview.src = e.target.result;
-                imagePreview.style.display = "block"; // Show the preview
-            };
-            reader.readAsDataURL(file);
-        } else {
-            imagePreview.style.display = "none"; // Hide the preview if no file is selected
-        }
-    });
-
+  // Add an event listener to show the preview when an image is selected
+  imageInput.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        imagePreview.src = e.target.result;
+        imagePreview.style.display = "block"; // Show the preview
+      };
+      reader.readAsDataURL(file);
+    } else {
+      imagePreview.style.display = "none"; // Hide the preview if no file is selected
+    }
+  });
     // Create an input for the member name
     const nameInput = document.createElement("input");
     nameInput.type = "text";
     nameInput.classList.add("memberName");
     nameInput.placeholder = "Member Name";
+
+    // Create an input for the member title
+    const titleInput = document.createElement("input");
+    titleInput.type = "text";
+    titleInput.classList.add("memberTitle");
+    titleInput.placeholder = "Member Title";
 
     // Create a save button
     const saveButton = document.createElement("button");
@@ -201,228 +226,335 @@ async function addTeamMember(){
     saveButton.addEventListener("click", async () => {
         //Get files
         const name = nameInput.value;
+        const title = titleInput.value;
         const portrait = imageInput.files[0];
-        if (!name || !portrait) {
-            alert("Please provide a name and portrait.");
+        if (!name || !title || !portrait) {
+            alert("Please provide a name, title, and portrait.");
             return;
         }
         //Save the portrait to storage
         console.log("Adding team member:", name); // Debugging line
         console.log("Portrait file:", portrait); // Debugging line
         //Save the name and portrait
-        await saveTeamMember(name, portrait);
+        await saveTeamMember(name, title, portrait);
+    //Rerender
+    initTeamMembers();
+  });
 
-
-
-        //Rerender
-        initTeamMembers();
-    });
-
-    //Create cancel button
-    const cancelButton = document.createElement("button");
-    cancelButton.textContent = "Cancel";
-    cancelButton.addEventListener("click", () => {
-        // Remove the temporary div
-        tempDiv.remove();
-    });
-
+  //Create cancel button
+  const cancelButton = document.createElement("button");
+  cancelButton.textContent = "Cancel";
+  cancelButton.addEventListener("click", () => {
+    // Remove the temporary div
+    tempDiv.remove();
+  });
     // Append inputs and button to the temporary div
     tempDiv.appendChild(imageInput);
     tempDiv.appendChild(imagePreview);
     tempDiv.appendChild(nameInput);
+    tempDiv.appendChild(titleInput);
     tempDiv.appendChild(saveButton);
     tempDiv.appendChild(cancelButton);
-
-    // Append the temporary div to the adminMembersBox
-    adminMembersBox.appendChild(tempDiv);
-
-
+  // Append the temporary div to the adminMembersBox
+  adminMembersBox.appendChild(tempDiv);
 }
 
-function renderTeamMembers(){
-    //Attempt to remove all children of adminMembersBox
-    const adminMembersBox = document.getElementById("adminMembersBox");
-    adminMembersBox.innerHTML = ""; // Clear existing members   const adminMembersBox = document.getElementById("adminMembersBox");
-    for(let i = 0; i < teamMembers.length; i++){
-        //Create the member object
-        const member = document.createElement("div");
-        member.classList.add("member");
+function renderTeamMembers() {
+  //Attempt to remove all children of adminMembersBox
+  const adminMembersBox = document.getElementById("adminMembersBox");
+  adminMembersBox.innerHTML = ""; // Clear existing members   const adminMembersBox = document.getElementById("adminMembersBox");
+  for (let i = 0; i < teamMembers.length; i++) {
+    //Create the member object
+    const member = document.createElement("div");
+    member.classList.add("member");
 
-        // Create an image
-        var portrait = document.createElement("img");
-        portrait.setAttribute("src", teamPortraits[i]); // Set the src attribute to the portrait URL
+    // Create an image
+    var portrait = document.createElement("img");
+    portrait.setAttribute("src", teamPortraits[i]); // Set the src attribute to the portrait URL
 
-        // Create a p for the member name
-        var name = document.createElement("p");
-        name.textContent = teamMembers[i]; // Set the text content to the name
-        // Update the name in the teamMembers array on blur (when editing ends)
+    // Create a p for the member name
+    var name = document.createElement("p");
+    name.textContent = teamMembers[i]; // Set the text content to the name
+    // Update the name in the teamMembers array on blur (when editing ends)
 
-        const removeButton = document.createElement("button");
-        removeButton.textContent = "- Remove";
-        removeButton.addEventListener("click", () => {
-            //teamMembers.splice(index, 1);
-            //renderTeamMembers();
-            const nameParagraph = removeButton.previousElementSibling;
-            remove(nameParagraph.textContent);
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "- Remove";
+    removeButton.addEventListener("click", () => {
+      //teamMembers.splice(index, 1);
+      //renderTeamMembers();
+      const nameParagraph = removeButton.previousElementSibling;
+      remove(nameParagraph.textContent);
 
-        });
+      var title = document.createElement("p");
+      title.textContent = teamTitles[i]; // Placeholder for title, can be modified later;
 
-        
-        
+      const removeButton = document.createElement("button");
+      removeButton.textContent = "- Remove";
+      removeButton.addEventListener("click", () => {
+        //teamMembers.splice(index, 1);
+        //renderTeamMembers();
+        const titleParagraph = removeButton.previousElementSibling;
+        const nameParagraph = titleParagraph.previousElementSibling;
+        remove(nameParagraph.textContent);
+      });
 
-        // Append portrait and name to the member div
-        member.appendChild(portrait);
-        member.appendChild(name);
-        member.appendChild(removeButton);
+      // Append portrait and name to the member div
+      member.appendChild(portrait);
+      member.appendChild(name);
+      member.appendChild(title);
+      member.appendChild(removeButton);
+      // Append portrait and name to the member div
+      member.appendChild(portrait);
+      member.appendChild(name);
+      member.appendChild(removeButton);
 
-        // Append the member div to the memberGrid
-        adminMembersBox.appendChild(member);
-    }
+      // Append the member div to the memberGrid
+      adminMembersBox.appendChild(member);
+    });
+  }
 }
 
 
 document.addEventListener("DOMContentLoaded", () => {
 
 
-    setupInfo();
+  setupInfo();
 
-    initTeamMembers();
+  initTeamMembers();
 
     const adminMembersBox = document.getElementById("adminMembersBox");
 
-    
 
-    // Load Left Box Content
-    
 
-    // Render Team Members
-    function renderTeamMembers() {
-        adminMembersBox.innerHTML = ""; // Clear existing members
-        /*teamMembers.forEach((member, index) => {
-            const memberDiv = document.createElement("div");
-            memberDiv.classList.add("member");
 
-            const portrait = document.createElement("img");
-            portrait.setAttribute("src", member.photo || "https://tinyurl.com/2s3cwmnp");
+  // Load Left Box Content
 
-            const name = document.createElement("p");
-            name.textContent = member.name || "*Member Name*";
-            name.contentEditable = "true";
 
-            // Update the name in the teamMembers array on blur (when editing ends)
-            name.addEventListener("blur", () => {
-                teamMembers[index].name = name.textContent;
-            });
+  // Render Team Members
+  function renderTeamMembers() {
+    adminMembersBox.innerHTML = ""; // Clear existing members
+    /*teamMembers.forEach((member, index) => {
+        const memberDiv = document.createElement("div");
+        memberDiv.classList.add("member");
 
-            const editPhoto = document.createElement("textarea");
-            editPhoto.type = "text";
-            editPhoto.placeholder = "Photo URL";
-            editPhoto.value = member.photo;
-            editPhoto.addEventListener("input", (e) => {
-                member.photo = e.target.value;
-                portrait.src = e.target.value;
-            });
+        const portrait = document.createElement("img");
+        portrait.setAttribute("src", member.photo || "https://tinyurl.com/2s3cwmnp");
 
-            const removeButton = document.createElement("button");
-            removeButton.textContent = "- Remove";
-            removeButton.addEventListener("click", () => {
-                teamMembers.splice(index, 1);
-                renderTeamMembers();
-            });
+        const name = document.createElement("p");
+        name.textContent = member.name || "*Member Name*";
+        name.contentEditable = "true";
 
-            memberDiv.appendChild(portrait);
-            memberDiv.appendChild(name);
-            memberDiv.appendChild(editPhoto);
-            memberDiv.appendChild(removeButton);
-            adminMembersBox.appendChild(memberDiv);
-        });*/
-    }
+        // Update the name in the teamMembers array on blur (when editing ends)
+        name.addEventListener("blur", () => {
+            teamMembers[index].name = name.textContent;
+        });
 
-    // Add New Member
-    document.getElementById("addNewMember").addEventListener("click", () => {
-        addTeamMember();
-    });
+        const editPhoto = document.createElement("textarea");
+        editPhoto.type = "text";
+        editPhoto.placeholder = "Photo URL";
+        editPhoto.value = member.photo;
+        editPhoto.addEventListener("input", (e) => {
+            member.photo = e.target.value;
+            portrait.src = e.target.value;
+        });
 
-    document.getElementById("saveAbt").addEventListener("click", () => {
-        // Save Left Box Content
-        console.log("Saving Left Box Content...");
-        
-        saveAbtHeader();
-        saveAbtBody();
-        alert("Changes saved successfully!");
-        
-    });
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "- Remove";
+        removeButton.addEventListener("click", () => {
+            teamMembers.splice(index, 1);
+            renderTeamMembers();
+        });
 
-    // Save Changes
-    /*document.getElementById("saveChanges").addEventListener("click", () => {
-        // Save Left Box Content
-        localStorage.setItem("leftBoxTitle", adminLeftTitle.textContent);
-        localStorage.setItem("leftBoxText", adminLeftText.textContent);
-
-        // Save Team Members
-        localStorage.setItem("teamMembers", JSON.stringify(teamMembers));
-
-        alert("Changes saved successfully!");
+        memberDiv.appendChild(portrait);
+        memberDiv.appendChild(name);
+        memberDiv.appendChild(editPhoto);
+        memberDiv.appendChild(removeButton);
+        adminMembersBox.appendChild(memberDiv);
     });*/
+  }
 
-    renderTeamMembers();
+  // Add New Member
+  document.getElementById("addNewMember").addEventListener("click", () => {
+    addTeamMember();
+  });
+
+  document.getElementById("saveAbt").addEventListener("click", () => {
+    // Save Left Box Content
+    console.log("Saving Left Box Content...");
+
+    saveAbtHeader();
+    saveAbtBody();
+    alert("Changes saved successfully!");
+
+  });
+
+  // Save Changes
+  /*document.getElementById("saveChanges").addEventListener("click", () => {
+      // Save Left Box Content
+      localStorage.setItem("leftBoxTitle", adminLeftTitle.textContent);
+      localStorage.setItem("leftBoxText", adminLeftText.textContent);
+
+      // Save Team Members
+      localStorage.setItem("teamMembers", JSON.stringify(teamMembers));
+
+      alert("Changes saved successfully!");
+  });*/
+
+  renderTeamMembers();
 });
 
 //social media 
-$(document).ready(function() {
+$(document).ready(function () {
 
-    // Handle form submission for social media links
-    $('#socialLinksForm').on('submit', function(event) {
-        event.preventDefault();  
+  // Handle form submission for social media links
+  $('#socialLinksForm').on('submit', function (event) {
+    event.preventDefault();
 
-        // Get values from input fields
-        const facebookLink = $('#facebookLink').val().trim();
-        const instagramLink = $('#instagramLink').val().trim();
+    // Get values from input fields
+    const facebookLink = $('#facebookLink').val().trim();
+    const instagramLink = $('#instagramLink').val().trim();
 
-        // Check if at least one link is provided
-        if (!facebookLink && !instagramLink) {
-            alert('Please enter at least one social media link.');
-            return; 
-        }
+    // Check if at least one link is provided
+    if (!facebookLink && !instagramLink) {
+      alert('Please enter at least one social media link.');
+      return;
+    }
 
-        // Placeholder for Firebase 
-        const updates = {};
-        if (facebookLink) updates.facebook = facebookLink;
-        if (instagramLink) updates.instagram = instagramLink;
+    // Placeholder for Firebase 
+    const updates = {};
+    if (facebookLink) updates.facebook = facebookLink;
+    if (instagramLink) updates.instagram = instagramLink;
 
-        // Temporary alert as a placeholder
-        alert(`Updates:\n${facebookLink ? "Facebook: " + facebookLink : ""}\n${instagramLink ? "Instagram: " + instagramLink : ""}`);
-    });
+    // Temporary alert as a placeholder
+    alert(`Updates:\n${facebookLink ? "Facebook: " + facebookLink : ""}\n${instagramLink ? "Instagram: " + instagramLink : ""}`);
+  });
 });
+
 
 
 // Handle update buttons for social media links
 document.getElementById("updateFacebookLink").addEventListener("click", async () => {
-    const facebookLink = document.getElementById("facebookLink").value.trim();
-    if (facebookLink) {
-        await updateDoc(doc(db, "Links", "facebook"), { link: facebookLink });
-        alert("Facebook link updated successfully!");
-    } else {
-        alert("Please enter a valid Facebook URL.");
+  const facebookLink = document.getElementById("facebookLink").value.trim();
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      try {
+        const hasPermission = await canEditElement(user.phoneNumber, "canEditSocials");
+        if (!hasPermission) {
+          alert("You do not have permission to perform this function.");
+          return;
+        } else {
+          if (facebookLink) {
+            await updateDoc(doc(db, "Links", "facebook"), { link: facebookLink });
+            alert("Facebook link updated successfully!");
+          } else {
+            alert("Please enter a valid Facebook URL.");
+          }
+        }
+        console.log(hasPermission);
+      } catch (error) {
+        console.error('Error checking permissions:', error);
+      }
     }
+  });
+  document.getElementById('facebookLink').value = '';
 });
+
+/*
+onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      try {
+        const hasPermission = await canEditElement(user.phoneNumber, "canEditSocials");
+        if (!hasPermission) {
+          alert("You do not have permission to perform this function.");
+
+        } else {
+          
+        }
+        console.log(hasPermission);
+      } catch (error) {
+        console.error('Error checking permissions:', error);
+      }
+    }
+  });
+*/
+
+
 
 document.getElementById("updateInstagramLink").addEventListener("click", async () => {
-    const instagramLink = document.getElementById("instagramLink").value.trim();
-    if (instagramLink) {
-        await updateDoc(doc(db, "Links", "instagram"), { link: instagramLink });
-        alert("Instagram link updated successfully!");
-    } else {
-        alert("Please enter a valid Instagram URL.");
+  const instagramLink = document.getElementById("instagramLink").value.trim();
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      try {
+        const hasPermission = await canEditElement(user.phoneNumber, "canEditSocials");
+        if (!hasPermission) {
+          alert("You do not have permission to perform this function.");
+
+        } else {
+          if (instagramLink) {
+            await updateDoc(doc(db, "Links", "instagram"), { link: instagramLink });
+            alert("Instagram link updated successfully!");
+          } else {
+            alert("Please enter a valid Instagram URL.");
+          }
+        }
+        console.log(hasPermission);
+      } catch (error) {
+        console.error('Error checking permissions:', error);
+      }
     }
+  });
+  document.getElementById('instagramLink').value = '';
 });
 
+
+
 document.getElementById("updateYouTubeLink").addEventListener("click", async () => {
-    const youtubeLink = document.getElementById("youtubeLink").value.trim();
-    if (youtubeLink) {
-        await updateDoc(doc(db, "Links", "youtube"), { link: youtubeLink });
-        alert("YouTube link updated successfully!");
-    } else {
-        alert("Please enter a valid YouTube URL.");
+  const youtubeLink = document.getElementById("youtubeLink").value.trim();
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      try {
+        const hasPermission = await canEditElement(user.phoneNumber, "canEditSocials");
+        if (!hasPermission) {
+          alert("You do not have permission to perform this function.");
+
+        } else {
+          if (youtubeLink) {
+            await updateDoc(doc(db, "Links", "youtube"), { link: youtubeLink });
+            alert("YouTube link updated successfully!");
+          } else {
+            alert("Please enter a valid YouTube URL.");
+          }
+        }
+        console.log(hasPermission);
+      } catch (error) {
+        console.error('Error checking permissions:', error);
+      }
     }
+  });
+  document.getElementById('youtubeLink').value = '';
 });
+
+async function getEmail(phoneNumber) {
+  const querySnapshot = await getDocs(collection(db, "whitelistedAdmins"));
+  let documentName = null;
+
+  querySnapshot.forEach((doc) => {
+    if (doc.data().phoneNumber === phoneNumber) {
+      documentName = doc.id;
+    }
+  });
+  console.log(documentName);
+
+  return documentName;
+}
+
+async function canEditElement(phoneNumber, permission) {
+  const email = await getEmail(phoneNumber);
+  if (!email) {
+    return false;
+  }
+
+  const docSnap = await getDoc(doc(db, "whitelistedAdmins", email));
+  const hasPermission = docSnap.data()[permission];
+  return hasPermission;
+}
