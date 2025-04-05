@@ -30,14 +30,18 @@ h3 {
     background-color: rgba(128, 128, 128, 0.5); /* Grey with 50% opacity */
     z-index: 0; 
 }
-.header a img {
-    position: relative;
+
+#logo {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1; /* Ensures the logo appears on top */
     transition: transform 0.3s ease; 
 }
 
-.header a img:hover {
-    transform: scale(1.1); /* Scale up the logo on hover */
+#logo:hover {
+    transform: translateX(-50%) scale(1.1);  /* Scale up the logo on hover */
 }
 
 .Webpage-Tab-Title {
@@ -78,6 +82,7 @@ h3 {
 }
 
 /*---------------Background---------------*/
+
 body { 
     background-image: url('../images/mosque-6231915.jpg');
     background-repeat: no-repeat;

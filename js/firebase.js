@@ -39,7 +39,7 @@ async function fetchLogo() {
   try {
     const url = await getDownloadURL(storageRef);
     console.log("Logo URL:", url); // Debugging line
-    document.getElementById('logo of MMSC').src = url;
+    document.getElementById('logo').src = url;
     console.log("Logo fetched and set successfully"); // Debugging line
   } catch (error) {
     console.error("Error fetching logo:", error);
@@ -575,11 +575,10 @@ window.saveSPrayerTime = saveSPrayerTime;
 window.canEditElement = canEditElement;
 window.getAnnouncements = getAnnouncements;
 window.getQuotes = getQuotes;
+window.addAnnouncement = addAnnouncement;
 window.getTeamTitles = getTeamTitles;
 window.removeEmail = removeEmail;
 window.removePhone = removePhone;
-
-
 
 getDocs(colRef)
   .then((snapshot) => {
@@ -692,7 +691,6 @@ async function savePrayerTime(prayerAmount) {
         break;
     }
   }
-
   try {
     setDoc(prayerRef, prayerTimes);
   } catch (e) {
@@ -755,4 +753,32 @@ async function getQuotes(){
   const quoteSnap = await getDoc(quoteRef);
   console.error("Error fetching quote:", quoteSnap.data());
   return quoteSnap.data();
+}
+
+async function addAnnouncement(){
+  const announcementRef = doc(db, "announcements", "announcement");
+  const announcementText = document.getElementById("announcementText").value;
+  getDoc(announcementRef).then((docSnap) => {
+    if (docSnap.exists()) {
+      const existingAnnouncements = docSnap.data().text || [];
+      updateDoc(announcementRef, { text: [...existingAnnouncements, announcementText] });
+    } else {
+      setDoc(announcementRef, { text: [announcementText] });
+    }
+    alert("Announcement posted");
+    announcementPanes(5);
+  }).catch((error) => {
+    console.error("Error adding announcement:", error);
+  });
+}
+
+async function addQuote(){
+  const quoteRef = doc(db, "quotes", "quote");
+  const quoteText = document.getElementById("quoteText").value;
+  setDoc(quoteRef, { text: quoteText }).then(() => {
+    alert("Quote posted");
+    quotePanes(1);
+  }).catch((error) => {
+    console.error("Error adding quote:", error);
+  });
 }

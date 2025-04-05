@@ -1,5 +1,5 @@
 /* Footer styles */
-.site-footer {
+#site-footer {
     background: linear-gradient(135deg, #0f5952, #07302c);
     color: #fff;
     padding: 20px 0; 
@@ -29,7 +29,7 @@
 }
 
 /* Footer content with shadow */
-.footer-content {
+#footer-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -42,14 +42,14 @@
 }
 
 /* Footer links aligned to the left */
-.footer-links {
+#footer-links {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     margin: 10px 0;
 }
 
-.footer-links a {
+#footer-links a {
     color: #fff;
     text-decoration: none;
     margin: 5px 0;
@@ -59,30 +59,30 @@
     transition: transform 0.2s;
 }
 
-.footer-links a:hover {
+#footer-links a:hover {
     color: #4CAF50;
     transform: translateX(5px);
 }
 
-.footer-links a::before {
+#footer-links a::before {
     content: "→ ";
     color: #4CAF50;
     transition: color 0.3s;
 }
 
 /* hover scale effect for social */
-.footer-social {
+#footer-social {
     display: flex;
     align-items: center;
     margin: 0 auto;
 }
 
-.footer-social a {
+#footer-social a {
     margin: 0 20px;
     transition: transform 0.2s ease-in-out;
 }
 
-.footer-social a:hover {
+#footer-social a:hover {
     transform: scale(1.2);
 }
 
@@ -92,32 +92,32 @@
     height: auto;
 }
 
-.footer-social a:hover .social-logo {
+#footer-social a:hover .social-logo {
     filter: brightness(0.8);
 }
 
 /* Footer contact styles with padding */
-.footer-contact {
+#footer-contact {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 10px 0;
 }
 
-.footer-contact a {
+#footer-contact a {
     color: #fff;
     text-decoration: none;
     margin: 15px 0;
     transition: transform 0.2s;
 }
 
-.footer-contact a::before {
+#footer-contact a::before {
     content: "→ ";
     color: #4CAF50;
     transition: color 0.3s;
 }
 
-.footer-contact a:hover {
+#footer-contact a:hover {
     color: #4CAF50;
     transform: translateX(5px);
 }
@@ -131,7 +131,7 @@
 }
 
 /* Wrapper for copyright and button */
-.footer-bottom {
+#footer-bottom {
     margin-top: 20px; 
     text-align: center; 
     padding: 10px 0; 
@@ -139,7 +139,7 @@
 }
 
 /* back-to-top button */
-.back-to-top {
+#back-to-top {
     margin-top: 10px;
     padding: 5px 10px;
     font-size: 15px;
@@ -190,12 +190,12 @@ body {
 
 /* Footer responsiveness for mobile*/
 @media (max-width: 768px) {
-    .footer-content {
+    #footer-content {
         flex-direction: column;
         text-align: center;
     }
 
-    .footer-social {
+    #footer-social {
         margin-top: 15px;
     }
 }

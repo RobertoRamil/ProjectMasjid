@@ -1,3 +1,28 @@
+@media screen and (max-width:400px){
+    #log_out{
+        min-height:50px;
+        white-space: nowrap;
+    }
+    #background_and_title{
+        margin-top:30px;
+    }
+}
+
+@media screen and (max-width:1099px) and (min-width:401px){
+    #log_out{
+        white-space: nowrap;
+        min-height:20%;
+        min-width:70px;
+
+    }
+    #update_image_visual_text{
+        white-space: nowrap;
+    }
+    #background_and_title{
+        margin-top:30px;
+    }
+}
+
 /*These will affect every page that it's imported to.*/
 * {
     box-sizing: border-box;
