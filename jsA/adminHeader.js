@@ -1,6 +1,8 @@
+/*
 document.addEventListener("DOMContentLoaded", () => {
     checkAuth();
 });
+*/
 // Select elements
 const imageUpload = document.getElementById("imageUpload");
 const imagePreview = document.getElementById("imagePreview");

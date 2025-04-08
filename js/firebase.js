@@ -543,42 +543,6 @@ function updateCarousel(imageUrls) {
   });
 }
 
-window.getAboutHeader = getAboutHeader;
-window.getAboutBody = getAboutBody;
-window.getTeamNames = getTeamNames;
-window.getTeamPortraits = getTeamPortraits;
-window.uploadImage = uploadImage;
-window.getlinks = getlinks;
-window.signUpEmail = signUpEmail;
-window.signUpPhone = signUpPhone;
-window.setHeaderBackground = setHeaderBackground;
-window.fetchLogo = fetchLogo;
-window.fetchZelleLogo = fetchZelleLogo;
-window.getDonateBody = getDonateBody;
-window.getPaypalBody = getPaypalBody;
-window.fetchCarouselImages = fetchCarouselImages;
-window.getEventsByDate = getEventsByDate;
-window.getEventsByMonth = getEventsByMonth;
-window.addEventToFirebase = addEventToFirebase;
-window.deleteEventFromFirebase = deleteEventFromFirebase;
-window.auth = auth;
-window.removeTeamMember = removeTeamMember;
-window.saveAbtHeader = saveAbtHeader;
-window.saveAbtBody = saveAbtBody;
-window.saveTeamMember = saveTeamMember;
-window.checkAuth = checkAuth;
-window.pullPrayerTime = pullPrayerTime;
-window.pullSPrayerTime = pullSPrayerTime;
-window.savePrayerTime = savePrayerTime;
-window.saveSPrayerTime = saveSPrayerTime;
-window.canEditElement = canEditElement;
-window.getAnnouncements = getAnnouncements;
-window.getQuotes = getQuotes;
-window.addAnnouncement = addAnnouncement;
-window.getTeamTitles = getTeamTitles;
-window.removeEmail = removeEmail;
-window.removePhone = removePhone;
-
 getDocs(colRef)
   .then((snapshot) => {
     let users = []
@@ -667,7 +631,6 @@ async function createPrayerTime(prayerName, prayerNumber, prayerTimes) {
 async function savePrayerTime(prayerAmount) {
   //This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.
   const prayerRef = doc(db, "prayerTimes", "prayerTime");
-  const prayerSnap = await getDoc(prayerRef);
 
   let prayerTimes = {};
 
@@ -701,7 +664,6 @@ async function savePrayerTime(prayerAmount) {
 async function saveSPrayerTime(prayerAmount) {
   //This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.
   const prayerSRef = doc(db, "prayerTimes", "specialPrayerTime");
-  const prayerSnap = await getDoc(prayerSRef);
 
   let sPrayerTimes = {};
 
@@ -723,6 +685,7 @@ async function getAnnouncements(){
   const announcementRef = doc(db, "announcements", "announcement");
   const announcementSnap = await getDoc(announcementRef);
   const announcements = announcementSnap.data().text;
+
 
   const announcementRow = document.getElementById("announcementRow");
   announcementRow.innerHTML = ''; // Clear existing announcements
@@ -781,3 +744,137 @@ async function addQuote(){
     console.error("Error adding quote:", error);
   });
 }
+
+
+//The .toggle is grabbing the field's name's value
+async function getToggles(){
+  const news = doc(db, "Toggles","NewsLetter");
+  const square = doc(db, "Toggles","Square");
+  const zelle = doc(db, "Toggles","Zelle");
+
+  const newsSnap = await getDoc(news);
+  const squareSnap = await getDoc(square);
+  const zelleSnap = await getDoc(zelle);
+
+  let toggleValues = [["NewsLetter",newsSnap.data().toggle],["Square",squareSnap.data().toggle],["Zelle",zelleSnap.data().toggle]];
+
+  return toggleValues;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+window.getAboutHeader = getAboutHeader;
+window.getAboutBody = getAboutBody;
+window.getTeamNames = getTeamNames;
+window.getTeamPortraits = getTeamPortraits;
+window.uploadImage = uploadImage;
+window.getlinks = getlinks;
+window.signUpEmail = signUpEmail;
+window.signUpPhone = signUpPhone;
+window.setHeaderBackground = setHeaderBackground;
+window.fetchLogo = fetchLogo;
+window.fetchZelleLogo = fetchZelleLogo;
+window.getDonateBody = getDonateBody;
+window.getPaypalBody = getPaypalBody;
+window.fetchCarouselImages = fetchCarouselImages;
+window.getEventsByDate = getEventsByDate;
+window.getEventsByMonth = getEventsByMonth;
+window.addEventToFirebase = addEventToFirebase;
+window.deleteEventFromFirebase = deleteEventFromFirebase;
+window.auth = auth;
+window.removeTeamMember = removeTeamMember;
+window.saveAbtHeader = saveAbtHeader;
+window.saveAbtBody = saveAbtBody;
+window.saveTeamMember = saveTeamMember;
+window.checkAuth = checkAuth;
+window.pullPrayerTime = pullPrayerTime;
+window.pullSPrayerTime = pullSPrayerTime;
+window.savePrayerTime = savePrayerTime;
+window.saveSPrayerTime = saveSPrayerTime;
+window.canEditElement = canEditElement;
+window.getAnnouncements = getAnnouncements;
+window.getQuotes = getQuotes;
+window.addAnnouncement = addAnnouncement;
+window.getTeamTitles = getTeamTitles;
+window.removeEmail = removeEmail;
+window.removePhone = removePhone;
+window.getToggles= getToggles;
+

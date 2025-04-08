@@ -23,6 +23,7 @@ const storage = getStorage(app);
 const auth = getAuth();
 
 // Check if the user is authenticated
+/*
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     // User is not signed in, redirect to login page
@@ -33,7 +34,7 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-
+*/
   async function getTeamNames(){
     const teamRef = doc(db, "team", "team_members");
     const teamSnap = await getDoc(teamRef); // Await the getDoc call
@@ -322,6 +323,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initTeamMembers();
 
+  initSocials();
+
     const adminMembersBox = document.getElementById("adminMembersBox");
 
 
@@ -557,4 +560,18 @@ async function canEditElement(phoneNumber, permission) {
   const docSnap = await getDoc(doc(db, "whitelistedAdmins", email));
   const hasPermission = docSnap.data()[permission];
   return hasPermission;
+}
+
+async function initSocials(){
+  const facebookRef = doc(db, "Links", "facebook");
+  const instagramRef = doc(db, "Links", "instagram");
+  const youtubeRef = doc(db, "Links", "youtube");
+
+  const facebookSnap = await getDoc(facebookRef);
+  const instagramSnap = await getDoc(instagramRef);
+  const youtubeSnap = await getDoc(youtubeRef);
+
+  document.getElementById("facebookLink").value = facebookSnap.data().link;
+  document.getElementById("instagramLink").value = instagramSnap.data().link;
+  document.getElementById("youtubeLink").value = youtubeSnap.data().link;
 }
