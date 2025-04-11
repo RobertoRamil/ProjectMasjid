@@ -17,14 +17,15 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
-const db = getFirestore();
-const storage = getStorage();
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const storage = getStorage(app);
 
 // Initialize Firebase Authentication and get a reference to the service
-const auth = getAuth();
+const auth = getAuth(app);
 
 // Check if the user is authenticated
+/*
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     // User is not signed in, redirect to login page
@@ -34,7 +35,39 @@ onAuthStateChanged(auth, (user) => {
     // User is signed in, you can get the user ID if needed
   }
 });
+*/
 // End: Redirect to login page if the user is not authenticated
+
+
+//Newsletter
+document.getElementById("newspaper_toggle").addEventListener("change", async () => {
+  let toggle = document.getElementById('newspaper_toggle');
+  let isChecked=toggle.checked;
+  const checkboxRef = doc(db, "Toggles", "NewsLetter");
+  try {
+    await updateDoc(checkboxRef, {
+      toggle: isChecked
+    });
+  } catch (e) {
+    console.log(`Error saving ${checkName} toggle value.`, e);
+  }  
+});
+
+async function initChecked(){
+  const news = doc(db, "Toggles","NewsLetter");
+  const newsSnap = await getDoc(news);
+
+  const newsToggleValue=newsSnap.data().toggle;
+
+  let newsCheck=document.getElementById("newspaper_toggle");
+
+  newsCheck.checked=newsToggleValue;
+  }
+
+
+
+//Calendar functionality
+
 let currentDate = new Date();
 let monthEvents = []; // Stores events as [{date: "YYYY-MM-DD", data: {Event 1: "Time", Event 2: "Time"}}]
 
@@ -251,5 +284,11 @@ window.prevMonth = prevMonth;
 window.addEvent = addEvent;
 window.deleteEvent = deleteEvent;
 renderCalendar();
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  initChecked();
+});
+
 
 

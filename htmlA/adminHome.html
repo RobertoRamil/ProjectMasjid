@@ -10,7 +10,6 @@
 
         <link rel="stylesheet" href="../cssA/adminHome.css">
         <script type="module" src="../jsA/adminHome.js"defer></script> 
-        <script type="module" src="../js/firebase.js"defer></script> 
 
 
         <script>
@@ -82,9 +81,15 @@
                 <label for="announcementText">Type announcement information here:</label>
                 <textarea id="announcementText" required></textarea>
                 <button onclick="addAnnouncement()" id="submit_announcement">Post Announcement</button>
-            
+                <div class="centeredRow"> 
+                    <div class="box"><br>
+                    <h1 id="heading">Announcements</h1>
+                    <div class="announcement-row" id="announcementRow"></div>
+
+                </div>
             
             </div>
+        </div>
         </div>
 
         <div id="map_quote">
@@ -94,8 +99,8 @@
               <textarea id="quoteText" required></textarea>
               <button id="submit_quote" onclick="addQuotes()">Post Quote</button>
           </div>
-        </div>
 
+        <!--
         <div id="map_container" class="Announce_Background">
             <form id="mapChange">
                 <b>
@@ -109,14 +114,15 @@
 
                 <input type="text" id="Location">
                 <button type="submit">Submit</button>
-                <!-- Commenting out because not working.
+                <! -- Commenting out because not working.
 
                 <button type="submit" onclick="convertSpace(event)">Submit</button> 
-                -->
+                -- >
             </form>
         </div>
+    -->
  
-        </div>
+      
         <div id="slideshowChange" class="Announce_Background">
             <h2>Manage Slideshow</h2>
             <div id="slideshowPreview">
@@ -131,7 +137,7 @@
             </form>
         </div>
 
-
+  </div>
     </body>
 
 </html>

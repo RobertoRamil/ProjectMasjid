@@ -101,7 +101,25 @@ function getEventCountByDate(date) {
   return 0;
 }
 
-renderCalendar();
+document.addEventListener("DOMContentLoaded", async function() {
+  renderCalendar();
+
+  let toggles = await getToggles();
+  let news=true;
+
+  for(let i=0; i<toggles.length; i++){
+    if(toggles[i][0] == "NewsLetter"){
+      news = toggles[i][1];
+    }
+  }
+
+  if(!news){
+    let newsLetterBody=document.getElementById("newsLetter");
+    newsLetterBody.remove();
+  }
+
+});
+
 
 /*
 async function fetchAndPrintEvents(date) {
