@@ -157,7 +157,7 @@
   }
 
 /*All of the buttons*/
-  #newsUp_button, #newsSend_button, .cal_header button {
+  #newsUp_button, #newsSend_button, .cal_header button, #pinpoint_sms_button, #pinpoint_email_button {
     background-color: #0f5952;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -303,3 +303,31 @@
   .event button:hover {
     text-decoration: underline;
   }
+
+
+/* pinpoint */
+
+#pinpoint_box{
+  border: black 1px solid;
+  width: 85%;
+  height: 200px;
+  overflow: auto;
+  resize: none;
+}
+
+#pinpoint_info{
+  text-align: center;
+  font-size: 1em;
+
+  background-color: white;
+  
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;  
+}
+
