@@ -110,9 +110,11 @@
     display: grid;
     width: 200px;
     height: fit-content;
+    place-items: center; /* Centers both image and text horizontally and vertically */
 }
 .Team p{
-
+    text-align: center;
+    margin: auto;
     font-size: 16px;
     margin-top: 5px;
     margin-bottom: 10px;
@@ -122,9 +124,7 @@
 
 }
 .Team img{
-    max-width: 125px;
-    width: auto;
-    max-height: 100px;
-    height: auto;
+    width: 200px;
+    height: 200px;
     padding-left: 25px;
 }
