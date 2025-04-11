@@ -22,7 +22,8 @@ const db = getFirestore(app);
 const storage = getStorage(app);
   const auth = getAuth();
   
-  // Check if the user is authenticated
+  //Login disabled on this branch for testing purposes
+  /*// Check if the user is authenticated
   onAuthStateChanged(auth, (user) => {
     if (!user) {
       // User is not signed in, redirect to login page
@@ -31,7 +32,7 @@ const storage = getStorage(app);
     } else {
       // User is signed in, you can get the user ID if needed
     }
-  });
+  });*/
 
 
   async function getTeamNames(){

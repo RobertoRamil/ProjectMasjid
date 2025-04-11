@@ -1,11 +1,10 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-
-import { getAuth, onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
-import { getStorage, ref, getDownloadURL, uploadBytes, listAll } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js';
-import { getFirestore, Timestamp, collection, doc, setDoc, getDoc, deleteDoc, updateDoc, getDocs, arrayUnion } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js'
+import { initializeApp } from "firebase/app";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getStorage, ref, getDownloadURL, uploadBytes, listAll } from "firebase/storage";
+import { getFirestore, Timestamp, collection, doc, setDoc, getDoc, deleteDoc, updateDoc, getDocs, arrayUnion } from "firebase/firestore";
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyChNmvSjjLzXfWeGsKHebXgq_AMUdKzHo",
+  apiKey: "AIzaSyChNmvSjjLzXfWeGsKHebXgGq_AMUdKzHo",
   authDomain: "project-musjid.firebaseapp.com",
   projectId: "project-musjid",
   storageBucket: "project-musjid.firebasestorage.app",
@@ -18,7 +17,6 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app);
 const auth = getAuth();
-
 
 function checkAuth(){
   onAuthStateChanged(auth, (user) => {
@@ -85,7 +83,7 @@ async function getPaypalBody(){
   return aboutBody;
 }
 
-//--------------------------------------------Setup for team members---------------------------------------------------
+//--------------------------------------------Setup for team members---------------------------------------------------//
 async function getTeamNames(){
   const teamRef = doc(db, "team", "team_members");
   const teamSnap = await getDoc(teamRef); // Await the getDoc call
@@ -168,12 +166,10 @@ async function saveTeamMember(name, portrait){
   } catch (error) {
     console.error("Error uploading portrait:", error);
   }
-
-
 }
-//--------------------------------------------End of setup for team members--------------------------------------------
+//--------------------------------------------End of setup for team members--------------------------------------------//
 
-//--------------------------------------------Setup for about section--------------------------------------------------
+//--------------------------------------------Setup for about section--------------------------------------------------//
 async function getAboutHeader(){
   const aboutRef = doc(db, "about", "about_header");
   const aboutSnap = await getDoc(aboutRef); // Await the getDoc call
@@ -199,11 +195,9 @@ async function saveAbtBody(){
   const aboutRef = doc(db, "about", "about_body");
   updateDoc(aboutRef, {body: aboutBody});
 }
-//--------------------------------------------End of setup for about section-------------------------------------------
+//--------------------------------------------End of setup for about section-------------------------------------------//
 
 //--------------------------------------------Setup for event section--------------------------------------------------//
-
-
 async function getEventsByDate(date) {
   const eventRef = doc(db, "calendarDates", date);
   try {
@@ -282,8 +276,8 @@ async function deleteEventFromFirebase(eventDate, eventName) {
     alert("ERROR: No events found for the given date.");
   }
 }
-
 //--------------------------------------------End of setup for event section-------------------------------------------//
+
 const contactsRef = doc(db, "users", "userContacts");
 const contactsSnap = getDoc(contactsRef);
 
@@ -453,6 +447,20 @@ async function getlinks() {
   }
 }
 
+export async function getlinksvals() {
+  const linksColRef = collection(db, "Links");
+  try {
+    const snapshot = await getDocs(linksColRef);
+    let linksVals = [];
+    snapshot.docs.forEach((doc) => {
+      linksVals.push(doc.data().link);
+    });
+    return linksVals;
+  } catch (error) {
+    console.error("Error fetching links:", error);
+  }
+}
+
 async function uploadImage() {
     const file = document.getElementById("imageUpload").files[0];
     const imageType = document.getElementById("imageType").value;
@@ -519,41 +527,42 @@ function updateCarousel(imageUrls) {
   });
 }
 
-window.getAboutHeader = getAboutHeader;
-window.getAboutBody = getAboutBody;
-window.getTeamNames = getTeamNames;
-window.getTeamPortraits = getTeamPortraits;
-window.uploadImage = uploadImage;
-window.getlinks = getlinks;
-window.signUpEmail = signUpEmail;
-window.signUpPhone = signUpPhone;
-window.setHeaderBackground = setHeaderBackground;
-window.fetchLogo = fetchLogo;
-window.fetchZelleLogo = fetchZelleLogo;
-window.getDonateBody = getDonateBody;
-window.getPaypalBody = getPaypalBody;
-window.fetchCarouselImages = fetchCarouselImages;
-window.getEventsByDate = getEventsByDate;
-window.getEventsByMonth = getEventsByMonth;
-window.addEventToFirebase = addEventToFirebase;
-window.deleteEventFromFirebase = deleteEventFromFirebase;
-window.auth = auth;
-window.removeTeamMember = removeTeamMember;
-window.saveAbtHeader = saveAbtHeader;
-window.saveAbtBody = saveAbtBody;
-window.saveTeamMember = saveTeamMember;
-window.checkAuth = checkAuth; 
-window.pullPrayerTime = pullPrayerTime;
-window.pullSPrayerTime = pullSPrayerTime;
-window.savePrayerTime = savePrayerTime;
-window.saveSPrayerTime = saveSPrayerTime;
-window.getAnnouncements = getAnnouncements;
-window.getQuotes = getQuotes;
-window.getTeamTitles = getTeamTitles;
-window.removeEmail = removeEmail;
-window.removePhone = removePhone;
-
-
+// Check if the code is running in a browser environment
+if (typeof window !== 'undefined') {
+  window.getAboutHeader = getAboutHeader;
+  window.getAboutBody = getAboutBody;
+  window.getTeamNames = getTeamNames;
+  window.getTeamPortraits = getTeamPortraits;
+  window.uploadImage = uploadImage;
+  window.getlinks = getlinks;
+  window.signUpEmail = signUpEmail;
+  window.signUpPhone = signUpPhone;
+  window.setHeaderBackground = setHeaderBackground;
+  window.fetchLogo = fetchLogo;
+  window.fetchZelleLogo = fetchZelleLogo;
+  window.getDonateBody = getDonateBody;
+  window.getPaypalBody = getPaypalBody;
+  window.fetchCarouselImages = fetchCarouselImages;
+  window.getEventsByDate = getEventsByDate;
+  window.getEventsByMonth = getEventsByMonth;
+  window.addEventToFirebase = addEventToFirebase;
+  window.deleteEventFromFirebase = deleteEventFromFirebase;
+  window.auth = auth;
+  window.removeTeamMember = removeTeamMember;
+  window.saveAbtHeader = saveAbtHeader;
+  window.saveAbtBody = saveAbtBody;
+  window.saveTeamMember = saveTeamMember;
+  window.checkAuth = checkAuth; 
+  window.pullPrayerTime = pullPrayerTime;
+  window.pullSPrayerTime = pullSPrayerTime;
+  window.savePrayerTime = savePrayerTime;
+  window.saveSPrayerTime = saveSPrayerTime;
+  window.getAnnouncements = getAnnouncements;
+  window.getQuotes = getQuotes;
+  window.getTeamTitles = getTeamTitles;
+  window.removeEmail = removeEmail;
+  window.removePhone = removePhone;
+}
 
 getDocs(colRef)
 .then((snapshot) => {
@@ -565,6 +574,7 @@ getDocs(colRef)
 .catch(err => {
     console.log(err.message)
 })
+
 //This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.
 async function pullPrayerTime(prayerName){
   const prayerRef = doc(db, "prayerTimes", "prayerTime");
@@ -614,7 +624,6 @@ async function pullSPrayerTime(){
     }  
   }
 
-
 async function createPrayerTime(prayerName, prayerNumber, prayerTimes){
   let prayerTime,sPrayerName;
   let firebaseTimeStamp;
@@ -638,63 +647,63 @@ async function createPrayerTime(prayerName, prayerNumber, prayerTimes){
 //Translating the prayer times to timestamps to put into database and then testing to push to the database.
 //If there are time slots present but not filled, it will not push all of the data and alert the user.
 //If it's a Jumu'ah prayer/speech it will translate the date value to timestamp to be stored.
-  //Else, it will grab the system's current day, month, and year at the time of pressing save to fill in those data points for the timestamp.
+//Else, it will grab the system's current day, month, and year at the time of pressing save to fill in those data points for the timestamp.
 
-  async function savePrayerTime(prayerAmount){
-    //This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.
-    const prayerRef = doc(db, "prayerTimes", "prayerTime");
-    const prayerSnap = await getDoc(prayerRef);
+async function savePrayerTime(prayerAmount){
+  //This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.
+  const prayerRef = doc(db, "prayerTimes", "prayerTime");
+  const prayerSnap = await getDoc(prayerRef);
 
-    let prayerTimes={};
-  
-    for(let i=1; i<=prayerAmount;i++){ //Grabs the time slot's id number, associate it with a prayer name, grab that time's data 
-      switch(i){
-        case 1:
-          createPrayerTime("Fajr",1,prayerTimes);
+  let prayerTimes={};
+
+  for(let i=1; i<=prayerAmount;i++){ //Grabs the time slot's id number, associate it with a prayer name, grab that time's data 
+    switch(i){
+      case 1:
+        createPrayerTime("Fajr",1,prayerTimes);
+      break;
+      case 2:
+        createPrayerTime("Dhuhr",2,prayerTimes);
         break;
-        case 2:
-          createPrayerTime("Dhuhr",2,prayerTimes);
-          break;
-        case 3:
-          createPrayerTime("Asr",3,prayerTimes);
-          break;  
-        case 4:
-          createPrayerTime("Maghrib",4,prayerTimes);
-          break;
-        case 5:
-          createPrayerTime("Isha",5,prayerTimes);
-          break; 
-      }
-    }
-  
-    try{
-      setDoc(prayerRef, prayerTimes);
-    }catch(e){
-      console.log("Error saving prayer times.",e);
-      alert("All prayer hours must be submitted to update the prayer hours.");
+      case 3:
+        createPrayerTime("Asr",3,prayerTimes);
+        break;  
+      case 4:
+        createPrayerTime("Maghrib",4,prayerTimes);
+        break;
+      case 5:
+        createPrayerTime("Isha",5,prayerTimes);
+        break; 
     }
   }
 
-  async function saveSPrayerTime(prayerAmount){
-    //This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.
-    const prayerSRef = doc(db, "prayerTimes", "specialPrayerTime");
-    const prayerSnap = await getDoc(prayerSRef);
-  
-    let sPrayerTimes={};
-  
-    for(let i=6; i<=prayerAmount;i++){ //Grabs the time slot's id number, associate it with a prayer name, grab that time's data 
-      createPrayerTime("",i,sPrayerTimes);
-    }
-
-    console.log(sPrayerTimes);
-  
-    try{
-      setDoc(prayerSRef, sPrayerTimes);
-    }catch(e){
-      console.log("Error saving prayer times.",e);
-      alert("All prayer hours must be submitted to update the prayer hours.");
-    }
+  try{
+    setDoc(prayerRef, prayerTimes);
+  }catch(e){
+    console.log("Error saving prayer times.",e);
+    alert("All prayer hours must be submitted to update the prayer hours.");
   }
+}
+
+async function saveSPrayerTime(prayerAmount){
+  //This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.
+  const prayerSRef = doc(db, "prayerTimes", "specialPrayerTime");
+  const prayerSnap = await getDoc(prayerSRef);
+
+  let sPrayerTimes={};
+
+  for(let i=6; i<=prayerAmount;i++){ //Grabs the time slot's id number, associate it with a prayer name, grab that time's data 
+    createPrayerTime("",i,sPrayerTimes);
+  }
+
+  console.log(sPrayerTimes);
+
+  try{
+    setDoc(prayerSRef, sPrayerTimes);
+  }catch(e){
+    console.log("Error saving prayer times.",e);
+    alert("All prayer hours must be submitted to update the prayer hours.");
+  }
+}
 
 async function getAnnouncements(){
   const announcementRef = doc(db, "announcements", "announcement");
@@ -714,14 +723,12 @@ async function getAnnouncements(){
   return announcements;
 }
 
-
 function addQuotes(){
   const quoteRef = doc(db, "quotes", "quote");
   const quoteText = document.getElementById("quoteText").value;
   updateDoc(quoteRef, {text: arrayUnion(quoteText)})
   alert("Quote posted");
   quotePanes(5);
-
 }
 
 async function getQuotes(){
