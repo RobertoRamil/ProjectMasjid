@@ -244,8 +244,63 @@ export async function deleteEvent() {
   document.getElementById('event-name-delete').value = '';
 }
 
+export async function sendPinpointEmail(){
+  console.log("Sending Email");
+  const messageContent = document.getElementById("pinpoint_box").value;
+  const emailPayload = {
+    to: "infommsc7392@gmail.com",
+    subject: "Email from Admin Panel",
+    message: messageContent
+  };
+
+  try {
+    const response = await fetch("/api/sendEmail", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(emailPayload)
+    });
+    
+    // Try to get text first if JSON parsing fails
+    const responseText = await response.text();
+    try {
+      const result = JSON.parse(responseText);
+      console.log("Email sent:", result);
+    } catch (jsonError) {
+      console.error("Failed to parse JSON. Raw response:", responseText);
+    }
+  } catch (error) {
+    console.error("Error sending email:", error);
+  }
+}
+
+export async function sendPinpointSMS(){
+  console.log("Sending SMS");
+  const messageContent = document.getElementById("pinpoint_box").value;
+    
+  // Optionally, get the phone number from an input or define it statically
+  const smsPayload = {
+      to: "+15418084601", // Replace with the recipient's phone number or get from an input
+      message: messageContent
+  };
+
+  try {
+      const response = await fetch("/api/sendSMS", { // Make sure you have a corresponding /api/sendSMS endpoint
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify(smsPayload)
+      });
+      const result = await response.json();
+      console.log("SMS sent:", result);
+  } catch (error) {
+      console.error("Error sending SMS:", error);
+  }
+}
 
 // Ensure these functions are accessible globally
+window.sendPinpointEmail = sendPinpointEmail;
+window.sendPinpointSMS = sendPinpointSMS;
 window.nextMonth = nextMonth;
 window.prevMonth = prevMonth;
 window.addEvent = addEvent;
