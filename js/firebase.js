@@ -366,7 +366,7 @@ async function signUpEmail() {
     }
     else{
       alert("You have joined the newsletter!");
-      updateDoc(contactsRef, {emails: arrayUnion(emails)})
+      updateDoc(contactsRef, {emails: arrayUnion(userEmail)})
     }
   }
   else {
