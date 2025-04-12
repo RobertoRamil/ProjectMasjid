@@ -124,7 +124,10 @@
 
 }
 .Team img{
-    width: 200px;
-    height: 200px;
-    padding-left: 25px;
+
+    width: 150px;
+    height: 150px;
+    padding-left: auto;
+    border: 5px solid white; /* Add a white border around each image */
+    border-radius: 20px; /* Optional: Add rounded corners to the border */
 }
