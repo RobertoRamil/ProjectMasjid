@@ -1,6 +1,4 @@
-import pkg from "@aws-sdk/client-pinpoint";
-const { PinpointClient, SendMessagesCommand } = pkg;
-
+const { PinpointClient, SendMessagesCommand } = require("@aws-sdk/client-pinpoint");
 
 export default async function handler(req, res) {
   // Allow only POST requests
