@@ -365,10 +365,12 @@ async function signUpEmail() {
       return;
     }
     else{
-      alert("Invalid Email");
-  
+      alert("You have joined the newsletter!");
+      updateDoc(contactsRef, {emails: arrayUnion(emails)})
     }
-    
+  }
+  else {
+    alert("Invalid Email");
   }
 }
 async function removeEmail() {

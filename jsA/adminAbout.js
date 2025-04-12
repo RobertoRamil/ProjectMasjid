@@ -81,21 +81,27 @@ onAuthStateChanged(auth, (user) => {
     return portraitURLs;
   }
   
-  async function removeTeamMember(name){
+  async function removeTeamMember(name) {
     console.log("Removing team member:", name); // Debugging line
     const teamRef = doc(db, "team", "team_members");
-    
+
     const teamSnap = await getDoc(teamRef); // Await the getDoc call
     const teamData = teamSnap.data();
-    if (teamData.teamNames) {
+    if (teamData.teamNames && teamData.teamTitles) {
       const index = teamData.teamNames.indexOf(name);
       if (index > -1) {
         teamData.teamNames.splice(index, 1);
         teamData.teamTitles.splice(index, 1);
+
+        // Update the Firestore document with the modified arrays
+        await updateDoc(teamRef, {
+          teamNames: teamData.teamNames,
+          teamTitles: teamData.teamTitles,
+        });
       }
     }
-    updateDoc(teamRef, { teamNames: teamData.teamNames });
-    //Remove the portrait from storage
+
+    // Remove the portrait from storage
     const portraitRef = ref(storage, `team_portraits/${name}.PNG`);
     try {
       await deleteObject(portraitRef);
@@ -164,11 +170,31 @@ async function setupInfo() {
 
 }
 
-async function initTeamMembers(){
+async function initTeamMembers() {
+  try {
+    console.log("Initializing team members...");
     teamMembers = await getTeamNames();
     teamTitles = await getTeamTitles();
     teamPortraits = await getTeamPortraits(teamMembers.length, teamMembers);
+
+    // Log the fetched data for debugging
+    console.log("Team Members:", teamMembers);
+    console.log("Team Titles:", teamTitles);
+    console.log("Team Portraits:", teamPortraits);
+
+    // Validate that all arrays are properly populated
+    if (!teamMembers || !teamTitles || !teamPortraits) {
+      throw new Error("One or more arrays are undefined.");
+    }
+    if (teamMembers.length !== teamTitles.length || teamMembers.length !== teamPortraits.length) {
+      throw new Error("Array lengths are mismatched.");
+    }
+
     renderTeamMembers();
+    console.log("Team members initialized successfully.");
+  } catch (error) {
+    console.error("Error initializing team members:", error);
+  }
 }
 
 async function remove(name) {
@@ -260,118 +286,56 @@ async function addTeamMember() {
 }
 
 function renderTeamMembers() {
-  //Attempt to remove all children of adminMembersBox
+  // Attempt to remove all children of adminMembersBox
   const adminMembersBox = document.getElementById("adminMembersBox");
-  adminMembersBox.innerHTML = ""; // Clear existing members   const adminMembersBox = document.getElementById("adminMembersBox");
+  adminMembersBox.innerHTML = ""; // Clear existing members
+
+  // Ensure teamMembers, teamTitles, and teamPortraits are defined and have the same length
+  if (!teamMembers || !teamTitles || !teamPortraits || teamMembers.length !== teamTitles.length || teamMembers.length !== teamPortraits.length) {
+    console.error("Error: teamMembers, teamTitles, or teamPortraits is undefined or mismatched.");
+    return;
+  }
+
   for (let i = 0; i < teamMembers.length; i++) {
-    //Create the member object
+    // Create the member object
     const member = document.createElement("div");
     member.classList.add("member");
 
     // Create an image
-    var portrait = document.createElement("img");
+    const portrait = document.createElement("img");
     portrait.setAttribute("src", teamPortraits[i]); // Set the src attribute to the portrait URL
 
     // Create a p for the member name
-    var name = document.createElement("p");
+    const name = document.createElement("p");
     name.textContent = teamMembers[i]; // Set the text content to the name
-    // Update the name in the teamMembers array on blur (when editing ends)
 
+    // Create a p for the member title
+    const title = document.createElement("p");
+    title.textContent = teamTitles[i]; // Set the text content to the title
+
+    // Create a remove button
     const removeButton = document.createElement("button");
     removeButton.textContent = "- Remove";
     removeButton.addEventListener("click", () => {
-      //teamMembers.splice(index, 1);
-      //renderTeamMembers();
-      const nameParagraph = removeButton.previousElementSibling;
-      remove(nameParagraph.textContent);
-
-      var title = document.createElement("p");
-      title.textContent = teamTitles[i]; // Placeholder for title, can be modified later;
-
-      const removeButton = document.createElement("button");
-      removeButton.textContent = "- Remove";
-      removeButton.addEventListener("click", () => {
-        //teamMembers.splice(index, 1);
-        //renderTeamMembers();
-        const titleParagraph = removeButton.previousElementSibling;
-        const nameParagraph = titleParagraph.previousElementSibling;
-        remove(nameParagraph.textContent);
-      });
-
-      // Append portrait and name to the member div
-      member.appendChild(portrait);
-      member.appendChild(name);
-      member.appendChild(title);
-      member.appendChild(removeButton);
-      // Append portrait and name to the member div
-      member.appendChild(portrait);
-      member.appendChild(name);
-      member.appendChild(removeButton);
-
-      // Append the member div to the memberGrid
-      adminMembersBox.appendChild(member);
+      remove(name.textContent);
     });
+
+    // Append portrait, name, title, and remove button to the member div
+    member.appendChild(portrait);
+    member.appendChild(name);
+    member.appendChild(title);
+    member.appendChild(removeButton);
+
+    // Append the member div to the adminMembersBox
+    adminMembersBox.appendChild(member);
   }
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
-
-
   setupInfo();
 
+  // Initialize team members, titles, and portraits
   initTeamMembers();
-
-    const adminMembersBox = document.getElementById("adminMembersBox");
-
-
-
-
-  // Load Left Box Content
-
-
-  // Render Team Members
-  function renderTeamMembers() {
-    adminMembersBox.innerHTML = ""; // Clear existing members
-    /*teamMembers.forEach((member, index) => {
-        const memberDiv = document.createElement("div");
-        memberDiv.classList.add("member");
-
-        const portrait = document.createElement("img");
-        portrait.setAttribute("src", member.photo || "https://tinyurl.com/2s3cwmnp");
-
-        const name = document.createElement("p");
-        name.textContent = member.name || "*Member Name*";
-        name.contentEditable = "true";
-
-        // Update the name in the teamMembers array on blur (when editing ends)
-        name.addEventListener("blur", () => {
-            teamMembers[index].name = name.textContent;
-        });
-
-        const editPhoto = document.createElement("textarea");
-        editPhoto.type = "text";
-        editPhoto.placeholder = "Photo URL";
-        editPhoto.value = member.photo;
-        editPhoto.addEventListener("input", (e) => {
-            member.photo = e.target.value;
-            portrait.src = e.target.value;
-        });
-
-        const removeButton = document.createElement("button");
-        removeButton.textContent = "- Remove";
-        removeButton.addEventListener("click", () => {
-            teamMembers.splice(index, 1);
-            renderTeamMembers();
-        });
-
-        memberDiv.appendChild(portrait);
-        memberDiv.appendChild(name);
-        memberDiv.appendChild(editPhoto);
-        memberDiv.appendChild(removeButton);
-        adminMembersBox.appendChild(memberDiv);
-    });*/
-  }
 
   // Add New Member
   document.getElementById("addNewMember").addEventListener("click", () => {
@@ -381,26 +345,10 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("saveAbt").addEventListener("click", () => {
     // Save Left Box Content
     console.log("Saving Left Box Content...");
-
     saveAbtHeader();
     saveAbtBody();
     alert("Changes saved successfully!");
-
   });
-
-  // Save Changes
-  /*document.getElementById("saveChanges").addEventListener("click", () => {
-      // Save Left Box Content
-      localStorage.setItem("leftBoxTitle", adminLeftTitle.textContent);
-      localStorage.setItem("leftBoxText", adminLeftText.textContent);
-
-      // Save Team Members
-      localStorage.setItem("teamMembers", JSON.stringify(teamMembers));
-
-      alert("Changes saved successfully!");
-  });*/
-
-  renderTeamMembers();
 });
 
 //social media 
