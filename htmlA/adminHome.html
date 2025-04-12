@@ -7,10 +7,9 @@
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"> </script>
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="../cssA/adminHome.css">
         <script type="module" src="../jsA/adminHome.js"defer></script> 
-        <script type="module" src="../js/firebase.js"defer></script> 
 
 
         <script>
@@ -26,7 +25,7 @@
     </header>
 
     <body>
-        <div id="Announcement_Quote_Prayer">
+        <div id="prayer_announce">
             <!-- This is the prayer box, every paragraph and span is one row -->
             <div id="prayers_times" class="Announce_Background">
                 <div id="date" class="clock" onload="getDate()"></div>
@@ -37,27 +36,27 @@
                 <div id="rows-container">
                     <form class="prayer_time_and_label">
                         <label for="prayerTime1">Fajr</label>      
-                        <input type="time" class = "time" placeholder="Prayer Time" id="prayerTime1" maxlength="5"/>
+                        <input type="time" class = "time" id="prayerTime1" maxlength="5"/>
                     </form>
 
                     <form class="prayer_time_and_label">
                         <label for="prayerTime2">Dhuhr</label> 
-                        <input type="time" class = "time" placeholder="Prayer Time" id="prayerTime2" maxlength="5"/>
+                        <input type="time" class = "time" id="prayerTime2" maxlength="5"/>
                     </form>
 
                     <form class="prayer_time_and_label">
                         <label for="prayerTime3">Asr</label> 
-                        <input type="time" class = "time" placeholder="Prayer Time" id="prayerTime3" maxlength="5"/>
+                        <input type="time" class = "time" id="prayerTime3" maxlength="5"/>
                     </form>
 
                     <form class="prayer_time_and_label">
                         <label for="prayerTime4">Maghrib</label> 
-                        <input type="time" class = "time" placeholder="Prayer Time" id="prayerTime4" maxlength="5"/>
+                        <input type="time" class = "time" id="prayerTime4" maxlength="5"/>
                     </form>
 
                     <form class="prayer_time_and_label">
                         <label for="prayerTime4">Isha</label> 
-                        <input type="time" class = "time" placeholder="Prayer Time" id="prayerTime5" maxlength="5"/>
+                        <input type="time" class = "time" id="prayerTime5" maxlength="5"/>
                     </form>
                     <div class="prayerTitle">
                         <u>Special Prayer Dates & Times:</u>
@@ -65,58 +64,14 @@
                 </div>
                 <div>                 
                     <button id="addSPrayerRow">Add Prayer</button>
-                    <button id="prayerSaveButton" onclick="addPrayer()"> Save </button> 
-                </div>
-            </div>
-
-            <div id="slideshowChange" class="Announce_Background">
-                <h2>Manage Slideshow</h2>
-                <div id="slideshowPreview">
-                    <!-- Slideshow images will be loaded here -->
-                </div>
-                <form id="slideshowForm">
-                    <label for="slideshowInput">Add a new photo:</label>
-                    <input type="file" id="slideshowInput" accept="image/*">
-                    <img id="photoPreview" class="photoPreview" src="" alt="Photo Preview">
-                    <button type="button" id="addPhotoButton">Add Photo</button>
-                    <button type="button" id="deletePhotoButton">Delete Selected Photos</button>
-                </form>
-            </div>
-
-            <div id="Announcements-container" class="Announce_Background">
-                <h2>Change Quote</h2>
-                <label for="quoteText">Type quote information here:</label>
-                <textarea id="quoteText" required></textarea>
-                <button id="submit_quote" onclick="addQuotes()">Post Quote</button>
-            </div>
-            </div>
-
-            
-            
-        </div>
-
-
-        <div style="display: flex;">
-            <div id="map_container">
-                <form id="mapChange">
-                    <b>
-                        Location Name on Google Maps: <br>
-                    </b>
-
-                    <div id="example_map_input">
-                        Example: Maunatul Muslimeen Society of CA (Islamic Center) - MMSC - Sacramento
-                        <br><br>
+                    <div class="popup">
+                        <span class="popuptext" id="popupItem">Prayer Saved Successfully</span>
                     </div>
+                    <button id="prayerSaveButton"> Save </button> 
 
-                    <input type="text" id="Location">
-                    <button type="submit">Submit</button>
-                   <!-- Commenting out because not working.
-
-                    <button type="submit" onclick="convertSpace(event)">Submit</button> 
-                    -->
-                </form>
+                </div>
             </div>
-
+            <!--Announcements-->
             <div id="Announcements-container" class="Announce_Background">
                 <h2>Add Announcement</h2>
             
@@ -126,10 +81,63 @@
                 <label for="announcementText">Type announcement information here:</label>
                 <textarea id="announcementText" required></textarea>
                 <button onclick="addAnnouncement()" id="submit_announcement">Post Announcement</button>
-            
+                <div class="centeredRow"> 
+                    <div class="box"><br>
+                    <h1 id="heading">Announcements</h1>
+                    <div class="announcement-row" id="announcementRow"></div>
+
+                </div>
             
             </div>
         </div>
+        </div>
+
+        <div id="map_quote">
+          <div id="quoteChange" class="Announce_Background">
+              <h2>Change Quote</h2>
+              <label for="quoteText">Type quote information here:</label>
+              <textarea id="quoteText" required></textarea>
+              <button id="submit_quote" onclick="addQuotes()">Post Quote</button>
+          </div>
+
+        <!--
+        <div id="map_container" class="Announce_Background">
+            <form id="mapChange">
+                <b>
+                    Location Name on Google Maps: <br>
+                </b>
+
+                <div id="example_map_input">
+                    Example: Maunatul Muslimeen Society of CA (Islamic Center) - MMSC - Sacramento
+                    <br><br>
+                </div>
+
+                <input type="text" id="Location">
+                <button type="submit">Submit</button>
+                <! -- Commenting out because not working.
+
+                <button type="submit" onclick="convertSpace(event)">Submit</button> 
+                -- >
+            </form>
+        </div>
+    -->
+ 
+      
+        <div id="slideshowChange" class="Announce_Background">
+            <h2>Manage Slideshow</h2>
+            <div id="slideshowPreview">
+                <!-- Slideshow images will be loaded here -->
+            </div>
+            <form id="slideshowForm">
+                <label for="slideshowInput">Add a new photo:</label>
+                <input type="file" id="slideshowInput" accept="image/*">
+                <img id="photoPreview" class="photoPreview" src="" alt="Photo Preview">
+                <button type="button" id="addPhotoButton">Add Photo</button>
+                <button type="button" id="deletePhotoButton">Delete Selected Photos</button>
+            </form>
+        </div>
+
+  </div>
     </body>
 
 </html>
