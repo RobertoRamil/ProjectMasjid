@@ -8,18 +8,18 @@
         <!--CSS & Javscript-->
         <link rel="stylesheet" href="../cssA/adminHeader.css">
         <script src="../jsA/adminHeader.js" defer ></script>
-        <script src="../js/firebase.js" type="module" defer></script>
 
     </head>
 
 
     <body>            
-        <div id="background_and_title">
-            <button onclick="darkSwitch()" id="darkModeToggle">&#9788</button>
+        <button onclick="darkSwitch()" id="darkModeToggle">&#9788</button>
 
+        <div id="background_and_title">            
             <button type="button" onclick="history.go(-1)"> < Back </button>
             <h2 id="update_image_visual_text"> Update Image </h2>
-            <button type="button" >Log out </button>
+            <button type="button" onclick="redirectToLogout()">Log out </button>
+
         </div>
 
         <div id="background-upload-container">
@@ -52,6 +52,7 @@
             <a href="adminAbout.html" class="tab">About</a>
             <a href="adminEvent.html" class="tab">Events</a>
             <a href="adminDonate.html" class="tab">Donate</a>
+            <a href="adminPermissions.html" class="tab">Permissions</a>
         </div>
     </body>
 </html>

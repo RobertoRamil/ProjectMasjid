@@ -17,14 +17,15 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
-const db = getFirestore();
-const storage = getStorage();
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const storage = getStorage(app);
 
 // Initialize Firebase Authentication and get a reference to the service
-const auth = getAuth();
+const auth = getAuth(app);
 
 // Check if the user is authenticated
+/*
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     // User is not signed in, redirect to login page
@@ -34,7 +35,39 @@ onAuthStateChanged(auth, (user) => {
     // User is signed in, you can get the user ID if needed
   }
 });
+*/
 // End: Redirect to login page if the user is not authenticated
+
+
+//Newsletter
+document.getElementById("newspaper_toggle").addEventListener("change", async () => {
+  let toggle = document.getElementById('newspaper_toggle');
+  let isChecked=toggle.checked;
+  const checkboxRef = doc(db, "Toggles", "NewsLetter");
+  try {
+    await updateDoc(checkboxRef, {
+      toggle: isChecked
+    });
+  } catch (e) {
+    console.log(`Error saving ${checkName} toggle value.`, e);
+  }  
+});
+
+async function initChecked(){
+  const news = doc(db, "Toggles","NewsLetter");
+  const newsSnap = await getDoc(news);
+
+  const newsToggleValue=newsSnap.data().toggle;
+
+  let newsCheck=document.getElementById("newspaper_toggle");
+
+  newsCheck.checked=newsToggleValue;
+  }
+
+
+
+//Calendar functionality
+
 let currentDate = new Date();
 let monthEvents = []; // Stores events as [{date: "YYYY-MM-DD", data: {Event 1: "Time", Event 2: "Time"}}]
 
@@ -244,12 +277,73 @@ export async function deleteEvent() {
   document.getElementById('event-name-delete').value = '';
 }
 
+export async function sendPinpointEmail(){
+  console.log("Sending Email");
+  const messageContent = document.getElementById("pinpoint_box").value;
+  const emailPayload = {
+    to: "infommsc7392@gmail.com",
+    subject: "Email from Admin Panel",
+    message: messageContent
+  };
+
+  try {
+    const response = await fetch("/api/sendEmail", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(emailPayload)
+    });
+    
+    // Try to get text first if JSON parsing fails
+    const responseText = await response.text();
+    try {
+      const result = JSON.parse(responseText);
+      console.log("Email sent:", result);
+    } catch (jsonError) {
+      console.error("Failed to parse JSON. Raw response:", responseText);
+    }
+  } catch (error) {
+    console.error("Error sending email:", error);
+  }
+}
+
+export async function sendPinpointSMS(){
+  console.log("Sending SMS");
+  const messageContent = document.getElementById("pinpoint_box").value;
+    
+  // Optionally, get the phone number from an input or define it statically
+  const smsPayload = {
+      to: "+15418084601", // Replace with the recipient's phone number or get from an input
+      message: messageContent
+  };
+
+  try {
+      const response = await fetch("/api/sendSMS", { // Make sure you have a corresponding /api/sendSMS endpoint
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify(smsPayload)
+      });
+      const result = await response.json();
+      console.log("SMS sent:", result);
+  } catch (error) {
+      console.error("Error sending SMS:", error);
+  }
+}
 
 // Ensure these functions are accessible globally
+window.sendPinpointEmail = sendPinpointEmail;
+window.sendPinpointSMS = sendPinpointSMS;
 window.nextMonth = nextMonth;
 window.prevMonth = prevMonth;
 window.addEvent = addEvent;
 window.deleteEvent = deleteEvent;
 renderCalendar();
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  initChecked();
+});
+
 
 

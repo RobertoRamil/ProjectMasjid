@@ -424,7 +424,16 @@ async function getAnnouncements(){
   const announcementRef = doc(db, "announcements", "announcement");
   const announcementSnap = await getDoc(announcementRef);
   const announcements = announcementSnap.data().text;
+  const announcementRow = document.getElementById("announcementRow");
+  console.log(announcementRow);
+  announcementRow.innerHTML = ''; // Clear existing announcements
 
+  announcements.forEach(announcement => {
+    const announcementDiv = document.createElement("div");
+    announcementDiv.className = "announcement";
+    announcementDiv.textContent = announcement;
+    announcementRow.appendChild(announcementDiv);
+  });
   return announcements;
 }
 

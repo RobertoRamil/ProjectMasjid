@@ -1,3 +1,8 @@
+/*
+document.addEventListener("DOMContentLoaded", () => {
+    checkAuth();
+});
+*/
 // Select elements
 const imageUpload = document.getElementById("imageUpload");
 const imagePreview = document.getElementById("imagePreview");
@@ -44,6 +49,17 @@ document.getElementById("headerResetButton").addEventListener("click", function 
     }
 
   })();
+
+function redirectToLogout(){
+    let result = confirm("Are you sure you want to logout?");
+    if(result){
+        console.log("Signing user out...");
+        window.location.href = "adminLogout.html";
+    }else{
+        console.log("User has refused sign out");
+    }
+    
+}
 
 function darkSwitch() {
     var element=document.body;

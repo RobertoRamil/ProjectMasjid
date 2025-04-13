@@ -1,44 +1,216 @@
 @media screen and (min-width:1100px){
-    #Announcement_Quote_Prayer{
-        display: flex;
+    #prayer_announce{
+        padding:10px;
+        display:flex;
+        align-items: flex-start;
+        justify-content: space-between;
+
+    }
+    #map_quote{
+        padding:10px;
+        display:flex;
+        align-items: flex-start;
         justify-content: space-between;
     }
 
-    #Announcements-container {
-        width: 30%; 
-        display: flex;
-    }
-
-    #map_container{
-        width:40%;
-    }
-
+    /*Quotes*/
     #quoteChange{
-        width: fit-content;
+        min-width: 48%;
+    }
+
+    /*Map*/
+    #map-container{
+        width: 50%;
+    }
+
+    /*Prayers*/
+    #prayers_times{
+        width: 48%;
+        margin: 10px 10px 0px 10px;
+    }  
+
+    /*Announcement*/
+    #Announcements-container {
+        width: 48%; 
+        display: flex;
     }
 
     #submit_announcement {
         width: 45%;
     }
-}
 
-@media screen and (max-width:1099px){
-    #map_container{
-        max-width:95%;     
+    /*Slide show*/
+    #slideshowChange{
+        width: 48%;
+    }
 
+    #slideshowForm input,
+    #slideshowForm button {
+        margin: 5px 0;
+        width: 40%;
+    }
+
+    #slideshowForm{
+        justify-content: center;
+        align-items: center;
     }
 }
 
+@media screen and (max-width:1099px){
+    #prayers_times{
+        margin: 10px 10px 20px 10px;
+    }  
+    #prayer_announce{
+        margin-bottom:50px;
+    }
+
+}
+
+
 .Announce_Background{
     background-color: lightgray;
-
     border: 1px solid black;
     box-shadow: 0 0 10px rgb(0, 0, 0, 0.1);    
     border-radius: 5px;
 }
 
-/*Announcement & Quote*/
-    #Announcements-container, #quoteChange{
+/* Prayer time box specifically */
+    #prayers_times {
+
+        text-align: center;
+        font-size: 20px;
+        font-weight:bold;
+
+        padding: 10px;
+
+        height: auto;
+        min-height: 200px; /* Optional: Set a minimum height */
+
+        overflow: visible; /* Ensure it grows dynamically */
+
+        display: flex;
+        flex-direction: column; /* Arrange rows and button vertically */
+        justify-content: space-between; /* Ensure button stays at the bottom */
+    }
+/*---------------------------Prayers----------------------------*/
+  
+/*This is the time inputs for the prayer times*/
+    .time{
+        font-size: 18px;
+        width:100%;
+    }
+
+    .prayerTitle {
+        margin-top:2%;
+        text-align: center;
+    }
+
+    .prayer_time_and_label{
+        display:flex;
+        flex-direction:column;
+
+        text-align: left;
+    }
+
+    #addPrayerRow {
+        align-self: center; /* Center button horizontally */
+
+        margin-top: 10px;
+    }
+
+    .sPrayerLabel{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .sPrayerName{
+        padding:5px;
+    }
+    
+    /*This the dropdown box for the special prayer names*/
+    .specialPrayerTime{
+        width: fit-content;
+
+        font-size: 20px;
+
+        margin:10px;
+    }
+    
+    /*Close Button seen in special prayers*/
+    .close_button{
+        margin-top: 0px;
+        background:none;
+        color:black;
+        padding:5px 10px;
+    
+        cursor: pointer;
+    }
+    
+    .close_button:hover{
+        background: #bbb;
+    }
+    /*---------------------------Popup----------------------------*/
+    .popup {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        }
+        
+    /* The actual popup */
+    .popup .popuptext {
+        visibility: hidden;
+        background-color: #03691be1;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 3px 8px;
+        position: absolute;
+        z-index: 1;
+        top: 150%;
+        margin-top: 20px;
+        left: 50%;
+        margin-left: -85px;
+        white-space: nowrap;
+    }
+        
+    /* Popup arrow */
+    .popup .popuptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #03691be1 transparent;
+    }
+    
+    /* Toggle this class - hide and show the popup */
+    .popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+    }
+    
+    /* Add animation (fade in the popup) */
+    @-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+    }
+    
+    @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+    }
+
+    /*----------------Announcement & Quote------------------*/
+    #Announcements-container, #quoteChange, #map_container{
         height:fit-content;
 
         margin: 10px;
@@ -75,11 +247,57 @@
         margin-right: 2%;
     }
 
-/*Quote*/
-    #quoteChange{
-        min-width: 30%;
+    #heading{
+        position: relative;
+        right:20%;
     }
 
+    /*------------------Slideshow management section------------------*/
+    #slideshowChange {
+        margin: 10px;
+        padding: 20px;
+        display: flow-root;
+    }
+
+    #slideshowPreview {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .slideshowImage {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border: 2px solid transparent;
+        cursor: pointer;
+    }
+
+    .slideshowImage.selected {
+        border-color: red;
+    }
+
+    #slideshowForm {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #slideshowForm input,
+    #slideshowForm button {
+        margin: 5px 0;
+    }
+
+    .photoPreview {
+        display: none;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin-top: 10px;
+    }
+
+
+/*------------------Quote----------------------*/
     #quoteForm{
         display:flex;
         flex-direction: column;
@@ -92,102 +310,16 @@
         box-sizing: border-box;
     }
 
-/* Prayer time box specifically */
-    #prayers_times {
-
-        text-align: center;
-        font-size: 20px;
-        font-weight:bold;
-
-        padding: 10px;
-        margin:10px;
-
-        width: fit-content;
-        height: auto;
-        min-height: 200px; /* Optional: Set a minimum height */
-
-        overflow: visible; /* Ensure it grows dynamically */
-
-        display: flex;
-        flex-direction: column; /* Arrange rows and button vertically */
-        justify-content: space-between; /* Ensure button stays at the bottom */
-    }
-
-/*This is the time inputs for the prayer times*/
-    .time{
-        font-size: 18px;
-        width:100%;
-    }
-
-    .prayerTitle {
-        margin-top:8%;
-
-        text-align: center;
-    }
-
-    .prayer_time_and_label{
-        display:flex;
-        flex-direction:column;
-
-        text-align: left;
-    }
-
-    #addPrayerRow {
-        align-self: center; /* Center button horizontally */
-
-        margin-top: 10px;
-    }
-
-    .sPrayerName{
-        padding:5px;
-    }
-
-/*This the dropdown box for the special prayer names*/
-    .specialPrayerTime{
-        width: fit-content;
-
-        font-size: 20px;
-
-        margin:10px;
-    }
-
-    
-/*Close Button seen in special prayers*/
-.close_button{
-    margin-top: 0px;
-    background:none;
-    color:black;
-
-    cursor: pointer;
-
-    position: relative;
-    transform: translate(250%, 90%);
-
-}
-
-.close_button:hover{
-    background: #bbb;
-}
 
 
-/*Map section*/
+/*----------------------Map section-------------------------*/
     #map_container{
-        border: 5px rgba(210, 212, 214, 0.897) groove;
-        border-radius: 10px;
-
-        height: 20%;
-
-        padding: 1%;
-        margin: 1%;
-
         font-size: larger;
         text-align: center;
 
         display: flex;
         align-items: center;
         justify-content: center;
-
-        background-color: rgba(210, 212, 214, 0.52);
     }
 
     #mapChange b{
@@ -211,51 +343,6 @@
 
         justify-self:center;
     }
-
-/* Slideshow management section */
-#slideshowChange {
-    width: fit-content; /* Increase width by 10% */
-    margin: 10px;
-    padding: 20px;
-    display: flow-root;
-}
-
-#slideshowPreview {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.slideshowImage {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border: 2px solid transparent;
-    cursor: pointer;
-}
-
-.slideshowImage.selected {
-    border-color: red;
-}
-
-#slideshowForm {
-    display: flex;
-    flex-direction: column;
-}
-
-#slideshowForm input,
-#slideshowForm button {
-    margin: 5px 0;
-}
-
-.photoPreview {
-    display: none;
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    margin-top: 10px;
-}
 
 /*Commenting out until used
 
