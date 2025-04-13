@@ -44,7 +44,7 @@ function convertSpace(event){
 
 //announcment box auto makes the boxes
 function announcement_Panes(announcement_panes) {
-    const announcementGrid = document.getElementById("quoteRow");
+    const announcementGrid = document.getElementById("announcementRow");
     for (let j = 0; j < announcement_panes; j++) {
         // Create announcement box
         const announcement = document.createElement("div");

@@ -333,7 +333,7 @@ async function getEmailsList() {
   return emails;
 }
 
-async function getPhoneList() {
+export async function getPhoneList() {
   const phoneSnap = await getDoc(contactsRef); // Await the getDoc call
   const phones = [];
   //get all the phone numbers from the database
