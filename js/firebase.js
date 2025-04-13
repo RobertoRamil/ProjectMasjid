@@ -56,6 +56,17 @@ async function setHeaderBackground() {
   }
 }
 
+async function setPageBackground() {
+  const storageRef = ref(storage, 'HeaderPhotos/MainPageBackground.png');
+  try {
+    const url = await getDownloadURL(storageRef);
+    console.log("Main Page background URL fetched:", url); // Debugging line
+    document.querySelector('body').style.backgroundImage = `url(${url})`;
+  } catch (error) {
+    console.error("Error fetching header background:", error);
+  }
+}
+
 //--------------------------------------------Setup for donate section--------------------------------------------------//
 async function fetchZelleLogo() {
   console.log("fetchZelleLogo function called");
@@ -578,6 +589,7 @@ window.addAnnouncement = addAnnouncement;
 window.getTeamTitles = getTeamTitles;
 window.removeEmail = removeEmail;
 window.removePhone = removePhone;
+window.setPageBackground = setPageBackground;
 
 getDocs(colRef)
   .then((snapshot) => {
