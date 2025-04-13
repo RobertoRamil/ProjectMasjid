@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
   pullPrayerTime();
   pullSPrayerTime();
   fetchCarouselImages();
-  getAnnouncements();
   getQuotes();
+  loadPrayerTimes();
 });
 
 //announcment box auto makes the boxes
@@ -157,7 +157,3 @@ async function loadPrayerTimes(){
     prayerBox.appendChild(sContainer);
 
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-    loadPrayerTimes();
-  });

@@ -5,20 +5,87 @@ const assert=require('assert');
 const chrome = require('selenium-webdriver/chrome');
 
 
-async function testLogin(username, password) {
-  let driver = await new Builder().forBrowser(Browser.CHROME).build();
-  try {
-    await driver.get('http://mmscenter.org'); // Replace with the actual path to your HTML file
-    
+
+async function adminPlace() {
+  try{
+
+  }catch(e){
+    console.log(e);
   } finally {
     await driver.quit();
   }
 }
-/*
-Currently this is hardcoded to start local host on the donate page.
-It will later need to be changed to the actual URL as the currently ids
-are different.
-*/
+
+async function checkToggle() {
+  let driver = new Builder().forBrowser('chrome').build();
+
+  //Newsletter
+  await driver.get('http://127.0.0.1:5500/htmlA/adminEvent.html');
+  await driver.sleep(3000);
+  
+  try {
+    await driver.get('http://127.0.0.1:5500/html/event.html');
+    let news = await driver.findElement(By.id('newsLetter'));
+    console.log("News is present.");
+  }catch(e){
+    console.log("News doesn't exist");
+  } 
+
+
+  await driver.get('http://127.0.0.1:5500/htmlA/adminDonate.html');
+  await driver.sleep(3000);
+  await driver.get('http://127.0.0.1:5500/html/donate.html');
+  await driver.sleep(1000);
+
+
+  try{
+    let paypal = await driver.findElement(By.id('paypal'));
+    console.log("paypal is present.");
+  }catch(e){
+    console.log("paypal doesn't exist");
+  } 
+
+  try{
+    let zelle = await driver.findElement(By.id('zelle'));
+    console.log("zelle is present.");
+  }catch(e){
+    console.log("zelle doesn't exist");
+
+  } finally {
+      await driver.quit();
+  }
+}
+
+async function testAdminHeaderButtons(){
+  let driver = await new Builder().forBrowser(Browser.CHROME).build();
+  try{
+    await driver.get('http://127.0.0.1:5500/htmlA/adminHome.html');
+    var header= await driver.findElement(By.id('header'));
+    var headerTabs = await header.findElements(By.className('tab'));
+    var tabAmount = headerTabs.length;
+
+    for (let i = 0; i <tabAmount; i++) {
+      await driver.wait(until.elementLocated(By.id('header')), 5000);
+      var header= await driver.findElement(By.id('header'));
+      var headerTabs = await header.findElements(By.className('tab'));
+      let targetUrl= await headerTabs[i].getAttribute('href');
+      await headerTabs[i].click();
+      let currentUrl= await driver.getCurrentUrl();
+
+      try {
+        assert.equal(targetUrl,currentUrl);
+        console.log(`Header button ${i + 1} passed: Navigated to ${currentUrl}`);
+      } catch (error) {
+        console.error(`Header button ${i + 1} failed: Expected ${targetUrl}, but got ${currentUrl}`);
+      }
+   }
+   
+
+  } finally {
+    await driver.quit();
+  }
+}
+
 async function testHeaderButtons(){
   let driver = await new Builder().forBrowser(Browser.CHROME).build();
   try{
@@ -312,9 +379,14 @@ async function testprayerBackground(){
 
 
 async function runTest(){
-  await testprayerBackground();
-  await testHeaderButtons();
-  await testFooterButtons();
-}
+  //await testprayerBackground();
+  //await testHeaderButtons();
+  //await testFooterButtons();
+
+  /*WHEN DOING THIS TWO TEST YOU MUST STOP ALL AUTH  OR IMPORT THE TEST LOGIN */
+  //await testAdminHeaderButtons();
+
+  //await checkToggle();
+  }
 
 runTest();

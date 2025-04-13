@@ -5,14 +5,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Admin Donate</title>
 
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
+        crossorigin="anonymous"></script>
+
         <link rel="stylesheet" href="../cssA/adminDonate.css">
        
         <script type="module" src="../jsA/adminDonate.js" defer></script>
-        
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
-        crossorigin="anonymous">
-        </script>
+        <script type="module" src="../js/firebase.js"defer></script> 
+
+    
         <script defer>
             $(function(){
                 $('#header').load('adminHeader.html');
@@ -34,7 +37,7 @@
             <div id="donate_buttons">       
                 <form id="paypal">
                     <b>Turn off Square </b>      
-                    <input type="checkbox" class="toggle"/>
+                    <input type="checkbox" class="toggle"  id="paypal_check"/>
                     <br>
                     <input type="url" id="paypalURL">
                     <br>
@@ -45,7 +48,7 @@
 
                 <form id="zelle">
                     <b>Turn off Zelle </b>      
-                    <input type="checkbox" class="toggle"/>
+                    <input type="checkbox" class="toggle" id="zelle_check"/>
                     <br>
                     <input type="file" placeholder="current URL" id="zelleSubmitImg" accept="image/*"/>
                     <br>

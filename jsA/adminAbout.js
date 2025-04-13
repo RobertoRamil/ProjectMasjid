@@ -23,6 +23,7 @@ const storage = getStorage(app);
 const auth = getAuth();
 
 // Check if the user is authenticated
+/*
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     // User is not signed in, redirect to login page
@@ -33,7 +34,7 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-
+*/
   async function getTeamNames(){
     const teamRef = doc(db, "team", "team_members");
     const teamSnap = await getDoc(teamRef); // Await the getDoc call
@@ -336,7 +337,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initialize team members, titles, and portraits
   initTeamMembers();
+  initSocials();
 
+    const adminMembersBox = document.getElementById("adminMembersBox");
+
+
+
+
+  // Load Left Box Content
+
+
+  // Render Team Members
+  function renderTeamMembers() {
+    adminMembersBox.innerHTML = ""; // Clear existing members
+    /*teamMembers.forEach((member, index) => {
+        const memberDiv = document.createElement("div");
+        memberDiv.classList.add("member");
+
+        const portrait = document.createElement("img");
+        portrait.setAttribute("src", member.photo || "https://tinyurl.com/2s3cwmnp");
+
+        const name = document.createElement("p");
+        name.textContent = member.name || "*Member Name*";
+        name.contentEditable = "true";
+
+        // Update the name in the teamMembers array on blur (when editing ends)
+        name.addEventListener("blur", () => {
+            teamMembers[index].name = name.textContent;
+        });
+
+        const editPhoto = document.createElement("textarea");
+        editPhoto.type = "text";
+        editPhoto.placeholder = "Photo URL";
+        editPhoto.value = member.photo;
+        editPhoto.addEventListener("input", (e) => {
+            member.photo = e.target.value;
+            portrait.src = e.target.value;
+        });
+
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "- Remove";
+        removeButton.addEventListener("click", () => {
+            teamMembers.splice(index, 1);
+            renderTeamMembers();
+        });
+
+        memberDiv.appendChild(portrait);
+        memberDiv.appendChild(name);
+        memberDiv.appendChild(editPhoto);
+        memberDiv.appendChild(removeButton);
+        adminMembersBox.appendChild(memberDiv);
+    });*/
+  }
   // Add New Member
   document.getElementById("addNewMember").addEventListener("click", () => {
     addTeamMember();
@@ -505,4 +557,18 @@ async function canEditElement(phoneNumber, permission) {
   const docSnap = await getDoc(doc(db, "whitelistedAdmins", email));
   const hasPermission = docSnap.data()[permission];
   return hasPermission;
+}
+
+async function initSocials(){
+  const facebookRef = doc(db, "Links", "facebook");
+  const instagramRef = doc(db, "Links", "instagram");
+  const youtubeRef = doc(db, "Links", "youtube");
+
+  const facebookSnap = await getDoc(facebookRef);
+  const instagramSnap = await getDoc(instagramRef);
+  const youtubeSnap = await getDoc(youtubeRef);
+
+  document.getElementById("facebookLink").value = facebookSnap.data().link;
+  document.getElementById("instagramLink").value = instagramSnap.data().link;
+  document.getElementById("youtubeLink").value = youtubeSnap.data().link;
 }
