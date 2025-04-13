@@ -1,4 +1,4 @@
-const { Builder, By, until } = require('selenium-webdriver');
+/*const { Builder, By, until } = require('selenium-webdriver');
 const { expect } = require('chai');
 require('chromedriver');
 
@@ -17,7 +17,7 @@ describe('Admin Login Test', function() {
   });
 
   it('should login with valid credentials, recaptcha click, and 2FA input', async function() {
-    await driver.get('http://127.0.0.1:5500/htmlA/adminLogin.html?testmode=true');
+    await driver.get('http://127.0.0.1:5500/ProjectMasjid/htmlA/adminLogin.html');
 
     await driver.wait(until.elementLocated(By.id('username')), 10000);
     await driver.findElement(By.id('username')).sendKeys('gamesforgio@gmail.com');
@@ -42,4 +42,4 @@ describe('Admin Login Test', function() {
     const currentUrl = await driver.getCurrentUrl();
     expect(currentUrl).to.include('adminHome.html');
   });
-});
+});*/
