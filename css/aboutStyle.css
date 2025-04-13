@@ -110,9 +110,11 @@
     display: grid;
     width: 200px;
     height: fit-content;
+    place-items: center; /* Centers both image and text horizontally and vertically */
 }
 .Team p{
-
+    text-align: center;
+    margin: auto;
     font-size: 16px;
     margin-top: 5px;
     margin-bottom: 10px;
@@ -122,9 +124,10 @@
 
 }
 .Team img{
-    max-width: 125px;
-    width: auto;
-    max-height: 100px;
-    height: auto;
-    padding-left: 25px;
+
+    width: 150px;
+    height: 150px;
+    padding-left: auto;
+    border: 5px solid white; /* Add a white border around each image */
+    border-radius: 20px; /* Optional: Add rounded corners to the border */
 }
