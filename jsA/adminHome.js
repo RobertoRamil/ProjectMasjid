@@ -424,8 +424,6 @@ async function getAnnouncements(){
   const announcementRef = doc(db, "announcements", "announcement");
   const announcementSnap = await getDoc(announcementRef);
   const announcements = announcementSnap.data().text;
-
-
   const announcementRow = document.getElementById("announcementRow");
   console.log(announcementRow);
   announcementRow.innerHTML = ''; // Clear existing announcements
@@ -436,7 +434,6 @@ async function getAnnouncements(){
     announcementDiv.textContent = announcement;
     announcementRow.appendChild(announcementDiv);
   });
-
   return announcements;
 }
 
@@ -456,17 +453,38 @@ async function addQuotes(){
 async function announcementPanes(announcement_panes) {
   const announcementGrid = document.getElementById("announcementRow");
   $(announcementGrid).empty();
-  let announcements = (await getAnnouncements()).text;
+  let announcements = (await getAnnouncements());
   for (let j = 0; j < announcements.length; j++) {
-    console.error(announcements[j]);
       // Create announcement box
       const announcement = document.createElement("div");
       announcement.classList.add("announcement");
-
       // Create inner box for content
       const boxInBox = document.createElement("div");
       boxInBox.classList.add("inner-box");
-      boxInBox.textContent = announcements[j]; 
+      boxInBox.style.width = "100%";
+      boxInBox.textContent = announcements[j];
+      const announcementRef = doc(db, "announcements", "announcement");
+
+      // creating a delete buutton
+      let deleteButton = $(`<button class="deleteAnnouncementBtn" style="margin-left: 10px" type="button"><i class="fa fa-close" style="font-size:48px;color:red"></i></button>`);
+      deleteButton.on('click', function(){
+        getDoc(announcementRef).then((docSnap) => {
+          if (docSnap.exists()) {
+            const existingAnnouncements = docSnap.data().text || [];
+            const indexInAnnouncements = existingAnnouncements.indexOf(announcements[j]);
+            existingAnnouncements.splice(indexInAnnouncements, 1); // Removes 1 element at index 2
+            updateDoc(announcementRef, { text: [...existingAnnouncements] });
+            announcementPanes()
+            alert("Announcement deleted");
+          } else {
+            setDoc(announcementRef, { text: [announcementText] });
+          }
+        }).catch((error) => {
+          console.error("Error removing announcement:", error);
+        });
+      });
+
+      $(boxInBox).append(deleteButton);
       announcement.appendChild(boxInBox);
 
       // Append announcement to grid
