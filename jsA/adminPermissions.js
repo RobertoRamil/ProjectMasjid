@@ -298,6 +298,7 @@ async function getAdminPermissions() {
   canEditSocialsCheckbox.type = 'checkbox';
   canEditSocialsCheckbox.checked = data.canEditSocials;
   canEditSocialsCheckbox.style.transform = 'scale(1.5)';
+  canEditSocialsCheckbox.id = 'canEditSocialsCheckbox'; // Added ID
 
   const canEditSocialsLabel = document.createElement('label');
   canEditSocialsLabel.textContent = 'Can Edit Socials';
@@ -307,6 +308,7 @@ async function getAdminPermissions() {
   canEditPaymentsCheckbox.type = 'checkbox';
   canEditPaymentsCheckbox.checked = data.canEditPayments;
   canEditPaymentsCheckbox.style.transform = 'scale(1.5)';
+  canEditPaymentsCheckbox.id = 'canEditPaymentsCheckbox'; // Added ID
 
   const canEditPaymentsLabel = document.createElement('label');
   canEditPaymentsLabel.textContent = 'Can Edit Payments';
