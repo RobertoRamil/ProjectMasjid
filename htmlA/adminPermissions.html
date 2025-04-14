@@ -7,7 +7,8 @@
     <!--Title is what chrome shows on top-->
     <title>Admin Event</title>
     <!--CSS & Javascript-->
-    <link rel="stylesheet" href="../cssA/adminEvent.css">
+    <link rel="stylesheet" href="../cssA/adminPermissions.css">
+    <script src="../jsA/adminPermissions.js" type="module" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"> </script>
     <!--This imports the codes of the adminHeader (including whatever is imported in the header HTML file)-->
@@ -16,7 +17,7 @@
             $('#header').load('adminHeader.html');
         })
     </script>
-    <script src="../jsA/adminPermissions.js" type="module" defer></script>
+
 </head>
 
 <header>
@@ -24,50 +25,56 @@
 </header>
 
 <body>
-    <div>
-        <div>
-            <label for="adminEmail">Email:</label>
-            <input type="text" id="adminEmail" placeholder="(I.E. email@domain.com)">
-        </div>
-        <div>
-            <div style="display: flex; gap: 5px;"></div>
+    <div id="permissions-content">
+        <h2 id="Webpage-Tab-Title">Admin Permissions</h2>
+
+
+        <div id="create-content">
+            <div id="emailPhone-content">
+                <label for="adminEmail">Email:</label>
+                <input type="text" id="adminEmail" placeholder="(I.E. email@domain.com)">
+            </div>
+            <div>
                 <label for="adminPhoneNumber">Phone Number:</label>
-                <input type="text" id="adminPhoneNumberCountryCode" placeholder="Country Code (I.E. 1)" maxlength="3" style="width: 132px;">
-                <input type="text" id="adminPhoneNumber" placeholder="Phone Number (I.E. 1234567890)" maxlength="10" style="width: 215px;">
+                <input type="text" id="adminPhoneNumberCountryCode" placeholder="Country Code (I.E. 1)" maxlength="3">
+                <input type="text" id="adminPhoneNumber" placeholder="Phone Number (I.E. 1234567890)" maxlength="10">
+            </div>
+            <div>
+                <label for="adminPassword">Password:</label>
+                <input type="text" id="adminPassword" placeholder="(I.E. password)">
+            </div>
+            <div>
+                <label for="canEditSocials">Can Edit Socials:</label>
+                <input type="checkbox" id="canEditSocials" name="canEditSocials">
+            </div>
+            <div>
+                <label for="canEditPayments">Can Edit About:</label>
+                <input type="checkbox" id="canEditPayments" name="canEditPayments">
+            </div>
+            <div>
+                <button id="createAdminBtn">Create Admin</button>
             </div>
         </div>
-        <div>
-            <label for="adminPassword">Password:</label>
-            <input type="text" id="adminPassword" placeholder="(I.E. password)">
-        </div>
-        <div>
-            <label for="canEditSocials">Can Edit Socials:</label>
-            <input type="checkbox" id="canEditSocials" name="canEditSocials" style="transform: scale(1.5);">
-        </div>
-        <div>
-            <label for="canEditPayments">Can Edit Payments:</label>
-            <input type="checkbox" id="canEditPayments" name="canEditPayments" style="transform: scale(1.5);">
-        </div>
-        <div>
-            <button id="createAdminBtn">Create Admin</button>
-        </div>
-    </div>
-    <div>
-        <div>
-            <label for="adminDropDown">Admin:</label>
-            <select id="adminDropDown"></select>
-        </div>
-        <div>
-            <button id="deleteAdminBtn">Delete Admin</button>
-        </div>
-    </div>
-    <div>
-        <label for="adminDropDown2">Admin:</label>
-        <select id="adminDropDown2"></select>
 
-    </div>
-    <div id="permissionsContainer">
-        <!-- This is where the permissions checkboxes will be appended -->
+        <div id="delete-content">
+            <div>
+                <label for="adminDropDown">Admin:</label>
+                <select id="adminDropDown"></select>
+            </div>
+            <div>
+                <button id="deleteAdminBtn">Delete Admin</button>
+            </div>
+        </div>
+        <div id="modify-content">
+            <div>
+                <label for="adminDropDown2">Admin:</label>
+                <select id="adminDropDown2"></select>
+            </div>
+            <div id="permissionsContainer">
+                <!-- This is where the permissions checkboxes will be appended -->
+            </div>
+        </div>
     </div>
 </body>
+
 </html>
