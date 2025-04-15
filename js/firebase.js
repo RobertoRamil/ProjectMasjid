@@ -732,6 +732,7 @@ async function getAnnouncements(){
 
   announcements.forEach(announcement => {
     const announcementDiv = document.createElement("div");
+    announcementDiv.style = 'white-space: normal;overflow-wrap: break-word;word-wrap: break-word;';
     announcementDiv.className = "announcement";
     announcementDiv.textContent = announcement;
     announcementRow.appendChild(announcementDiv);

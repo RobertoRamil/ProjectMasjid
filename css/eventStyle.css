@@ -205,7 +205,6 @@
         font-size: 0.8em;
     }
 }
-
 .signup {
     align-items: center; 
     width: 35%; 
@@ -222,6 +221,13 @@
     flex-direction: column;
     justify-content: center;
 }
+@media (max-width: 480px) {
+    .signup {
+        width: 90%;
+    }
+}
+
+
 
 .emailSignup p, .phoneSignup p {
     text-align: left;
