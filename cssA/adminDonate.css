@@ -40,10 +40,13 @@
     }
 /*This is the background and border of the info box and the donate section*/
     #donate_about,#donate_buttons{
+        color:white;
         border: solid;
-        background-color: rgb(230, 225, 225);
+        background-color: #333;
         padding: 0.5%;
         display:block;
+        border-radius: 10px;
+        border-color: #4b4b4b;
     }
 
 /*Preview of the file to be submitted*/

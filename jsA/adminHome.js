@@ -432,7 +432,6 @@ async function getAnnouncements(){
     const announcementDiv = document.createElement("div");
     announcementDiv.className = "announcement";
     announcementDiv.textContent = announcement;
-    announcementRow.appendChild(announcementDiv);
   });
   return announcements;
 }
@@ -457,6 +456,7 @@ async function announcementPanes(announcement_panes) {
   for (let j = 0; j < announcements.length; j++) {
       // Create announcement box
       const announcement = document.createElement("div");
+      announcement.style = 'white-space: normal;overflow-wrap: break-word;word-wrap: break-word;';
       announcement.classList.add("announcement");
       // Create inner box for content
       const boxInBox = document.createElement("div");
@@ -466,7 +466,7 @@ async function announcementPanes(announcement_panes) {
       const announcementRef = doc(db, "announcements", "announcement");
 
       // creating a delete buutton
-      let deleteButton = $(`<button class="deleteAnnouncementBtn" style="margin-left: 10px" type="button"><i class="fa fa-close" style="font-size:48px;color:red"></i></button>`);
+      let deleteButton = $(`<div style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 5px 0;"><button class="deleteAnnouncementBtn" type="button"><i class="fa fa-close" style="font-size:48px;color:red"></i></button>`);
       deleteButton.on('click', function(){
         getDoc(announcementRef).then((docSnap) => {
           if (docSnap.exists()) {

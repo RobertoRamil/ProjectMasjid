@@ -1,16 +1,23 @@
 @media screen and (min-width:1100px){
     #prayer_announce{
+        color:white;
         padding:10px;
         display:flex;
-        align-items: flex-start;
+        align-items: stretch;
         justify-content: space-between;
-
     }
     #map_quote{
+        color:white;
         padding:10px;
         display:flex;
         align-items: flex-start;
         justify-content: space-between;
+    }
+
+    #Webpage-Tab-Title {
+        font-size: 24px;
+        margin-top:0px;
+        color:white;
     }
 
     /*Quotes*/
@@ -61,14 +68,20 @@
         margin: 10px 10px 20px 10px;
     }  
     #prayer_announce{
-        margin-bottom:50px;
+        color:white;
+        margin-bottom:10px;
+    }
+    #map_quote{
+        color:white;
     }
 
 }
 
 
 .Announce_Background{
-    background-color: lightgray;
+    flex: 1;
+    box-shadow: 3px 3px 10px gray;
+    background-color: #333;
     border: 1px solid black;
     box-shadow: 0 0 10px rgb(0, 0, 0, 0.1);    
     border-radius: 5px;
@@ -81,7 +94,7 @@
         font-size: 20px;
         font-weight:bold;
 
-        padding: 10px;
+        padding: 20px;
 
         height: auto;
         min-height: 200px; /* Optional: Set a minimum height */
@@ -212,8 +225,8 @@
     /*----------------Announcement & Quote------------------*/
     #Announcements-container, #quoteChange, #map_container{
         height:fit-content;
-
-        margin: 10px;
+        
+        margin: 10px 10px 0px 10px;
         padding: 20px;
 
         display:flow-root;
@@ -231,7 +244,7 @@
         position:relative;
 
         font-size: large;
-
+        height: 152px;
         width: 100%;
 
         padding: 8px;
@@ -243,14 +256,15 @@
     }
 
     #submit_announcement {
-        float: inline-start;
-        margin-right: 2%;
+        display: inline-start;
     }
 
     #heading{
-        position: relative;
-        right:20%;
+        margin-top: 10px; 
+        text-align: center;
     }
+
+    
 
     /*------------------Slideshow management section------------------*/
     #slideshowChange {
