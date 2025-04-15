@@ -26,7 +26,7 @@ const storage = getStorage(app);
 const db = getFirestore(app);
 
 // Check if the user is authenticated
-/*
+
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     // User is not signed in, redirect to login page
@@ -36,7 +36,7 @@ onAuthStateChanged(auth, (user) => {
     console.log(user);
   }
 });
-*/
+
 // End: Redirect to login page if the user is not authenticated
 
 // Load existing slideshow photos

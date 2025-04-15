@@ -25,7 +25,7 @@ const storage = getStorage(app);
 const auth = getAuth(app);
 
 // Check if the user is authenticated
-/*
+
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     // User is not signed in, redirect to login page
@@ -35,7 +35,7 @@ onAuthStateChanged(auth, (user) => {
     // User is signed in, you can get the user ID if needed
   }
 });
-*/
+
 // End: Redirect to login page if the user is not authenticated
 
 
