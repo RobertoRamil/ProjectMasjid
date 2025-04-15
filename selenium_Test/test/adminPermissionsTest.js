@@ -48,6 +48,7 @@ describe('Admin Permissions Page Tests', function () {
         // Accept the prompt dialog
         await alert.accept();
         
+        
         // Navigate to Permissions page
         await driver.sleep(5000);
         
