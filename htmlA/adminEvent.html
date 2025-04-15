@@ -108,9 +108,9 @@
                 <input type="time" id="event-time-input" name="event-time-input" step="900">
             </div>
         </div>
-        <button onclick="addEvent()">Add Event</button>
+        <button id="event-button" onclick="addEvent()">Add Event</button>
     </div>
-    <div id="event-delete"></div>
+    <div id="event-delete">
         <h3>Delete Event</h3>
         <div style="display: flex; gap: 10px;">
             <div>
@@ -122,7 +122,7 @@
                 <input type="text" id="event-name-delete" name="event-name-delete">
             </div>
         </div>
-        <button onclick="deleteEvent()">Delete Event</button>
+        <button id="event-button" onclick="deleteEvent()">Delete Event</button>
     </div>
     
 </body>

@@ -2,7 +2,7 @@
 #about_content{
     color:white;
     padding: 20px;
-    background-color: rgb(102, 102, 104); /*This is just to make it easier to see what is the body section*/
+ /*This is just to make it easier to see what is the body section*/
 }
 
 /*This is the title of the page "Admin About*/
@@ -124,10 +124,12 @@
     #socialLinksForm input {
         padding: 10px;
         font-size: 1em;
-        border: 1px solid #ccc;
+        border: 1px solid #4b4b4b;
         border-radius: 4px;
         width: 100%;
         box-sizing: border-box;
+        color: white;
+        background-color: #444;
     }
 
     #socialLinksForm input:focus {
