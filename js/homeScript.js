@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
   pullPrayerTime();
   pullSPrayerTime();
   fetchCarouselImages();
+  getAnnouncements();
   getQuotes();
   loadPrayerTimes();
   // Lightbox setup
@@ -61,7 +62,8 @@ function convertSpace(event){
 
 //announcment box auto makes the boxes
 function announcement_Panes(announcement_panes) {
-    const announcementGrid = document.getElementById("announcementRow");
+    console.error("homescript.js");
+    const announcementGrid = document.getElementById("quoteRow");
     for (let j = 0; j < announcement_panes; j++) {
         // Create announcement box
         const announcement = document.createElement("div");

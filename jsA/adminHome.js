@@ -454,7 +454,9 @@ async function announcementPanes(announcement_panes) {
   const announcementGrid = document.getElementById("announcementRow");
   $(announcementGrid).empty();
   let announcements = (await getAnnouncements());
+  console.error(announcements);
   for (let j = 0; j < announcements.length; j++) {
+    console.error(j);
       // Create announcement box
       const announcement = document.createElement("div");
       announcement.classList.add("announcement");
@@ -483,8 +485,9 @@ async function announcementPanes(announcement_panes) {
           console.error("Error removing announcement:", error);
         });
       });
-
+      console.error('appending');
       $(boxInBox).append(deleteButton);
+      console.error(boxInBox.outerHTML);
       announcement.appendChild(boxInBox);
 
       // Append announcement to grid

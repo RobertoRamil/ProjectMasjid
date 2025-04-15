@@ -134,6 +134,7 @@ function teamMems(num_mems){
 teamMems(12);
 
 function announcementPanes(announcement_panes){
+  console.error("script.js");
   const announcementGrid = document.getElementById("announcementBox");
   for(let j = 0; j < announcement_panes; j++){
     
