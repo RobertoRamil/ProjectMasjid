@@ -1,8 +1,32 @@
-/*
+
 document.addEventListener("DOMContentLoaded", () => {
     checkAuth();
 });
-*/
+
+document.getElementById("Logout").addEventListener("click", () => {
+    redirectToLogout();
+});
+document.getElementById("darkModeToggle").addEventListener("click", () => {
+    darkSwitch();
+});
+
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js';
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+
+// Ensure environment variables are injected during the build process
+const firebaseConfig = {
+    apiKey: "AIzaSyChNmvSjjLzXfWeGsKHebXgGq_AMUdKzHo",
+    authDomain: "project-musjid.firebaseapp.com",
+    projectId: "project-musjid",
+    storageBucket: "project-musjid.firebasestorage.app",
+    messagingSenderId: "445451894728",
+    appId: "1:445451894728:web:09bffcb1743ae1ecec4afd",
+    measurementId: "G-H5XN7NRJ6V"
+};
+
+const app = initializeApp(firebaseConfig);
+const storage = getStorage(app);
+
 // Select elements
 const imageUpload = document.getElementById("imageUpload");
 const imagePreview = document.getElementById("imagePreview");
@@ -21,59 +45,87 @@ imageUpload.addEventListener("change", function () {
         reader.readAsDataURL(file);
     }
 });
+
+async function uploadImageToFirebase(file, fileName) {
+    try {
+        const fileRef = ref(storage, `HeaderPhotos/${fileName}`);
+        await uploadBytes(fileRef, file);
+        const downloadURL = await getDownloadURL(fileRef);
+        uploadStatus.textContent = "Upload successful!";
+        console.log("File uploaded successfully. URL:", downloadURL);
+    } catch (error) {
+        uploadStatus.textContent = "Upload failed!";
+        console.error("Error uploading file:", error);
+    }
+}
+
 function handleUploadImage() {
-    uploadImage();
+    const file = imageUpload.files[0];
+    if (!file) {
+        uploadStatus.textContent = "No file selected!";
+        return;
+    }
+
+    const imageType = document.getElementById("imageType").value;
+    let fileName;
+
+    if (imageType === "logo") {
+        fileName = "logo2.png";
+    } else if (imageType === "backdrop") {
+        fileName = "FrontImage.png";
+    } else if (imageType === "pageBackground") {
+        fileName = "MainPageBackground.png"; // Rename for pageBackground
+    }
+
+    uploadImageToFirebase(file, fileName);
 }
 
 uploadButton.addEventListener("click", handleUploadImage);
 
-//Reset the input for image input
-document.getElementById("headerResetButton").addEventListener("click", function (){
-    var imageInput=document.getElementById("imageUpload");
-    var imageInputPreview=document.getElementById("imagePreview");
+// Reset the input for image input
+document.getElementById("headerResetButton").addEventListener("click", function () {
+    var imageInput = document.getElementById("imageUpload");
+    var imageInputPreview = document.getElementById("imagePreview");
 
-    imageInputPreview.style.display="none";
-    imageInput.value="";
+    imageInputPreview.style.display = "none";
+    imageInput.value = "";
 });
 
+// Dark mode
+(function () {
+    var element = document.body;
+    var darkOn = localStorage.getItem("darkCookie");
 
-//Dark mode
-(function(){
-    var element=document.body;
-    var darkOn=localStorage.getItem("darkCookie");
-    
-    if(darkOn==="true"){
+    if (darkOn === "true") {
         element.classList.toggle("dark-mode");
-        var imageInput=document.getElementById("darkModeToggle");
-        imageInput.innerText=String.fromCodePoint("0x263E");   
+        var imageInput = document.getElementById("darkModeToggle");
+        imageInput.innerText = String.fromCodePoint("0x263E");
     }
+})();
 
-  })();
-
-function redirectToLogout(){
+function redirectToLogout() {
     let result = confirm("Are you sure you want to logout?");
-    if(result){
+    if (result) {
         console.log("Signing user out...");
         window.location.href = "adminLogout.html";
-    }else{
+    } else {
         console.log("User has refused sign out");
     }
-    
 }
 
 function darkSwitch() {
-    var element=document.body;
-    var switchDark=element.classList.toggle("dark-mode");
-    
-    var imageInput=document.getElementById("darkModeToggle");
+    var element = document.body;
+    var switchDark = element.classList.toggle("dark-mode");
 
+    var imageInput = document.getElementById("darkModeToggle");
 
-    if(imageInput.innerText===String.fromCodePoint("0x263C")||switchDark){/*Sun=0x263C */
+    if (imageInput.innerText === String.fromCodePoint("0x263C") || switchDark) {
+        /* Sun=0x263C */
         localStorage.setItem("darkCookie", true);
-        imageInput.innerText=String.fromCodePoint("0x263E");
-    }else{
+        imageInput.innerText = String.fromCodePoint("0x263E");
+    } else {
         localStorage.removeItem("darkCookie");
-        imageInput.innerText=String.fromCodePoint("0x263C");/* Moon=0x263E */
+        imageInput.innerText = String.fromCodePoint("0x263C"); /* Moon=0x263E */
     }
-  }
+}
 

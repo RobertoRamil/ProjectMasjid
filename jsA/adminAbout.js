@@ -23,7 +23,7 @@ const storage = getStorage(app);
 const auth = getAuth();
 
 // Check if the user is authenticated
-/*
+
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     // User is not signed in, redirect to login page
@@ -34,7 +34,7 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-*/
+
   async function getTeamNames(){
     const teamRef = doc(db, "team", "team_members");
     const teamSnap = await getDoc(teamRef); // Await the getDoc call

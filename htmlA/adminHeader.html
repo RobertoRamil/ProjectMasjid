@@ -7,7 +7,9 @@
         <title>Admin Logo and Backdrop Upload</title>
         <!--CSS & Javscript-->
         <link rel="stylesheet" href="../cssA/adminHeader.css">
-        <script src="../jsA/adminHeader.js" defer ></script>
+        <script src="../jsA/adminHeader.js" type="module" defer></script>
+        <script src="../js/firebase.js" type="module" defer></script>
+
 
     </head>
 
@@ -18,7 +20,7 @@
         <div id="background_and_title">            
             <button type="button" onclick="history.go(-1)"> < Back </button>
             <h2 id="update_image_visual_text"> Update Image </h2>
-            <button type="button" onclick="redirectToLogout()">Log out </button>
+            <button type="button" id="Logout" onclick="redirectToLogout()">Log out </button>
 
         </div>
 
@@ -29,6 +31,7 @@
                 <select id="imageType" name="imageType">
                     <option value="logo" selected>Logo</option>
                     <option value="backdrop">Backdrop</option>
+                    <option value="pageBackground">Main Background</option>
                 </select>
             </div>
             

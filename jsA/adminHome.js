@@ -65,7 +65,7 @@ document.getElementById("addPhotoButton").addEventListener("click", () => {
     if (!file) return;
 
     const slideshowPreview = document.getElementById("slideshowPreview");
-    if (slideshowPreview.children.length >= 5) {
+    if (slideshowPreview.children.length >= 10) {
         alert("Maximum number of photos reached.");
         return;
     }

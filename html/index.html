@@ -5,12 +5,12 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Home Page</title>
+        <title>MMSC</title>
+        <meta name="description" content="An Islamic center serving as a spiritual and community hub, offering a plethora of services including educational, religious, and outreach programs.">
 
         <link id="pageCSS" rel="stylesheet" href="../css/homeStyle.css">
         
         <!--Prayer and announcements-->        
-        <script src="../js/homeScript.js"></script>
 
         <!--Slideshow-->
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" 
@@ -40,12 +40,10 @@
 
 <!--Header-->
 <div id="header"></div>
-<!--Header-->
-
 <!-- Quote of the Day-->
   <div class="centeredRow">
       <div class="box">
-        <h1 id="heading">Quote of the Day</h1>
+        <h1 id="heading">Islamic Gems</h1>
         <div class="announcement-row" id="quoteRow"></div>
       </div>
   </div>
@@ -58,7 +56,7 @@
     <div class="centeredRow">
             <div class="box" id="prayerBox">
                 <h1 id="heading">Daily Congregational Prayer Time</h1>
-                <h1 id="headingText">(Join us for all five daily prayers at MMSC)</h1>
+                <h1 id="headingText">Join us for all five daily prayers at MMSC</h1>
                 <h1 id="headingDate"><div id="date" class="clock" onload="getDate()"></div> </h1>
                 <div class="container"></div> <!-- Container to hold prayer boxes -->
                 <script src="../js/script.js"></script>                               
@@ -69,7 +67,9 @@
     
         
 <!--Image Carousel-->   
-<div class="centeredRow">     
+<div class="centeredRow"> 
+  <div class ="boxC">    
+    <h1 id="heading">Community Highlights</h1>
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <!-- Remove hardcoded indicators -->
@@ -86,6 +86,7 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
+   </div>
   </div>
 </div>
 <!--Image Carousel--->
@@ -106,6 +107,9 @@
 
 <!-- footer added here -->
 <div id="footer"></div>
+<div class="lightbox-overlay" id="lightbox">
+  <img id="lightbox-img" src="" alt="Enlarged image">
+</div>
 
     <!-- Link to the JavaScript file -->
     <script src="../js/homeScript.js" type="module" defer></script>

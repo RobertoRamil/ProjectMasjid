@@ -56,6 +56,17 @@ async function setHeaderBackground() {
   }
 }
 
+async function setPageBackground() {
+  const storageRef = ref(storage, 'HeaderPhotos/MainPageBackground.png');
+  try {
+    const url = await getDownloadURL(storageRef);
+    console.log("Main Page background URL fetched:", url); // Debugging line
+    document.querySelector('body').style.backgroundImage = `url(${url})`;
+  } catch (error) {
+    console.error("Error fetching header background:", error);
+  }
+}
+
 //--------------------------------------------Setup for donate section--------------------------------------------------//
 async function fetchZelleLogo() {
   console.log("fetchZelleLogo function called");
@@ -333,7 +344,7 @@ async function getEmailsList() {
   return emails;
 }
 
-async function getPhoneList() {
+export async function getPhoneList() {
   const phoneSnap = await getDoc(contactsRef); // Await the getDoc call
   const phones = [];
   //get all the phone numbers from the database
@@ -545,16 +556,43 @@ function updateCarousel(imageUrls) {
   });
 }
 
-getDocs(colRef)
-  .then((snapshot) => {
-    let users = []
-    snapshot.docs.forEach((doc) => {
-      users.push({ ...doc.data(), id: doc.id })
-    })
-  })
-  .catch(err => {
-    console.log(err.message)
-  })
+window.getAboutHeader = getAboutHeader;
+window.getAboutBody = getAboutBody;
+window.getTeamNames = getTeamNames;
+window.getTeamPortraits = getTeamPortraits;
+window.uploadImage = uploadImage;
+window.getlinks = getlinks;
+window.signUpEmail = signUpEmail;
+window.signUpPhone = signUpPhone;
+window.setHeaderBackground = setHeaderBackground;
+window.fetchLogo = fetchLogo;
+window.fetchZelleLogo = fetchZelleLogo;
+window.getDonateBody = getDonateBody;
+window.getPaypalBody = getPaypalBody;
+window.fetchCarouselImages = fetchCarouselImages;
+window.getEventsByDate = getEventsByDate;
+window.getEventsByMonth = getEventsByMonth;
+window.addEventToFirebase = addEventToFirebase;
+window.deleteEventFromFirebase = deleteEventFromFirebase;
+window.auth = auth;
+window.removeTeamMember = removeTeamMember;
+window.saveAbtHeader = saveAbtHeader;
+window.saveAbtBody = saveAbtBody;
+window.saveTeamMember = saveTeamMember;
+window.checkAuth = checkAuth;
+window.pullPrayerTime = pullPrayerTime;
+window.pullSPrayerTime = pullSPrayerTime;
+window.savePrayerTime = savePrayerTime;
+window.saveSPrayerTime = saveSPrayerTime;
+window.canEditElement = canEditElement;
+window.getAnnouncements = getAnnouncements;
+window.getQuotes = getQuotes;
+window.addAnnouncement = addAnnouncement;
+window.getTeamTitles = getTeamTitles;
+window.removeEmail = removeEmail;
+window.removePhone = removePhone;
+window.setPageBackground = setPageBackground;
+
 //This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.
 async function pullPrayerTime(prayerName) {
   const prayerRef = doc(db, "prayerTimes", "prayerTime");

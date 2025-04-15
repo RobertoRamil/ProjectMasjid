@@ -6,6 +6,23 @@ document.addEventListener('DOMContentLoaded', function() {
   getAnnouncements();
   getQuotes();
   loadPrayerTimes();
+  // Lightbox setup
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  // Attach click listeners to carousel images
+  document.querySelector('.carousel-inner').addEventListener('click', function(e) {
+    if (e.target.tagName === 'IMG') {
+      lightboxImg.src = e.target.src;
+      lightbox.style.display = 'flex';
+    }
+  });
+
+  // Close lightbox on click
+  lightbox.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+    lightboxImg.src = ''; // clear the image
+  });
 });
 
 //announcment box auto makes the boxes
