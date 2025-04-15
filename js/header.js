@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
   console.log("DOMContentLoaded event triggered"); // Debugging line
   fetchLogo();
   setHeaderBackground();
+  setPageBackground();
   backgroundHourChange();
   setInterval(backgroundHourChange, 3.6e+6);
 });
