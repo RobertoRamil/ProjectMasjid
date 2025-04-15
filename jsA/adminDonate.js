@@ -3,6 +3,7 @@ import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/
 import { getFirestore, doc, updateDoc, getDocs, getDoc, collection } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js';
 
+
 // Hide this later
 const firebaseConfig = {
   apiKey: "AIzaSyChNmvSjjLzXfWeGsKHebXgGq_AMUdKzHo",
@@ -25,7 +26,7 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 
 // Check if the user is authenticated
-/*
+
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     // User is not signed in, redirect to login page
@@ -35,7 +36,7 @@ onAuthStateChanged(auth, (user) => {
     // User is signed in
   }
 });
-*/
+
 
 // This shows the preview of the image uploaded
 document.getElementById('zelleSubmitImg').onchange = evt => {
@@ -248,3 +249,5 @@ document.addEventListener("DOMContentLoaded", function() {
   squareInfo();
   initChecked();
 });
+
+
