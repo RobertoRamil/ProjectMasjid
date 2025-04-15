@@ -29,29 +29,25 @@ async function backgroundHourChange(){
     var hour=systemTime.toLocaleTimeString("en-US", {hour12:false,hour: "2-digit", minute: "2-digit"});   
     //Change the background colors on the filter div that rests behind all objects but on top of the background image
  
-    //Fajr
-    if(hour>prayerTimes[4]){
-      filter.style.backdropFilter="hue-rotate(150deg)";
-      headerFilter.style.filter="hue-rotate(302deg) brightness(80%)";
+    if (hour > prayerTimes[4]) { // Fajr
+      filter.style.backgroundColor = "rgba(0, 0, 0, 0.25)";
+      headerFilter.style.filter = "brightness(0.75)"; // Darken header
     }
-    //Dhuhr
-    else if (hour>prayerTimes[0] && hour<=prayerTimes[1]){
-      filter.style.backdropFilter="brightness(160%)";
-      //Because the header is already filtered this wont be.
+    else if (hour > prayerTimes[0] && hour <= prayerTimes[1]) { // Dhuhr
+      filter.style.backgroundColor = "rgba(0, 0, 0, 0.1)";
+      headerFilter.style.filter = "brightness(1.0)"; // Normal brightness
     }
-    //Asr 
-    else if (hour>prayerTimes[1] && hour<=prayerTimes[2]){
-      filter.style.backdropFilter="hue-rotate(200deg)";
-      headerFilter.style.filter="hue-rotate(340deg)";
+    else if (hour > prayerTimes[1] && hour <= prayerTimes[2]) { // Asr
+      filter.style.backgroundColor = "rgba(0, 0, 0, 0.2)";
+      headerFilter.style.filter = "brightness(0.9)"; // Slightly darker header
     }
-    //Maghrib
-    else if (hour>prayerTimes[2] && hour<=prayerTimes[3]){
-      filter.style.backdropFilter="hue-rotate(80deg) brightness(120%)";
-      headerFilter.style.filter="hue-rotate(290deg) brightness(75%)";
+    else if (hour > prayerTimes[2] && hour <= prayerTimes[3]) { // Maghrib
+      filter.style.backgroundColor = "rgba(0, 0, 0, 0.4)";
+      headerFilter.style.filter = "brightness(0.85)"; // Darker header
     }
-    //Isha
-    else if (hour>prayerTimes[3] && hour<=prayerTimes[4]){
-      filter.style.backdropFilter="hue-rotate(120deg) brightness(20%)";
-      headerFilter.style.filter="hue-rotate(30deg) brightness(30%)";
+    else if (hour > prayerTimes[3] && hour <= prayerTimes[4]) { // Isha
+      filter.style.backgroundColor = "rgba(0, 0, 0, 0.6)";
+      headerFilter.style.filter = "brightness(0.7)"; // Much darker header
     }
-}
+  }
+

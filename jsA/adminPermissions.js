@@ -24,6 +24,7 @@ const storage = getStorage();
 const auth = getAuth();
 
 // Check if the user is authenticated
+/*
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     // User is not signed in, redirect to login page
@@ -34,7 +35,7 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-
+*/
 
 
 
@@ -230,11 +231,18 @@ async function deleteAdmin() {
               alert('Admin deleted successfully');
 
 
-              // Remove the deleted admin from the dropdown
-              const optionToRemove = adminDropDown.querySelector(`option[value="${selectedAdmin}"]`);
-              if (optionToRemove) {
-                adminDropDown.removeChild(optionToRemove);
-              }
+                // Remove the deleted admin from adminDropDown
+                const optionToRemove = adminDropDown.querySelector(`option[value="${selectedAdmin}"]`);
+                if (optionToRemove) {
+                  adminDropDown.removeChild(optionToRemove);
+                }
+
+                // Remove the deleted admin from adminDropDown2 if it is selected
+                const optionToRemove2 = adminDropDown2.querySelector(`option[value="${selectedAdmin}"]`);
+                if (optionToRemove2) {
+                  adminDropDown2.removeChild(optionToRemove2);
+                  permissionsContainer.innerHTML = ''; // Clear the permissions container
+                }
             } catch (error) {
               console.error('Error deleting admin:', error);
               alert('Error deleting admin: ' + error.message);
@@ -287,27 +295,29 @@ async function getAdminPermissions() {
 
   permissionsContainer.innerHTML = ''; // Clear previous content
 
-  const canEditPaymentsCheckbox = document.createElement('input');
-  canEditPaymentsCheckbox.type = 'checkbox';
-  canEditPaymentsCheckbox.checked = data.canEditPayments;
-  canEditPaymentsCheckbox.style.transform = 'scale(1.5)';
-
-  const canEditPaymentsLabel = document.createElement('label');
-  canEditPaymentsLabel.textContent = 'Can Edit Payments';
-  canEditPaymentsLabel.appendChild(canEditPaymentsCheckbox);
-
   const canEditSocialsCheckbox = document.createElement('input');
   canEditSocialsCheckbox.type = 'checkbox';
   canEditSocialsCheckbox.checked = data.canEditSocials;
   canEditSocialsCheckbox.style.transform = 'scale(1.5)';
+  canEditSocialsCheckbox.id = 'canEditSocialsCheckbox'; // Added ID
 
   const canEditSocialsLabel = document.createElement('label');
   canEditSocialsLabel.textContent = 'Can Edit Socials';
   canEditSocialsLabel.appendChild(canEditSocialsCheckbox);
 
-  permissionsContainer.appendChild(canEditPaymentsLabel);
-  permissionsContainer.appendChild(document.createElement('br')); // Line break
+  const canEditPaymentsCheckbox = document.createElement('input');
+  canEditPaymentsCheckbox.type = 'checkbox';
+  canEditPaymentsCheckbox.checked = data.canEditPayments;
+  canEditPaymentsCheckbox.style.transform = 'scale(1.5)';
+  canEditPaymentsCheckbox.id = 'canEditPaymentsCheckbox'; // Added ID
+
+  const canEditPaymentsLabel = document.createElement('label');
+  canEditPaymentsLabel.textContent = 'Can Edit Payments';
+  canEditPaymentsLabel.appendChild(canEditPaymentsCheckbox);
+
   permissionsContainer.appendChild(canEditSocialsLabel);
+  permissionsContainer.appendChild(document.createElement('br')); // Line break
+  permissionsContainer.appendChild(canEditPaymentsLabel);
 
 }
 

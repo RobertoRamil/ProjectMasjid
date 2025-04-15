@@ -3,6 +3,7 @@ import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/
 import { getFirestore, doc, updateDoc, getDocs, getDoc, collection } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js';
 
+
 // Hide this later
 const firebaseConfig = {
   apiKey: "AIzaSyChNmvSjjLzXfWeGsKHebXgGq_AMUdKzHo",
@@ -25,6 +26,7 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 
 // Check if the user is authenticated
+
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     // User is not signed in, redirect to login page
@@ -34,6 +36,7 @@ onAuthStateChanged(auth, (user) => {
     // User is signed in
   }
 });
+
 
 // This shows the preview of the image uploaded
 document.getElementById('zelleSubmitImg').onchange = evt => {
@@ -162,5 +165,89 @@ async function canEditElement(phoneNumber, permission) {
   const hasPermission = docSnap.data()[permission];
   return hasPermission;
 }
+
+async function squareInfo() {
+    const donateRef = doc(db, "donate", "donate_paypal");
+    const donateSnap = await getDoc(donateRef);
+    
+    console.log(donateSnap.data().body);
+
+    document.getElementById("paypalURL").value = donateSnap.data().body;
+}
+
+
+//Setting the checked value based on databse
+async function initChecked(){
+  const square = doc(db, "Toggles","Square");
+  const zelle = doc(db, "Toggles","Zelle");
+
+  const squareSnap = await getDoc(square);
+  const zelleSnap = await getDoc(zelle);
+
+  let squareCheck=document.getElementById("paypal_check");
+  let zelleCheck=document.getElementById("zelle_check");
+
+  let toggleValues = [["square",squareSnap.data().toggle],["zelle",zelleSnap.data().toggle]];
+
+
+
+  for(let i=0;i<toggleValues.length;i++){
+    let toggleName = toggleValues[i][0];
+    let toggleValue = toggleValues[i][1];
+    console.log(toggleName);
+    console.log(toggleValue);
+
+    if(toggleName=="square"){
+      squareCheck.checked=toggleValue;
+    }
+    if(toggleName=="zelle"){
+      zelleCheck.checked=toggleValue;
+    }
+  }
+
+
+}
+
+
+
+
+//Paypal/Square
+document.getElementById("paypal_check").addEventListener("click", async () => {
+  let toggle = document.getElementById('paypal_check');
+  let isChecked=toggle.checked;
+  const checkboxRef = doc(db, "Toggles", "Square");
+  try {
+    await updateDoc(checkboxRef, {
+      toggle: isChecked
+    });
+  } catch (e) {
+    console.log(`Error saving ${checkName} toggle value.`, e);
+  }  
+});
+
+
+
+//Newsletter
+document.getElementById("zelle_check").addEventListener("click", async () => {
+  let toggle = document.getElementById('zelle_check');
+  let isChecked=toggle.checked;
+  const checkboxRef = doc(db, "Toggles", "Zelle");
+  try {
+    await updateDoc(checkboxRef, {
+      toggle: isChecked
+    });
+  } catch (e) {
+    console.log(`Error saving ${checkName} toggle value.`, e);
+  }  
+});
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  squareInfo();
+  initChecked();
+});
 
 

@@ -26,6 +26,7 @@ const storage = getStorage(app);
 const db = getFirestore(app);
 
 // Check if the user is authenticated
+/*
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     // User is not signed in, redirect to login page
@@ -35,6 +36,7 @@ onAuthStateChanged(auth, (user) => {
     console.log(user);
   }
 });
+*/
 // End: Redirect to login page if the user is not authenticated
 
 // Load existing slideshow photos
@@ -63,7 +65,7 @@ document.getElementById("addPhotoButton").addEventListener("click", () => {
     if (!file) return;
 
     const slideshowPreview = document.getElementById("slideshowPreview");
-    if (slideshowPreview.children.length >= 5) {
+    if (slideshowPreview.children.length >= 10) {
         alert("Maximum number of photos reached.");
         return;
     }
@@ -208,6 +210,7 @@ document.getElementById("addSPrayerRow").addEventListener("click", addPrayer);
 //This presets the prayer times on admin side to remind admins what size is in the database
 async function loadCurrentPrayerTimes(){
   let congregationNames = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+  
 
   for(let i=0; i<congregationNames.length; i++){
       let timeTemp =await pullPrayerTime(congregationNames[i]);
@@ -235,9 +238,7 @@ async function loadCurrentPrayerTimes(){
     }
   }
 }
-document.addEventListener("DOMContentLoaded", function() {
-  loadCurrentPrayerTimes();
-});
+
 async function pullPrayerTime(prayerName){
   const prayerRef = doc(db, "prayerTimes", "prayerTime");
   const prayerSnap = await getDoc(prayerRef);
@@ -418,6 +419,25 @@ async function addAnnouncement(){
     console.error("Error adding announcement:", error);
   });
 }
+
+async function getAnnouncements(){
+  const announcementRef = doc(db, "announcements", "announcement");
+  const announcementSnap = await getDoc(announcementRef);
+  const announcements = announcementSnap.data().text;
+  const announcementRow = document.getElementById("announcementRow");
+  console.log(announcementRow);
+  announcementRow.innerHTML = ''; // Clear existing announcements
+
+  announcements.forEach(announcement => {
+    const announcementDiv = document.createElement("div");
+    announcementDiv.className = "announcement";
+    announcementDiv.textContent = announcement;
+    announcementRow.appendChild(announcementDiv);
+  });
+  return announcements;
+}
+
+
 window.addQuotes = addQuotes;
 async function addQuotes(){
   const quoteRef = doc(db, "quotes", "quote");
@@ -433,25 +453,46 @@ async function addQuotes(){
 async function announcementPanes(announcement_panes) {
   const announcementGrid = document.getElementById("announcementRow");
   $(announcementGrid).empty();
-  let announcements = (await getAnnouncements()).text;
+  let announcements = (await getAnnouncements());
   for (let j = 0; j < announcements.length; j++) {
-    console.error(announcements[j]);
       // Create announcement box
       const announcement = document.createElement("div");
       announcement.classList.add("announcement");
-
       // Create inner box for content
       const boxInBox = document.createElement("div");
       boxInBox.classList.add("inner-box");
-      boxInBox.textContent = announcements[j]; 
+      boxInBox.style.width = "100%";
+      boxInBox.textContent = announcements[j];
+      const announcementRef = doc(db, "announcements", "announcement");
+
+      // creating a delete buutton
+      let deleteButton = $(`<button class="deleteAnnouncementBtn" style="margin-left: 10px" type="button"><i class="fa fa-close" style="font-size:48px;color:red"></i></button>`);
+      deleteButton.on('click', function(){
+        getDoc(announcementRef).then((docSnap) => {
+          if (docSnap.exists()) {
+            const existingAnnouncements = docSnap.data().text || [];
+            const indexInAnnouncements = existingAnnouncements.indexOf(announcements[j]);
+            existingAnnouncements.splice(indexInAnnouncements, 1); // Removes 1 element at index 2
+            updateDoc(announcementRef, { text: [...existingAnnouncements] });
+            announcementPanes()
+            alert("Announcement deleted");
+          } else {
+            setDoc(announcementRef, { text: [announcementText] });
+          }
+        }).catch((error) => {
+          console.error("Error removing announcement:", error);
+        });
+      });
+
+      $(boxInBox).append(deleteButton);
       announcement.appendChild(boxInBox);
 
       // Append announcement to grid
       announcementGrid.appendChild(announcement);
   }
 }
-announcementPanes(5);
-window.announcementPanes = announcementPanes;
+
+/*
 //announcment box auto makes the boxes
 async function quotePanes(quote_panes) {
   const quoteGrid = document.getElementById("quoteRow");
@@ -470,5 +511,26 @@ async function quotePanes(quote_panes) {
   // Append quote to grid
   quoteGrid.appendChild(quoteBox);
 }
-quotePanes(1);
-window.quotePanes = quotePanes;
+*/
+async function getQuote(){
+  const quoteRef = doc(db, "quotes", "quote");
+  const quoteSnap = await getDoc(quoteRef);
+  if (quoteSnap.exists()) {
+    const quoteData = quoteSnap.data();
+    document.getElementById("quoteText").value = quoteData.text;
+  } else {
+    console.log("No such document!");
+  }
+
+}
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  loadCurrentPrayerTimes();
+  getQuote();
+  announcementPanes(5);
+  //quotePanes(1);
+});

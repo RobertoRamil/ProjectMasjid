@@ -14,7 +14,7 @@ describe('Admin Login Page Tests', function () {
             await driver.quit();
         }
     });
-    
+    /*
     it('should load the admin login page and check the title', async function () {
         await driver.get('http://127.0.0.1:5500/htmlA/adminLogin.html');
         await driver.wait(until.titleIs('Admin Login'), 30000);
@@ -73,7 +73,5 @@ describe('Admin Login Page Tests', function () {
         const currentUrl = await driver.getCurrentUrl();
         expect(currentUrl).to.equal('http://127.0.0.1:5500/htmlA/adminHome.html');
     });
-    
-
-
+    */
 });

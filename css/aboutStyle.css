@@ -14,7 +14,7 @@
     border-radius: 8px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     font-family: 'Old Standard TT', serif;
-    font-size: 20px;
+    font-size: 25px;
     background-color: rgba(255, 255, 255, 0.9);
 }
 .information h2 {
@@ -24,11 +24,58 @@
     
 }
 .Webpage-Tab-Title {
+  font-family: 'Old Standard TT', serif;
+  font-size: 32px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: fadeInDown 0.8s ease forwards;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.Webpage-Tab-Title {
     font-family: 'Old Standard TT', serif;
-    font-size: 32px; 
+    font-size: 32px;
     text-align: center;
     font-weight: bold;
-}
+    color: white;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: fadeInDown 0.8s ease forwards;
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .Webpage-Tab-Title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #14746a;
+    margin: 10px auto 0;
+    border-radius: 2px;
+    opacity: 0;
+    animation: underlineFadeIn 0.8s ease forwards;
+    animation-delay: 0.8s;
+  }
+  
+  @keyframes fadeInDown {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes underlineFadeIn {
+    to {
+      opacity: 1;
+    }
+  }
 /*---------------social medias box (bottom boxes)------------ */
 
 .SocialMedia div {
@@ -110,9 +157,11 @@
     display: grid;
     width: 200px;
     height: fit-content;
+    place-items: center; /* Centers both image and text horizontally and vertically */
 }
 .Team p{
-
+    text-align: center;
+    margin: auto;
     font-size: 16px;
     margin-top: 5px;
     margin-bottom: 10px;
@@ -122,9 +171,15 @@
 
 }
 .Team img{
-    max-width: 125px;
-    width: auto;
-    max-height: 100px;
-    height: auto;
-    padding-left: 25px;
+
+    width: 200px;
+    height: 200px;
+    padding-left: auto;
+    border: 5px solid white; /* Add a white border around each image */
+    border-radius: 20px; /* Optional: Add rounded corners to the border */
 }
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
