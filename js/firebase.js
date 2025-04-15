@@ -592,15 +592,7 @@ window.getTeamTitles = getTeamTitles;
 window.removeEmail = removeEmail;
 window.removePhone = removePhone;
 window.setPageBackground = setPageBackground;
-  .then((snapshot) => {
-    let users = []
-    snapshot.docs.forEach((doc) => {
-      users.push({ ...doc.data(), id: doc.id })
-    })
-  })
-  .catch(err => {
-    console.log(err.message)
-  })
+
 //This goes to the firebase database, looks at the prayerTimes collection and at the Prayers document.
 async function pullPrayerTime(prayerName) {
   const prayerRef = doc(db, "prayerTimes", "prayerTime");
