@@ -74,6 +74,119 @@ describe('Admin Login Page Tests', function () {
         expect(currentUrl).to.equal('http://127.0.0.1:5500/htmlA/adminHome.html');
     });
     
+    
+   /* it('should be able to delete announcement', async function () {
+        await driver.get('http://127.0.0.1:5500/htmlA/adminHome.html');
+        
+        const elements = await driver.findElements(By.className(className));
+        let originalWordCount = $(".announcement-row .inner-box").length;
+
+        // announcement textbox
+        let announcementTextBox = $("#announcementText");
+        
+        let randomWord = "test";
+        // type random word into announcement box
+        $(announcementTextBox).val(randomWord);
+
+        // post button
+        let postAnnouncement = $("#submit_announcement");
+
+        //clicks post button
+        postAnnouncement.click();
+
+        // after we click button, there's a network request that posts that data to the DB
+        // This could take like .5s so lets wait 1s so that the data is properly loaded
+        setTimeout(() => {
+            // at this point, because we just added a word, word count should be (originalWordCount + 1)
+
+            // this gets the last added word's container
+            let lastAddedWordContainer = $(".announcement-row .inner-box").parent().last();
+            
+            // now we're going to delete the word.
+            let deleteButton = lastAddedWordContainer.find(".deleteAnnouncementBtn");
+
+            deleteButton.click();
+
+            // now wait another full second for the delete to process
+            setTimeout(() => {
+                let endingWordCount = $(".announcement-row .inner-box").length;
+
+                // we just added and deleted a word, we should expect our ending word count
+                // to equal our original word count before adding/deleting.
+                expect(endingWordCount).to.equal(originalWordCount);
 
 
+            }, 1000);
+        }, 1000);
+
+    });
+
+    it('should be able to add announcement', async function () {
+        await driver.get('http://127.0.0.1:5500/htmlA/adminHome.html');
+        
+        // announcement textbox
+        let announcementTextBox = $("#announcementText");
+
+        function getRandomWord(wordList) {
+            const randomIndex = Math.floor(Math.random() * wordList.length);
+            return wordList[randomIndex];
+          }
+        
+        const words = ["apple", "banana", "cherry", "date", "elderberry"];
+        let randomWord = getRandomWord(words);
+
+        // type random word into announcement box
+        $(announcementTextBox).val(randomWord);
+
+        // post button
+        let postAnnouncement = $("#submit_announcement");
+
+        //clicks post button
+        postAnnouncement.click();
+
+        // after we click button, there's a network request that posts that data to the DB
+        // This could take like .5s so lets wait 1s so that the data is properly loaded
+        setTimeout(() => {
+            // this gets the last word added
+            let lastAddedWord = $(".announcement-row .inner-box").last().text();
+
+            expect(lastAddedWord).to.equal(randomWord);
+        }, 1000);
+
+    });
+
+    it('should be able to change quote', async function () {
+        await driver.get('http://127.0.0.1:5500/htmlA/adminHome.html');
+        
+        // announcement textbox
+        let quoteTextBox = $("#quoteText");
+
+        function getRandomWord(wordList) {
+            const randomIndex = Math.floor(Math.random() * wordList.length);
+            return wordList[randomIndex];
+          }
+        
+        const words = ["apple", "banana", "cherry", "date", "elderberry"];
+        let randomWord = getRandomWord(words);
+
+        // type random word into announcement box
+        $(quoteTextBox).val(randomWord);
+
+        // post button
+        let postQuote = $("#submit_quote");
+
+        //clicks post button
+        postQuote.click();
+
+        // after we click button, there's a network request that posts that data to the DB
+        // This could take like .5s so lets wait 1s so that the data is properly loaded
+        setTimeout(async () => {
+            await driver.get('http://127.0.0.1:5500/htmlA/adminHome.html');
+            
+            let quoteAfterPageRefresh = $("#quoteText").val();
+            expect(quoteAfterPageRefresh).to.equal(randomWord);
+
+        }, 1000);
+
+    })*/
 });

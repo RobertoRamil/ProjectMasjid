@@ -413,7 +413,6 @@ async function addAnnouncement(){
     } else {
       setDoc(announcementRef, { text: [announcementText] });
     }
-    alert("Announcement posted");
     announcementPanes(5);
   }).catch((error) => {
     console.error("Error adding announcement:", error);
@@ -428,12 +427,6 @@ async function getAnnouncements(){
   console.log(announcementRow);
   announcementRow.innerHTML = ''; // Clear existing announcements
 
-  announcements.forEach(announcement => {
-    const announcementDiv = document.createElement("div");
-    announcementDiv.className = "announcement";
-    announcementDiv.textContent = announcement;
-    announcementRow.appendChild(announcementDiv);
-  });
   return announcements;
 }
 
@@ -463,7 +456,7 @@ async function announcementPanes(announcement_panes) {
       // Create inner box for content
       const boxInBox = document.createElement("div");
       boxInBox.classList.add("inner-box");
-      boxInBox.style.width = "100%";
+      boxInBox.style.display = "inline";
       boxInBox.textContent = announcements[j];
       const announcementRef = doc(db, "announcements", "announcement");
 
@@ -477,7 +470,6 @@ async function announcementPanes(announcement_panes) {
             existingAnnouncements.splice(indexInAnnouncements, 1); // Removes 1 element at index 2
             updateDoc(announcementRef, { text: [...existingAnnouncements] });
             announcementPanes()
-            alert("Announcement deleted");
           } else {
             setDoc(announcementRef, { text: [announcementText] });
           }
@@ -486,10 +478,9 @@ async function announcementPanes(announcement_panes) {
         });
       });
       console.error('appending');
-      $(boxInBox).append(deleteButton);
       console.error(boxInBox.outerHTML);
       announcement.appendChild(boxInBox);
-
+      announcement.appendChild(deleteButton[0]);
       // Append announcement to grid
       announcementGrid.appendChild(announcement);
   }
