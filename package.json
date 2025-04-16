@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "dotenv": "^16.4.7",
     "@aws-sdk/client-pinpoint": "^3.787.0",
     "fast-xml-parser": "^5.2.0",
     "firebase": "^11.0.1",

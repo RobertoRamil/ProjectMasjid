@@ -5,6 +5,17 @@
     justify-content: space-evenly;   
   }
 
+  #middle-region-boxes{
+    padding:10px;
+    display:flex;
+    margin: 2px;
+    justify-content: space-evenly;
+    align-items: stretch; 
+  }
+
+  .middle-region{
+    flex:1;
+  }
   /*News letter information*/
   #newsletter_info{
     width: 35%;
@@ -80,11 +91,14 @@
   text-align: center;
 }
 
+body{
+  background-color: rgb(102, 102, 104);
+}
+
 /*Toggling the news signups*/
   #toggle_news_signup{
     padding-left:20px;
     padding-bottom: 20px;
-    background-color: #f4f4f4;
     border-radius: 5px;
     box-shadow: 0 0 10px rgb(0, 0, 0, .1);
     text-size-adjust: 140%;
@@ -97,15 +111,15 @@
   #Edit_newsLetter{
     padding: 1%;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: rgb(230, 225, 225);
+    color: white;
   }
 
   #newsletter_info{
     text-align: center;
     font-size: 1em;
 
-    background-color: white;
+    background-color: #333;
+    color:white;
     
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -126,7 +140,8 @@
     text-align: center;
     font-size: 1em;
       
-    background-color: white;
+    background-color: #333;
+    color:white;
 
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -147,6 +162,8 @@
     height: 200px;
     overflow: auto;
     resize: none;
+    background-color: #444;
+    color:white;
   }
   #infoUp_button{
     border-radius: 8px;
@@ -162,20 +179,23 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
-  #newsUp_button:hover, #newsSend_button:hover, #infoUp_button:hover{
+  #newsUp_button:hover, #newsSend_button:hover, #infoUp_button:hover,#pinpoint_sms_button:hover, #pinpoint_email_button:hover{
     transform: scale(1.1);
     background-color: #157269;
   }
 
 /* Calendar Box */
   #calendar-box {
-    border: 1px solid #ddd;
+    border: 1px solid #4b4b4b;
     border-radius: 10px;
     margin-top: 10px;
     padding: 10px;
-    background-color: #fff;
+    background-color: #333;
+    color:white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
   }
@@ -201,7 +221,8 @@
   }
 
   .calendar-day {
-    border: 1px solid #ccc;
+    border: 1px solid #4b4b4b;
+    border-radius: 5px;
     padding: 10px;
     min-height: 80px;
     position: relative;
@@ -210,11 +231,11 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background-color: #fdfdfd;
+    background-color: #444;
   }
     
   .calendar-day:hover {
-    background-color: #f0f0f0;
+    background-color: rgb(102, 102, 104);
   }
 
 /* Event Circle */
@@ -244,6 +265,54 @@
     left:50%;
     transform:translateX(-50%);
   }
+
+
+  #event-box{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: #333;
+    color:white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 600px;
+  }
+
+  #event-input{
+    display: flex;
+    flex-direction: column;
+    background-color: #333;
+    color:white;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px auto;
+    overflow: visible;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  #event-delete{
+    display: flex;
+    flex-direction: column;
+    background-color: #333;
+    color:white;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px auto;
+    overflow: visible;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  #event-button{
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    float: inline-end;
+  }
+
 
   #saveButton:hover {
     background-color: #45a049;
@@ -278,6 +347,8 @@
   .event-list {
     margin-top: 10px;
     text-align: left;
+    background-color: rgb(102, 102, 104);
+    color:white;
   }
 
   .event {
@@ -313,21 +384,27 @@
   height: 200px;
   overflow: auto;
   resize: none;
+  background-color: #444;
+  color:white;
 }
 
 #pinpoint_info{
   text-align: center;
   font-size: 1em;
 
-  background-color: white;
+  background-color: #333;
+  color:white;
   
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
 
-
+  padding: 20px;
   flex-direction: column;
   justify-content: center;
-  align-items: center;  
+  align-items: center;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 600px;
 }
 

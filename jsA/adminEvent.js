@@ -25,7 +25,7 @@ const storage = getStorage(app);
 const auth = getAuth(app);
 
 // Check if the user is authenticated
-/*
+
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     // User is not signed in, redirect to login page
@@ -35,7 +35,7 @@ onAuthStateChanged(auth, (user) => {
     // User is signed in, you can get the user ID if needed
   }
 });
-*/
+
 // End: Redirect to login page if the user is not authenticated
 
 
@@ -277,57 +277,109 @@ export async function deleteEvent() {
   document.getElementById('event-name-delete').value = '';
 }
 
-export async function sendPinpointEmail(){
+export async function sendPinpointEmail() {
   console.log("Sending Email");
   const messageContent = document.getElementById("pinpoint_box").value;
-  const emailPayload = {
-    to: "infommsc7392@gmail.com",
-    subject: "Email from Admin Panel",
-    message: messageContent
-  };
+
+  // Directly define getEmailsList logic here
+  const contactsRef = doc(db, "users", "userContacts");
+
+  async function getEmailsListLocal() {
+    const emailSnap = await getDoc(contactsRef);
+    const emails = [];
+    if (emailSnap.exists()) {
+      const emailData = emailSnap.data();
+      if (emailData.emails) {
+        emailData.emails.forEach((email) => {
+          emails.push(email);
+        });
+      }
+    }
+    return emails;
+  }
 
   try {
-    const response = await fetch("/api/sendEmail", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(emailPayload)
-    });
-    
-    // Try to get text first if JSON parsing fails
-    const responseText = await response.text();
-    try {
-      const result = JSON.parse(responseText);
-      console.log("Email sent:", result);
-    } catch (jsonError) {
-      console.error("Failed to parse JSON. Raw response:", responseText);
+    const emailAddresses = await getEmailsListLocal();
+
+    if (!emailAddresses.length) {
+      console.log("No email addresses found.");
+      return;
+    }
+
+    for (const emailAddress of emailAddresses) {
+      const emailPayload = {
+        to: emailAddress,
+        subject: "Email from Admin Panel",
+        message: messageContent
+      };
+
+      const response = await fetch("/api/sendEmail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(emailPayload)
+      });
+
+      const responseText = await response.text();
+      try {
+        const result = JSON.parse(responseText);
+        console.log(`Email sent to ${emailAddress}:`, result);
+      } catch (jsonError) {
+        console.error(`Failed to parse JSON for ${emailAddress}. Raw response:`, responseText);
+      }
     }
   } catch (error) {
-    console.error("Error sending email:", error);
+    console.error("Error sending emails:", error);
   }
 }
 
-export async function sendPinpointSMS(){
+export async function sendPinpointSMS() {
   console.log("Sending SMS");
   const messageContent = document.getElementById("pinpoint_box").value;
-    
-  // Optionally, get the phone number from an input or define it statically
-  const smsPayload = {
-      to: "+15418084601", // Replace with the recipient's phone number or get from an input
-      message: messageContent
-  };
+
+  // Directly define getPhoneList logic here
+  const contactsRef = doc(db, "users", "userContacts");
+  
+  async function getPhoneListLocal() {
+    const phoneSnap = await getDoc(contactsRef);
+    const phones = [];
+    if (phoneSnap.exists()) {
+      const phoneData = phoneSnap.data();
+      if (phoneData.phoneNums) {
+        phoneData.phoneNums.forEach((phone) => {
+          phones.push(phone);
+        });
+      }
+    }
+    return phones;
+  }
 
   try {
-      const response = await fetch("/api/sendSMS", { // Make sure you have a corresponding /api/sendSMS endpoint
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json"
-          },
-          body: JSON.stringify(smsPayload)
+    const phoneNumbers = await getPhoneListLocal();
+
+    if (!phoneNumbers.length) {
+      console.log("No phone numbers found.");
+      return;
+    }
+
+    for (const phoneNumber of phoneNumbers) {
+      const smsPayload = {
+        to: phoneNumber,
+        message: messageContent
+      };
+
+      const response = await fetch("/api/sendSMS", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(smsPayload)
       });
+
       const result = await response.json();
-      console.log("SMS sent:", result);
+      console.log(`SMS sent to ${phoneNumber}:`, result);
+    }
   } catch (error) {
-      console.error("Error sending SMS:", error);
+    console.error("Error sending SMS:", error);
   }
 }
 

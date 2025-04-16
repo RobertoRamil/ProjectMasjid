@@ -26,7 +26,7 @@ const storage = getStorage(app);
 const db = getFirestore(app);
 
 // Check if the user is authenticated
-/*
+
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     // User is not signed in, redirect to login page
@@ -36,7 +36,7 @@ onAuthStateChanged(auth, (user) => {
     console.log(user);
   }
 });
-*/
+
 // End: Redirect to login page if the user is not authenticated
 
 // Load existing slideshow photos
@@ -65,7 +65,7 @@ document.getElementById("addPhotoButton").addEventListener("click", () => {
     if (!file) return;
 
     const slideshowPreview = document.getElementById("slideshowPreview");
-    if (slideshowPreview.children.length >= 5) {
+    if (slideshowPreview.children.length >= 10) {
         alert("Maximum number of photos reached.");
         return;
     }
@@ -456,6 +456,7 @@ async function announcementPanes(announcement_panes) {
     console.error(j);
       // Create announcement box
       const announcement = document.createElement("div");
+      announcement.style = 'white-space: normal;overflow-wrap: break-word;word-wrap: break-word;';
       announcement.classList.add("announcement");
       // Create inner box for content
       const boxInBox = document.createElement("div");
@@ -465,7 +466,7 @@ async function announcementPanes(announcement_panes) {
       const announcementRef = doc(db, "announcements", "announcement");
 
       // creating a delete buutton
-      let deleteButton = $(`<button class="deleteAnnouncementBtn" style="margin-left: 10px" type="button"><i class="fa fa-close" style="font-size:48px;color:red"></i></button>`);
+      let deleteButton = $(`<div style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 5px 0;"><button class="deleteAnnouncementBtn" type="button"><i class="fa fa-close" style="font-size:48px;color:red"></i></button>`);
       deleteButton.on('click', function(){
         getDoc(announcementRef).then((docSnap) => {
           if (docSnap.exists()) {
