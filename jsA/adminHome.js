@@ -426,8 +426,12 @@ async function getAnnouncements(){
   const announcementRow = document.getElementById("announcementRow");
   console.log(announcementRow);
   announcementRow.innerHTML = ''; // Clear existing announcements
-
-  return announcements;
+  // announcements.forEach(announcement => {
+  //   const announcementDiv = document.createElement("div");
+  //   announcementDiv.className = "announcement";
+  //   announcementDiv.textContent = announcement;
+  //   announcementRow.appendChild(announcementDiv);
+  // });  return announcements;
 }
 
 
