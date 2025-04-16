@@ -5,6 +5,17 @@
     justify-content: space-evenly;   
   }
 
+  #middle-region-boxes{
+    padding:10px;
+    display:flex;
+    margin: 2px;
+    justify-content: space-evenly;
+    align-items: stretch; 
+  }
+
+  .middle-region{
+    flex:1;
+  }
   /*News letter information*/
   #newsletter_info{
     width: 35%;
@@ -172,7 +183,7 @@ body{
     margin-bottom: 10px;
   }
 
-  #newsUp_button:hover, #newsSend_button:hover, #infoUp_button:hover{
+  #newsUp_button:hover, #newsSend_button:hover, #infoUp_button:hover,#pinpoint_sms_button:hover, #pinpoint_email_button:hover{
     transform: scale(1.1);
     background-color: #157269;
   }
@@ -257,17 +268,16 @@ body{
 
 
   #event-box{
-    width: 75%; 
     display: flex;
     flex-direction: column;
-    margin: 0px auto;
     text-align: center;
     background-color: #333;
     color:white;
     border-radius: 10px;
     padding: 20px;
     margin-top: 10px;
-    margin-bottom: 10px;
+    width: 100%;
+    max-width: 600px;
   }
 
   #event-input{
@@ -277,7 +287,10 @@ body{
     color:white;
     border-radius: 5px;
     padding: 20px;
-    margin-bottom: 10px;
+    margin: 10px auto;
+    overflow: visible;
+    width: 100%;
+    max-width: 800px;
   }
 
   #event-delete{
@@ -287,6 +300,10 @@ body{
     color:white;
     border-radius: 5px;
     padding: 20px;
+    margin: 10px auto;
+    overflow: visible;
+    width: 100%;
+    max-width: 800px;
   }
 
   #event-button{
@@ -382,9 +399,12 @@ body{
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
 
-
+  padding: 20px;
   flex-direction: column;
   justify-content: center;
-  align-items: center;  
+  align-items: center;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 600px;
 }
 
