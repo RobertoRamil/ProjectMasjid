@@ -7,6 +7,7 @@ function sleep(ms) {
 
 async function testEditableContentAndSave() {
   let driver = await new Builder().forBrowser(Browser.CHROME).build();
+  let testsPassed = 0;
 
   try {
     // Navigate to the adminAbout.html page
@@ -18,7 +19,7 @@ async function testEditableContentAndSave() {
 
     // Fetch links using getlinksvals
     let originalLinksVals = await getlinksvals();
-    console.log('Fetched links:', originalLinksVals);
+    console.log('Begin editable content testing');
 
     await sleep(2000); // Wait for 2 seconds to ensure the page is fully loaded
 
@@ -39,8 +40,15 @@ async function testEditableContentAndSave() {
     // Handle the alert dialog box
     await driver.wait(until.alertIsPresent(), 5000);
     const alert = await driver.switchTo().alert();
-    console.log('Alert text:', await alert.getText());
+    //console.log('Alert text:', await alert.getText());
     await alert.accept();
+    if(await alert.getText() === 'Changes saved successfully!') {
+      console.log('\tTest1 passed: About information updated successfully');
+      testsPassed++;
+    }
+    else {
+      console.log('\tTest1 failed: About information update failed');
+    }
 
     // Reset information to original values
     await titleBox.clear();
@@ -53,8 +61,15 @@ async function testEditableContentAndSave() {
 
     await driver.wait(until.alertIsPresent(), 5000);
     const alert2 = await driver.switchTo().alert();
-    console.log('Alert text:', await alert2.getText());
+    //console.log('Alert text:', await alert2.getText());
     await alert2.accept();
+    if(await alert2.getText() === 'Changes saved successfully!') {
+      console.log('\tTest2 passed: About information reset successfully');
+      testsPassed++;
+    }
+    else {
+      console.log('\tTest2 failed: About information reset failed');
+    }
 
     // Informational box testing concluded
     console.log('Begin URL testing');
@@ -76,8 +91,16 @@ async function testEditableContentAndSave() {
     // Handle the alert dialog box for Facebook
     await driver.wait(until.alertIsPresent(), 5000);
     const facebookAlert = await driver.switchTo().alert();
-    console.log('Facebook Alert text:', await facebookAlert.getText());
+    //console.log('Facebook Alert text:', await facebookAlert.getText());
     await facebookAlert.accept();
+    if(await facebookAlert.getText() === 'Facebook link updated successfully!'){
+      console.log('\tTest 3 passed: Facebook link updated successfully');
+      testsPassed++;
+    }
+    else{
+      console.log('\tTest 3 failed: Facebook link update failed');
+    }
+
 
     // Update Instagram link
     await instagramInput.clear();
@@ -87,8 +110,15 @@ async function testEditableContentAndSave() {
     // Handle the alert dialog box for Instagram
     await driver.wait(until.alertIsPresent(), 5000);
     const instagramAlert = await driver.switchTo().alert();
-    console.log('Instagram Alert text:', await instagramAlert.getText());
+    //console.log('Instagram Alert text:', await instagramAlert.getText());
     await instagramAlert.accept();
+    if(await instagramAlert.getText() === 'Instagram link updated successfully!'){
+      console.log('\tTest 4 passed: Instagram link updated successfully');
+      testsPassed++;
+    }
+    else{
+      console.log('\tTest 4 failed: Instagram link update failed');
+    }
 
     // Update YouTube link
     await youtubeInput.clear();
@@ -98,8 +128,15 @@ async function testEditableContentAndSave() {
     // Handle the alert dialog box for YouTube
     await driver.wait(until.alertIsPresent(), 5000);
     const youtubeAlert = await driver.switchTo().alert();
-    console.log('YouTube Alert text:', await youtubeAlert.getText());
+    //console.log('YouTube Alert text:', await youtubeAlert.getText());
     await youtubeAlert.accept();
+    if(await youtubeAlert.getText() === 'YouTube link updated successfully!'){
+      console.log('\tTest 5 passed: YouTube link updated successfully');
+      testsPassed++;
+    }
+    else{
+      console.log('\tTest 5 failed: YouTube link update failed');
+    }
 
     // Reset links to original values using originalLinksVals
     await facebookInput.clear();
@@ -109,7 +146,7 @@ async function testEditableContentAndSave() {
     // Handle the alert dialog box for Facebook reset
     await driver.wait(until.alertIsPresent(), 5000);
     const facebookResetAlert = await driver.switchTo().alert();
-    console.log('Facebook Reset Alert text:', await facebookResetAlert.getText());
+    console.log('\t\tFacebook Reset Alert text:', await facebookResetAlert.getText());
     await facebookResetAlert.accept();
 
     await instagramInput.clear();
@@ -119,7 +156,7 @@ async function testEditableContentAndSave() {
     // Handle the alert dialog box for Instagram reset
     await driver.wait(until.alertIsPresent(), 5000);
     const instagramResetAlert = await driver.switchTo().alert();
-    console.log('Instagram Reset Alert text:', await instagramResetAlert.getText());
+    console.log('\t\tInstagram Reset Alert text:', await instagramResetAlert.getText());
     await instagramResetAlert.accept();
 
     await youtubeInput.clear();
@@ -129,15 +166,14 @@ async function testEditableContentAndSave() {
     // Handle the alert dialog box for YouTube reset
     await driver.wait(until.alertIsPresent(), 5000);
     const youtubeResetAlert = await driver.switchTo().alert();
-    console.log('YouTube Reset Alert text:', await youtubeResetAlert.getText());
+    console.log('\t\tYouTube Reset Alert text:', await youtubeResetAlert.getText());
     await youtubeResetAlert.accept();
 
-    console.log('Social media link testing concluded. All tests passed successfully!');
+    console.log('\nSocial media link testing concluded. Tests passed: ' + testsPassed + ' / 5');
 
   } catch (error) {
     console.error('Test failed:', error);
   } finally {
-    await sleep(2000);
     await driver.quit();
   }
 }

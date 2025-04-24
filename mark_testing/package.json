@@ -1,0 +1,17 @@
+{
+  "name": "mark_testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --timeout 5500"
+  },
+  "devDependencies": {
+    "chai": "^5.2.0",
+    "chromedriver": "^135.0.3",
+    "mocha": "^11.1.0",
+    "selenium-webdriver": "^4.31.0"
+  },
+  "type": "module"
+  
+}
