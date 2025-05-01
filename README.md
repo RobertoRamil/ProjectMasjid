@@ -74,14 +74,14 @@ User Events page
 ![Events](readme/Events3.png)
 
 Admin Home page
-![aHome](readme/adminhome.PNG)
+![aHome](readme/adminHome.png)
 
 Admin About page
-![aAbout](readme/adminabout.PNG)
+![aAbout](readme/adminAbout.png)
 
 Admin adding calendar event
-![aCalendar1](readme/adminevents.PNG)
+![aCalendar1](readme/adminEvents.png)
 
 Admin Donation page
-![aCalendar1](readme/admindonate.PNG)
+![aCalendar1](readme/adminDonate.png)
 
