@@ -5,10 +5,10 @@
 ## Meet the Team: 
   - Mark Ures [LinkedIn]()
   - Roberto Ramil [LinkedIn](https://www.linkedin.com/in/roberto-ramil-297a6b89/)
-  - Corliss Yang [Email](realgiovanynunez@gmail.com)
+  - Corliss Yang [LinkedIn]()
   - Shahroz Hamid [LinkedIn]()
   - Mansoor Ali [LinkedIn]()
-  - Giovany Nunez [LinkedIn]()
+  - Giovany Nunez [Email](realgiovanynunez@gmail.com)
   - Iman Abboud [LinkedIn]()
   - Simon Vu Truong [LinkedIn]()
 
