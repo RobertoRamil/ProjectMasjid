@@ -3,7 +3,7 @@
 ![banner](https://github.com/RobertoRamil/ProjectMasjid/blob/main/readme/Banner.png?raw=true)
 
 ## Meet the Team: 
-  - Mark Ures [LinkedIn]()
+  - Mark Ures [LinkedIn](https://www.linkedin.com/in/mark-ures-245022363/)
   - Roberto Ramil [LinkedIn](https://www.linkedin.com/in/roberto-ramil-297a6b89/)
   - Corliss Yang [LinkedIn]()
   - Shahroz Hamid [LinkedIn]()
