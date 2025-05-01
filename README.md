@@ -7,7 +7,7 @@
   - Roberto Ramil [LinkedIn](https://www.linkedin.com/in/roberto-ramil-297a6b89/)
   - Corliss Yang [LinkedIn]()
   - Shahroz Hamid [LinkedIn]()
-  - Mansoor Ali [LinkedIn]()
+  - Mansoor Ali [LinkedIn](https://www.linkedin.com/in/mansoor-ali-431901204/)
   - Giovany Nunez [Email](realgiovanynunez@gmail.com)
   - Iman Abboud [LinkedIn]()
   - Simon Vu Truong [LinkedIn]()
