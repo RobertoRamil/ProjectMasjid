@@ -3,14 +3,14 @@
 ![banner](https://github.com/RobertoRamil/ProjectMasjid/blob/main/readme/Banner.png?raw=true)
 
 ## Meet the Team: 
-  - Mark Ures [Linkin]()
-  - Roberto Ramil [Linkin]()
-  - Corliss Yang [Linkin]()
-  - Shahroz Hamid [Linkin]()
-  - Mansoor Ali [Linkin]()
-  - Giovany Nunez [Linkin]()
-  - Iman Abboud [Linkin]()
-  - Simon Vu Truong [Linkin]()
+  - Mark Ures [LinkedIn]()
+  - Roberto Ramil [LinkedIn](https://www.linkedin.com/in/roberto-ramil-297a6b89/)
+  - Corliss Yang [LinkedIn]()
+  - Shahroz Hamid [LinkedIn]()
+  - Mansoor Ali [LinkedIn]()
+  - Giovany Nunez [LinkedIn]()
+  - Iman Abboud [LinkedIn]()
+  - Simon Vu Truong [LinkedIn]()
 
 ## Table of Contents
  - [What Project Masjid Is](#what-project-masjid-is)
