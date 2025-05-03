@@ -46,9 +46,35 @@ IDE: Visual Studio
 ### Entity Relationship Diagram
 ![ERD](https://github.com/RobertoRamil/ProjectMasjid/blob/main/readme/Blank_diagram.png?raw=true)
 ## Testing
- > Currently a placeholder
+ - Programming Languages:
+   - HTML
+   - JAVASCRIPT
+   - CSS
+ - Libraries
+   - Popper.js
+   - Google Fonts fonts.gstatic fonts.googleapis
+   - BootStraps
+   - jQuery
+   - Firebase
+   - Cloudflare
+ - IDE
+   - Visual Studio Code
+
 ## Deployment
- > Currently a placeholder
+How to set up development environment
+ - Setup IDE
+The following software must be installed to maintain and locally run the environment for testing
+ - Visual Studio 1.99.2
+ - Java SE Runtime Environment 23.0.2+7-58
+ - Git 2.46.2
+ - NPM 10.9.0 (Installation instructions here)
+Once these have been installed, some additional Visual Studio extensions are needed.
+ - Live Server 5.7.9
+This will add a button to the bottom right of Visual studio that will allow you to locally host the website on your computer. This will allow testing and viewing of potential changes before committing them to the live version of the website.
+ - JavaScript (ES6) code snippets 1.8.0
+This will add code previews and suggestion support to Visual studio to allow you to code more efficiently by providing autocompletions of current variables and JavaScript functions. Pull code from the repository. Once the above installations have been completed you can then clone the repository of the CodeBase onto your computer.
+It is recommended to first create a directory on your computer which will be easy to navigate to for you to clone the repository into, this could be somewhere such as your desktop. Once visual studio has been opened, clone the following repository to visual studio: https://github.com/RobertoRamil/ProjectMasjid cloning it to the directory you created in the step above.
+
 ## Developer Instructions
  > Currently a placeholder
 ## Prototype Showcase
