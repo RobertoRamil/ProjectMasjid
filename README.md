@@ -22,7 +22,7 @@
  - [Prototype](#prototype-showcase)
  - [Current Project Showcase](#current-project-showcase)
 
-## What Project Masjid Is
+## What is Project Masjid 
 Maunatul Muslimeen Society of CA (MMSC) is a non-profit organization that provides prayer services to the local community. Per the client's request, BasiqCoders built a unique solution for their community by building a robust website for a way of fostering community among the attendees, providing important announcements, prayer times, and an admin portal for the leaders to add/update changes without requiring any coding by the user.
   
 Project Masjid is led and implemented by the development team of BasiqCoders which is composed of undergraduate students majoring in Computer Science at California State University, Sacramento. The team comprises Iman-Tyson Abboud, Mansoor Ali, Shahroz Hamid, Giovany Nunez, Roberto Ramil, Mark Ures, Simon Vu Truong, and Corliss Yang.
