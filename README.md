@@ -61,7 +61,18 @@ IDE: Visual Studio
    - Visual Studio Code
 
 ## Deployment
-> TODO
+To deploy Project Masjid from scratch will entail the following steps:
+ - Clone Project Masjid from https://github.com/RobertoRamil/ProjectMasjid 
+ - Sign up / Login to Vercel
+ - Push push your version of the clone to your github
+ - Connect your Github to your Vercel
+ - Add new project
+ - Choose your github 
+ - Choose your repo of Project Masjid
+ - Configure deployment through your Vercel dashboard
+ - The root directory will be ProjectMasjid/html/index.html
+Finalize the deployment through your Vercel dashboard
+
 
 ## Developer Instructions
 > Setup IDE:
