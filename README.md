@@ -6,7 +6,7 @@
   - Mark Ures &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[LinkedIn](https://www.linkedin.com/in/mark-ures-245022363/)
   - Roberto Ramil &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[LinkedIn](https://www.linkedin.com/in/roberto-ramil-297a6b89/)
   - Corliss Yang &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[LinkedIn](https://www.linkedin.com/in/corliss-y-06712a2a5/)
-  - Shahroz Hamid&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[LinkedIn]()
+  - Shahroz Hamid&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[LinkedIn](https://www.linkedin.com/in/shahroz-hamid-46b694216?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app)
   - Mansoor Ali &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[LinkedIn](https://www.linkedin.com/in/mansoor-ali-431901204/)
   - Giovany Nunez&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Email](realgiovanynunez@gmail.com)
   - Iman Abboud &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[LinkedIn](https://www.linkedin.com/in/iman-abboud/)
