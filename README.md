@@ -37,7 +37,7 @@ Frontend:
 
 
 Backend:
- - <img src="https://firebaseopensource.com/logo-small.png" alt="FIREBASEICON" width="20"/> Firebase - Database
+ - <img src="https://www.gstatic.com/mobilesdk/240926_mobilesdk/workmark_light_grey.svg" alt="FIREBASEICON" width="20"/> Firebase - Database
  - <img src="https://cdn.iconscout.com/icon/free/png-256/free-node-js-logo-icon-download-in-svg-png-gif-file-formats--technology-social-media-vol-5-pack-logos-icons-3030179.png?f=webp" alt="NJSICON" width="20"/> Node.js - Database and data handling
  - <img src="https://icons.iconarchive.com/icons/ionic/ionicons/256/logo-vercel-icon.png" alt="VERCELICON" width="20"/> Vercel - Webhosting
  - <img src="https://cdn.iconscout.com/icon/free/png-256/free-aws-logo-icon-download-in-svg-png-gif-file-formats--cloud-computing-network-server-database-brand-pack-logos-icons-1583149.png?f=webp&w=256" alt="AWSICON" width="20"/> AWS (SNS) - SMS/Email Service
