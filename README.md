@@ -10,7 +10,7 @@
   - Mansoor Ali &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[LinkedIn](https://www.linkedin.com/in/mansoor-ali-431901204/)
   - Giovany Nunez&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Email](realgiovanynunez@gmail.com)
   - Iman Abboud &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[LinkedIn](https://www.linkedin.com/in/iman-abboud/)
-  - Simon Vu Truong [LinkedIn]()
+  - Simon Vu Truong [LinkedIn](https://www.linkedin.com/in/simon-vu-515b55363/)
 
 ## Table of Contents
  - [What Project Masjid Is](#what-project-masjid-is)
