@@ -9,7 +9,7 @@
   - Shahroz Hamid&nbsp;[LinkedIn]()
   - Mansoor Ali &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[LinkedIn](https://www.linkedin.com/in/mansoor-ali-431901204/)
   - Giovany Nunez&nbsp;&nbsp; [Email](realgiovanynunez@gmail.com)
-  - Iman Abboud [LinkedIn]&nbsp;(https://www.linkedin.com/in/iman-abboud/)
+  - Iman Abboud &nbsp;[LinkedIn](https://www.linkedin.com/in/iman-abboud/)
   - Simon Vu Truong [LinkedIn]()
 
 ## Table of Contents
