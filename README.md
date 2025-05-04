@@ -5,7 +5,7 @@
 ## Meet the Team: 
   - Mark Ures &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[LinkedIn](https://www.linkedin.com/in/mark-ures-245022363/)
   - Roberto Ramil &nbsp;&nbsp;&nbsp;[LinkedIn](https://www.linkedin.com/in/roberto-ramil-297a6b89/)
-  - Corliss Yang &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[LinkedIn](https://www.linkedin.com/in/corliss-y-06712a2a5/)
+  - Corliss Yang &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[LinkedIn](https://www.linkedin.com/in/corliss-y-06712a2a5/)
   - Shahroz Hamid&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[LinkedIn]()
   - Mansoor Ali &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[LinkedIn](https://www.linkedin.com/in/mansoor-ali-431901204/)
   - Giovany Nunez&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Email](realgiovanynunez@gmail.com)
