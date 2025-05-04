@@ -44,7 +44,7 @@ Backend:
 
 IDE: Visual Studio
 ### Entity Relationship Diagram
-![ERD](https://github.com/RobertoRamil/ProjectMasjid/blob/main/readme/Blank_diagram.png?raw=true)
+![ERD](readme/Blank_diagram.png?raw=true)
 ## Testing
  - Programming Languages:
    - HTML
