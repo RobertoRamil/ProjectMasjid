@@ -8,8 +8,8 @@
   - Corliss Yang &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[LinkedIn](https://www.linkedin.com/in/corliss-y-06712a2a5/)
   - Shahroz Hamid&nbsp;[LinkedIn]()
   - Mansoor Ali &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[LinkedIn](https://www.linkedin.com/in/mansoor-ali-431901204/)
-  - Giovany Nunez&nbsp;&nbsp; [Email](realgiovanynunez@gmail.com)
-  - Iman Abboud &nbsp;[LinkedIn](https://www.linkedin.com/in/iman-abboud/)
+  - Giovany Nunez&nbsp;[Email](realgiovanynunez@gmail.com)
+  - Iman Abboud &nbsp;&nbsp;[LinkedIn](https://www.linkedin.com/in/iman-abboud/)
   - Simon Vu Truong [LinkedIn]()
 
 ## Table of Contents
