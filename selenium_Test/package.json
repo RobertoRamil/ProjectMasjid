@@ -4,12 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --timeout 5500"
+    "test": "mocha ./test/adminHometest.js"
   },
   "devDependencies": {
     "chai": "^5.2.0",
     "chromedriver": "^134.0.5",
+    "mocha": "^11.1.0",
     "webdriver-manager": "^5.0.0"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "jquery": "^3.7.1",
+    "selenium-webdriver": "^4.31.0"
+  }
 }
