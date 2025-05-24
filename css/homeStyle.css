@@ -36,28 +36,26 @@ To create content separation, use the class "centeredRow".
 
 #heading{
     font-family: 'Abril Fatface', serif;
-    font-size: clamp(2rem, 4vw, 4rem);
+    font-size: clamp(1rem, -1.5rem + 8vw, 3rem);
     text-align: center;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 #headingDate{
-    font-size: clamp(1rem, 5vw, 4rem);
+    font-size: clamp(1rem, -0.5625rem + 5vw, 2.25rem);
     text-align: center;
     margin-top: 20px;
     margin-bottom: 20px;
     font-family: 'Old Standard TT', serif;
-    font-size: 30px;
     font-weight: bold;
 }
 
 #headingText{
-    font-size: clamp(1rem, 5vw, 4rem);
+    font-size: clamp(1rem, -0.5625rem + 5vw, 2.25rem);
     text-align: center;
     margin-top: 20px;
     margin-bottom: 20px;
     font-family: 'Old Standard TT', serif;
-    font-size: 30px;
 }
 
 /*Quote*/
@@ -74,14 +72,12 @@ To create content separation, use the class "centeredRow".
 
 /*Prayer Time*/
 .prayer-name {
-    font-size: clamp(0rem, 6vw, 1.5rem);
-    margin-bottom: 10px; /* Space between name and time */
-    font-size: 30px;
+    font-size: clamp(1rem, 4vw, 1.5rem);
 }
 
 .prayer-time {
     font-family: 'Old Standard TT', serif;
-    font-size: 20px;
+    font-size: clamp(1rem, 4vw, 1.5rem);
     font-weight: bold;
 }
 
@@ -90,7 +86,7 @@ To create content separation, use the class "centeredRow".
     font-family: 'Old Standard TT', serif;
     align-items: flex; 
     flex-direction:column;  
-    width: clamp(150px, 16%, 300px); /* Responsive width */
+    width: clamp(150px, 11vw, 300px); /* Responsive width */
     padding: 2vw;
     background-color: white;
     border-radius: 8px;
@@ -150,13 +146,12 @@ To create content separation, use the class "centeredRow".
 /* Individual announcement box */
 .announcement {
     font-family: 'Old Standard TT', serif;
-    font-size: 14px;
     width: 90%; /* Slight padding from edges */
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 15px;
-    font-size: 25px;
+    font-size: clamp(1rem, 4vw, 1.5rem);
     text-align: center;
 }
 /*Announcements*/
