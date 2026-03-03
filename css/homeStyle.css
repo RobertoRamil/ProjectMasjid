@@ -10,8 +10,8 @@ To create content separation, use the class "centeredRow".
 .centeredRow{
     display: flex;
     justify-content: center;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 }
 
 .container {
@@ -223,18 +223,20 @@ To create content separation, use the class "centeredRow".
     padding: 0 1rem;
   }
   
+  /* prayer I frame for phone screen */
   .mosque-frame {
-    width: 100%;
+    width: 80vw;
     height: 100vh;
     border: none;
     border-radius: 12px;
   }
+
+  /* prayer I frame for wide screen */
   @media (min-width: 768px) {
     .mosque-frame {
-      max-width: 75vw;
-      max-height: 50vh;
+      max-width: 80vw;
+      max-height: 40vh;
       display: block;
       margin: 0 auto;
-      margin-bottom: 1vh; 
     }
   }
