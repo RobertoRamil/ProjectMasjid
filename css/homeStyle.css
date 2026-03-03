@@ -223,7 +223,7 @@ To create content separation, use the class "centeredRow".
     padding: 0 1rem;
   }
   
-  /* prayer I frame for phone screen */
+  /* prayer I frame for phone */
   .mosque-frame {
     width: 80vw;
     height: 100vh;
@@ -235,7 +235,7 @@ To create content separation, use the class "centeredRow".
   @media (min-width: 768px) {
     .mosque-frame {
       max-width: 80vw;
-      max-height: 40vh;
+      max-height: 45vh;
       display: block;
       margin: 0 auto;
     }
