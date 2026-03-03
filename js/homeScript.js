@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
   fetchCarouselImages();
   getAnnouncements();
   getQuotes();
-  loadPrayerTimes();
+  //loadPrayerTimes();
   // Lightbox setup
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
@@ -110,69 +110,69 @@ function getDate(){
 }
 getDate();
 
-// Alternative function for generating prayer boxes using prayerAmount
-async function loadPrayerTimes(){
-    let congregationAmount = 5;
-    const congregationNames = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
-    let congregationTimes=[];
+// // Alternative function for generating prayer boxes using prayerAmount
+// async function loadPrayerTimes(){
+//     let congregationAmount = 5;
+//     const congregationNames = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+//     let congregationTimes=[];
 
-    for(let i=0; i<congregationNames.length; i++){
-        let timeTemp =await pullPrayerTime(congregationNames[i]);
-        congregationTimes[i] = timeTemp.toLocaleTimeString("en-US", {hour: 'numeric', minute: '2-digit'});   
-    }
+//     for(let i=0; i<congregationNames.length; i++){
+//         let timeTemp =await pullPrayerTime(congregationNames[i]);
+//         congregationTimes[i] = timeTemp.toLocaleTimeString("en-US", {hour: 'numeric', minute: '2-digit'});   
+//     }
 
-    let container = document.querySelector(".container"); // Selects the container div
-    for (let i = 0; i < congregationAmount; i++) {
-        let box = document.createElement("div"); // Create the outer box
-        box.classList.add("prayerBox");
+//     let container = document.querySelector(".container"); // Selects the container div
+//     for (let i = 0; i < congregationAmount; i++) {
+//         let box = document.createElement("div"); // Create the outer box
+//         box.classList.add("prayerBox");
 
-        let prayerName = document.createElement("div"); // Prayer name div
-        prayerName.classList.add("prayer-name");
-        prayerName.textContent = congregationNames[i];
+//         let prayerName = document.createElement("div"); // Prayer name div
+//         prayerName.classList.add("prayer-name");
+//         prayerName.textContent = congregationNames[i];
 
-        let prayerTime = document.createElement("div"); // Prayer time div
-        prayerTime.classList.add("prayer-time");
-        prayerTime.textContent = congregationTimes[i];
+//         let prayerTime = document.createElement("div"); // Prayer time div
+//         prayerTime.classList.add("prayer-time");
+//         prayerTime.textContent = congregationTimes[i];
 
-        // Append name and time inside the box
-        box.appendChild(prayerName);
-        box.appendChild(prayerTime);
+//         // Append name and time inside the box
+//         box.appendChild(prayerName);
+//         box.appendChild(prayerTime);
 
-        // Append box to the container
-        container.appendChild(box);
-    }
+//         // Append box to the container
+//         container.appendChild(box);
+//     }
 
-    //This creates a break between normal prayers and special prayers.
-    let prayerBox = document.querySelector("#prayerBox");
-    prayerBox.appendChild(document.createElement("hr"));
-    prayerBox.appendChild(document.createElement("br"));
+//     //This creates a break between normal prayers and special prayers.
+//     let prayerBox = document.querySelector("#prayerBox");
+//     prayerBox.appendChild(document.createElement("hr"));
+//     prayerBox.appendChild(document.createElement("br"));
 
-    let specialPrayers =await pullSPrayerTime();
-    let specialSize=specialPrayers[0].length;
+//     let specialPrayers =await pullSPrayerTime();
+//     let specialSize=specialPrayers[0].length;
 
-    let sContainer = document.createElement("div"); // Selects the special prayercontainer div
+//     let sContainer = document.createElement("div"); // Selects the special prayercontainer div
 
-    sContainer.classList.add("container");
+//     sContainer.classList.add("container");
 
-    for(let i=0; i<specialSize;i++){
-        let sBox = document.createElement("div"); // Create the outer box
-        sBox.classList.add("prayerBox");
+//     for(let i=0; i<specialSize;i++){
+//         let sBox = document.createElement("div"); // Create the outer box
+//         sBox.classList.add("prayerBox");
 
-        let prayerName = document.createElement("div"); // Prayer name div
-        prayerName.classList.add("prayer-name");
-        prayerName.textContent = specialPrayers[0][i];
+//         let prayerName = document.createElement("div"); // Prayer name div
+//         prayerName.classList.add("prayer-name");
+//         prayerName.textContent = specialPrayers[0][i];
 
-        let prayerTime = document.createElement("div"); // Prayer time div
-        prayerTime.classList.add("prayer-time");
-        prayerTime.textContent = specialPrayers[1][i].toLocaleTimeString("en-US", {year:'numeric',month:'long',day:'numeric',hour: 'numeric', minute: '2-digit'});
+//         let prayerTime = document.createElement("div"); // Prayer time div
+//         prayerTime.classList.add("prayer-time");
+//         prayerTime.textContent = specialPrayers[1][i].toLocaleTimeString("en-US", {year:'numeric',month:'long',day:'numeric',hour: 'numeric', minute: '2-digit'});
 
-        // Append name and time inside the box
-        sBox.appendChild(prayerName);
-        sBox.appendChild(prayerTime);
+//         // Append name and time inside the box
+//         sBox.appendChild(prayerName);
+//         sBox.appendChild(prayerTime);
 
-        // Append box to the container
-        sContainer.appendChild(sBox);
-    }
-    prayerBox.appendChild(sContainer);
+//         // Append box to the container
+//         sContainer.appendChild(sBox);
+//     }
+//     prayerBox.appendChild(sContainer);
 
-}
+// }
