@@ -226,14 +226,12 @@ To create content separation, use the class "centeredRow".
   .mosque-frame {
     width: 100%;
     height: 100vh;
-    aspect-ratio: 4 / 5;   /* Taller ratio for phones */
     border: none;
     border-radius: 12px;
   }
   @media (min-width: 768px) {
     .mosque-frame {
-      aspect-ratio: 16 / 9;   /* Standard wide video ratio */
-      max-width: 70vw;
+      max-width: 75vw;
       max-height: 50vh;
       display: block;
       margin: 0 auto;
